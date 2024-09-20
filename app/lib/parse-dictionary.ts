@@ -41,8 +41,10 @@ export async function parseDictionary() {
 				.toArray()
 				.map((def) => {
 					const $def = $(def);
+					const $defContents = $def.nextUntil('.def').addBack();
 					return {
-						definition: $def.contents().text().trim()
+						definition: $def.contents().text().trim(),
+						contents: $defContents.toString()
 					};
 				});
 			return {
