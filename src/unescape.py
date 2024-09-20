@@ -25,6 +25,9 @@ def unescape_special_chars(text):
     
     # Replace curly single quotes with straight single quotes
     unescaped = unescaped.replace('‘', "'").replace('’', "'")
+
+    # Remove leading space before a semicolon
+    unescaped = re.sub(r'\s+;', ';', unescaped)
     
     # Handle the ‖ character and replace <b> with <strong> and <i> with <em>
     soup = BeautifulSoup(unescaped, 'html.parser')

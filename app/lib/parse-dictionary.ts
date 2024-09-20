@@ -11,11 +11,54 @@ export async function parseDictionary() {
 	const entries = Object.entries(typedDictionaryData).map(([key, value]) => {
 		const contents = value;
 		const $ = cheerio.load(contents, {}, false);
+		const $hwSelection = $('.hw');
+		let $headwords = [];
+		if ($hwSelection.length === 0) {
+			const $allContents = $('*');
+			$headwords = [$allContents];
+		} else {
+			const $firstHw = $('.hw').first();
+			const $beforeFirstHw = $firstHw.prevAll();
+			if ($beforeFirstHw.length > 0) {
+				const $prevContents = $beforeFirstHw.last().nextUntil('.hw').addBack();
+				$headwords.push($prevContents);
+			}
+			$headwords = [
+				...$headwords,
+				...$hwSelection.map((_, hw) => {
+					const $hwContents = $(hw).nextUntil('.hw').addBack();
+					return $hwContents;
+				})
+			];
+		}
+
+		const extractedHeadwords = $headwords.map(($hw) => {
+			const name = $hw.filter('.hw').text().trim() || key;
+			const pronunciation = $hw.filter('.pr').first().text().trim().replace('(', '').replace(')', '');
+			const partOfSpeech = $hw.filter('.pos').first().text().trim();
+			const defs = $hw
+				.filter('.def')
+				.toArray()
+				.map((def) => {
+					const $def = $(def);
+					return {
+						definition: $def.contents().text().trim()
+					};
+				});
+			return {
+				name,
+				pronunciation,
+				partOfSpeech,
+				defs,
+				contents: $hw.toString()
+			};
+		});
 
 		const output = {
 			entryName: key,
 			contents,
-			_: $
+			headwords: extractedHeadwords
+			// _: $('.hw')
 		};
 		return output;
 	});
@@ -24,31 +67,3 @@ export async function parseDictionary() {
 
 // Define ParsedDictionary as the resolved type of parseDictionary
 export type ParsedDictionary = Awaited<ReturnType<typeof parseDictionary>>;
-
-export function splitContentsBySelector(contents: string, selector: string) {
-	const $ = cheerio.load(contents, {}, false);
-	const elements = $(selector);
-
-	// If no elements match the selector, return the full content as a single element
-	if (elements.length === 0) {
-		return [$('*')];
-	}
-
-	const result = [];
-
-	// Add content before the first selector, if it exists
-	const firstElement = elements.first();
-	const contentBeforeFirst = firstElement.prevAll().toArray().reverse();
-	if (contentBeforeFirst.length > 0) {
-		result.push($(contentBeforeFirst));
-	}
-
-	// Split content by selector
-	elements.each((_, element) => {
-		const $element = $(element);
-		const chunk = $element.nextUntil(selector).addBack();
-		result.push(chunk);
-	});
-
-	return result;
-}
