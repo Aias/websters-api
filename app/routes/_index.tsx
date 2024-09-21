@@ -55,11 +55,14 @@ export default function Index() {
 												{hw.defs.map((def, i) => {
 													return (
 														<li className='pt-2' key={i}>
-															<p>{def.definition}</p>
+															<p
+																className='def'
+																dangerouslySetInnerHTML={{ __html: def.definition }}
+															/>
 															{def.quotes.map((quote, qIdx) => (
 																<blockquote
 																	key={qIdx}
-																	className='mt-2 pl-4 border-l-4 border-gray-300'
+																	className='quote mt-2 pl-4 border-l-4 border-hint'
 																>
 																	<p className='italic'>
 																		<span

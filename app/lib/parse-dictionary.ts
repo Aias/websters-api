@@ -50,7 +50,7 @@ export async function parseDictionary() {
 						}))
 						.get();
 					return {
-						definition: $def.contents().text().trim(),
+						definition: $def.contents().toString().trim(),
 						contents: $defContents.toString(),
 						quotes // Updated quotes property
 					};
