@@ -1,6 +1,7 @@
 import type { MetaFunction } from '@remix-run/node';
 import { parseDictionary, type ParsedDictionary } from '~/lib/parse-dictionary';
 import { useEffect, useState } from 'react';
+import '../styles/dictionary.css';
 
 export const meta: MetaFunction = () => {
 	return [{ title: 'New Remix App' }, { name: 'description', content: 'Welcome to Remix!' }];
@@ -54,7 +55,26 @@ export default function Index() {
 												{hw.defs.map((def, i) => {
 													return (
 														<li className='pt-2' key={i}>
-															{def.definition}
+															<p>{def.definition}</p>
+															{def.quotes.map((quote, qIdx) => (
+																<blockquote
+																	key={qIdx}
+																	className='mt-2 pl-4 border-l-4 border-gray-300'
+																>
+																	<p className='italic'>
+																		<span
+																			dangerouslySetInnerHTML={{
+																				__html: `"${quote.text?.trim()}"`
+																			}}
+																		/>
+																		{quote.author && (
+																			<span className='block text-sm mt-1'>
+																				— {quote.author}
+																			</span>
+																		)}
+																	</p>
+																</blockquote>
+															))}
 														</li>
 													);
 												})}

@@ -42,9 +42,17 @@ export async function parseDictionary() {
 				.map((def) => {
 					const $def = $(def);
 					const $defContents = $def.nextUntil('.def').addBack();
+					const quotes = $defContents
+						.filter('.q')
+						.map((_, q) => ({
+							text: $(q).clone().find('.qau').remove().end().html(), // Remove .qau from text
+							author: $(q).find('.qau').text().trim() // Extract author from .qau
+						}))
+						.get();
 					return {
 						definition: $def.contents().text().trim(),
-						contents: $defContents.toString()
+						contents: $defContents.toString(),
+						quotes // Updated quotes property
 					};
 				});
 			return {
