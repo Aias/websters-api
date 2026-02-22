@@ -1,7 +1,4 @@
-:where(.def, .quote) div {
-	display: inline;
-}
-
+/* Typography classes from the Webster's 1913 source */
 .ex {
 	font-style: italic;
 }
@@ -9,4 +6,26 @@
 .xex {
 	text-decoration: underline;
 	text-decoration-style: dotted;
+}
+
+.ets {
+	font-style: italic;
+}
+
+a.er {
+	font-variant: small-caps;
+	text-decoration: none;
+	color: inherit;
+	border-bottom: 1px solid currentColor;
+	opacity: 0.7;
+	transition: opacity 0.1s;
+}
+
+a.er:hover {
+	opacity: 1;
+}
+
+.mark,
+.fld {
+	font-style: italic;
 }

@@ -3,3 +3,8 @@ node_modules
 /.cache
 /build
 .env
+
+.DS_Store
+
+# Generated database (rebuild with: bun run build:db)
+app/data/dictionary.db

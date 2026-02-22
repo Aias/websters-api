@@ -1,95 +1,78 @@
-import type { MetaFunction } from '@remix-run/node';
-import { parseDictionary, type ParsedDictionary } from '~/lib/parse-dictionary';
-import { useEffect, useState } from 'react';
-import '../styles/dictionary.css';
+import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
+import { json } from '@remix-run/node';
+import { Form, Link, useLoaderData } from '@remix-run/react';
+import { searchEntries, getRandomEntry } from '~/lib/db.server';
+import { EntryView } from '~/components/entry';
+import '~/styles/dictionary.css';
 
 export const meta: MetaFunction = () => {
-	return [{ title: 'New Remix App' }, { name: 'description', content: 'Welcome to Remix!' }];
+	return [
+		{ title: "Webster's 1913 Unabridged Dictionary" },
+		{ name: 'description', content: "Webster's Unabridged Dictionary, 1913 edition" },
+	];
 };
 
-const title = `Webster's 1913 API`;
+export async function loader({ request }: LoaderFunctionArgs) {
+	const url = new URL(request.url);
+	const q = url.searchParams.get('q')?.trim() ?? '';
+
+	if (!q) {
+		const random = getRandomEntry();
+		return json({ q: '', results: [] as Array<{ key: string }>, featured: random });
+	}
+
+	const results = searchEntries(q, 50);
+	return json({ q, results, featured: null });
+}
 
 export default function Index() {
-	const [parsedData, setParsedData] = useState<ParsedDictionary | null>(null);
-
-	useEffect(() => {
-		async function fetchData() {
-			try {
-				const data = await parseDictionary();
-				setParsedData(data);
-				console.log('Parsed dictionary data:', data);
-			} catch (error) {
-				console.error('Error parsing dictionary:', error);
-			}
-		}
-
-		fetchData();
-	}, []);
+	const { q, results, featured } = useLoaderData<typeof loader>();
 
 	return (
-		<div className='flex flex-col h-screen p-4'>
-			<h1 className='text-4xl font-bold'>{title}</h1>
-			<ol>
-				{parsedData?.map((entry) => {
-					return (
-						<li key={entry.entryName} className='pt-4'>
-							<h2 className='text-2xl font-bold'>{entry.entryName}</h2>
-							<ol>
-								{entry.headwords.map((hw, i) => {
-									return (
-										<li key={i} className='pt-2 pl-4'>
-											<h3 className='text-xl'>
-												{hw.name}
-												{hw.pronunciation ? (
-													<em className='text-base'> ({hw.pronunciation})</em>
-												) : (
-													''
-												)}
-												{hw.partOfSpeech ? (
-													<span className='text-base'>, {hw.partOfSpeech}</span>
-												) : (
-													''
-												)}
-											</h3>
-											<ol className='text-sm'>
-												{hw.defs.map((def, i) => {
-													return (
-														<li className='pt-2' key={i}>
-															<p
-																className='def'
-																dangerouslySetInnerHTML={{ __html: def.definition }}
-															/>
-															{def.quotes.map((quote, qIdx) => (
-																<blockquote
-																	key={qIdx}
-																	className='quote mt-2 pl-4 border-l-4 border-hint'
-																>
-																	<p className='italic'>
-																		<span
-																			dangerouslySetInnerHTML={{
-																				__html: `"${quote.text?.trim()}"`
-																			}}
-																		/>
-																		{quote.author && (
-																			<span className='block text-sm mt-1'>
-																				— {quote.author}
-																			</span>
-																		)}
-																	</p>
-																</blockquote>
-															))}
-														</li>
-													);
-												})}
-											</ol>
-										</li>
-									);
-								})}
-							</ol>
+		<div className="max-w-2xl mx-auto px-4 py-8">
+			<h1 className="text-4xl font-bold mb-6">Webster&rsquo;s 1913</h1>
+
+			<Form method="get" className="mb-8">
+				<input
+					type="search"
+					name="q"
+					defaultValue={q}
+					placeholder="Look up a word..."
+					className="w-full px-4 py-2 border border-input bg-background text-foreground rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-ring"
+					autoFocus
+				/>
+			</Form>
+
+			{q && results.length > 0 && (
+				<ul className="space-y-1">
+					{results.map((r) => (
+						<li key={r.key}>
+							<Link
+								to={`/entry/${encodeURIComponent(r.key)}`}
+								className="text-foreground/80 hover:text-foreground hover:underline"
+							>
+								{r.key}
+							</Link>
 						</li>
-					);
-				})}
-			</ol>
+					))}
+				</ul>
+			)}
+
+			{q && results.length === 0 && (
+				<p className="text-muted-foreground">No entries found for &ldquo;{q}&rdquo;</p>
+			)}
+
+			{!q && featured && (
+				<div>
+					<p className="text-sm text-muted-foreground mb-4">Random entry:</p>
+					<h2 className="text-2xl font-bold mb-4">
+						<Link to={`/entry/${encodeURIComponent(featured.key)}`} className="hover:underline">
+							{featured.key}
+						</Link>
+					</h2>
+					<EntryView entry={featured} />
+				</div>
+			)}
 		</div>
 	);
 }
