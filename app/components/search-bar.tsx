@@ -168,7 +168,7 @@ export function SearchBar() {
                 >
                   {result.key}
                   {result.partOfSpeech && (
-                    <span className="text-sm italic text-muted-foreground">
+                    <span className="text-sm text-muted-foreground italic">
                       {result.partOfSpeech}
                     </span>
                   )}
