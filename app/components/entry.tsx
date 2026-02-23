@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type {
   DictionaryEntry,
   Homograph,
@@ -26,6 +27,34 @@ export function EntryView({ entry }: { entry: DictionaryEntry }) {
         ))}
       </article>
     </HoverLinks>
+  );
+}
+
+export function SimilarEntries({
+  entries,
+}: {
+  entries: ReadonlyArray<{ key: string; distance: number }>;
+}) {
+  if (entries.length === 0) {
+    return null;
+  }
+
+  return (
+    <section className="mt-10 border-t border-border pt-6">
+      <h2 className="mb-3 text-lg font-semibold">Similar Entries</h2>
+      <ul className="flex flex-wrap gap-2">
+        {entries.map((entry) => (
+          <li key={entry.key}>
+            <Link
+              href={`/entry/${encodeURIComponent(entry.key)}`}
+              className="inline-flex rounded-full border border-border px-3 py-1 text-sm text-foreground/80 hover:bg-accent hover:text-accent-foreground"
+            >
+              {entry.key}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }
 

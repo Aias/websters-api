@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { EntryView } from '~/components/entry';
-import { getRandomEntry, searchEntries } from '~/lib/db.server';
+import { getRandomEntry, searchEntries, semanticSearch } from '~/lib/db.server';
 
 type HomePageProps = {
   searchParams: Promise<{
@@ -22,13 +22,14 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   const { q: rawQuery } = await searchParams;
   const q = normalizeQuery(rawQuery);
   const featured = q ? null : getRandomEntry();
-  const results = q ? searchEntries(q, 50) : [];
+  const prefixResults = q ? searchEntries(q, 50) : [];
+  const semanticResults = q && prefixResults.length === 0 ? await semanticSearch(q, 20) : [];
 
   return (
     <>
-      {q && results.length > 0 && (
+      {q && prefixResults.length > 0 && (
         <ul className="space-y-1">
-          {results.map((result) => (
+          {prefixResults.map((result) => (
             <li key={result.key}>
               <Link
                 href={`/entry/${encodeURIComponent(result.key)}`}
@@ -41,7 +42,25 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         </ul>
       )}
 
-      {q && results.length === 0 && (
+      {q && prefixResults.length === 0 && semanticResults.length > 0 && (
+        <>
+          <p className="mb-2 text-sm text-muted-foreground">Similar to &ldquo;{q}&rdquo;:</p>
+          <ul className="space-y-1">
+            {semanticResults.map((result) => (
+              <li key={result.key}>
+                <Link
+                  href={`/entry/${encodeURIComponent(result.key)}`}
+                  className="text-foreground/80 hover:text-foreground hover:underline"
+                >
+                  {result.key}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+
+      {q && prefixResults.length === 0 && semanticResults.length === 0 && (
         <p className="text-muted-foreground">No entries found for &ldquo;{q}&rdquo;</p>
       )}
 

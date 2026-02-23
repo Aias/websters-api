@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { EntryView } from '~/components/entry';
-import { getEntry } from '~/lib/db.server';
+import { EntryView, SimilarEntries } from '~/components/entry';
+import { getEntry, getSimilarEntries } from '~/lib/db.server';
 
 type EntryPageProps = {
   params: Promise<{ word: string }>;
@@ -30,10 +30,13 @@ export default async function EntryPage({ params }: EntryPageProps) {
     notFound();
   }
 
+  const similarEntries = await getSimilarEntries(entry, 6);
+
   return (
     <>
       <h1 className="mb-6 text-4xl font-bold">{entry.key}</h1>
       <EntryView entry={entry} />
+      <SimilarEntries entries={similarEntries} />
     </>
   );
 }
