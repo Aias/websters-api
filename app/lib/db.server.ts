@@ -62,7 +62,13 @@ async function getFeatureExtractor(): Promise<FeatureExtractionPipeline> {
       pipeline<'feature-extraction'>('feature-extraction', EMBEDDING_MODEL_ID)
     );
   }
-  return featureExtractorPromise;
+
+  try {
+    return await featureExtractorPromise;
+  } catch (error) {
+    featureExtractorPromise = null;
+    throw error;
+  }
 }
 
 async function embedText(text: string): Promise<ReadonlyArray<number>> {
@@ -133,15 +139,20 @@ export async function semanticSearch(
     return [];
   }
 
-  const vector = await embedText(normalizedQuery);
-  return database
-    .prepare<[string, number], { key: string; distance: number }>(
-      `SELECT key, distance
-       FROM entry_vectors
-       WHERE embedding MATCH ? AND k = ?
-       ORDER BY distance`
-    )
-    .all(vectorToSqlLiteral(vector), limit);
+  try {
+    const vector = await embedText(normalizedQuery);
+    return database
+      .prepare<[string, number], { key: string; distance: number }>(
+        `SELECT key, distance
+         FROM entry_vectors
+         WHERE embedding MATCH ? AND k = ?
+         ORDER BY distance`
+      )
+      .all(vectorToSqlLiteral(vector), limit);
+  } catch (error) {
+    console.warn('Vector semantic search failed. Returning no semantic results.', error);
+    return [];
+  }
 }
 
 export async function getSimilarEntries(
@@ -157,15 +168,20 @@ export async function getSimilarEntries(
     return [];
   }
 
-  const vector = await embedText(entryToEmbeddingText(entry));
-  const rows = database
-    .prepare<[string, number, string], { key: string; distance: number }>(
-      `SELECT key, distance
-       FROM entry_vectors
-       WHERE embedding MATCH ? AND k = ? AND key <> ?
-       ORDER BY distance`
-    )
-    .all(vectorToSqlLiteral(vector), limit + SIMILAR_SEARCH_BUFFER, entry.key);
+  try {
+    const vector = await embedText(entryToEmbeddingText(entry));
+    const rows = database
+      .prepare<[string, number, string], { key: string; distance: number }>(
+        `SELECT key, distance
+         FROM entry_vectors
+         WHERE embedding MATCH ? AND k = ? AND key <> ?
+         ORDER BY distance`
+      )
+      .all(vectorToSqlLiteral(vector), limit + SIMILAR_SEARCH_BUFFER, entry.key);
 
-  return rows.slice(0, limit);
+    return rows.slice(0, limit);
+  } catch (error) {
+    console.warn('Similar entries lookup failed. Returning no similar entries.', error);
+    return [];
+  }
 }
