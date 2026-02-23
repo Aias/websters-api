@@ -25,20 +25,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   const results = q ? searchEntries(q, 50) : [];
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-8">
-      <h1 className="mb-6 text-4xl font-bold">Webster&rsquo;s 1913</h1>
-
-      <form action="/" method="get" className="mb-8">
-        <input
-          type="search"
-          name="q"
-          defaultValue={q}
-          placeholder="Look up a word..."
-          className="w-full rounded-lg border border-input bg-background px-4 py-2 text-lg text-foreground focus:ring-2 focus:ring-ring focus:outline-none"
-          autoFocus
-        />
-      </form>
-
+    <>
       {q && results.length > 0 && (
         <ul className="space-y-1">
           {results.map((result) => (
@@ -69,6 +56,6 @@ export default async function HomePage({ searchParams }: HomePageProps) {
           <EntryView entry={featured} />
         </div>
       )}
-    </div>
+    </>
   );
 }
