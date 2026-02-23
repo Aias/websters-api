@@ -37,7 +37,7 @@ export function getEntry(word: string): DictionaryEntry | null {
 
 export function searchEntries(
   prefix: string,
-  limit = 20,
+  limit = 20
 ): Array<{ key: string; partOfSpeech: string | null }> {
   return getDb()
     .prepare<[string, number], { key: string; partOfSpeech: string | null }>(
@@ -47,7 +47,7 @@ export function searchEntries(
        WHERE normalized_key LIKE ?
        GROUP BY normalized_key
        ORDER BY normalized_key
-       LIMIT ?`,
+       LIMIT ?`
     )
     .all(`${normalizeLookup(prefix)}%`, limit);
 }

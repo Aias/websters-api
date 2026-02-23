@@ -17,6 +17,11 @@ const cardo = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : 'http://localhost:3000'
+  ),
   title: "Webster's 1913 Unabridged Dictionary",
   description: "Webster's Unabridged Dictionary, 1913 edition",
 };
