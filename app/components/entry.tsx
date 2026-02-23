@@ -219,9 +219,7 @@ function QuotationView({ quotation }: { quotation: Quotation }) {
     <blockquote className="mt-3 border-l-3 border-border pl-3 text-sm text-muted-foreground italic">
       <InlineHtml html={quotation.html} />
       {quotation.author && (
-        <span className="mt-1 block text-muted-foreground/60 not-italic">
-          — {quotation.author}
-        </span>
+        <span className="mt-1 block text-muted-foreground/60 not-italic">— {quotation.author}</span>
       )}
     </blockquote>
   );
