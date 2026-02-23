@@ -54,7 +54,7 @@ export function searchEntries(
 }
 
 /**
- * Fuzzy entry lookup: exact match → Porter stem → stem with -i → -y restoration.
+ * Fuzzy entry lookup: exact match → Porter stem → common headword variations.
  * Used by the hover-link lookup to resolve inflected forms (plurals, tenses)
  * back to their dictionary headword.
  */
@@ -64,16 +64,17 @@ export function findClosestEntry(word: string): DictionaryEntry | null {
 
   const normalized = normalizeLookup(word);
   const stemmed = porterStem(normalized);
+  if (stemmed === normalized) return null;
 
-  if (stemmed !== normalized) {
-    const stemMatch = getEntry(stemmed);
-    if (stemMatch) return stemMatch;
+  const candidates = [
+    stemmed,
+    stemmed + 'e', // Porter strips silent -e (besiege → besieg, derive → deriv)
+    ...(stemmed.endsWith('i') ? [stemmed.slice(0, -1) + 'y'] : []), // Porter converts -y → -i (fly → fli, apply → appli)
+  ];
 
-    // Porter converts -y → -i (step 1c); reverse it to match headwords like "fly", "apply"
-    if (stemmed.endsWith('i')) {
-      const yForm = getEntry(stemmed.slice(0, -1) + 'y');
-      if (yForm) return yForm;
-    }
+  for (const candidate of candidates) {
+    const match = getEntry(candidate);
+    if (match) return match;
   }
 
   return null;

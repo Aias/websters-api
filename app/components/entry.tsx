@@ -82,14 +82,14 @@ function HomographView({ homograph }: { homograph: Homograph }) {
 
       {etymology && <EtymologyView etymology={etymology} />}
 
-      <ol className="mt-2 space-y-3">
+      <ol className="mt-2 space-y-4">
         {senses.map((sense, i) => (
           <SenseView key={i} sense={sense} showNumber={senses.length > 1} />
         ))}
       </ol>
 
       {compoundForms.length > 0 && (
-        <div className="mt-4 border-l-2 border-border pl-4">
+        <div className="mt-4">
           {compoundForms.map((cf, i) => (
             <CompoundFormView key={i} form={cf} />
           ))}
@@ -168,7 +168,7 @@ function SenseView({ sense, showNumber }: { sense: Sense; showNumber: boolean })
   return (
     <li className="flex gap-2">
       {showNumber && sense.number && (
-        <span className="w-6 shrink-0 text-right font-bold text-muted-foreground">
+        <span className="w-6 shrink-0 text-right font-bold text-muted-foreground tabular-nums">
           {sense.number}
         </span>
       )}
@@ -218,7 +218,7 @@ function QuotationView({ quotation }: { quotation: Quotation }) {
   return (
     <blockquote className="relative mt-3 pl-3.5 text-sm text-muted-foreground italic">
       <span
-        className="pointer-events-none absolute inset-y-0.5 inset-s-0 w-[3px] rounded bg-border content-['']"
+        className="pointer-events-none absolute inset-y-0.25 inset-s-0 w-[3px] rounded bg-border content-['']"
         aria-hidden="true"
       />
       <InlineHtml html={quotation.html} />
@@ -239,11 +239,7 @@ function CompoundFormView({ form }: { form: CompoundForm }) {
           <InlineHtml html={form.headwordHtml} />
         </strong>
       ) : (
-        form.headwords.map((hw, i) => (
-          <strong key={i} className="mr-1">
-            {hw}
-          </strong>
-        ))
+        form.headwords.map((hw, i) => <strong key={i}>{hw},</strong>)
       )}
       {form.etymology && (
         <span className="text-sm text-muted-foreground">

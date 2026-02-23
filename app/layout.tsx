@@ -39,16 +39,16 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
           />
         )}
       </head>
-      <body className="font-serif antialiased">
-        <header className="mx-auto max-w-2xl px-4 pt-8 pb-6">
-          <Link href="/" className="mb-4 block text-4xl font-bold">
+      <body className="flex h-screen flex-col overflow-hidden font-serif antialiased">
+        <header className="mx-auto w-full max-w-2xl shrink-0 px-4 pt-8 pb-8">
+          <Link href="/" className="mb-4 block text-center text-4xl font-bold">
             Webster&rsquo;s 1913
           </Link>
           <Suspense>
             <SearchBar />
           </Suspense>
         </header>
-        <main className="mx-auto max-w-2xl px-4 pb-8">{children}</main>
+        <main className="mx-auto w-full max-w-2xl grow overflow-y-auto px-4 pb-8">{children}</main>
       </body>
     </html>
   );

@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 
 :root {
+  color-scheme: light;
   --background: oklch(100% 0 none);
   --foreground: oklch(14.67% 0.004 49.3);
   --card: oklch(100% 0 none);
@@ -64,6 +65,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    color-scheme: dark;
     --background: oklch(18% 0.004 49.3);
     --foreground: oklch(94% 0.001 106.4);
     --card: oklch(22% 0.004 49.3);
@@ -112,6 +114,7 @@ body {
 .xex {
   text-decoration: underline;
   text-decoration-style: dotted;
+  text-decoration-skip-ink: auto;
   text-decoration-thickness: 0.075em;
   text-underline-offset: 0.175em;
 }
