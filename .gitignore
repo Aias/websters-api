@@ -10,3 +10,4 @@ node_modules
 
 # Generated database (rebuild with: bun run build:db)
 app/data/dictionary.db
+app/data/dictionary.build-meta.json
