@@ -27,6 +27,19 @@ describe('preprocess', () => {
     expect(result).toContain('\u2018');
     expect(result).toContain('\u2019');
   });
+
+  test('removes unsafe tags and attributes', () => {
+    const input =
+      '<div class="def" onclick="alert(1)" style="color:red">Safe</div>' +
+      '<script>alert(1)</script>' +
+      '<div class="er" href="javascript:alert(1)">Test Ref</div>';
+
+    const result = preprocess(input);
+    expect(result).not.toContain('<script');
+    expect(result).not.toContain('onclick=');
+    expect(result).not.toContain('style=');
+    expect(result).toContain('href="/entry/Test%20Ref"');
+  });
 });
 
 // ─── Simple entry parsing ────────────────────────────────
@@ -148,6 +161,22 @@ describe('parseEntry — numbered senses', () => {
     const entry = parseEntry('Test', html);
     expect(entry.homographs[0].senses[0].field).toBe('(Mar. Law)');
   });
+
+  test('does not emit empty sense when field appears before repeated sn', () => {
+    const html =
+      '<h2 class="hw">Am-ne&#x2032;sic </h2>' +
+      '<div class="fld">(Med.) </div>' +
+      '<div class="sn">1. </div>' +
+      '<div class="sn">1. </div>' +
+      '<div class="def">Of or pertaining to amnesia.</div>';
+
+    const entry = parseEntry('Amnesic', html);
+    const senses = entry.homographs[0].senses;
+    expect(senses).toHaveLength(1);
+    expect(senses[0].field).toBe('(Med.)');
+    expect(senses[0].number).toBe('1.');
+    expect(senses[0].definition).toContain('amnesia');
+  });
 });
 
 // ─── Quotations ──────────────────────────────────────────
@@ -260,6 +289,34 @@ describe('parseEntry — compound forms', () => {
     expect(h.compoundForms[0].headwords).toEqual(['A per se']);
     expect(h.compoundForms[0].definition).toContain('preeminent');
     expect(h.compoundForms[0].mark).toBe('[Obs.]');
+  });
+
+  test('extracts multiple compound forms and grouped headwords', () => {
+    const html =
+      '<h2 class="hw">Analytical </h2>' +
+      '<div class="def">Base definition.</div>' +
+      '<div class="cs">' +
+      '<div class="mcol">' +
+      '<div class="col"><b>Analytical geometry </b></div>or ' +
+      '<div class="col"><b>coordinate geometry</b></div>' +
+      '</div>. ' +
+      '<div class="cd">See under <div class="er">Geometry</div>.</div>' +
+      '&#x2013; <div class="col"><b>Analytic language</b></div>, ' +
+      '<div class="cd">A noninflectional language.</div>' +
+      '&#x2013; <div class="col"><b>Analytical table</b></div>, ' +
+      '<div class="cd">A classification table.</div>' +
+      '</div>';
+
+    const entry = parseEntry('Analytical', html);
+    const forms = entry.homographs[0].compoundForms;
+
+    expect(forms).toHaveLength(3);
+    expect(forms[0].headwords).toEqual(['Analytical geometry', 'coordinate geometry']);
+    expect(forms[0].definition).toContain('/entry/Geometry');
+    expect(forms[1].headwords).toEqual(['Analytic language']);
+    expect(forms[1].definition).toContain('noninflectional language');
+    expect(forms[2].headwords).toEqual(['Analytical table']);
+    expect(forms[2].definition).toContain('classification table');
   });
 });
 

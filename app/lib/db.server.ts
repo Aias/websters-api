@@ -17,23 +17,38 @@ function getDb(): BetterSqlite3.Database {
 }
 
 export function getEntry(word: string): DictionaryEntry | null {
+  const normalizedWord = word.toLowerCase().trim();
+
   const row = getDb()
-    .prepare('SELECT data FROM entries WHERE normalized_key = ?')
-    .get(word.toLowerCase().trim()) as { data: string } | undefined;
+    .prepare<[string], { data: string }>(
+      'SELECT data FROM entries WHERE normalized_key = ? ORDER BY key COLLATE NOCASE LIMIT 1'
+    )
+    .get(normalizedWord);
+
   if (!row) return null;
-  return JSON.parse(row.data);
+  const entry: DictionaryEntry = JSON.parse(row.data);
+  return entry;
 }
 
 export function searchEntries(prefix: string, limit = 20): Array<{ key: string }> {
   return getDb()
-    .prepare('SELECT key FROM entries WHERE normalized_key LIKE ? ORDER BY normalized_key LIMIT ?')
-    .all(`${prefix.toLowerCase().trim()}%`, limit) as Array<{ key: string }>;
+    .prepare<[string, number], { key: string }>(
+      `SELECT MIN(key) AS key
+       FROM entries
+       WHERE normalized_key LIKE ?
+       GROUP BY normalized_key
+       ORDER BY normalized_key
+       LIMIT ?`
+    )
+    .all(`${prefix.toLowerCase().trim()}%`, limit);
 }
 
 export function getRandomEntry(): DictionaryEntry | null {
-  const row = getDb().prepare('SELECT data FROM entries ORDER BY RANDOM() LIMIT 1').get() as
-    | { data: string }
-    | undefined;
+  const row = getDb()
+    .prepare<[], { data: string }>('SELECT data FROM entries ORDER BY RANDOM() LIMIT 1')
+    .get();
+
   if (!row) return null;
-  return JSON.parse(row.data);
+  const entry: DictionaryEntry = JSON.parse(row.data);
+  return entry;
 }
