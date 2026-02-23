@@ -1,35 +1,43 @@
 {
-  "include": [
-    "app/**/*.ts",
-    "app/**/*.tsx",
-    "app/**/.server/**/*.ts",
-    "app/**/.server/**/*.tsx",
-    "app/**/.client/**/*.ts",
-    "app/**/.client/**/*.tsx"
-  ],
-  "exclude": [
-    "scripts"
-  ],
   "compilerOptions": {
-    "lib": ["DOM", "DOM.Iterable", "ES2022"],
-    "types": ["@remix-run/node", "vite/client", "@types/bun"],
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "jsx": "react-jsx",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "resolveJsonModule": true,
-    "target": "ES2022",
-    "strict": true,
     "allowJs": true,
-    "skipLibCheck": true,
+    "allowArbitraryExtensions": true,
+    "allowImportingTsExtensions": true,
+    "disableSolutionSearching": true,
+    "disableSourceOfProjectReferenceRedirect": true,
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
+    "incremental": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "module": "ESNext",
+    "moduleDetection": "force",
+    "moduleResolution": "Bundler",
+    "noFallthroughCasesInSwitch": true,
+    "noEmit": true,
     "paths": {
       "~/*": ["./app/*"]
     },
-
-    // Vite takes care of building everything, not tsc.
-    "noEmit": true
-  }
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ES2022",
+    "verbatimModuleSyntax": true,
+    "types": ["@types/bun"]
+  },
+  "exclude": ["node_modules", "**/*.test.ts"],
+  "include": [
+    "next-env.d.ts",
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    "scripts/**/*.ts",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ]
 }

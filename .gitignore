@@ -1,7 +1,9 @@
 node_modules
 
 /.cache
+/.next
 /build
+*.tsbuildinfo
 .env
 
 .DS_Store
