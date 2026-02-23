@@ -39,7 +39,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
           />
         )}
       </head>
-      <body className="flex h-screen flex-col overflow-hidden font-serif antialiased">
+      <body className="flex h-dvh flex-col overflow-hidden font-serif antialiased">
         <header className="mx-auto w-full max-w-2xl shrink-0 px-4 pt-8 pb-8">
           <Link href="/" className="mb-4 block text-center text-4xl font-bold">
             Webster&rsquo;s 1913

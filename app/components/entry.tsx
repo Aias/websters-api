@@ -239,6 +239,7 @@ function CompoundFormView({ form }: { form: CompoundForm }) {
           <InlineHtml html={form.headwordHtml} />
         </strong>
       ) : (
+        // Trailing comma is intended as a separator between headwords and the following definition
         form.headwords.map((hw, i) => <strong key={i}>{hw},</strong>)
       )}
       {form.etymology && (
