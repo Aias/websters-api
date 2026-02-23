@@ -35,15 +35,19 @@ export function getEntry(word: string): DictionaryEntry | null {
   return parseEntryRow(row);
 }
 
-export function searchEntries(prefix: string, limit = 20): Array<{ key: string }> {
+export function searchEntries(
+  prefix: string,
+  limit = 20,
+): Array<{ key: string; partOfSpeech: string | null }> {
   return getDb()
-    .prepare<[string, number], { key: string }>(
-      `SELECT MIN(key) AS key
+    .prepare<[string, number], { key: string; partOfSpeech: string | null }>(
+      `SELECT MIN(key) AS key,
+              json_extract(data, '$.homographs[0].partOfSpeech') AS partOfSpeech
        FROM entries
        WHERE normalized_key LIKE ?
        GROUP BY normalized_key
        ORDER BY normalized_key
-       LIMIT ?`
+       LIMIT ?`,
     )
     .all(`${normalizeLookup(prefix)}%`, limit);
 }

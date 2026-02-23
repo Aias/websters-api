@@ -11,7 +11,7 @@ export function SearchBar() {
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const abortRef = useRef<AbortController>(null);
-  const [results, setResults] = useState<Array<{ key: string }>>([]);
+  const [results, setResults] = useState<Array<{ key: string; partOfSpeech: string | null }>>([]);
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
 
@@ -54,7 +54,7 @@ export function SearchBar() {
 
     fetch(`/api/search?q=${encodeURIComponent(value)}`, { signal: controller.signal })
       .then((r) => r.json())
-      .then((data: Array<{ key: string }>) => {
+      .then((data: Array<{ key: string; partOfSpeech: string | null }>) => {
         setResults(data);
         setActiveIndex(-1);
       })
@@ -136,7 +136,7 @@ export function SearchBar() {
           role="combobox"
           autoComplete="off"
           aria-autocomplete="list"
-          className="w-full rounded-lg border border-input bg-background px-4 py-2 text-foreground focus:ring-2 focus:ring-ring focus:outline-none"
+          className="w-full rounded-lg border border-input bg-background px-4 py-2 font-sans text-foreground focus:ring-2 focus:ring-ring focus:outline-none"
         />
         {!open && !query && (
           <kbd className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 rounded border border-border px-1.5 py-0.5 text-xs text-muted-foreground">
@@ -164,9 +164,14 @@ export function SearchBar() {
                     e.preventDefault();
                     navigate(result.key);
                   }}
-                  className={`block px-4 py-1.5 ${i === activeIndex ? 'bg-accent text-accent-foreground' : 'text-foreground/80 hover:bg-accent/50'}`}
+                  className={`flex items-baseline gap-2 px-4 py-1.5 ${i === activeIndex ? 'bg-accent text-accent-foreground' : 'text-foreground/80 hover:bg-accent/50'}`}
                 >
                   {result.key}
+                  {result.partOfSpeech && (
+                    <span className="text-sm italic text-muted-foreground">
+                      {result.partOfSpeech}
+                    </span>
+                  )}
                 </Link>
               </li>
             ))}
