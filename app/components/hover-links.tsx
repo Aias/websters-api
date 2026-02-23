@@ -72,7 +72,7 @@ function getWordAtPoint(x: number, y: number): WordAtPoint | null {
 
 function createHighlight(range: Range, key: string): HTMLAnchorElement {
   const link = document.createElement('a');
-  link.href = `/entry/${encodeURIComponent(key)}`;
+  link.href = `/entry/${encodeURIComponent(key.toLowerCase())}`;
   link.setAttribute('data-hover-link', '');
   range.surroundContents(link);
 

@@ -1,6 +1,7 @@
 import 'server-only';
 import { join } from 'node:path';
 import BetterSqlite3 from 'better-sqlite3';
+import { porterStem } from './stemmer';
 import type { DictionaryEntry } from './types';
 
 // Next route/page code runs in the Node runtime; Bun's SQLite API is still used in scripts/build-db.ts.
@@ -50,6 +51,32 @@ export function searchEntries(
        LIMIT ?`
     )
     .all(`${normalizeLookup(prefix)}%`, limit);
+}
+
+/**
+ * Fuzzy entry lookup: exact match → Porter stem → stem with -i → -y restoration.
+ * Used by the hover-link lookup to resolve inflected forms (plurals, tenses)
+ * back to their dictionary headword.
+ */
+export function findClosestEntry(word: string): DictionaryEntry | null {
+  const exact = getEntry(word);
+  if (exact) return exact;
+
+  const normalized = normalizeLookup(word);
+  const stemmed = porterStem(normalized);
+
+  if (stemmed !== normalized) {
+    const stemMatch = getEntry(stemmed);
+    if (stemMatch) return stemMatch;
+
+    // Porter converts -y → -i (step 1c); reverse it to match headwords like "fly", "apply"
+    if (stemmed.endsWith('i')) {
+      const yForm = getEntry(stemmed.slice(0, -1) + 'y');
+      if (yForm) return yForm;
+    }
+  }
+
+  return null;
 }
 
 export function getRandomEntry(): DictionaryEntry | null {

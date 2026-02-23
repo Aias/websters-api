@@ -22,7 +22,7 @@ const DB_FILE = join(ROOT, 'app', 'data', 'dictionary.db');
 const BUILD_META_FILE = join(ROOT, 'app', 'data', 'dictionary.build-meta.json');
 const PROGRESS_EVERY = 10000;
 // Bump when parser/build output semantics change to force a rebuild.
-const PARSER_VERSION = 2;
+const PARSER_VERSION = 3;
 
 interface SourceFingerprint {
   size: number;
@@ -221,6 +221,45 @@ function loadPreprocessedDocument(html: string): cheerio.CheerioAPI {
       delete el.attribs[attributeName];
     }
   });
+
+  // Normalize whitespace: move leading/trailing spaces outside inline elements
+  // so CSS decorations (underlines, etc.) don't extend over whitespace.
+  // Merge into adjacent text nodes rather than creating whitespace-only nodes
+  // (which get filtered by parsers that skip empty text).
+  // Process in reverse document order so nested elements propagate outward.
+  const inlineElements = $('em, span, strong, a').toArray().reverse();
+  for (const el of inlineElements) {
+    const { children } = el;
+    if (children.length === 0) continue;
+
+    const last = children[children.length - 1];
+    if (last.type === 'text') {
+      const trailing = last.data.match(/(\s+)$/);
+      if (trailing) {
+        last.data = last.data.slice(0, -trailing[1].length);
+        const next = el.nextSibling;
+        if (next?.type === 'text') {
+          next.data = trailing[1] + next.data;
+        } else {
+          $(el).after(trailing[1]);
+        }
+      }
+    }
+
+    const first = children[0];
+    if (first.type === 'text') {
+      const leading = first.data.match(/^(\s+)/);
+      if (leading) {
+        first.data = first.data.slice(leading[1].length);
+        const prev = el.previousSibling;
+        if (prev?.type === 'text') {
+          prev.data += leading[1];
+        } else {
+          $(el).before(leading[1]);
+        }
+      }
+    }
+  }
 
   return $;
 }

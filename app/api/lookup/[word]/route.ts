@@ -1,8 +1,8 @@
-import { getEntry } from '~/lib/db.server';
+import { findClosestEntry } from '~/lib/db.server';
 
 export async function GET(_request: Request, { params }: { params: Promise<{ word: string }> }) {
   const { word } = await params;
-  const entry = getEntry(word);
+  const entry = findClosestEntry(word);
 
   if (!entry) {
     return Response.json({ exists: false });

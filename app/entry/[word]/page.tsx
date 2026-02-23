@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import { EntryView } from '~/components/entry';
 import { getEntry } from '~/lib/db.server';
 
@@ -20,6 +20,10 @@ export async function generateMetadata({ params }: EntryPageProps): Promise<Meta
 
 export default async function EntryPage({ params }: EntryPageProps) {
   const { word } = await params;
+  const lowercase = word.toLowerCase();
+  if (word !== lowercase) {
+    permanentRedirect(`/entry/${encodeURIComponent(lowercase)}`);
+  }
   const entry = getEntry(word);
 
   if (!entry) {

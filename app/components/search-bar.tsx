@@ -64,7 +64,7 @@ export function SearchBar() {
   function navigate(key: string) {
     setOpen(false);
     inputRef.current?.blur();
-    router.push(`/entry/${encodeURIComponent(key)}`);
+    router.push(`/entry/${encodeURIComponent(key.toLowerCase())}`);
   }
 
   function scrollToIndex(index: number) {
@@ -158,7 +158,7 @@ export function SearchBar() {
                 aria-selected={i === activeIndex}
               >
                 <Link
-                  href={`/entry/${encodeURIComponent(result.key)}`}
+                  href={`/entry/${encodeURIComponent(result.key.toLowerCase())}`}
                   tabIndex={-1}
                   onMouseDown={(e) => {
                     e.preventDefault();
