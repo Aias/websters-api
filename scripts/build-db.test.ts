@@ -678,6 +678,31 @@ describe('parseEntry — compound form content', () => {
     expect(cf.definition).toContain('reliance upon');
   });
 
+  test('dash separators between compound forms are not captured as quotations', () => {
+    const html =
+      '<h2 class="hw">Visible </h2>' +
+      '<div class="def">Perceivable by the eye.</div>' +
+      '<div class="cs">' +
+      '<div class="col"><b>Visible church </b></div>' +
+      '<div class="fld">(Theol.)</div>, ' +
+      '<div class="cd">the apparent church of Christ on earth. </div>' +
+      '&#x2013; <div class="col"><b>Visible horizon</b></div>. ' +
+      '<div class="cd">Same as Apparent horizon.</div>' +
+      '</div>';
+
+    const entry = parseEntry('Visible', html);
+    const forms = entry.homographs[0].compoundForms;
+
+    expect(forms).toHaveLength(2);
+    expect(forms[0].headwords).toEqual(['Visible church']);
+    expect(forms[0].field).toBe('(Theol.)');
+    expect(forms[0].definition).toContain('apparent church');
+    expect(forms[0].quotations).toHaveLength(0);
+    expect(forms[1].headwords).toEqual(['Visible horizon']);
+    expect(forms[1].field).toBeNull();
+    expect(forms[1].definition).toContain('Apparent horizon');
+  });
+
   test('compound form captures inline quotation and attribution', () => {
     const html =
       '<h2 class="hw">Test </h2>' +

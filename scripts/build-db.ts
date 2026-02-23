@@ -335,6 +335,7 @@ function parseCompoundForms($: cheerio.CheerioAPI, node: Element): ReadonlyArray
   let pendingHeadwords: string[] = [];
   let pendingHeadwordHtml: InlineHTML | null = null;
   let pendingEtymology: Etymology | null = null;
+  let pendingField: string | null = null;
   let pendingDefinition: InlineHTML | null = null;
   let pendingMark: string | null = null;
   let pendingQuotations: Quotation[] = [];
@@ -357,6 +358,7 @@ function parseCompoundForms($: cheerio.CheerioAPI, node: Element): ReadonlyArray
       !pendingDefinition &&
       pendingHeadwords.length === 0 &&
       !pendingEtymology &&
+      !pendingField &&
       !pendingMark &&
       pendingQuotations.length === 0 &&
       pendingAttributions.length === 0
@@ -367,6 +369,7 @@ function parseCompoundForms($: cheerio.CheerioAPI, node: Element): ReadonlyArray
       headwords: pendingHeadwords,
       headwordHtml: pendingHeadwordHtml,
       etymology: pendingEtymology,
+      field: pendingField,
       definition: pendingDefinition,
       mark: pendingMark,
       quotations: pendingQuotations,
@@ -376,6 +379,7 @@ function parseCompoundForms($: cheerio.CheerioAPI, node: Element): ReadonlyArray
     pendingHeadwords = [];
     pendingHeadwordHtml = null;
     pendingEtymology = null;
+    pendingField = null;
     pendingDefinition = null;
     pendingMark = null;
     pendingQuotations = [];
@@ -392,6 +396,8 @@ function parseCompoundForms($: cheerio.CheerioAPI, node: Element): ReadonlyArray
     // Bare text nodes — accumulate as quotation content after a cd
     if (!isElement(child)) {
       if (child.type === 'text' && child.data.trim() && pendingDefinition) {
+        // Skip dash-only separators between compound entries (en dash, em dash, hyphen)
+        if (/^[\s\u2013\u2014\-,;.]+$/.test(child.data)) continue;
         quotationHtmlParts.push(child.data);
       }
       continue;
@@ -415,6 +421,11 @@ function parseCompoundForms($: cheerio.CheerioAPI, node: Element): ReadonlyArray
 
     if (hasClass(child, 'ety')) {
       pendingEtymology = parseEtymology($, child);
+      continue;
+    }
+
+    if (hasClass(child, 'fld')) {
+      pendingField = getText($, child);
       continue;
     }
 
