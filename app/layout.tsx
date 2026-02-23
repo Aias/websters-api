@@ -1,13 +1,19 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import localFont from 'next/font/local';
 import Link from 'next/link';
 import { Suspense, type ReactNode } from 'react';
 import { SearchBar } from '~/components/search-bar';
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
+const cardo = localFont({
+  src: [
+    { path: './fonts/Cardo-Regular.woff2', weight: '400', style: 'normal' },
+    { path: './fonts/Cardo-Italic.woff2', weight: '400', style: 'italic' },
+    { path: './fonts/Cardo-Bold.woff2', weight: '700', style: 'normal' },
+  ],
+  variable: '--font-cardo',
+  display: 'swap',
+  adjustFontFallback: 'Times New Roman',
 });
 
 export const metadata: Metadata = {
@@ -17,8 +23,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="font-sans antialiased">
+    <html lang="en" className={cardo.variable}>
+      <body className="font-serif antialiased">
         <header className="mx-auto max-w-2xl px-4 pt-8 pb-6">
           <Link href="/" className="mb-4 block text-4xl font-bold">
             Webster&rsquo;s 1913
