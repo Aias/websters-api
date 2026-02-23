@@ -7,6 +7,7 @@ import type {
   CompoundForm,
   InlineHTML,
 } from '~/lib/types';
+import { HoverLinks } from './hover-links';
 
 // ─── Inline HTML renderer ────────────────────────────────
 
@@ -18,11 +19,13 @@ function InlineHtml({ html, className }: { html: InlineHTML; className?: string 
 
 export function EntryView({ entry }: { entry: DictionaryEntry }) {
   return (
-    <article>
-      {entry.homographs.map((homograph, i) => (
-        <HomographView key={i} homograph={homograph} />
-      ))}
-    </article>
+    <HoverLinks>
+      <article>
+        {entry.homographs.map((homograph, i) => (
+          <HomographView key={i} homograph={homograph} />
+        ))}
+      </article>
+    </HoverLinks>
   );
 }
 
