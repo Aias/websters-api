@@ -6,6 +6,9 @@
   "scripts": {
     "build": "bun run build:db && next build",
     "build:db": "bun run scripts/build-db.ts",
+    "build:embeddings": "bun run scripts/build-embeddings.ts",
+    "build:embeddings:throttled": "EMBEDDING_BATCH_SIZE=8 EMBEDDING_PAUSE_MS=50 EMBEDDING_INTRA_THREADS=1 EMBEDDING_INTER_THREADS=1 bun run scripts/build-embeddings.ts",
+    "build:full": "bun run build:db && bun run build:embeddings && next build",
     "check": "bun run lint && bun run type-check && bun run format",
     "dev": "next dev",
     "format": "oxfmt",
@@ -16,13 +19,16 @@
     "test": "bun test",
     "type-check": "tsgo --noEmit",
     "type-check:watch": "tsgo --noEmit --watch",
-    "typecheck": "bun run type-check"
+    "typecheck": "bun run type-check",
+    "vec:poc": "bun run scripts/vec-poc.ts"
   },
   "dependencies": {
+    "@huggingface/transformers": "3.8.1",
     "better-sqlite3": "12.6.2",
     "next": "16.1.6",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "sqlite-vec": "0.1.7-alpha.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "4.2.0",
