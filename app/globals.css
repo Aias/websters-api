@@ -64,24 +64,24 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: oklch(14.67% 0.004 49.3);
-    --foreground: oklch(98.45% 0.001 106.4);
-    --card: oklch(14.67% 0.004 49.3);
+    --background: oklch(18% 0.004 49.3);
+    --foreground: oklch(94% 0.001 106.4);
+    --card: oklch(22% 0.004 49.3);
     --card-foreground: oklch(98.45% 0.001 106.4);
     --popover: oklch(14.67% 0.004 49.3);
     --popover-foreground: oklch(98.45% 0.001 106.4);
-    --primary: oklch(98.45% 0.001 106.4);
+    --primary: oklch(94% 0.001 106.4);
     --primary-foreground: oklch(21.61% 0.006 56);
     --secondary: oklch(26.85% 0.006 34.3);
     --secondary-foreground: oklch(98.45% 0.001 106.4);
     --muted: oklch(26.85% 0.006 34.3);
-    --muted-foreground: oklch(71.59% 0.009 56.3);
+    --muted-foreground: oklch(74% 0.009 56.3);
     --accent: oklch(26.85% 0.006 34.3);
     --accent-foreground: oklch(98.45% 0.001 106.4);
     --destructive: oklch(39.59% 0.133 25.7);
     --destructive-foreground: oklch(98.45% 0.001 106.4);
-    --border: oklch(26.85% 0.006 34.3);
-    --input: oklch(26.85% 0.006 34.3);
+    --border: oklch(24% 0.006 34.3);
+    --input: oklch(32% 0.006 34.3);
     --ring: oklch(86.83% 0.004 56.4);
     --chart-1: oklch(52.92% 0.193 262.1);
     --chart-2: oklch(69.83% 0.134 165.5);
@@ -105,9 +105,15 @@ body {
   font-style: italic;
 }
 
+.qex {
+  color: var(--foreground);
+}
+
 .xex {
   text-decoration: underline;
   text-decoration-style: dotted;
+  text-decoration-thickness: 0.075em;
+  text-underline-offset: 0.175em;
 }
 
 .ets {
@@ -116,15 +122,16 @@ body {
 
 a.er {
   font-variant: small-caps;
-  text-decoration: none;
-  color: inherit;
-  border-bottom: 1px solid currentColor;
+  text-decoration: underline;
+  text-decoration-thickness: 0.075em;
+  text-underline-offset: 0.175em;
+  text-decoration-skip-ink: auto;
+  text-decoration-color: oklch(from currentColor l c h / 0.5);
   opacity: 0.7;
   transition: opacity 0.1s;
-}
-
-a.er:hover {
-  opacity: 1;
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .mark,
@@ -137,13 +144,14 @@ a[data-hover-link] {
   color: inherit;
   text-decoration-line: underline;
   text-decoration-color: transparent;
-  text-underline-offset: 2px;
+  text-decoration-thickness: 0.075em;
+  text-underline-offset: 0.175em;
   cursor: pointer;
   transition: text-decoration-color 0.15s ease-out;
-}
 
-a[data-hover-link].visible {
-  text-decoration-color: currentColor;
+  &.visible {
+    text-decoration-color: oklch(from currentColor l c h / 0.75);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
