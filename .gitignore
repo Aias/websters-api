@@ -8,6 +8,7 @@ next-env.d.ts
 .env
 
 .DS_Store
+/logs
 
 # Generated database (rebuild with: bun run build:db)
 app/data/dictionary.db
