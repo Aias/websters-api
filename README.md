@@ -28,6 +28,12 @@ bun run build
 
 `build` first regenerates the SQLite dictionary, then runs `next build`.
 
+```sh
+bun run build:db:force
+```
+
+Use `build:db:force` to rebuild regardless of source fingerprint checks.
+
 ## Quality
 
 ```sh
@@ -52,3 +58,4 @@ bun run start
 
 - Runtime reads use `better-sqlite3` in Next server code.
 - Database generation (`build:db`) uses Bun's built-in SQLite API.
+- Build metadata stores both source fingerprint and parser version for skip decisions.

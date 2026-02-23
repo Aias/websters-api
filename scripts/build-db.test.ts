@@ -53,7 +53,6 @@ describe('parseEntry — simple entries', () => {
 
     const entry = parseEntry('A 1', html);
     expect(entry.key).toBe('A 1');
-    expect(entry.normalizedKey).toBe('a 1');
     expect(entry.homographs).toHaveLength(1);
 
     const h = entry.homographs[0];
@@ -89,7 +88,7 @@ describe('parseEntry — simple entries', () => {
     const entry = parseEntry('Aam', html);
     const h = entry.homographs[0];
     expect(h.etymology).not.toBeNull();
-    expect(h.etymology!.sourceWords).toEqual(['aam', 'ama', 'hama']);
+    expect(h.etymology!.html).toContain('hama');
     expect(h.alternateSpellings).toEqual(['Aum', 'Awm']);
   });
 });
@@ -112,7 +111,7 @@ describe('parseEntry — multiple homographs', () => {
     expect(entry.homographs[1].partOfSpeech).toBe('noun');
   });
 
-  test('detects ‖ alternate marker', () => {
+  test('strips ‖ marker between homographs', () => {
     const html =
       '<h2 class="hw">Test </h2>' +
       '<div class="def">First sense.</div><br/>' +
@@ -121,8 +120,8 @@ describe('parseEntry — multiple homographs', () => {
 
     const entry = parseEntry('Test', html);
     expect(entry.homographs).toHaveLength(2);
-    expect(entry.homographs[0].isAlternate).toBe(false);
-    expect(entry.homographs[1].isAlternate).toBe(true);
+    expect(entry.homographs[1].senses[0].definition).toContain('Alternate pronunciation sense');
+    expect(entry.homographs[1].senses[0].definition).not.toContain('\u2016');
   });
 });
 
@@ -236,11 +235,11 @@ describe('parseEntry — verb morphology', () => {
 
     const entry = parseEntry('Abandon', html);
     const h = entry.homographs[0];
-    expect(h.verbMorphology).not.toBeNull();
-    expect(h.verbMorphology).toHaveLength(2);
-    expect(h.verbMorphology![0].label).toBe('imperfect or past participle');
-    expect(h.verbMorphology![0].form).toBe('Abandoned');
-    expect(h.verbMorphology![1].form).toBe('Abandoning');
+    expect(h.morphology).not.toBeNull();
+    expect(h.morphology).toHaveLength(2);
+    expect(h.morphology![0].label).toBe('imperfect or past participle');
+    expect(h.morphology![0].form).toBe('Abandoned');
+    expect(h.morphology![1].form).toBe('Abandoning');
   });
 });
 
@@ -400,7 +399,7 @@ describe('parseEntry — full "Abandon" entry', () => {
     const h = entry.homographs[0];
     expect(h.partOfSpeech).toBe('transitive verb');
     expect(h.senses).toHaveLength(4);
-    expect(h.verbMorphology).toHaveLength(2);
+    expect(h.morphology).toHaveLength(2);
   });
 
   test('first sense has mark and quotations', () => {
@@ -427,28 +426,317 @@ describe('parseEntry — full "Abandon" entry', () => {
     expect(h.usage).toContain('These words agree');
   });
 
-  test('has etymology with cross-references', () => {
+  test('has etymology html with linked references', () => {
     const entry = parseEntry('Abandon', abandonHtml);
     const h = entry.homographs[0];
     expect(h.etymology).not.toBeNull();
-    expect(h.etymology!.sourceWords).toContain('abandoner');
-    expect(h.etymology!.crossReferences).toEqual(
-      expect.arrayContaining([expect.objectContaining({ text: 'Ban', target: 'ban' })])
-    );
+    expect(h.etymology!.html).toContain('abandoner');
+    expect(h.etymology!.html).toContain('/entry/Ban');
   });
 
   test('second homograph is a noun', () => {
     const entry = parseEntry('Abandon', abandonHtml);
     const h = entry.homographs[1];
     expect(h.partOfSpeech).toBe('noun');
-    expect(h.isAlternate).toBe(false);
   });
 
-  test('third homograph is alternate (‖ marker)', () => {
+  test('third homograph keeps expected noun sense', () => {
     const entry = parseEntry('Abandon', abandonHtml);
     const h = entry.homographs[2];
-    expect(h.isAlternate).toBe(true);
     expect(h.partOfSpeech).toBe('noun');
     expect(h.senses[0].definition).toContain('natural impulses');
+  });
+});
+
+// ─── Sub-definitions (sd) ───────────────────────────────
+
+describe('parseEntry — sub-definitions', () => {
+  test('sd creates separate sub-senses with letter labels', () => {
+    const html =
+      '<h2 class="hw">Abacus </h2>' +
+      '<div class="sn">3. </div>' +
+      '<div class="fld">(Arch.) </div>' +
+      '<div class="sd">(a) </div>' +
+      '<div class="def">The uppermost member of a column.</div>' +
+      '<div class="sd">(b) </div>' +
+      '<div class="def">A tablet or panel.</div>';
+
+    const entry = parseEntry('Abacus', html);
+    const senses = entry.homographs[0].senses;
+    // sn 3. with field (Arch.) has no definition; sd (a) takes over that sense slot
+    expect(senses).toHaveLength(2);
+    expect(senses[0].number).toBe('(a)');
+    expect(senses[0].field).toBe('(Arch.)');
+    expect(senses[0].definition).toContain('uppermost member');
+    expect(senses[1].number).toBe('(b)');
+    expect(senses[1].definition).toContain('tablet or panel');
+  });
+
+  test('sd after definition flushes as new sense', () => {
+    const html =
+      '<h2 class="hw">Test </h2>' +
+      '<div class="sn">1. </div>' +
+      '<div class="def">General def. </div>' +
+      '<div class="sd">(a) </div>' +
+      '<div class="def">Sub-def A.</div>' +
+      '<div class="sd">(b) </div>' +
+      '<div class="def">Sub-def B.</div>';
+
+    const entry = parseEntry('Test', html);
+    const senses = entry.homographs[0].senses;
+    expect(senses).toHaveLength(3);
+    expect(senses[0].number).toBe('1.');
+    expect(senses[0].definition).toContain('General def');
+    expect(senses[1].number).toBe('(a)');
+    expect(senses[2].number).toBe('(b)');
+  });
+});
+
+// ─── Secondary POS definitions (def2) ───────────────────
+
+describe('parseEntry — def2 secondary POS', () => {
+  test('def2 creates sense with secondary partOfSpeech', () => {
+    const html =
+      '<h2 class="hw">Abortifacient </h2>' +
+      '<div class="pos">adjective </div>' +
+      '<div class="def">Producing miscarriage. </div>' +
+      '<div class="def2">' +
+      '<div class="pos">noun </div>' +
+      '<div class="def">A drug that causes premature delivery.</div>' +
+      '</div>';
+
+    const entry = parseEntry('Abortifacient', html);
+    const h = entry.homographs[0];
+    expect(h.partOfSpeech).toBe('adjective');
+    expect(h.senses).toHaveLength(2);
+    expect(h.senses[0].definition).toContain('Producing miscarriage');
+    expect(h.senses[0].partOfSpeech).toBeNull();
+    expect(h.senses[1].definition).toContain('drug that causes');
+    expect(h.senses[1].partOfSpeech).toBe('noun');
+  });
+
+  test('def2 with sd sub-senses', () => {
+    const html =
+      '<h2 class="hw">Chaldean </h2>' +
+      '<div class="def">Of or pertaining to Chaldea. </div>' +
+      '<div class="def2">' +
+      '<div class="pos">noun </div>' +
+      '<div class="sd">(a) </div>' +
+      '<div class="def">A native of Chaldea. </div>' +
+      '<div class="sd">(b) </div>' +
+      '<div class="def">A learned man.</div>' +
+      '</div>';
+
+    const entry = parseEntry('Chaldean', html);
+    const senses = entry.homographs[0].senses;
+    expect(senses).toHaveLength(3);
+    expect(senses[0].definition).toContain('pertaining to Chaldea');
+    expect(senses[1].number).toBe('(a)');
+    expect(senses[1].definition).toContain('native of Chaldea');
+    expect(senses[1].partOfSpeech).toBe('noun');
+    expect(senses[2].number).toBe('(b)');
+    expect(senses[2].definition).toContain('learned man');
+  });
+});
+
+// ─── Plural forms (plu) ─────────────────────────────────
+
+describe('parseEntry — plural forms', () => {
+  test('extracts plural forms with pronunciation', () => {
+    const html =
+      '<h2 class="hw">Abacus </h2>' +
+      '<div class="pos">noun </div>' +
+      '<div class="plu"><i class="it">pl. </i>' +
+      '<div class="plw">Abacuses </div>; L. pl. ' +
+      '<div class="plw">Abaci </div><div class="pr">(-sī)</div>. </div>' +
+      '<div class="def">A frame with beads.</div>';
+
+    const entry = parseEntry('Abacus', html);
+    const h = entry.homographs[0];
+    expect(h.pluralForms).not.toBeNull();
+    expect(h.pluralForms).toHaveLength(2);
+    expect(h.pluralForms![0].form).toBe('Abacuses');
+    expect(h.pluralForms![0].pronunciation).toBeNull();
+    expect(h.pluralForms![1].form).toBe('Abaci');
+    expect(h.pluralForms![1].pronunciation).toBe('-sī');
+  });
+});
+
+// ─── Derived forms (wordforms) ──────────────────────────
+
+describe('parseEntry — derived forms', () => {
+  test('extracts derived word forms', () => {
+    const html =
+      '<h2 class="hw">Absent-minded </h2>' +
+      '<div class="pos">adjective </div>' +
+      '<div class="def">Inattentive to surroundings.</div>' +
+      '<div class="wordforms">' +
+      '<div class="wf">Absent-mindedness</div>, <div class="pos">noun </div>' +
+      '– <div class="wf">Absent-mindedly</div>, <div class="pos">adverb</div>' +
+      '</div>';
+
+    const entry = parseEntry('Absent-minded', html);
+    const h = entry.homographs[0];
+    expect(h.derivedForms).not.toBeNull();
+    expect(h.derivedForms).toHaveLength(2);
+    expect(h.derivedForms![0].form).toBe('Absent-mindedness');
+    expect(h.derivedForms![0].partOfSpeech).toBe('noun');
+    expect(h.derivedForms![1].form).toBe('Absent-mindedly');
+    expect(h.derivedForms![1].partOfSpeech).toBe('adverb');
+  });
+
+  test('accumulates derived forms across multiple wordforms blocks', () => {
+    const html =
+      '<h2 class="hw">Fad </h2>' +
+      '<div class="pos">noun </div>' +
+      '<div class="def">A hobby; whim.</div>' +
+      '<div class="wordforms"><div class="wf">Faddist</div>, <div class="pos">noun</div></div>' +
+      '<div class="wordforms"><div class="wf">Faddish</div>, <div class="pos">adjective</div></div>';
+
+    const entry = parseEntry('Fad', html);
+    const h = entry.homographs[0];
+    expect(h.derivedForms).not.toBeNull();
+    expect(h.derivedForms).toHaveLength(2);
+    expect(h.derivedForms![0]).toEqual({
+      form: 'Faddist',
+      partOfSpeech: 'noun',
+      pronunciation: null,
+    });
+    expect(h.derivedForms![1]).toEqual({
+      form: 'Faddish',
+      partOfSpeech: 'adjective',
+      pronunciation: null,
+    });
+  });
+});
+
+// ─── Adjective morphology (amorph) ─────────────────────
+
+describe('parseEntry — adjective morphology', () => {
+  test('extracts comparative and superlative forms', () => {
+    const html =
+      '<h2 class="hw">Able </h2>' +
+      '<div class="pos">adjective </div>' +
+      '<div class="amorph">[' +
+      '<div class="pos">comparative </div><div class="adjf">Abler</div>; ' +
+      '<div class="pos">superlative </div><div class="adjf">Ablest</div>.' +
+      '] </div>' +
+      '<div class="def">Having sufficient power.</div>';
+
+    const entry = parseEntry('Able', html);
+    const h = entry.homographs[0];
+    expect(h.morphology).not.toBeNull();
+    expect(h.morphology).toHaveLength(2);
+    expect(h.morphology![0].label).toBe('comparative');
+    expect(h.morphology![0].form).toBe('Abler');
+    expect(h.morphology![1].label).toBe('superlative');
+    expect(h.morphology![1].form).toBe('Ablest');
+  });
+});
+
+// ─── Multi-headword (mhw) ──────────────────────────────
+
+describe('parseEntry — multi-headword entries', () => {
+  test('mhw extracts alternate headwords', () => {
+    const html =
+      '<div class="mhw">' +
+      '<h2 class="hw">Aaronic </h2>, ' +
+      '<h2 class="hw">Aaronical </h2>' +
+      '</div>' +
+      '<div class="pos">adjective </div>' +
+      '<div class="def">Of or pertaining to Aaron.</div>';
+
+    const entry = parseEntry('Aaronic', html);
+    expect(entry.homographs).toHaveLength(1);
+    const h = entry.homographs[0];
+    expect(h.headword).toBe('Aaronic');
+    expect(h.alternateHeadwords).toEqual(['Aaronical']);
+    expect(h.senses[0].definition).toContain('pertaining to Aaron');
+  });
+});
+
+// ─── Compound form improvements ─────────────────────────
+
+describe('parseEntry — compound form content', () => {
+  test('mcol preserves headwordHtml with connectors', () => {
+    const html =
+      '<h2 class="hw">Strength </h2>' +
+      '<div class="def">A definition.</div>' +
+      '<div class="cs">' +
+      '<div class="mcol">' +
+      '<div class="col"><b>On the strength of</b></div>, ' +
+      '<i class="it">or </i>' +
+      '<div class="col"><b>Upon the strength of</b></div>' +
+      '</div>, ' +
+      '<div class="cd">in reliance upon.</div>' +
+      '</div>';
+
+    const entry = parseEntry('Strength', html);
+    const cf = entry.homographs[0].compoundForms[0];
+    expect(cf.headwords).toEqual(['On the strength of', 'Upon the strength of']);
+    expect(cf.headwordHtml).toContain('or');
+    expect(cf.definition).toContain('reliance upon');
+  });
+
+  test('compound form captures inline quotation and attribution', () => {
+    const html =
+      '<h2 class="hw">Test </h2>' +
+      '<div class="def">A definition.</div>' +
+      '<div class="cs">' +
+      '<div class="col"><b>Test phrase</b></div>, ' +
+      '<div class="cd">the meaning. </div>' +
+      '\u201CExample usage with <i class="xex">test </i>phrase.\u201D ' +
+      '<div class="au">Author.</div>' +
+      '</div>';
+
+    const entry = parseEntry('Test', html);
+    const cf = entry.homographs[0].compoundForms[0];
+    expect(cf.definition).toContain('the meaning');
+    expect(cf.quotations).toHaveLength(1);
+    expect(cf.quotations[0].html).toContain('xex');
+    expect(cf.quotations[0].author).toBe('Author');
+  });
+});
+
+// ─── Catch-all fallback ─────────────────────────────────
+
+describe('parseEntry — inline element fallback', () => {
+  test('xex inline element preserved in definition', () => {
+    const html =
+      '<h2 class="hw">Strength </h2>' +
+      '<div class="sn">3. </div>' +
+      '<div class="def">Power of resisting attacks; impregnability. </div>' +
+      '\u201COur castle\u2019s <i class="xex">strength </i>will laugh a siege to scorn.\u201D' +
+      '<div class="rj"><div class="au">Shak.</div></div>';
+
+    const entry = parseEntry('Strength', html);
+    const def = entry.homographs[0].senses[0].definition;
+    expect(def).toContain('xex');
+    expect(def).toContain('strength');
+    expect(def).toContain('castle\u2019s');
+    expect(def).toContain('laugh a siege');
+  });
+
+  test('multiple inline elements between text nodes are preserved', () => {
+    const html =
+      '<h2 class="hw">Test </h2>' +
+      '<div class="def">Base def. </div>' +
+      'A <i class="it">special</i> <b>note</b> here.';
+
+    const entry = parseEntry('Test', html);
+    const def = entry.homographs[0].senses[0].definition;
+    expect(def).toContain('special');
+    expect(def).toContain('note');
+    expect(def).toContain('here.');
+  });
+
+  test('no crash when unrecognized element precedes any sense', () => {
+    const html =
+      '<h2 class="hw">Test </h2>' +
+      '<i class="xex">before-sense </i>' +
+      '<div class="def">A definition.</div>';
+
+    const entry = parseEntry('Test', html);
+    expect(entry.homographs[0].senses[0].definition).toContain('A definition');
   });
 });

@@ -7,13 +7,9 @@ type EntryPageProps = {
   params: Promise<{ word: string }>;
 };
 
-function readEntry(word: string) {
-  return getEntry(word);
-}
-
 export async function generateMetadata({ params }: EntryPageProps): Promise<Metadata> {
   const { word } = await params;
-  const entry = readEntry(word);
+  const entry = getEntry(word);
 
   if (!entry) {
     return { title: 'Not Found' };
@@ -24,7 +20,7 @@ export async function generateMetadata({ params }: EntryPageProps): Promise<Meta
 
 export default async function EntryPage({ params }: EntryPageProps) {
   const { word } = await params;
-  const entry = readEntry(word);
+  const entry = getEntry(word);
 
   if (!entry) {
     notFound();

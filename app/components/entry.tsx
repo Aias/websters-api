@@ -5,6 +5,7 @@ import type {
   Etymology,
   Quotation,
   CompoundForm,
+  InflectedForm,
   InlineHTML,
 } from '~/lib/types';
 import { HoverLinks } from './hover-links';
@@ -34,14 +35,17 @@ export function EntryView({ entry }: { entry: DictionaryEntry }) {
 function HomographView({ homograph }: { homograph: Homograph }) {
   const {
     headword,
+    alternateHeadwords,
     pronunciation,
     partOfSpeech,
-    verbMorphology,
+    morphology,
+    pluralForms,
     etymology,
     senses,
     synonyms,
     usage,
     compoundForms,
+    derivedForms,
     alternateSpellings,
     note,
   } = homograph;
@@ -50,23 +54,29 @@ function HomographView({ homograph }: { homograph: Homograph }) {
     <section className="mb-8">
       <header className="mb-2">
         <h2 className="inline text-2xl font-bold text-foreground">{headword}</h2>
+        {alternateHeadwords.length > 0 && (
+          <span className="ml-1 text-2xl font-bold text-foreground">
+            , {alternateHeadwords.join(', ')}
+          </span>
+        )}
         {pronunciation && (
           <span className="ml-2 text-lg text-muted-foreground">({pronunciation})</span>
         )}
         {partOfSpeech && <span className="ml-2 text-muted-foreground italic">{partOfSpeech}</span>}
       </header>
 
-      {verbMorphology && verbMorphology.length > 0 && (
+      {morphology && morphology.length > 0 && <MorphologyView forms={morphology} />}
+
+      {pluralForms && pluralForms.length > 0 && (
         <p className="mb-2 text-sm text-muted-foreground">
-          [
-          {verbMorphology.map((form, i) => (
+          <span className="italic">pl. </span>
+          {pluralForms.map((pf, i) => (
             <span key={i}>
               {i > 0 && '; '}
-              <span className="italic">{form.label}</span> <strong>{form.form}</strong>
-              {form.pronunciation && ` (${form.pronunciation})`}
+              <strong>{pf.form}</strong>
+              {pf.pronunciation && ` (${pf.pronunciation})`}
             </span>
           ))}
-          ]
         </p>
       )}
 
@@ -84,6 +94,19 @@ function HomographView({ homograph }: { homograph: Homograph }) {
             <CompoundFormView key={i} form={cf} />
           ))}
         </div>
+      )}
+
+      {derivedForms && derivedForms.length > 0 && (
+        <p className="mt-3 text-sm text-muted-foreground">
+          {derivedForms.map((df, i) => (
+            <span key={i}>
+              {i > 0 && ' — '}
+              <strong>{df.form}</strong>
+              {df.pronunciation && ` (${df.pronunciation})`}
+              {df.partOfSpeech && <span className="italic">, {df.partOfSpeech}</span>}
+            </span>
+          ))}
+        </p>
       )}
 
       {synonyms && (
@@ -111,6 +134,24 @@ function HomographView({ homograph }: { homograph: Homograph }) {
   );
 }
 
+// ─── Morphology ─────────────────────────────────────────
+
+function MorphologyView({ forms }: { forms: ReadonlyArray<InflectedForm> }) {
+  return (
+    <p className="mb-2 text-sm text-muted-foreground">
+      [
+      {forms.map((form, i) => (
+        <span key={i}>
+          {i > 0 && '; '}
+          <span className="italic">{form.label}</span> <strong>{form.form}</strong>
+          {form.pronunciation && ` (${form.pronunciation})`}
+        </span>
+      ))}
+      ]
+    </p>
+  );
+}
+
 // ─── Etymology ───────────────────────────────────────────
 
 function EtymologyView({ etymology }: { etymology: Etymology }) {
@@ -132,6 +173,9 @@ function SenseView({ sense, showNumber }: { sense: Sense; showNumber: boolean })
         </span>
       )}
       <div className="flex-1">
+        {sense.partOfSpeech && (
+          <span className="mr-1 text-muted-foreground italic">{sense.partOfSpeech}</span>
+        )}
         {sense.field && (
           <span className="mr-1 text-sm text-muted-foreground italic">{sense.field}</span>
         )}
@@ -188,11 +232,17 @@ function QuotationView({ quotation }: { quotation: Quotation }) {
 function CompoundFormView({ form }: { form: CompoundForm }) {
   return (
     <div className="mb-2">
-      {form.headwords.map((hw, i) => (
-        <strong key={i} className="mr-1">
-          {hw}
+      {form.headwordHtml ? (
+        <strong>
+          <InlineHtml html={form.headwordHtml} />
         </strong>
-      ))}
+      ) : (
+        form.headwords.map((hw, i) => (
+          <strong key={i} className="mr-1">
+            {hw}
+          </strong>
+        ))
+      )}
       {form.etymology && (
         <span className="text-sm text-muted-foreground">
           <InlineHtml html={form.etymology.html} />
@@ -204,6 +254,16 @@ function CompoundFormView({ form }: { form: CompoundForm }) {
         </span>
       )}
       {form.mark && <span className="ml-1 text-sm text-muted-foreground italic">{form.mark}</span>}
+
+      {form.quotations.map((q, i) => (
+        <QuotationView key={i} quotation={q} />
+      ))}
+
+      {form.attributions.map((attr, i) => (
+        <span key={i} className="ml-1 text-sm text-muted-foreground">
+          {attr}
+        </span>
+      ))}
     </div>
   );
 }

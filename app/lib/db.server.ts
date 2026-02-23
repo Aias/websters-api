@@ -16,18 +16,23 @@ function getDb(): BetterSqlite3.Database {
   return db;
 }
 
-export function getEntry(word: string): DictionaryEntry | null {
-  const normalizedWord = word.normalize('NFC').toLowerCase().trim();
+function normalizeLookup(value: string): string {
+  return value.normalize('NFC').toLowerCase().trim();
+}
 
+function parseEntryRow(row: { data: string } | undefined): DictionaryEntry | null {
+  if (!row) return null;
+  const entry: DictionaryEntry = JSON.parse(row.data);
+  return entry;
+}
+
+export function getEntry(word: string): DictionaryEntry | null {
   const row = getDb()
     .prepare<[string], { data: string }>(
       'SELECT data FROM entries WHERE normalized_key = ? ORDER BY key COLLATE NOCASE LIMIT 1'
     )
-    .get(normalizedWord);
-
-  if (!row) return null;
-  const entry: DictionaryEntry = JSON.parse(row.data);
-  return entry;
+    .get(normalizeLookup(word));
+  return parseEntryRow(row);
 }
 
 export function searchEntries(prefix: string, limit = 20): Array<{ key: string }> {
@@ -40,15 +45,12 @@ export function searchEntries(prefix: string, limit = 20): Array<{ key: string }
        ORDER BY normalized_key
        LIMIT ?`
     )
-    .all(`${prefix.normalize('NFC').toLowerCase().trim()}%`, limit);
+    .all(`${normalizeLookup(prefix)}%`, limit);
 }
 
 export function getRandomEntry(): DictionaryEntry | null {
   const row = getDb()
     .prepare<[], { data: string }>('SELECT data FROM entries ORDER BY RANDOM() LIMIT 1')
     .get();
-
-  if (!row) return null;
-  const entry: DictionaryEntry = JSON.parse(row.data);
-  return entry;
+  return parseEntryRow(row);
 }
