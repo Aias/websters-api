@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { EntryView } from '~/components/entry';
 import { getEntry } from '~/lib/db.server';
@@ -32,14 +31,9 @@ export default async function EntryPage({ params }: EntryPageProps) {
   }
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-8">
-      <nav className="mb-6">
-        <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">
-          &larr; Search
-        </Link>
-      </nav>
+    <>
       <h1 className="mb-6 text-4xl font-bold">{entry.key}</h1>
       <EntryView entry={entry} />
-    </div>
+    </>
   );
 }
