@@ -130,3 +130,23 @@ a.er:hover {
 .fld {
   font-style: italic;
 }
+
+/* Hover-discovered word links */
+a[data-hover-link] {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  transition: text-decoration-color 0.15s ease-out;
+}
+
+a[data-hover-link].visible {
+  text-decoration-color: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a[data-hover-link] {
+    transition: none;
+  }
+}

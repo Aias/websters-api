@@ -30,6 +30,7 @@
   "embeddedLanguageFormatting": "auto",
   "ignorePatterns": [
     "bun.lock",
+    "next-env.d.ts",
     "package-lock.json",
     "yarn.lock",
     "src/dict.json",
