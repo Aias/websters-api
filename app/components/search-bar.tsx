@@ -28,9 +28,9 @@ export function SearchBar() {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key !== '/' || e.metaKey || e.ctrlKey || e.altKey) return;
 
-      const tag = (e.target as HTMLElement).tagName;
-      if (tag === 'INPUT' || tag === 'TEXTAREA' || (e.target as HTMLElement).isContentEditable)
-        return;
+      if (!(e.target instanceof HTMLElement)) return;
+      const tag = e.target.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target.isContentEditable) return;
 
       e.preventDefault();
       inputRef.current?.focus();
@@ -68,8 +68,10 @@ export function SearchBar() {
   }
 
   function scrollToIndex(index: number) {
-    const item = listRef.current?.children[index] as HTMLElement | undefined;
-    item?.scrollIntoView({ block: 'nearest' });
+    const item = listRef.current?.children.item(index);
+    if (item instanceof HTMLElement) {
+      item.scrollIntoView({ block: 'nearest' });
+    }
   }
 
   function handleKeyDown(e: React.KeyboardEvent) {

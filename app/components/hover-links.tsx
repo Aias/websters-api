@@ -36,27 +36,13 @@ interface WordAtPoint {
 }
 
 function getWordAtPoint(x: number, y: number): WordAtPoint | null {
-  let textNode: Node;
-  let offset: number;
-
-  if (document.caretPositionFromPoint) {
-    const pos = document.caretPositionFromPoint(x, y);
-    if (!pos || pos.offsetNode.nodeType !== Node.TEXT_NODE) return null;
-    textNode = pos.offsetNode;
-    offset = pos.offset;
-    // eslint-disable-next-line typescript-eslint/no-deprecated -- fallback for older browsers
-  } else if (document.caretRangeFromPoint) {
-    // eslint-disable-next-line typescript-eslint/no-deprecated
-    const range = document.caretRangeFromPoint(x, y);
-    if (!range || range.startContainer.nodeType !== Node.TEXT_NODE) return null;
-    textNode = range.startContainer;
-    offset = range.startOffset;
-  } else {
-    return null;
-  }
+  const pos = document.caretPositionFromPoint(x, y);
+  if (!pos || pos.offsetNode.nodeType !== Node.TEXT_NODE) return null;
+  const textNode = pos.offsetNode;
+  const offset = pos.offset;
 
   // Skip text inside existing links
-  if ((textNode.parentElement as Element | null)?.closest('a')) return null;
+  if (textNode.parentElement?.closest('a')) return null;
 
   const text = textNode.textContent ?? '';
   if (offset >= text.length) return null;
@@ -144,7 +130,11 @@ export function HoverLinks({ children }: { children: ReactNode }) {
     }
 
     function handlePointer(e: PointerEvent) {
-      const target = e.target as Element;
+      const { target } = e;
+      if (!(target instanceof Element)) {
+        if (currentWord) cleanup();
+        return;
+      }
 
       // Pointer is over the active hover-link — keep it alive
       if (activeLink?.contains(target)) return;

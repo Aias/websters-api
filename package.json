@@ -6,6 +6,7 @@
   "scripts": {
     "build": "bun run build:db && next build",
     "build:db": "bun run scripts/build-db.ts",
+    "build:db:force": "bun run scripts/build-db.ts --force",
     "check": "bun run lint && bun run type-check && bun run format",
     "dev": "next dev",
     "format": "oxfmt",
@@ -15,8 +16,7 @@
     "start": "next start",
     "test": "bun test",
     "type-check": "tsgo --noEmit",
-    "type-check:watch": "tsgo --noEmit --watch",
-    "typecheck": "bun run type-check"
+    "type-check:watch": "tsgo --noEmit --watch"
   },
   "dependencies": {
     "better-sqlite3": "12.6.2",

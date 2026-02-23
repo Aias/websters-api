@@ -4,13 +4,14 @@ import { dirname, join } from 'node:path';
 import * as cheerio from 'cheerio';
 import type { AnyNode, Element } from 'domhandler';
 import type {
-  ConjugationForm,
   CompoundForm,
-  CrossReference,
+  DerivedForm,
   DictionaryEntry,
   Etymology,
   Homograph,
+  InflectedForm,
   InlineHTML,
+  PluralForm,
   Quotation,
   Sense,
 } from '../app/lib/types.ts';
@@ -20,6 +21,8 @@ const SRC_FILE = join(ROOT, 'src', 'dict.json');
 const DB_FILE = join(ROOT, 'app', 'data', 'dictionary.db');
 const BUILD_META_FILE = join(ROOT, 'app', 'data', 'dictionary.build-meta.json');
 const PROGRESS_EVERY = 10000;
+// Bump when parser/build output semantics change to force a rebuild.
+const PARSER_VERSION = 2;
 
 interface SourceFingerprint {
   size: number;
@@ -27,6 +30,7 @@ interface SourceFingerprint {
 }
 
 interface BuildMetadata {
+  parserVersion: number;
   sourceSize: number;
   sourceMtimeMs: number;
   entryCount: number;
@@ -36,6 +40,10 @@ interface BuildMetadata {
 interface BuildResult {
   parsedCount: number;
   errorCount: number;
+}
+
+interface BuildOptions {
+  force: boolean;
 }
 
 // ─── Helpers ─────────────────────────────────────────────
@@ -78,6 +86,20 @@ function getHtml($: cheerio.CheerioAPI, node: AnyNode): InlineHTML {
   return ($(node).html() ?? '').trim();
 }
 
+function getOuterHtml($: cheerio.CheerioAPI, node: AnyNode): string {
+  return $.html(node).trim();
+}
+
+function unwrapParenthesized(value: string): string {
+  return value.trim().replace(/^\(/, '').replace(/\)$/, '');
+}
+
+function getAdjacentPronunciation($: cheerio.CheerioAPI, node: AnyNode): string | null {
+  const next = $(node).next('.pr');
+  if (next.length === 0) return null;
+  return unwrapParenthesized(next.text());
+}
+
 function decodeHtmlCharRefs(str: string): string {
   return str
     .replace(/&#x([0-9a-fA-F]+);/g, (_, hex: string) => String.fromCodePoint(parseInt(hex, 16)))
@@ -96,12 +118,15 @@ function getSourceFingerprint(): SourceFingerprint {
 function isBuildMetadata(value: unknown): value is BuildMetadata {
   if (value === null || typeof value !== 'object') return false;
 
+  const parserVersion = Reflect.get(value, 'parserVersion');
   const sourceSize = Reflect.get(value, 'sourceSize');
   const sourceMtimeMs = Reflect.get(value, 'sourceMtimeMs');
   const entryCount = Reflect.get(value, 'entryCount');
   const errorCount = Reflect.get(value, 'errorCount');
 
   return (
+    typeof parserVersion === 'number' &&
+    Number.isFinite(parserVersion) &&
     typeof sourceSize === 'number' &&
     Number.isFinite(sourceSize) &&
     typeof sourceMtimeMs === 'number' &&
@@ -126,16 +151,25 @@ function readBuildMetadata(): BuildMetadata | null {
   }
 }
 
-function shouldSkipBuild(source: SourceFingerprint): boolean {
+function shouldSkipBuild(source: SourceFingerprint, parserVersion: number): boolean {
   if (!existsSync(DB_FILE)) return false;
   const metadata = readBuildMetadata();
   if (!metadata) return false;
 
-  return metadata.sourceSize === source.size && metadata.sourceMtimeMs === source.mtimeMs;
+  return (
+    metadata.parserVersion === parserVersion &&
+    metadata.sourceSize === source.size &&
+    metadata.sourceMtimeMs === source.mtimeMs
+  );
 }
 
-function writeBuildMetadata(source: SourceFingerprint, result: BuildResult): void {
+function writeBuildMetadata(
+  source: SourceFingerprint,
+  result: BuildResult,
+  parserVersion: number
+): void {
   const metadata: BuildMetadata = {
+    parserVersion,
     sourceSize: source.size,
     sourceMtimeMs: source.mtimeMs,
     entryCount: result.parsedCount,
@@ -181,23 +215,9 @@ function loadPreprocessedDocument(html: string): cheerio.CheerioAPI {
       const normalizedName = attributeName.toLowerCase();
 
       if (normalizedName === 'class') continue;
-
-      if (normalizedName === 'href') {
-        if (typeof attributeValue !== 'string' || !attributeValue.startsWith('/entry/')) {
-          delete el.attribs[attributeName];
-        }
-        continue;
+      if (normalizedName === 'href' && typeof attributeValue === 'string') {
+        if (attributeValue.startsWith('/entry/')) continue;
       }
-
-      if (
-        normalizedName.startsWith('on') ||
-        normalizedName === 'style' ||
-        normalizedName === 'srcdoc'
-      ) {
-        delete el.attribs[attributeName];
-        continue;
-      }
-
       delete el.attribs[attributeName];
     }
   });
@@ -212,48 +232,85 @@ export function preprocess(html: string): string {
 // ─── Etymology parser ────────────────────────────────────
 
 function parseEtymology($: cheerio.CheerioAPI, node: Element): Etymology {
-  const html = getHtml($, node);
-  const sourceWords: string[] = [];
-  const crossReferences: CrossReference[] = [];
-
-  $(node)
-    .find('.ets')
-    .each((_, el) => {
-      const text = $(el).text().trim();
-      if (text) sourceWords.push(text);
-    });
-
-  $(node)
-    .find('.er')
-    .each((_, el) => {
-      const text = $(el).text().trim();
-      if (text) crossReferences.push({ text, target: normalizeKey(text) });
-    });
-
-  return { html, sourceWords, crossReferences };
+  return { html: getHtml($, node) };
 }
 
-// ─── Verb morphology parser ──────────────────────────────
+// ─── Morphology parser ──────────────────────────────────
 
-function parseVerbMorphology($: cheerio.CheerioAPI, node: Element): ReadonlyArray<ConjugationForm> {
-  const forms: ConjugationForm[] = [];
+function parseMorphology(
+  $: cheerio.CheerioAPI,
+  node: Element,
+  formClass: string
+): ReadonlyArray<InflectedForm> {
+  const forms: InflectedForm[] = [];
   const children = $(node).contents().toArray();
 
   let currentLabel = '';
   for (const child of children) {
     if (hasClass(child, 'pos')) {
       currentLabel = getText($, child);
-    } else if (hasClass(child, 'conjf')) {
+    } else if (hasClass(child, formClass)) {
       const form = getText($, child);
-      let pronunciation: string | null = null;
-      const next = $(child).next('.pr');
-      if (next.length > 0) {
-        pronunciation = next.text().trim().replace(/^\(/, '').replace(/\)$/, '');
-      }
-      forms.push({ label: currentLabel, form, pronunciation });
+      forms.push({ label: currentLabel, form, pronunciation: getAdjacentPronunciation($, child) });
     }
   }
 
+  return forms;
+}
+
+// ─── Plural forms parser ────────────────────────────────
+
+function parsePluralForms($: cheerio.CheerioAPI, node: Element): ReadonlyArray<PluralForm> {
+  const forms: PluralForm[] = [];
+  const children = $(node).contents().toArray();
+
+  for (const child of children) {
+    if (hasClass(child, 'plw')) {
+      const form = getText($, child);
+      if (!form) continue;
+      forms.push({ form, pronunciation: getAdjacentPronunciation($, child) });
+    }
+  }
+
+  return forms;
+}
+
+// ─── Derived forms parser ───────────────────────────────
+
+function parseDerivedForms($: cheerio.CheerioAPI, node: Element): ReadonlyArray<DerivedForm> {
+  const forms: DerivedForm[] = [];
+  const children = $(node).contents().toArray();
+
+  let pendingForm: string | null = null;
+  let pendingPronunciation: string | null = null;
+
+  function flush(partOfSpeech: string | null): void {
+    if (!pendingForm) return;
+    forms.push({ form: pendingForm, partOfSpeech, pronunciation: pendingPronunciation });
+    pendingForm = null;
+    pendingPronunciation = null;
+  }
+
+  for (const child of children) {
+    if (hasClass(child, 'wf')) {
+      // New form — flush any pending one (without POS)
+      if (pendingForm) flush(null);
+      pendingForm = getText($, child);
+      continue;
+    }
+
+    if (hasClass(child, 'pr') && pendingForm) {
+      pendingPronunciation = unwrapParenthesized(getText($, child));
+      continue;
+    }
+
+    if (hasClass(child, 'pos') && pendingForm) {
+      flush(getText($, child));
+      continue;
+    }
+  }
+
+  flush(null);
   return forms;
 }
 
@@ -276,22 +333,53 @@ function parseQuotation($: cheerio.CheerioAPI, node: Element): Quotation {
 function parseCompoundForms($: cheerio.CheerioAPI, node: Element): ReadonlyArray<CompoundForm> {
   const forms: CompoundForm[] = [];
   let pendingHeadwords: string[] = [];
+  let pendingHeadwordHtml: InlineHTML | null = null;
   let pendingEtymology: Etymology | null = null;
+  let pendingDefinition: InlineHTML | null = null;
   let pendingMark: string | null = null;
+  let pendingQuotations: Quotation[] = [];
+  let pendingAttributions: string[] = [];
+  // Accumulates inline quotation HTML from bare text/elements after cd
+  let quotationHtmlParts: string[] = [];
 
-  function flush(definition: InlineHTML | null): void {
-    if (!definition && pendingHeadwords.length === 0 && !pendingEtymology && !pendingMark) return;
+  function flushQuotation(): void {
+    if (quotationHtmlParts.length === 0) return;
+    const html = quotationHtmlParts.join('').trim();
+    if (html) {
+      pendingQuotations.push({ html, author: null });
+    }
+    quotationHtmlParts = [];
+  }
+
+  function flush(): void {
+    flushQuotation();
+    if (
+      !pendingDefinition &&
+      pendingHeadwords.length === 0 &&
+      !pendingEtymology &&
+      !pendingMark &&
+      pendingQuotations.length === 0 &&
+      pendingAttributions.length === 0
+    )
+      return;
 
     forms.push({
       headwords: pendingHeadwords,
+      headwordHtml: pendingHeadwordHtml,
       etymology: pendingEtymology,
-      definition,
+      definition: pendingDefinition,
       mark: pendingMark,
+      quotations: pendingQuotations,
+      attributions: pendingAttributions,
     });
 
     pendingHeadwords = [];
+    pendingHeadwordHtml = null;
     pendingEtymology = null;
+    pendingDefinition = null;
     pendingMark = null;
+    pendingQuotations = [];
+    pendingAttributions = [];
   }
 
   function appendHeadword(headword: string): void {
@@ -299,9 +387,19 @@ function parseCompoundForms($: cheerio.CheerioAPI, node: Element): ReadonlyArray
   }
 
   for (const child of $(node).contents().toArray()) {
-    if (!isElement(child)) continue;
+    if (isFiller(child)) continue;
+
+    // Bare text nodes — accumulate as quotation content after a cd
+    if (!isElement(child)) {
+      if (child.type === 'text' && child.data.trim() && pendingDefinition) {
+        quotationHtmlParts.push(child.data);
+      }
+      continue;
+    }
 
     if (hasClass(child, 'mcol')) {
+      flush();
+      pendingHeadwordHtml = getHtml($, child);
       for (const nestedCol of $(child).find('.col').toArray()) {
         appendHeadword(getText($, nestedCol));
       }
@@ -309,6 +407,8 @@ function parseCompoundForms($: cheerio.CheerioAPI, node: Element): ReadonlyArray
     }
 
     if (hasClass(child, 'col')) {
+      // New headword signals start of a new form — flush any pending
+      if (pendingDefinition) flush();
       appendHeadword(getText($, child));
       continue;
     }
@@ -322,28 +422,77 @@ function parseCompoundForms($: cheerio.CheerioAPI, node: Element): ReadonlyArray
       const mark = getText($, child);
       if (!mark) continue;
 
-      if (forms.length > 0 && pendingHeadwords.length === 0 && !pendingEtymology && !pendingMark) {
+      if (
+        forms.length > 0 &&
+        pendingHeadwords.length === 0 &&
+        !pendingEtymology &&
+        !pendingMark &&
+        !pendingDefinition
+      ) {
         const previous = forms[forms.length - 1];
-        forms[forms.length - 1] = {
-          headwords: previous.headwords,
-          etymology: previous.etymology,
-          definition: previous.definition,
-          mark,
-        };
+        forms[forms.length - 1] = { ...previous, mark };
       } else {
         pendingMark = mark;
       }
       continue;
     }
 
+    if (hasClass(child, 'sd')) {
+      // Sub-definition label — flush current if we have a definition
+      if (pendingDefinition) flush();
+      continue;
+    }
+
     if (hasClass(child, 'cd')) {
-      const definition = getHtml($, child);
-      flush(definition || null);
+      // If there's already a pending definition (e.g. back-to-back cd), flush first
+      if (pendingDefinition) flush();
+      pendingDefinition = getHtml($, child) || null;
+      continue;
+    }
+
+    if (hasClass(child, 'au')) {
+      flushQuotation();
+      const author = getText($, child).replace(/\.$/, '');
+      if (author) {
+        const lastQ = pendingQuotations[pendingQuotations.length - 1];
+        if (lastQ && !lastQ.author) {
+          pendingQuotations[pendingQuotations.length - 1] = { ...lastQ, author };
+        } else {
+          pendingAttributions.push(getText($, child));
+        }
+      }
+      continue;
+    }
+
+    if (hasClass(child, 'q')) {
+      flushQuotation();
+      pendingQuotations.push(parseQuotation($, child));
+      continue;
+    }
+
+    if (hasClass(child, 'rj')) {
+      flushQuotation();
+      const $au = $(child).find('.au');
+      if ($au.length > 0) {
+        const author = $au.text().trim().replace(/\.$/, '');
+        const lastQ = pendingQuotations[pendingQuotations.length - 1];
+        if (lastQ && !lastQ.author) {
+          pendingQuotations[pendingQuotations.length - 1] = { ...lastQ, author };
+        } else if (author) {
+          pendingAttributions.push($au.text().trim());
+        }
+      }
+      continue;
+    }
+
+    // Unrecognized inline elements after a definition — accumulate as quotation HTML
+    if (pendingDefinition) {
+      quotationHtmlParts.push(getOuterHtml($, child));
       continue;
     }
   }
 
-  flush(null);
+  flush();
   return forms;
 }
 
@@ -353,6 +502,7 @@ class SenseBuilder {
   private number: string | null;
   private field: string | null = null;
   private definition: InlineHTML = '';
+  private partOfSpeech: string | null = null;
   private mark: string | null = null;
   private quotations: Quotation[] = [];
   private attributions: string[] = [];
@@ -377,6 +527,10 @@ class SenseBuilder {
 
   appendToDefinition(text: string) {
     this.definition = (this.definition + text).trim();
+  }
+
+  setPartOfSpeech(pos: string) {
+    this.partOfSpeech = pos;
   }
 
   setMark(mark: string) {
@@ -415,6 +569,7 @@ class SenseBuilder {
       number: this.number,
       field: this.field,
       definition: this.definition,
+      partOfSpeech: this.partOfSpeech,
       mark: this.mark,
       quotations: this.quotations,
       attributions: this.attributions,
@@ -426,20 +581,24 @@ class SenseBuilder {
 
 // ─── Main entry parser ──────────────────────────────────
 
+interface HomographSection {
+  hwNode: Element | null;
+  alternateHwNodes: Element[];
+  nodes: AnyNode[];
+}
+
 export function parseEntry(key: string, rawHtml: string): DictionaryEntry {
   const decodedKey = decodeHtmlCharRefs(key).normalize('NFC');
   const $ = loadPreprocessedDocument(rawHtml);
   const topNodes = $.root().contents().toArray();
 
   // Split into homograph sections by h2.hw
-  const sections: Array<{ hwNode: Element | null; isAlternate: boolean; nodes: AnyNode[] }> = [];
+  const sections: HomographSection[] = [];
   let currentNodes: AnyNode[] = [];
-  let pendingAlternate = false;
 
   for (const node of topNodes) {
-    // Check for ‖ marker in text nodes before an h2.hw
+    // Strip ‖ marker that appears between homographs in source HTML.
     if (node.type === 'text' && node.data.includes('\u2016')) {
-      pendingAlternate = true;
       const cleaned = node.data.replace(/\u2016/g, '');
       node.data = cleaned;
       if (cleaned.trim()) {
@@ -448,15 +607,45 @@ export function parseEntry(key: string, rawHtml: string): DictionaryEntry {
       continue;
     }
 
+    // mhw wraps multiple h2.hw elements — extract them as a single section
+    if (isElement(node) && hasClass(node, 'mhw')) {
+      const hwNodes = $(node).find('h2.hw').toArray();
+      if (hwNodes.length > 0) {
+        if (sections.length > 0 || currentNodes.length > 0) {
+          if (sections.length === 0) {
+            sections.push({
+              hwNode: null,
+              alternateHwNodes: [],
+              nodes: currentNodes,
+            });
+          }
+        }
+        sections.push({
+          hwNode: hwNodes[0],
+          alternateHwNodes: hwNodes.slice(1),
+          nodes: [],
+        });
+        currentNodes = sections[sections.length - 1].nodes;
+      }
+      continue;
+    }
+
     if (isElement(node) && hasClass(node, 'hw') && isTag(node, 'h2')) {
       if (sections.length > 0 || currentNodes.length > 0) {
         if (sections.length === 0) {
           // Pre-hw content
-          sections.push({ hwNode: null, isAlternate: false, nodes: currentNodes });
+          sections.push({
+            hwNode: null,
+            alternateHwNodes: [],
+            nodes: currentNodes,
+          });
         }
       }
-      sections.push({ hwNode: node, isAlternate: pendingAlternate, nodes: [] });
-      pendingAlternate = false;
+      sections.push({
+        hwNode: node,
+        alternateHwNodes: [],
+        nodes: [],
+      });
       currentNodes = sections[sections.length - 1].nodes;
       continue;
     }
@@ -466,7 +655,11 @@ export function parseEntry(key: string, rawHtml: string): DictionaryEntry {
 
   // No .hw found — single homograph using JSON key
   if (sections.length === 0) {
-    sections.push({ hwNode: null, isAlternate: pendingAlternate, nodes: currentNodes });
+    sections.push({
+      hwNode: null,
+      alternateHwNodes: [],
+      nodes: currentNodes,
+    });
   }
 
   // Merge pre-hw content into first real section
@@ -478,33 +671,49 @@ export function parseEntry(key: string, rawHtml: string): DictionaryEntry {
   }
 
   const homographs: Homograph[] = sections.map((section) =>
-    parseHomograph($, decodedKey, section.hwNode, section.isAlternate, section.nodes)
+    parseHomograph($, decodedKey, section.hwNode, section.alternateHwNodes, section.nodes)
   );
 
-  return { key: decodedKey, normalizedKey: normalizeKey(decodedKey), homographs };
+  return { key: decodedKey, homographs };
 }
 
 function parseHomograph(
   $: cheerio.CheerioAPI,
   entryKey: string,
   hwNode: Element | null,
-  isAlternate: boolean,
+  alternateHwNodes: Element[],
   nodes: AnyNode[]
 ): Homograph {
   const headword = hwNode ? getText($, hwNode) : entryKey;
+  const alternateHeadwords = alternateHwNodes.map((hw) => getText($, hw));
   let pronunciation: string | null = null;
   let partOfSpeech: string | null = null;
-  let verbMorphology: ReadonlyArray<ConjugationForm> | null = null;
+  let morphology: ReadonlyArray<InflectedForm> | null = null;
+  let pluralForms: ReadonlyArray<PluralForm> | null = null;
   let etymology: Etymology | null = null;
   let synonyms: InlineHTML | null = null;
   let usage: InlineHTML | null = null;
   const compoundForms: CompoundForm[] = [];
+  let derivedForms: ReadonlyArray<DerivedForm> | null = null;
   let alternateSpellings: string[] | null = null;
   let homographNote: InlineHTML | null = null;
 
   const senses: Sense[] = [];
   let currentSense: SenseBuilder | null = null;
   let inHeader = true;
+
+  /** Handle sense/sub-sense number — shared by sn and sd */
+  function handleSenseNumber(number: string): void {
+    if (!currentSense) {
+      currentSense = new SenseBuilder(number);
+    } else if (currentSense.hasPayload()) {
+      senses.push(currentSense.build());
+      currentSense = new SenseBuilder(number);
+    } else {
+      currentSense.setNumber(number);
+    }
+    inHeader = false;
+  }
 
   for (const node of nodes) {
     if (isFiller(node)) continue;
@@ -521,7 +730,7 @@ function parseHomograph(
 
     // Header fields
     if (hasClass(el, 'pr') && inHeader && !pronunciation) {
-      pronunciation = getText($, el).replace(/^\(/, '').replace(/\)$/, '');
+      pronunciation = unwrapParenthesized(getText($, el));
       continue;
     }
 
@@ -531,7 +740,17 @@ function parseHomograph(
     }
 
     if (hasClass(el, 'vmorph')) {
-      verbMorphology = parseVerbMorphology($, el);
+      morphology = parseMorphology($, el, 'conjf');
+      continue;
+    }
+
+    if (hasClass(el, 'amorph')) {
+      morphology = parseMorphology($, el, 'adjf');
+      continue;
+    }
+
+    if (hasClass(el, 'plu')) {
+      pluralForms = parsePluralForms($, el);
       continue;
     }
 
@@ -542,17 +761,13 @@ function parseHomograph(
 
     // Sense number
     if (hasClass(el, 'sn')) {
-      const number = getText($, el);
-      if (!currentSense) {
-        currentSense = new SenseBuilder(number);
-      } else if (currentSense.hasPayload()) {
-        senses.push(currentSense.build());
-        currentSense = new SenseBuilder(number);
-      } else {
-        currentSense.setNumber(number);
-      }
+      handleSenseNumber(getText($, el));
+      continue;
+    }
 
-      inHeader = false;
+    // Sub-definition label — acts as a sense delimiter like sn
+    if (hasClass(el, 'sd')) {
+      handleSenseNumber(getText($, el));
       continue;
     }
 
@@ -561,6 +776,43 @@ function parseHomograph(
       inHeader = false;
       if (!currentSense) currentSense = new SenseBuilder(null);
       currentSense.setDefinition(getHtml($, el));
+      continue;
+    }
+
+    // def2 — secondary POS definition block; iterate children inline
+    if (hasClass(el, 'def2')) {
+      inHeader = false;
+      if (currentSense?.hasPayload()) {
+        senses.push(currentSense.build());
+      }
+      currentSense = null;
+      const sensesBeforeDef2 = senses.length;
+      let sensePOS: string | null = null;
+      for (const child of $(el).contents().toArray()) {
+        if (!isElement(child)) continue;
+        if (hasClass(child, 'pos')) {
+          sensePOS = getText($, child);
+        } else if (hasClass(child, 'sn') || hasClass(child, 'sd')) {
+          handleSenseNumber(getText($, child));
+        } else if (hasClass(child, 'def')) {
+          if (!currentSense) currentSense = new SenseBuilder(null);
+          currentSense.setDefinition(getHtml($, child));
+        } else if (hasClass(child, 'fld')) {
+          if (!currentSense) currentSense = new SenseBuilder(null);
+          currentSense.setField(getText($, child));
+        } else if (hasClass(child, 'mark')) {
+          if (currentSense) currentSense.setMark(getText($, child));
+        }
+      }
+      // Apply POS to all senses created within this def2 block
+      if (sensePOS) {
+        for (let si = sensesBeforeDef2; si < senses.length; si++) {
+          senses[si] = { ...senses[si], partOfSpeech: sensePOS };
+        }
+        if (currentSense) {
+          currentSense.setPartOfSpeech(sensePOS);
+        }
+      }
       continue;
     }
 
@@ -633,6 +885,15 @@ function parseHomograph(
       continue;
     }
 
+    // Derived word forms
+    if (hasClass(el, 'wordforms')) {
+      const forms = parseDerivedForms($, el);
+      if (forms.length > 0) {
+        derivedForms = [...(derivedForms ?? []), ...forms];
+      }
+      continue;
+    }
+
     // Alternate spellings
     if (hasClass(el, 'altsp')) {
       const spellings: string[] = [];
@@ -645,6 +906,11 @@ function parseHomograph(
       alternateSpellings = spellings;
       continue;
     }
+
+    // Catch-all: unrecognized element — preserve as inline content
+    if (currentSense) {
+      currentSense.appendToDefinition(getOuterHtml($, el));
+    }
   }
 
   if (currentSense?.hasPayload()) {
@@ -653,15 +919,17 @@ function parseHomograph(
 
   return {
     headword,
-    isAlternate,
+    alternateHeadwords,
     pronunciation,
     partOfSpeech,
-    verbMorphology,
+    morphology,
+    pluralForms,
     etymology,
     senses,
     synonyms,
     usage,
     compoundForms,
+    derivedForms,
     alternateSpellings,
     note: homographNote,
   };
@@ -710,7 +978,7 @@ function writeDatabase(
         const entry = parseEntry(key, rawHtml);
         insert.run({
           $key: entry.key,
-          $normalizedKey: entry.normalizedKey,
+          $normalizedKey: normalizeKey(entry.key),
           $data: JSON.stringify(entry),
         });
         parsedCount++;
@@ -738,11 +1006,32 @@ function writeDatabase(
 
 // ─── Main ────────────────────────────────────────────────
 
-async function main(): Promise<void> {
+function parseBuildOptions(args: ReadonlyArray<string>): BuildOptions {
+  let force = false;
+
+  for (const arg of args) {
+    if (arg === '--force' || arg === '-f') {
+      force = true;
+      continue;
+    }
+
+    if (arg.startsWith('-')) {
+      throw new Error(`Unknown option: ${arg}`);
+    }
+  }
+
+  return { force };
+}
+
+async function main(options: BuildOptions): Promise<void> {
   const sourceFingerprint = getSourceFingerprint();
-  if (shouldSkipBuild(sourceFingerprint)) {
+  if (!options.force && shouldSkipBuild(sourceFingerprint, PARSER_VERSION)) {
     console.log('Source dictionary unchanged. Skipping database rebuild.');
     return;
+  }
+
+  if (options.force) {
+    console.log('Force rebuild requested; rebuilding dictionary database.');
   }
 
   console.log('Reading source dictionary...');
@@ -755,10 +1044,11 @@ async function main(): Promise<void> {
   const result = writeDatabase(data, keys);
 
   console.log(`Parsed ${result.parsedCount} entries (${result.errorCount} errors)`);
-  writeBuildMetadata(sourceFingerprint, result);
+  writeBuildMetadata(sourceFingerprint, result, PARSER_VERSION);
   console.log(`Database written to ${DB_FILE}`);
 }
 
 if (import.meta.main) {
-  await main();
+  const options = parseBuildOptions(Bun.argv.slice(2));
+  await main(options);
 }
