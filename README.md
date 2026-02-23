@@ -1,40 +1,54 @@
-# Welcome to Remix!
+# Webster's 1913 Dictionary
 
-- 📖 [Remix docs](https://remix.run/docs)
+## Stack
+
+- Next.js 16 (App Router, Turbopack default)
+- React 19
+- Tailwind CSS v4
+- Bun runtime + package manager
+- TypeScript 7 preview (`tsgo`) + `oxlint` + `oxfmt` (plus `typescript@5` for Next.js toolchain compatibility)
+
+## Setup
+
+```sh
+bun install
+```
 
 ## Development
 
-Run the dev server:
-
-```shellscript
-npm run dev
+```sh
+bun run dev
 ```
 
-## Deployment
-
-First, build your app for production:
+## Build
 
 ```sh
-npm run build
+bun run build
 ```
 
-Then run the app in production mode:
+`build` first regenerates the SQLite dictionary, then runs `next build`.
+
+## Quality
 
 ```sh
-npm start
+bun check
 ```
 
-Now you'll need to pick a host to deploy it to.
+`check` runs lint + type-check + format with auto-fixes (`oxlint`, `tsgo`, `oxfmt`).
 
-### DIY
+```sh
+bun run lint:check
+bun run type-check
+bun run format:check
+```
 
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
+## Production
 
-Make sure to deploy the output of `npm run build`
+```sh
+bun run start
+```
 
-- `build/server`
-- `build/client`
+## Data Notes
 
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+- Runtime reads use `better-sqlite3` in Next server code.
+- Database generation (`build:db`) uses Bun's built-in SQLite API.

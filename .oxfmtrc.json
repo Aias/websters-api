@@ -1,0 +1,39 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "useTabs": false,
+  "tabWidth": 2,
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "printWidth": 100,
+  "experimentalTailwindcss": {
+    "stylesheet": "./app/globals.css",
+    "attributes": ["class", "className"],
+    "functions": ["clsx", "cn"],
+    "preserveDuplicates": false,
+    "preserveWhitespace": false
+  },
+  "experimentalSortImports": {
+    "newlinesBetween": false,
+    "groups": [
+      ["side_effect"],
+      ["builtin", "type-builtin"],
+      ["external", "type-external"],
+      ["internal", "type-internal"],
+      ["parent", "type-parent"],
+      ["sibling", "type-sibling"],
+      ["index", "type-index"]
+    ]
+  },
+  "experimentalSortPackageJson": {
+    "sortScripts": true
+  },
+  "embeddedLanguageFormatting": "auto",
+  "ignorePatterns": [
+    "bun.lock",
+    "package-lock.json",
+    "yarn.lock",
+    "src/dict.json",
+    "**/*.gen.ts",
+    "**/migrations/*"
+  ]
+}
