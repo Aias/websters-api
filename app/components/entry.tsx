@@ -216,12 +216,10 @@ function SenseView({ sense, showNumber }: { sense: Sense; showNumber: boolean })
 
 function QuotationView({ quotation }: { quotation: Quotation }) {
   return (
-    <blockquote className="mt-1 border-l-2 border-border pl-4 text-sm text-muted-foreground italic">
+    <blockquote className="mt-3 border-l-3 border-border pl-3 text-sm text-muted-foreground italic">
       <InlineHtml html={quotation.html} />
       {quotation.author && (
-        <span className="mt-0.5 block text-muted-foreground/60 not-italic">
-          — {quotation.author}
-        </span>
+        <span className="mt-1 block text-muted-foreground/60 not-italic">— {quotation.author}</span>
       )}
     </blockquote>
   );
@@ -247,6 +245,9 @@ function CompoundFormView({ form }: { form: CompoundForm }) {
         <span className="text-sm text-muted-foreground">
           <InlineHtml html={form.etymology.html} />
         </span>
+      )}
+      {form.field && (
+        <span className="ml-1 text-sm text-muted-foreground italic">{form.field}</span>
       )}
       {form.definition && (
         <span className="ml-1">

@@ -33,6 +33,8 @@ export interface CompoundForm {
   /** Full HTML of headword group including connectors ("or", ",") for display */
   headwordHtml: InlineHTML | null;
   etymology: Etymology | null;
+  /** Domain label: "(Theol.)", "(Law)", etc. */
+  field: string | null;
   definition: InlineHTML | null;
   mark: string | null;
   quotations: ReadonlyArray<Quotation>;
