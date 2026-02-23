@@ -17,7 +17,7 @@ function getDb(): BetterSqlite3.Database {
 }
 
 export function getEntry(word: string): DictionaryEntry | null {
-  const normalizedWord = word.toLowerCase().trim();
+  const normalizedWord = word.normalize('NFC').toLowerCase().trim();
 
   const row = getDb()
     .prepare<[string], { data: string }>(
@@ -40,7 +40,7 @@ export function searchEntries(prefix: string, limit = 20): Array<{ key: string }
        ORDER BY normalized_key
        LIMIT ?`
     )
-    .all(`${prefix.toLowerCase().trim()}%`, limit);
+    .all(`${prefix.normalize('NFC').toLowerCase().trim()}%`, limit);
 }
 
 export function getRandomEntry(): DictionaryEntry | null {

@@ -78,8 +78,14 @@ function getHtml($: cheerio.CheerioAPI, node: AnyNode): InlineHTML {
   return ($(node).html() ?? '').trim();
 }
 
+function decodeHtmlCharRefs(str: string): string {
+  return str
+    .replace(/&#x([0-9a-fA-F]+);/g, (_, hex: string) => String.fromCodePoint(parseInt(hex, 16)))
+    .replace(/&#(\d+);/g, (_, dec: string) => String.fromCodePoint(parseInt(dec, 10)));
+}
+
 function normalizeKey(key: string): string {
-  return key.toLowerCase().trim();
+  return decodeHtmlCharRefs(key).normalize('NFC').toLowerCase().trim();
 }
 
 function getSourceFingerprint(): SourceFingerprint {
@@ -421,6 +427,7 @@ class SenseBuilder {
 // ─── Main entry parser ──────────────────────────────────
 
 export function parseEntry(key: string, rawHtml: string): DictionaryEntry {
+  const decodedKey = decodeHtmlCharRefs(key).normalize('NFC');
   const $ = loadPreprocessedDocument(rawHtml);
   const topNodes = $.root().contents().toArray();
 
@@ -471,10 +478,10 @@ export function parseEntry(key: string, rawHtml: string): DictionaryEntry {
   }
 
   const homographs: Homograph[] = sections.map((section) =>
-    parseHomograph($, key, section.hwNode, section.isAlternate, section.nodes)
+    parseHomograph($, decodedKey, section.hwNode, section.isAlternate, section.nodes)
   );
 
-  return { key, normalizedKey: normalizeKey(key), homographs };
+  return { key: decodedKey, normalizedKey: normalizeKey(decodedKey), homographs };
 }
 
 function parseHomograph(

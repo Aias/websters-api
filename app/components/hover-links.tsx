@@ -144,8 +144,12 @@ export function HoverLinks({ children }: { children: ReactNode }) {
     }
 
     function handlePointer(e: PointerEvent) {
-      // Skip if hovering over excluded elements
       const target = e.target as Element;
+
+      // Pointer is over the active hover-link — keep it alive
+      if (activeLink?.contains(target)) return;
+
+      // Skip if hovering over other excluded elements
       if (target.closest('a, h2')) {
         if (currentWord) cleanup();
         return;
