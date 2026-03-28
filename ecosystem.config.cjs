@@ -4,7 +4,7 @@ module.exports = {
       name: 'websters-api',
       script: 'bun',
       args: 'run start',
-      cwd: './',
+      cwd: __dirname,
       env: {
         NODE_ENV: 'production',
         PORT: '3031',
