@@ -9,6 +9,11 @@ export function normalizeSourceTypography($: CheerioAPI): void {
   $('.exp, .sups, .subs').each((_, element) => {
     element.tagName = $(element).hasClass('subs') ? 'sub' : 'sup';
   });
+  $('.chform')
+    .contents()
+    .each((_, node) => {
+      if (node.type === 'text') $(node).replaceWith($.html(node).replace(/\d+/g, '<sub>$&</sub>'));
+    });
 
   $('.table, .mtable').each((_, table) => {
     const $table = $(table);

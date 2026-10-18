@@ -24,7 +24,7 @@ const DB_FILE = join(ROOT, 'app', 'data', 'dictionary.db');
 const BUILD_META_FILE = join(ROOT, 'app', 'data', 'dictionary.build-meta.json');
 const PROGRESS_EVERY = 10000;
 // Bump when parser/build output semantics change to force a rebuild.
-const PARSER_VERSION = 11;
+const PARSER_VERSION = 13;
 
 interface SourceFingerprint {
   size: number;
@@ -207,6 +207,13 @@ function loadPreprocessedDocument(html: string): cheerio.CheerioAPI {
 
       if (normalizedName === 'class') continue;
       if (
+        el.tagName === 'img' &&
+        (normalizedName === 'alt' ||
+          (normalizedName === 'src' && /^\/illustrations\/[a-z0-9-]+\.png$/.test(attributeValue)) ||
+          (['width', 'height'].includes(normalizedName) && /^[1-9]\d*$/.test(attributeValue)))
+      )
+        continue;
+      if (
         normalizedName === 'data-scope' &&
         attributeValue === 'homograph' &&
         (hasClass(el, 'syn') || hasClass(el, 'note'))
@@ -348,9 +355,10 @@ function parseContent($: cheerio.CheerioAPI, nodes: ReadonlyArray<AnyNode>): Lex
       return;
     }
     if (previous?.kind === kind && (kind === 'text' || kind === 'forms' || kind === 'definition')) {
+      const space = kind !== 'text' && !/\s$/.test(previous.html) && !/^[\s,.;:!?)\]}]/.test(html);
       blocks[blocks.length - 1] = {
         ...previous,
-        html: previous.html + (kind === 'definition' || kind === 'forms' ? ' ' : '') + html,
+        html: previous.html + (space ? ' ' : '') + html,
       };
     } else {
       blocks.push({ kind, html });
@@ -435,6 +443,14 @@ function parseContent($: cheerio.CheerioAPI, nodes: ReadonlyArray<AnyNode>): Lex
         if (compound && /[-\u2013\u2014]/.test(node.data)) compound.complete = true;
         return;
       }
+      if (
+        node.nextSibling &&
+        (hasClass(node.nextSibling, 'col') || hasClass(node.nextSibling, 'mcol')) &&
+        /[\u2013\u2014]\s*$/.test(node.data)
+      ) {
+        node.data = node.data.replace(/\s*[\u2013\u2014]\s*$/, '');
+        if (compound) compound.complete = true;
+      }
       const previous = blocks[blocks.length - 1];
       addHtml(previous?.kind === 'forms' ? 'forms' : 'text', getOuterHtml($, node));
       return;
@@ -456,6 +472,10 @@ function parseContent($: cheerio.CheerioAPI, nodes: ReadonlyArray<AnyNode>): Lex
       if (hasClass(node, 'sd') && !/^(?:\(?[a-z]\)|[IVXLCDM]+[.)]?|\(?\d+[.)]?)$/.test(number))
         addHtml('label', getOuterHtml($, node));
       else addNumber(number, hasClass(node, 'sd'), inCompound);
+      return;
+    }
+    if (hasClass(node, 'plu') && /^\(pl\.\)$/.test(getText($, node))) {
+      addHtml('label', getOuterHtml($, node));
       return;
     }
     if (

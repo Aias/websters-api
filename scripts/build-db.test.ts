@@ -61,6 +61,16 @@ describe('preprocess', () => {
     expect(preprocess('<div class="er">Whitecap{2}</div>')).toContain('href="/entry/whitecap"');
   });
 
+  test('preserves local dictionary illustrations and descriptions without allowing remote image sources', () => {
+    const result = preprocess(
+      '<img src="/illustrations/example.png" alt="Coordinate diagram" width="156" height="129" onerror="alert(1)"/><img src="https://example.com/image.png"/><img src="/illustrations/../private.png"/>'
+    );
+    expect(result).toContain('src="/illustrations/example.png"');
+    expect(result).toContain('alt="Coordinate diagram"');
+    expect(result).toContain('width="156" height="129"');
+    expect(result).not.toMatch(/onerror|https:|\.\./);
+  });
+
   test('retains unresolved source characters and typographic quotation marks', () => {
     expect(plain(preprocess('“word” ‘word’ &#xFFFD;'))).toBe('“word” ‘word’ �');
   });
@@ -526,6 +536,37 @@ test('treats isolated hyphens as compound separators without changing lexical hy
   );
   expect(blocks.map((block) => block.kind)).toEqual(['etymology', 'compound', 'compound']);
   expect(text([blocks[0]])).toBe('prefix-suffix');
+});
+
+test('removes compound separator dashes while retaining adjacent author punctuation and prose', () => {
+  const blocks = content(
+    '<div class="cs"><div class="col">First phrase</div><div class="cd">Meaning – with qualification.</div><div class="qau">Author</div>. – <div class="mcol"><div class="col">Second phrase</div>, or <div class="col">Another phrase</div></div><div class="cd">Other meaning.</div></div>'
+  );
+  const compounds = blocks.filter((block) => block.kind === 'compound');
+  expect(compounds).toHaveLength(2);
+  expect(text(compounds[0].content)).toBe('Meaning – with qualification.Author.');
+  expect(compounds[1].headwords).toEqual(['Second phrase', 'Another phrase']);
+});
+
+test('keeps punctuation adjacent when joining forms across source wrappers', () => {
+  const blocks = content(
+    '<div class="plu"><i>pl.</i> E. <div class="plw">Forms</div></div>, L. <div class="plw">Forma</div>.'
+  );
+  expect(text(blocks)).toBe('pl. E. Forms, L. Forma.');
+});
+
+test('keeps a parenthetical plural-use marker inline without splitting a compound', () => {
+  const blocks = content(
+    '<div class="col">Example phrase</div><div class="def">One meaning;</div><div class="plu">(pl.)</div><div class="def">multiple meanings.</div>'
+  );
+  expect(blocks).toHaveLength(1);
+  const compound = blocks[0];
+  if (compound.kind !== 'compound') throw new Error('Missing compound');
+  expect(compound.content.map((block) => block.kind)).toEqual([
+    'definition',
+    'label',
+    'definition',
+  ]);
 });
 
 test.each(['Inadvertency', 'Poseuse'])('%s keeps a header separator on its forms line', (key) => {

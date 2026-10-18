@@ -123,9 +123,20 @@ body {
 
 .altname,
 .altnpluf,
+.ant,
+.asp,
+.cref,
+.ets,
+.etsep,
+.fam,
+.isa,
 .member,
+.pluf,
 .prod,
-.ets {
+.qau,
+.sig,
+.stype,
+.uex {
   font-style: italic;
 }
 
