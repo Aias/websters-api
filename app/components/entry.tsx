@@ -1,4 +1,6 @@
+import Link from 'next/link';
 import { Fragment } from 'react';
+import { quotationAuthor } from '~/lib/quotation-authors';
 import type {
   DictionaryEntry,
   HeaderPart,
@@ -12,10 +14,7 @@ import { HoverLinks } from './hover-links';
 function InlineHtml({ html, className = '' }: { html: InlineHTML; className?: string }) {
   const Tag = /<(?:table|pre|div|blockquote)\b/.test(html) ? 'div' : 'span';
   return (
-    <Tag
-      className={`${className} overflow-x-auto`}
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
+    <Tag className={`${className} overflow-x-auto`} dangerouslySetInnerHTML={{ __html: html }} />
   );
 }
 
@@ -94,15 +93,31 @@ function ContentView({
   );
 }
 
-export function QuotationView({ quotation }: { quotation: Quotation }) {
+export function QuotationView({
+  quotation,
+  linkAuthors = true,
+}: {
+  quotation: Quotation;
+  linkAuthors?: boolean;
+}) {
   return (
     <blockquote className="q">
       <InlineHtml html={quotation.html} />
-      {quotation.authors.map((author, i) => (
-        <span key={i} className="quotation-author">
-          — {author}
-        </span>
-      ))}
+      {quotation.authors.map((author, i) => {
+        const { slug } = quotationAuthor(author);
+        return (
+          <span key={i} className="quotation-author">
+            —{' '}
+            {linkAuthors && slug ? (
+              <Link href={`/authors/${slug}`} className="hover:underline">
+                {author}
+              </Link>
+            ) : (
+              author
+            )}
+          </span>
+        );
+      })}
     </blockquote>
   );
 }

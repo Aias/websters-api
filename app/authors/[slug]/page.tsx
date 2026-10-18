@@ -39,7 +39,7 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
                 </Link>
               </h2>
               {word.quotations.map((quotation, i) => (
-                <QuotationView key={i} quotation={quotation} />
+                <QuotationView key={i} quotation={quotation} linkAuthors={false} />
               ))}
             </article>
           ))}
