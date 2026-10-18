@@ -285,6 +285,37 @@ describe('sense hierarchy and compounds', () => {
     expect(text(blocks)).toBe('1.(Med.)Meaning.');
   });
 
+  test.each([
+    ['Box', 'Box turtle'],
+    ['Cross', 'Cross bottony'],
+    ['Give', 'To give on'],
+    ['Pocket', 'deep pocket'],
+    ['Soul', 'Soul scot'],
+    ['Turn', 'To turn on'],
+    ['Way', 'To go the way of all the earth'],
+  ])('preserves whitespace before the compound alias connector in %s', (key, headword) => {
+    const compound = parseEntry(key, sourceHtml(key))
+      .homographs.flatMap((homograph) => homograph.content)
+      .find(
+        (block) =>
+          block.kind === 'compound' && block.headwords.length > 1 && block.headwords[0] === headword
+      );
+    if (compound?.kind !== 'compound') throw new Error(`Missing compound: ${headword}`);
+    expect(plain(compound.headwordHtml)).toContain(`${headword} or `);
+  });
+
+  test.each([
+    ['Grass', 'Grass parrakeet', 'any of several'],
+    ['Grass', 'Grass plover', 'the upland'],
+    ['Tangle', 'Blue tangle', 'See Dangleberry'],
+  ])('preserves words split across definition tags in %s: %s', (key, headword, phrase) => {
+    const compound = parseEntry(key, sourceHtml(key))
+      .homographs.flatMap((homograph) => homograph.content)
+      .find((block) => block.kind === 'compound' && block.headwords[0] === headword);
+    if (compound?.kind !== 'compound') throw new Error(`Missing compound: ${headword}`);
+    expect(text(compound.content)).toContain(phrase);
+  });
+
   test('keeps trailing quotations and lettered senses with their compound', () => {
     const blocks = content(
       '<div class="sn">1.</div><div class="def">Main meaning.</div><div class="cs"><div class="mcol"><div class="col">First phrase</div> or <div class="col">Other phrase</div></div><div class="sd">(a)</div><div class="cd">First meaning.</div></div><div class="q">Phrase quotation.</div><div class="sd">(b)</div><div class="cd">Second meaning.</div><div class="syn">Root synonyms.</div><div class="usage">Root usage.</div>'

@@ -24,7 +24,7 @@ const DB_FILE = join(ROOT, 'app', 'data', 'dictionary.db');
 const BUILD_META_FILE = join(ROOT, 'app', 'data', 'dictionary.build-meta.json');
 const PROGRESS_EVERY = 10000;
 // Bump when parser/build output semantics change to force a rebuild.
-const PARSER_VERSION = 7;
+const PARSER_VERSION = 8;
 
 interface SourceFingerprint {
   size: number;
@@ -400,7 +400,7 @@ function parseContent($: cheerio.CheerioAPI, nodes: ReadonlyArray<AnyNode>): Lex
       if (node.type !== 'text') return;
       const blocks = target();
       if (!node.data.trim()) {
-        if (blocks.length > 0) addHtml('text', getOuterHtml($, node));
+        if (blocks.length > 0 || compound) addHtml('text', getOuterHtml($, node));
         return;
       }
       if (/^[\s\u2013\u2014{}]+$/.test(node.data)) {
