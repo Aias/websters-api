@@ -31,7 +31,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
           {results.map((result) => (
             <li key={result.key}>
               <Link
-                href={`/entry/${encodeURIComponent(result.key.toLowerCase())}`}
+                href={`/entry/${result.slug}`}
                 className="text-foreground/80 hover:text-foreground hover:underline"
               >
                 {result.key}
@@ -49,7 +49,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         <div>
           <p className="mb-4 text-sm text-muted-foreground">Random entry:</p>
           <h2 className="mb-4 text-2xl font-bold">
-            <Link href={`/entry/${encodeURIComponent(featured.key)}`} className="hover:underline">
+            <Link href={`/entry/${featured.slug}`} className="hover:underline">
               {featured.key}
             </Link>
           </h2>

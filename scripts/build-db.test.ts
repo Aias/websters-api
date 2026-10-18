@@ -38,7 +38,7 @@ describe('preprocess', () => {
     expect(result).not.toContain('<script');
     expect(result).not.toContain('onclick=');
     expect(result).not.toContain('style=');
-    expect(result).toContain('href="/entry/Test%20Ref"');
+    expect(result).toContain('href="/entry/test-ref"');
   });
 });
 
@@ -53,6 +53,7 @@ describe('parseEntry — simple entries', () => {
 
     const entry = parseEntry('A 1', html);
     expect(entry.key).toBe('A 1');
+    expect(entry.slug).toBe('a-1');
     expect(entry.homographs).toHaveLength(1);
 
     const h = entry.homographs[0];
@@ -311,7 +312,7 @@ describe('parseEntry — compound forms', () => {
 
     expect(forms).toHaveLength(3);
     expect(forms[0].headwords).toEqual(['Analytical geometry', 'coordinate geometry']);
-    expect(forms[0].definition).toContain('/entry/Geometry');
+    expect(forms[0].definition).toContain('/entry/geometry');
     expect(forms[1].headwords).toEqual(['Analytic language']);
     expect(forms[1].definition).toContain('noninflectional language');
     expect(forms[2].headwords).toEqual(['Analytical table']);
@@ -431,7 +432,7 @@ describe('parseEntry — full "Abandon" entry', () => {
     const h = entry.homographs[0];
     expect(h.etymology).not.toBeNull();
     expect(h.etymology!.html).toContain('abandoner');
-    expect(h.etymology!.html).toContain('/entry/Ban');
+    expect(h.etymology!.html).toContain('/entry/ban');
   });
 
   test('second homograph is a noun', () => {

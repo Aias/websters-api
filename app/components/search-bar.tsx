@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+import type { SearchResult } from '~/lib/types';
 
 export function SearchBar() {
   const searchParams = useSearchParams();
@@ -11,7 +12,7 @@ export function SearchBar() {
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const abortRef = useRef<AbortController>(null);
-  const [results, setResults] = useState<Array<{ key: string; partOfSpeech: string | null }>>([]);
+  const [results, setResults] = useState<Array<SearchResult>>([]);
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
 
@@ -54,17 +55,17 @@ export function SearchBar() {
 
     fetch(`/api/search?q=${encodeURIComponent(value)}`, { signal: controller.signal })
       .then((r) => r.json())
-      .then((data: Array<{ key: string; partOfSpeech: string | null }>) => {
+      .then((data: Array<SearchResult>) => {
         setResults(data);
         setActiveIndex(-1);
       })
       .catch(() => {});
   }
 
-  function navigate(key: string) {
+  function navigate(slug: string) {
     setOpen(false);
     inputRef.current?.blur();
-    router.push(`/entry/${encodeURIComponent(key.toLowerCase())}`);
+    router.push(`/entry/${slug}`);
   }
 
   function scrollToIndex(index: number) {
@@ -95,7 +96,7 @@ export function SearchBar() {
       case 'Enter':
         if (activeIndex >= 0) {
           e.preventDefault();
-          navigate(results[activeIndex].key);
+          navigate(results[activeIndex].slug);
         }
         break;
       case 'Escape':
@@ -158,11 +159,11 @@ export function SearchBar() {
                 aria-selected={i === activeIndex}
               >
                 <Link
-                  href={`/entry/${encodeURIComponent(result.key.toLowerCase())}`}
+                  href={`/entry/${result.slug}`}
                   tabIndex={-1}
                   onMouseDown={(e) => {
                     e.preventDefault();
-                    navigate(result.key);
+                    navigate(result.slug);
                   }}
                   className={`flex items-baseline gap-2 px-4 py-1.5 ${i === activeIndex ? 'bg-accent text-accent-foreground' : 'text-foreground/80 hover:bg-accent/50'}`}
                 >

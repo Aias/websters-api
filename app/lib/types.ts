@@ -76,5 +76,12 @@ export interface Homograph {
 
 export interface DictionaryEntry {
   key: string;
+  slug: string;
   homographs: ReadonlyArray<Homograph>;
+}
+
+export interface SearchResult {
+  key: string;
+  slug: string;
+  partOfSpeech: string | null;
 }

@@ -3,6 +3,7 @@ import { existsSync, mkdirSync, readFileSync, statSync, unlinkSync, writeFileSyn
 import { dirname, join } from 'node:path';
 import * as cheerio from 'cheerio';
 import type { AnyNode, Element } from 'domhandler';
+import { slugify } from '../app/lib/slug.ts';
 import type {
   CompoundForm,
   DerivedForm,
@@ -22,7 +23,7 @@ const DB_FILE = join(ROOT, 'app', 'data', 'dictionary.db');
 const BUILD_META_FILE = join(ROOT, 'app', 'data', 'dictionary.build-meta.json');
 const PROGRESS_EVERY = 10000;
 // Bump when parser/build output semantics change to force a rebuild.
-const PARSER_VERSION = 4;
+const PARSER_VERSION = 5;
 
 interface SourceFingerprint {
   size: number;
@@ -204,10 +205,10 @@ function loadPreprocessedDocument(html: string): cheerio.CheerioAPI {
     }
 
     if (hasClass(el, 'er')) {
-      const text = $(el).text().trim();
-      if (text) {
+      const slug = slugify($(el).text());
+      if (slug) {
         el.tagName = 'a';
-        el.attribs['href'] = `/entry/${encodeURIComponent(text)}`;
+        el.attribs['href'] = `/entry/${slug}`;
       }
     }
 
@@ -639,6 +640,8 @@ interface HomographSection {
 
 export function parseEntry(key: string, rawHtml: string): DictionaryEntry {
   const decodedKey = decodeHtmlCharRefs(key).normalize('NFC');
+  const slug = slugify(decodedKey);
+  if (!slug) throw new Error(`Key "${decodedKey}" has no URL slug`);
   const $ = loadPreprocessedDocument(rawHtml);
   const topNodes = $.root().contents().toArray();
 
@@ -724,7 +727,7 @@ export function parseEntry(key: string, rawHtml: string): DictionaryEntry {
     parseHomograph($, decodedKey, section.hwNode, section.alternateHwNodes, section.nodes)
   );
 
-  return { key: decodedKey, homographs };
+  return { key: decodedKey, slug, homographs };
 }
 
 function parseHomograph(
@@ -1006,12 +1009,13 @@ function writeDatabase(
     CREATE TABLE entries (
       key TEXT PRIMARY KEY,
       normalized_key TEXT NOT NULL,
+      slug TEXT NOT NULL,
       data TEXT NOT NULL
     )
   `);
 
   const insert = db.prepare(
-    'INSERT INTO entries (key, normalized_key, data) VALUES ($key, $normalizedKey, $data)'
+    'INSERT INTO entries (key, normalized_key, slug, data) VALUES ($key, $normalizedKey, $slug, $data)'
   );
 
   let parsedCount = 0;
@@ -1029,6 +1033,7 @@ function writeDatabase(
         insert.run({
           $key: entry.key,
           $normalizedKey: normalizeKey(entry.key),
+          $slug: entry.slug,
           $data: JSON.stringify(entry),
         });
         parsedCount++;
@@ -1049,6 +1054,7 @@ function writeDatabase(
 
   insertMany(keys);
   db.run('CREATE INDEX idx_normalized_key ON entries(normalized_key)');
+  db.run('CREATE INDEX idx_slug ON entries(slug)');
   db.close();
 
   return { parsedCount, errorCount };
