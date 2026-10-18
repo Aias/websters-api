@@ -1,0 +1,102 @@
+# Sources and lexical behavior
+
+## Locate the defect in the data flow
+
+```text
+src/dict.jsonl + scripts/dictionary-source.ts
+    -> scripts/build-db.ts + source-typography.ts + entry-aliases.ts
+    -> app/data/dictionary.db
+    -> app/lib/db.server.ts
+    -> app/components/entry.tsx + app/globals.css + app/layout.tsx
+```
+
+Read `scripts/PARSING.md` and the corresponding current functions and tests. Use source patches for corrupt source, shared changes for valid source handled incorrectly, and harness fixes for misleading captures. Keep the original HTML notation and historical wording unless a witness supports a correction.
+
+## Primary witnesses
+
+| Source                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Use and limitations                                                                                                                                                               |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Project Gutenberg 1913 text: [660](https://www.gutenberg.org/ebooks/660) A-B, [661](https://www.gutenberg.org/ebooks/661) C, [662](https://www.gutenberg.org/ebooks/662) D-E, [663](https://www.gutenberg.org/ebooks/663) F-H, [664](https://www.gutenberg.org/ebooks/664) I-L, [665](https://www.gutenberg.org/ebooks/665) M-O, [666](https://www.gutenberg.org/ebooks/666) P-Q, [667](https://www.gutenberg.org/ebooks/667) R, [668](https://www.gutenberg.org/ebooks/668) S, [669](https://www.gutenberg.org/ebooks/669) T-W, [670](https://www.gutenberg.org/ebooks/670) X-Z and the 1913 supplement | Electronic transcription. `(?)` and `&?;` mark characters the transcriber could not read                                                                                          |
+| [GCIDE downloads](https://gcide.gnu.org.ua/download), [GCIDE XML 0.53](https://www.ibiblio.org/webster/gcide_xml-0.53.zip)                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Tagged lexical context, alternate source representation, and editorial distinctions                                                                                               |
+| [Older GCIDE releases](https://ftp.gnu.org/old-gnu/gcide/), including [0.46 A](https://ftp.gnu.org/old-gnu/gcide/gcide-0.46/cide.a)                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Earlier wording when a later edit removes a historical sense or introduces a broken reference                                                                                     |
+| [Webster's International Dictionary, vol. 1, 1907](https://archive.org/details/webstersinternat01webs) and [vol. 2, 1895 printing](https://archive.org/details/webstersinternat02websuoft)                                                                                                                                                                                                                                                                                                                                                                                                               | Printed glyphs, typography, neighboring entry boundaries, illustrations, and missing content. Vol. 1 covers A-M, through Myzostomata. Vol. 2 covers N-Z on printed pages 961-1681 |
+| [Canonical dictionary tag definitions](https://micra.com/dictionary/tagset.txt)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Semantic and presentation meaning of source classes                                                                                                                               |
+| [Unicode combining-mark guidance](https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-7/)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Encoding of combining and double diacritics                                                                                                                                       |
+
+Download needed sources once and preserve edition, URL, printed page, scan image identifier, and relevant excerpts. Gutenberg and GCIDE share transcription ancestry. Their agreement can corroborate a representation but does not make a shared error correct. GCIDE also contains later additions and editorial revisions, so the application corpus is not a word-for-word historical facsimile.
+
+The International print is a related edition, not the exact electronic 1913 source. State the volume and printing accurately when citing it. Use print to resolve identifiable corruption without replacing legitimate electronic-edition differences. Do not add every print-only headword or delete every electronic-only sense. For a substantial omission, seek an electronic witness or surviving source context as well as print.
+
+Use OCR to locate pages, then inspect the actual image for letters, stress, and accents. An archive.org item's `_hocr_pageindex.json.gz` and `_hocr_searchtext.txt.gz` together give the OCR text of each leaf, which `_djvu.txt` does not separate. The image for a zero-based leaf is `https://archive.org/download/<id>/page/n<leaf>.jpg?scale=1`. OCR garbles stress-marked headwords, so locate an entry by each leaf's running heads, the first and last words on the page, rather than by searching for the headword. Printed page numbers, archive leaf numbers, and image URL indices can differ. Confirm the visible page and entry before recording it as evidence. Inspect adjacent entries when a fragment or attribution appears displaced.
+
+## Source recovery decisions
+
+| Finding                                                    | Investigation and correction                                                                                                         |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| U+FFFD, a broken Greek word, or a suspicious phonetic mark | Read a matching witness and the pronunciation guide. Preserve unknown characters when no exact reading is supported.                 |
+| A missing article, word, quotation, or definition          | Compare the complete sentence and neighboring source structure. Restore the missing span, not the entire entry from another edition. |
+| A numbering gap                                            | Check for an omitted sense, an editorial revision, and genuine numbering before renumbering.                                         |
+| An orphan author or quotation                              | Inspect the previous and next headwords. It may reveal missing lexical content or a lost entry boundary.                             |
+| An ampersand represented as an alternative                 | Check the source's morphological role. Conjunctive forms and alternative spellings have different meanings.                          |
+| A malformed canonical key                                  | Verify the displayed headword and witness, check collisions, and record an explicit rekey with old/new pairing.                      |
+| A referenced but absent figure                             | Find the exact diagram or letter arrangement. Preserve its labels and relationship to the definition.                                |
+
+Keep Greek accents, breathing marks, final sigma, ligatures, and reduced-vowel typography faithful to the witness. Inspect Unicode code points when appearance is ambiguous. A modern spelling or pronunciation from general knowledge is not a restoration source.
+
+For a letter arrangement or table, preserve the witnessed line breaks and alignment in semantic HTML. For a historical illustration, use the verified source image or an unchanged crop with page URL, crop bounds, dimensions, and useful alternative text. Store shipped images in `public/illustrations/` and document their source there. Do not substitute an invented diagram or remove the definition's figure references to conceal a missing image.
+
+Look for conversion defects even where no replacement character appears: conjunctive grammatical labels rendered as alternatives, lost punctuation after expanded abbreviations, missing reduced-vowel italics or voiced-consonant marks, altered dash types, and normalized ligatures or diaereses. Verify each pattern against source conventions before treating it as corruption. Record corpus-wide patterns for a [dictionary-wide pass](#dictionary-wide-passes) rather than patching them entry by entry. A lone sense number or empty record needs source investigation, not automatic deletion or invented content. GCIDE's source tags show whether a missing sense 2 was a later contributor addition that the conversion filtered out, or 1913 text that was lost.
+
+## Dictionary-wide passes
+
+When a conversion defect recurs across the corpus, fix it once instead of in each batch:
+
+1. Write a pure transform from an entry's key and HTML to corrected HTML. Check each entry against a witness: GCIDE for grammatical labels and pronunciation italics, Gutenberg or print for spellings. Leave an entry unchanged and list it when its witness is missing or disagrees.
+2. Dry-run the transform against a frozen copy of the source. Parse every changed entry before and after, and confirm that only the intended characters or markup differ.
+3. Apply the passes one at a time through `writeDictionarySource`, and commit each separately so its diff shows one line per changed entry.
+
+Keep the transforms with the evidence. Re-running them after a rebase resolves conflicts. Before patching a recurring pattern in a batch, check `git log -- src/dict.jsonl` for a pass that already covers it. Batch reviewers record further occurrences rather than patching them.
+
+## Lexical structure and boundaries
+
+Preserve source order and association across homographs, header fragments, forms, senses, compounds, notes, usage, and quotations. A repeated-looking passage may carry a distinct lexical function. Remove a duplicate only after proving it is an empty transcription error.
+
+Header parts can interleave a headword, pronunciation, inflection, qualifier, and another headword. Keep punctuation and language qualifiers attached to their original parts. Connectors within a multiple-headword group and grammatical references such as a comparative's "of" phrase remain on that header. Compound introductions belong with their compound rather than the previous numbered sense. Distinguish final run-in derivatives from forms within a continuing numbered sense. Closing every sense at `wordforms` can split the list or detach its quotation. Secondary parts of speech and derivatives can contain definitions and must not collapse into an inflection string.
+
+Use `data-scope="homograph"` on a note or synonym list only after verifying whole-word scope. Do not infer that every final note belongs outside the last sense. Preserve nested Roman, numeric, and lettered markers and their content.
+
+Boundary normalization must preserve both spaces and intentional adjacency. For example, joining `frost` and `or rain` needs a word boundary, while joining `some` and `thing` may continue one word. Inspect the source wrappers and punctuation before generalizing. Keep decimals, spaced ellipses, preformatted text, and table spacing intact. Consume compound-separator dashes only at confirmed structural boundaries, retaining adjacent author punctuation and lexical dashes.
+
+The foreign-word mark `‖` belongs with the relevant displayed headword or compound. Exclude it from lookup metadata without dropping or moving it. Parenthetical plural-use labels such as `(pl.)` can occur inside a definition or compound without starting a forms section.
+
+Keep native block markup valid. A quotation inside retained note, usage, or definition HTML still needs quotation presentation and its own attribution. A following author can close that block or its final quotation rather than attaching to an earlier standalone quotation. Tables, preformatted arrangements, and blockquotes cannot be wrapped in an inline element merely because they pass through an inline-HTML component. Preserve malformed table text without assigning it to guessed columns.
+
+## Pronunciation and typography
+
+Consult the tag definitions before changing a class. Many lexical classes imply italics, including taxonomic, etymological, alternate-name, reference, and usage-example classes. Other markers identify metadata rather than visible lexical content. `.ver`, for example, contains technical verification information. Establish the source role before removing a short uppercase token or an encoded sense pointer. A token's appearance alone does not prove it is editorial metadata.
+
+Both audits share a restoration rule for pronunciations:
+
+- A composite placeholder such as `(?; 277)` or `(# or #; 135)` is a damaged field, and so is a field GCIDE marks unreadable with `&unr_;`. Restore it from print when legible and keep the guide number, as in `(zīm; 277)`. When the conversion dropped such a field, insert it after its form word.
+- A bare `(?)`, or a pronunciation absent from both the source and GCIDE, stays empty. Do not add pronunciations from print.
+- Repair damaged marks inside an existing field when print corroborates them.
+
+Pronunciation fields made entirely of unknown placeholders or unknown alternatives are omitted from display while retained in raw source. Composite fields may also contain a pronunciation-guide number, language qualifier, or real phonetic text. The parser preserves a guide reference such as `(#; 73)` as `(73)` while omitting the unknown phonetics. Preserve all meaningful commentary and document the missing transcription. Do not drop an entire field because part of it is unknown.
+
+Retain italic reduced-vowel notation within pronunciation HTML. For a double breve or macron spanning two vowels, encode the combining mark after the first base character. Fix a misplaced mark at the shared typography boundary when the source pattern is systematic, then verify text and glyph placement across every affected record.
+
+Within `.grk`, shared normalization handles word-final sigma and the transcription convention representing an iota subscript as a comma after α, η, or ω. The comma conversion applies before another Greek letter or at the end of a text node, including a standalone `α,`. These are constrained notation conversions, not recovery of missing Greek letters. Keep the conversion scoped to Greek markup and test punctuation and combining-mark boundaries.
+
+The tagset defines `.chform` digits as subscripts. Process its direct text without nesting existing `sub` or changing `sup`, and preserve `.chformi`'s explicit notation. Verify idempotence and unchanged semantic text. Ordinary numbers outside formula markup must remain ordinary numbers.
+
+Use existing application treatments for lexical italics, quotation attribution, and other presentation. Do not change fonts, colors, or design tokens to compensate for a damaged character or a failed font load in the review harness. Verify the computed style before claiming a typography defect.
+
+## Lookup and reference preservation
+
+Check actual reference targets, not just the visible label or a guessed canonical key. Source links can name compounds, alternate spellings, plurals, or an infinitive. Read `entry-aliases.ts`, `lookup.ts`, `slug.ts`, and `db.server.ts` to reproduce current behavior.
+
+Canonical slugs resolve before alias fallback. Existing exact aliases and canonical names take precedence over inferred ligature equivalents. A blanket `æ -> ae` or `œ -> oe` lookup normalization can merge distinct existing destinations. Add only unambiguous equivalent spellings and compare every old alias destination against the new map on identical decoded input.
+
+If only part of a visible phrase names an entry, the source link boundary may be wrong. Verify the target entry's treatment of the full phrase before changing that boundary. Preserve the visible wording. Do not globally strip particles or words to make broken links resolve.
+
+After a rekey, confirm the old/new record pairing, expected URL, aliases, search, and real navigation. Changes to routing or database generation require checking cross-reference destinations across the affected corpus, including previously valid targets.
