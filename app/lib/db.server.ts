@@ -99,6 +99,16 @@ export function getAuthor(slug: string): Author | null {
   return getDb().prepare<[string], Author>(`${SELECT_AUTHORS} WHERE slug = ?`).get(slug) ?? null;
 }
 
+export function getCitedForm(authorSlug: string): string | null {
+  return (
+    getDb()
+      .prepare<[string], { cited: string }>(
+        'SELECT cited FROM quotations WHERE author_slug = ? GROUP BY cited ORDER BY COUNT(*) DESC, cited LIMIT 1'
+      )
+      .get(authorSlug)?.cited ?? null
+  );
+}
+
 export function getQuotedWords(authorSlug: string): Array<QuotedWord> {
   const rows = getDb()
     .prepare<[string], { key: string; slug: string; html: string; citation: string | null }>(

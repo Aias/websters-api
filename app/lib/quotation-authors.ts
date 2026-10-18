@@ -1,20 +1,26 @@
+import authorNames from './author-names.json';
 import { slugify } from './slug';
 import type { DictionaryEntry, LexicalBlock, Quotation } from './types';
 
 const SCRIPTURE =
   /^(?:(?:[1-4I]\.?\s*)?[A-Z][a-z]+\.?\s*(?:[ivxlcdm]+|\d+)(?:[.:,]\s*|\s+)\d+|(?:[23]\.?\s*John|Jude|Obad|Ob|Philem|Phil)\.?\s+\d+)/;
 
+const AUTHOR_NAMES = new Map(Object.entries(authorNames));
+
 function terminate(attribution: string): string {
   return attribution.replace(/[\s.,;:]*$/, '.');
 }
 
-export function quotationAuthor(attribution: string) {
-  const cited = terminate(attribution.replace(/\s*(?:[([]|,\s*\d{4}\b).*/, ''));
-  const name = SCRIPTURE.test(cited) ? 'Bible.' : cited;
+export function quotationAuthor(attribution: string, entryKey: string) {
+  const stripped = terminate(attribution.replace(/\s*(?:[([]|,\s*\d{4}\b).*/, ''));
+  const cited = SCRIPTURE.test(stripped) ? 'Bible.' : stripped;
+  const form = slugify(cited.replace(/\./g, ''));
+  const name = AUTHOR_NAMES.get(`${form}@${entryKey}`) ?? AUTHOR_NAMES.get(form) ?? cited;
   return {
-    slug: slugify(name.replace(/\./g, '')),
+    slug: slugify(name.replace(/–/g, '-').replace(/\./g, '')),
     name,
-    citation: terminate(attribution) === name ? null : attribution,
+    cited,
+    citation: terminate(attribution) === cited ? null : attribution,
   };
 }
 
@@ -28,6 +34,8 @@ function* quotations(content: ReadonlyArray<LexicalBlock>): Generator<Quotation>
 export function entryQuotations(entry: DictionaryEntry) {
   return entry.homographs
     .flatMap((homograph) => [...quotations(homograph.content)])
-    .flatMap(({ html, authors }) => authors.map((author) => ({ ...quotationAuthor(author), html })))
+    .flatMap(({ html, authors }) =>
+      authors.map((author) => ({ ...quotationAuthor(author, entry.key), html }))
+    )
     .filter(({ slug }) => slug);
 }

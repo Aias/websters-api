@@ -3,25 +3,32 @@ import { parseEntry } from '../../scripts/build-db';
 import { entryQuotations, quotationAuthor } from './quotation-authors';
 
 describe('quotation authors', () => {
-  test('groups attribution variants under the printed author name', () => {
-    expect(quotationAuthor('Milton.')).toEqual({ slug: 'milton', name: 'Milton.', citation: null });
-    expect(quotationAuthor('Milton')).toEqual({ slug: 'milton', name: 'Milton.', citation: null });
-    expect(quotationAuthor('MIlton.').slug).toBe('milton');
-    expect(quotationAuthor('Sir. W. Hamilton.').slug).toBe(
-      quotationAuthor('Sir W. Hamilton.').slug
+  test('names attribution variants by the full name of their author', () => {
+    expect(quotationAuthor('Milton.', 'Abate')).toEqual({
+      slug: 'john_milton',
+      name: 'John Milton',
+      cited: 'Milton.',
+      citation: null,
+    });
+    expect(quotationAuthor('MIlton', 'Abate').slug).toBe('john_milton');
+    expect(quotationAuthor('B. Jonson.', 'Abate').slug).toBe(
+      quotationAuthor('Ben Jonson.', 'Abate').slug
     );
-    expect(quotationAuthor('Beau. & Fl.')).toMatchObject({ slug: 'beau_fl', name: 'Beau. & Fl.' });
+    expect(quotationAuthor('Nobody in Particular.', 'Abate')).toMatchObject({
+      slug: 'nobody_in_particular',
+      name: 'Nobody in Particular.',
+    });
   });
 
   test('keeps cited works as citations', () => {
-    expect(quotationAuthor('Milton (Comus).')).toEqual({
-      slug: 'milton',
-      name: 'Milton.',
+    expect(quotationAuthor('Milton (Comus).', 'Abate')).toEqual({
+      slug: 'john_milton',
+      name: 'John Milton',
+      cited: 'Milton.',
       citation: 'Milton (Comus).',
     });
-    expect(quotationAuthor('Wycliff [Matt. xxvii. 51, 52].').name).toBe('Wycliff.');
-    expect(quotationAuthor('Terence in English(1614)').name).toBe('Terence in English.');
-    expect(quotationAuthor('Huxley, 1870.').name).toBe('Huxley.');
+    expect(quotationAuthor('Wycliff [Matt. xxvii. 51, 52].', 'Abate').cited).toBe('Wycliff.');
+    expect(quotationAuthor('Huxley, 1870.', 'Abate').cited).toBe('Huxley.');
   });
 
   test('attributes scripture references to the Bible', () => {
@@ -36,15 +43,19 @@ describe('quotation authors', () => {
       'Phil. 7 (Rev. Ver.).',
       'Bible, 1551. Rom. viii. 21.',
     ]) {
-      expect(quotationAuthor(reference)).toEqual({
+      expect(quotationAuthor(reference, 'Abate')).toEqual({
         slug: 'bible',
-        name: 'Bible.',
+        name: 'Bible',
+        cited: 'Bible.',
         citation: reference,
       });
     }
-    expect(quotationAuthor('Isa. xxix. 17 (Douay version).').name).toBe('Bible.');
-    expect(quotationAuthor('Bible (1551).').name).toBe('Bible.');
-    expect(quotationAuthor('I. Taylor (The Alphabet).').name).toBe('I. Taylor.');
+    expect(quotationAuthor('I. Taylor (The Alphabet).', 'Abate').cited).toBe('I. Taylor.');
+  });
+
+  test('separates authors who share a printed form', () => {
+    expect(quotationAuthor('Gray.', 'Adnate').name).toBe('Asa Gray');
+    expect(quotationAuthor('Gray.', 'Annals').name).toBe('Thomas Gray');
   });
 
   test('collects every attributed quotation in an entry', () => {
@@ -56,6 +67,10 @@ describe('quotation authors', () => {
         '<span class="q">Another quote. <span class="qau">Bacon.</span><span class="qau">Dryden.</span></span>' +
         '<span class="q">Unattributed.</span>'
     );
-    expect(entryQuotations(entry).map(({ slug }) => slug)).toEqual(['shak', 'bacon', 'dryden']);
+    expect(entryQuotations(entry).map(({ name }) => name)).toEqual([
+      'William Shakespeare',
+      'Francis Bacon',
+      'John Dryden',
+    ]);
   });
 });

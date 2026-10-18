@@ -804,7 +804,7 @@ function writeDatabase(sourceData: Map<string, string>, keys: ReadonlyArray<stri
   `);
   db.run('CREATE TABLE aliases (normalized_key TEXT PRIMARY KEY, key TEXT NOT NULL)');
   db.run(
-    'CREATE TABLE quotations (author_slug TEXT NOT NULL, author TEXT NOT NULL, key TEXT NOT NULL, html TEXT NOT NULL, citation TEXT)'
+    'CREATE TABLE quotations (author_slug TEXT NOT NULL, author TEXT NOT NULL, cited TEXT NOT NULL, key TEXT NOT NULL, html TEXT NOT NULL, citation TEXT)'
   );
   const aliasesByEntry = new Map<string, ReadonlyArray<string>>();
 
@@ -812,7 +812,7 @@ function writeDatabase(sourceData: Map<string, string>, keys: ReadonlyArray<stri
     'INSERT INTO entries (key, normalized_key, slug, data) VALUES ($key, $normalizedKey, $slug, $data)'
   );
   const insertQuotation = db.prepare(
-    'INSERT INTO quotations (author_slug, author, key, html, citation) VALUES (?, ?, ?, ?, ?)'
+    'INSERT INTO quotations (author_slug, author, cited, key, html, citation) VALUES (?, ?, ?, ?, ?, ?)'
   );
 
   let parsedCount = 0;
@@ -834,8 +834,8 @@ function writeDatabase(sourceData: Map<string, string>, keys: ReadonlyArray<stri
           $slug: entry.slug,
           $data: JSON.stringify(entry),
         });
-        for (const { slug, name, html, citation } of entryQuotations(entry)) {
-          insertQuotation.run(slug, name, entry.key, html, citation);
+        for (const { slug, name, cited, html, citation } of entryQuotations(entry)) {
+          insertQuotation.run(slug, name, cited, entry.key, html, citation);
         }
         parsedCount++;
       } catch (err) {
@@ -864,12 +864,8 @@ function writeDatabase(sourceData: Map<string, string>, keys: ReadonlyArray<stri
   db.run('CREATE INDEX idx_quotations_author ON quotations(author_slug)');
   db.run(`
     CREATE TABLE authors AS
-    SELECT author_slug AS slug, author AS name, total AS quotation_count FROM (
-      SELECT author_slug, author,
-        SUM(COUNT(*)) OVER (PARTITION BY author_slug) AS total,
-        ROW_NUMBER() OVER (PARTITION BY author_slug ORDER BY COUNT(*) DESC, author) AS rank
-      FROM quotations GROUP BY author_slug, author
-    ) WHERE rank = 1
+    SELECT author_slug AS slug, MIN(author) AS name, COUNT(*) AS quotation_count
+    FROM quotations GROUP BY author_slug
   `);
   db.close();
 

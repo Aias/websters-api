@@ -55,9 +55,11 @@ function needsLeadingSpace(block: LexicalBlock | undefined): boolean {
 
 function ContentView({
   content,
+  entryKey,
   inline = false,
 }: {
   content: ReadonlyArray<LexicalBlock>;
+  entryKey: string;
   inline?: boolean;
 }) {
   const groups: ContentGroup[] = [];
@@ -82,29 +84,31 @@ function ContentView({
               {sense.number}
             </span>
             <div className="min-w-0 flex-1">
-              <ContentView content={sense.content} />
+              <ContentView content={sense.content} entryKey={entryKey} />
             </div>
           </li>
         ))}
       </ol>
     ) : (
-      <BlockView key={i} block={group.block} inline={inline} />
+      <BlockView key={i} block={group.block} entryKey={entryKey} inline={inline} />
     )
   );
 }
 
 export function QuotationView({
   quotation,
+  entryKey,
   linkAuthors = true,
 }: {
   quotation: Quotation;
+  entryKey: string;
   linkAuthors?: boolean;
 }) {
   return (
     <blockquote className="q">
       <InlineHtml html={quotation.html} />
       {quotation.authors.map((author, i) => {
-        const { slug } = quotationAuthor(author);
+        const { slug } = quotationAuthor(author, entryKey);
         return (
           <span key={i} className="quotation-author">
             —{' '}
@@ -122,7 +126,15 @@ export function QuotationView({
   );
 }
 
-function BlockView({ block, inline }: { block: Exclude<LexicalBlock, Sense>; inline: boolean }) {
+function BlockView({
+  block,
+  entryKey,
+  inline,
+}: {
+  block: Exclude<LexicalBlock, Sense>;
+  entryKey: string;
+  inline: boolean;
+}) {
   switch (block.kind) {
     case 'compound': {
       const first = block.content[0];
@@ -132,18 +144,18 @@ function BlockView({ block, inline }: { block: Exclude<LexicalBlock, Sense>; inl
             <InlineHtml html={block.headwordHtml} />
           </strong>
           {needsLeadingSpace(first) ? ' ' : null}
-          <ContentView content={block.content} inline />
+          <ContentView content={block.content} entryKey={entryKey} inline />
         </div>
       );
     }
     case 'section':
       return (
         <section className="mt-3">
-          <ContentView content={block.content} />
+          <ContentView content={block.content} entryKey={entryKey} />
         </section>
       );
     case 'quotation':
-      return <QuotationView quotation={block} />;
+      return <QuotationView quotation={block} entryKey={entryKey} />;
     case 'etymology':
     case 'forms': {
       const Tag = inline && block.kind === 'etymology' ? 'span' : 'div';
@@ -186,7 +198,7 @@ export function EntryView({ entry }: { entry: DictionaryEntry }) {
         {entry.homographs.map((homograph, i) => (
           <section key={i} className="mb-8">
             <HeaderView parts={homograph.header} />
-            <ContentView content={homograph.content} />
+            <ContentView content={homograph.content} entryKey={entry.key} />
           </section>
         ))}
       </article>

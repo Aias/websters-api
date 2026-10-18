@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { QuotationView } from '~/components/entry';
 import { HoverLinks } from '~/components/hover-links';
 import { Masonry } from '~/components/masonry';
-import { getAuthor, getQuotedWords } from '~/lib/db.server';
+import { getAuthor, getCitedForm, getQuotedWords } from '~/lib/db.server';
 
 type AuthorPageProps = {
   params: Promise<{ slug: string }>;
@@ -21,6 +21,7 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
   if (!author) {
     notFound();
   }
+  const cited = getCitedForm(author.slug);
 
   return (
     <div data-wide>
@@ -28,6 +29,7 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
       <p className="mb-6 text-muted-foreground">
         {author.quotationCount.toLocaleString('en-US')}{' '}
         {author.quotationCount === 1 ? 'quotation' : 'quotations'}
+        {cited !== author.name && cited !== `${author.name}.` && `, cited as ${cited}`}
       </p>
       <HoverLinks>
         <Masonry>
@@ -39,7 +41,12 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
                 </Link>
               </h2>
               {word.quotations.map((quotation, i) => (
-                <QuotationView key={i} quotation={quotation} linkAuthors={false} />
+                <QuotationView
+                  key={i}
+                  quotation={quotation}
+                  entryKey={word.key}
+                  linkAuthors={false}
+                />
               ))}
             </article>
           ))}

@@ -56,6 +56,8 @@ Notes and synonym lists retain their active sense unless the source explicitly m
 
 Structured quotations store authors inside `.qau` separately. An immediately following `.au`, `.qau`, or `.rj` attribution attaches to the preceding structured quotation. After a note, usage block, synonym list, or forms line, it closes that block, and it joins a quotation that ends the block. Other inline attributions remain in their original positions. Secondary sections retain trailing attributions with their final quotation. Quotations embedded in notes, usage and definitions retain native blockquote markup and share the same presentation as structured quotations.
 
+The authors index groups structured quotations by author, while entries keep their printed attributions. A printed form drops any cited work, such as `Milton (Comus).`, and every scripture reference is cited as the Bible. `app/lib/author-names.json` maps each printed form, keyed by its slug, to a full name in the form of its English Wikipedia article title. Names come from the dictionary's own List of Authors Quoted (pp. vii–xvi, as transcribed in GCIDE), checked against the quotations themselves. When the dictionary prints one form for different people, a key such as `gray@Adnate` names the author of the quotation in that entry. Different people with the same name carry their life dates. Unmapped forms appear as printed.
+
 Inline classes such as `.ets`, `.altname`, `.altnpluf`, `.member`, `.prod`, `.xex`, `.spn`, `.as`, and `.altsp` remain in the HTML. Embedded headwords in definitions and derived forms become `strong` elements rather than block headings.
 
 ## Verification
