@@ -10,6 +10,38 @@ describe('dictionary reference lookup', () => {
     expect(normalizeLookup('A\u0308')).toBe('ä');
   });
 
+  test('resolves ligature spellings without changing canonical entry names or accents', () => {
+    expect(normalizeLookup('Æther')).toBe('æther');
+    expect(normalizeLookup('Œdema')).toBe('œdema');
+    expect(normalizeLookup('Piña')).toBe('piña');
+    const aliases = unambiguousAliases(new Map([['Cæsarian', ['Cæsarian']]]));
+    expect(aliases.get('caesarian')).toBe('Cæsarian');
+  });
+
+  test('preserves exact ligature aliases and refuses ambiguous equivalent spellings', () => {
+    const aliases = unambiguousAliases(
+      new Map([
+        ['Harp', ['Aeolian harp']],
+        ['AEolian', ['Æolian harp']],
+        ['Haemo-', ['Haema-']],
+        ['First', ['Caenozoic', 'Shared']],
+        ['Second', ['Cænozoic', 'Shared']],
+        ['Third', ['Shæred']],
+        ['Fourth', ['Cænozoeic']],
+        ['Fifth', ['Caenozœic']],
+      ])
+    );
+    expect(aliases.get('aeolian harp')).toBe('Harp');
+    expect(aliases.get('æolian harp')).toBe('AEolian');
+    expect(aliases.get('hæma-')).toBe('Haemo-');
+    expect(aliases.get('caenozoic')).toBe('First');
+    expect(aliases.get('cænozoic')).toBe('Second');
+    expect(aliases.has('shared')).toBe(false);
+    expect(aliases.get('shaered')).toBe('Third');
+    expect(aliases.has('caenozoeic')).toBe(false);
+    expect(aliases.has('cænozœic')).toBe(false);
+  });
+
   test('indexes spelled headwords, alternate spellings, and compound headings', () => {
     const aliases = entryAliases(
       'Aaronical',

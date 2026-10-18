@@ -24,6 +24,21 @@ function sourceDocument(key: string): cheerio.CheerioAPI {
 }
 
 describe('source typography', () => {
+  test('subscripts chemical formula digits without changing text or existing superscripts', () => {
+    const $ = cheerio.load(
+      '<span class="chform">C6H5.NH.CO.CH3</span><span class="chform">NO3<sup>-</sup></span><span class="chform">H<sub>2</sub>O</span><span>Chapter 12</span>'
+    );
+    const before = $.text();
+    normalizeSourceTypography($);
+    normalizeSourceTypography($);
+    expect($.text()).toBe(before);
+    expect($('.chform').eq(0).html()).toBe('C<sub>6</sub>H<sub>5</sub>.NH.CO.CH<sub>3</sub>');
+    expect($('.chform').eq(1).html()).toBe('NO<sub>3</sub><sup>-</sup>');
+    expect($('.chform').eq(2).html()).toBe('H<sub>2</sub>O');
+    expect($('sub sub')).toHaveLength(0);
+    expect($('span').last().html()).toBe('Chapter 12');
+  });
+
   test.each([
     ['Aard-wolf', 'wo͝olf'],
     ['Abb wool', 'wo͝ol'],
@@ -109,9 +124,8 @@ describe('source typography', () => {
     expect($('.sn').last().text().trim()).toBe('2.');
   });
 
-  test('renders explicitly marked subscripts without guessing plain formula digits', () => {
+  test('renders explicitly marked subscripts', () => {
     const $ = sourceDocument('Subscript');
     expect($('sub.subs').length).toBeGreaterThan(0);
-    expect(sourceDocument('Molecular')('sub')).toHaveLength(0);
   });
 });
