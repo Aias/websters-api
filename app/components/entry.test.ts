@@ -1,19 +1,16 @@
 import { expect, test } from 'bun:test';
-import { readFileSync } from 'node:fs';
 import * as cheerio from 'cheerio';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { parseEntry } from '../../scripts/build-db';
+import { readDictionarySource } from '../../scripts/dictionary-source';
 import { EntryView } from './entry';
 
-const source: unknown = JSON.parse(
-  readFileSync(new URL('../../src/dict.json', import.meta.url), 'utf8')
-);
+const source = readDictionarySource();
 
 function rendered(key: string) {
-  if (!source || typeof source !== 'object') throw new Error('Invalid dictionary');
-  const raw = Reflect.get(source, key);
-  if (typeof raw !== 'string') throw new Error(`Missing entry: ${key}`);
+  const raw = source.get(key);
+  if (raw === undefined) throw new Error(`Missing entry: ${key}`);
   return cheerio.load(
     renderToStaticMarkup(createElement(EntryView, { entry: parseEntry(key, raw) }))
   );

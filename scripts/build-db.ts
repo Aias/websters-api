@@ -1,5 +1,5 @@
 import { Database } from 'bun:sqlite';
-import { existsSync, mkdirSync, readFileSync, statSync, unlinkSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import * as cheerio from 'cheerio';
 import type { AnyNode, Element } from 'domhandler';
@@ -15,11 +15,11 @@ import type {
   Quotation,
   Sense,
 } from '../app/lib/types.ts';
+import { readDictionarySource, sourceFingerprint } from './dictionary-source';
 import { entryAliases, unambiguousAliases } from './entry-aliases';
 import { normalizeSourceTypography } from './source-typography';
 
 const ROOT = join(import.meta.dir, '..');
-const SRC_FILE = join(ROOT, 'src', 'dict.json');
 const DB_FILE = join(ROOT, 'app', 'data', 'dictionary.db');
 const BUILD_META_FILE = join(ROOT, 'app', 'data', 'dictionary.build-meta.json');
 const PROGRESS_EVERY = 10000;
@@ -98,11 +98,6 @@ function decodeHtmlCharRefs(str: string): string {
 
 function normalizeKey(key: string): string {
   return normalizeLookup(decodeHtmlCharRefs(key));
-}
-
-function getSourceFingerprint(): SourceFingerprint {
-  const sourceStat = statSync(SRC_FILE);
-  return { size: sourceStat.size, mtimeMs: sourceStat.mtimeMs };
 }
 
 function isBuildMetadata(value: unknown): value is BuildMetadata {
@@ -786,10 +781,7 @@ export function parseEntry(key: string, rawHtml: string): DictionaryEntry {
 
 // ─── Database writer ─────────────────────────────────────
 
-function writeDatabase(
-  sourceData: Record<string, string>,
-  keys: ReadonlyArray<string>
-): BuildResult {
+function writeDatabase(sourceData: Map<string, string>, keys: ReadonlyArray<string>): BuildResult {
   const dataDir = dirname(DB_FILE);
   if (!existsSync(dataDir)) mkdirSync(dataDir, { recursive: true });
   if (existsSync(DB_FILE)) unlinkSync(DB_FILE);
@@ -824,8 +816,8 @@ function writeDatabase(
       const key = entryKeys[i];
 
       try {
-        const rawHtml = sourceData[key];
-        if (typeof rawHtml !== 'string') continue;
+        const rawHtml = sourceData.get(key);
+        if (rawHtml === undefined) continue;
 
         const entry = parseEntry(key, rawHtml);
         aliasesByEntry.set(entry.key, entryAliases(entry.key, rawHtml));
@@ -842,7 +834,7 @@ function writeDatabase(
           console.error(`Error parsing "${key}":`, err);
         }
       } finally {
-        delete sourceData[key];
+        sourceData.delete(key);
       }
 
       if ((i + 1) % PROGRESS_EVERY === 0) {
@@ -883,9 +875,9 @@ function parseBuildOptions(args: ReadonlyArray<string>): BuildOptions {
   return { force };
 }
 
-async function main(options: BuildOptions): Promise<void> {
-  const sourceFingerprint = getSourceFingerprint();
-  if (!options.force && shouldSkipBuild(sourceFingerprint, PARSER_VERSION)) {
+function main(options: BuildOptions): void {
+  const fingerprint = sourceFingerprint();
+  if (!options.force && shouldSkipBuild(fingerprint, PARSER_VERSION)) {
     console.log('Source dictionary unchanged. Skipping database rebuild.');
     return;
   }
@@ -895,20 +887,19 @@ async function main(options: BuildOptions): Promise<void> {
   }
 
   console.log('Reading source dictionary...');
-  const raw = await Bun.file(SRC_FILE).text();
-  const data: Record<string, string> = JSON.parse(raw);
-  const keys = Object.keys(data);
+  const data = readDictionarySource();
+  const keys = [...data.keys()];
   console.log(`Found ${keys.length} entries`);
 
   console.log('Parsing entries and writing database...');
   const result = writeDatabase(data, keys);
 
   console.log(`Parsed ${result.parsedCount} entries (${result.errorCount} errors)`);
-  writeBuildMetadata(sourceFingerprint, result, PARSER_VERSION);
+  writeBuildMetadata(fingerprint, result, PARSER_VERSION);
   console.log(`Database written to ${DB_FILE}`);
 }
 
 if (import.meta.main) {
   const options = parseBuildOptions(Bun.argv.slice(2));
-  await main(options);
+  main(options);
 }

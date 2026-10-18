@@ -1,6 +1,8 @@
 # Dictionary HTML parsing
 
-`scripts/build-db.ts` converts `src/dict.json` into the SQLite dictionary. `app/lib/types.ts` defines the stored shape, and `app/components/entry.tsx` renders it.
+`scripts/build-db.ts` converts `src/dict.jsonl` into the SQLite dictionary. `app/lib/types.ts` defines the stored shape, and `app/components/entry.tsx` renders it.
+
+The source is stored as JSON Lines, one `{"key", "html"}` object per line, sorted by key in code-point order. `scripts/dictionary-source.ts` reads and writes the file, and a test checks that it stays in that form, so edits to different entries merge without conflicts.
 
 ## Source normalization
 
