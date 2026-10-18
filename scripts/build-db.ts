@@ -16,6 +16,7 @@ import type {
   Sense,
 } from '../app/lib/types.ts';
 import { entryAliases, unambiguousAliases } from './entry-aliases';
+import { normalizeSourceTypography } from './source-typography';
 
 const ROOT = join(import.meta.dir, '..');
 const SRC_FILE = join(ROOT, 'src', 'dict.json');
@@ -23,7 +24,7 @@ const DB_FILE = join(ROOT, 'app', 'data', 'dictionary.db');
 const BUILD_META_FILE = join(ROOT, 'app', 'data', 'dictionary.build-meta.json');
 const PROGRESS_EVERY = 10000;
 // Bump when parser/build output semantics change to force a rebuild.
-const PARSER_VERSION = 6;
+const PARSER_VERSION = 7;
 
 interface SourceFingerprint {
   size: number;
@@ -204,12 +205,20 @@ function loadPreprocessedDocument(html: string): cheerio.CheerioAPI {
       const normalizedName = attributeName.toLowerCase();
 
       if (normalizedName === 'class') continue;
+      if (
+        normalizedName === 'colspan' &&
+        /^(?:[1-9]\d*)$/.test(attributeValue) &&
+        (hasClass(el, 'td') || hasClass(el, 'th') || el.tagName === 'td' || el.tagName === 'th')
+      )
+        continue;
       if (normalizedName === 'href' && typeof attributeValue === 'string') {
         if (attributeValue.startsWith('/entry/')) continue;
       }
       delete el.attribs[attributeName];
     }
   });
+
+  normalizeSourceTypography($);
 
   // Normalize whitespace: move leading/trailing spaces outside inline elements
   // so CSS decorations (underlines, etc.) don't extend over whitespace.

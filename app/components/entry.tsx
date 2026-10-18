@@ -3,9 +3,10 @@ import type { DictionaryEntry, HeaderPart, InlineHTML, LexicalBlock, Sense } fro
 import { HoverLinks } from './hover-links';
 
 function InlineHtml({ html, className = '' }: { html: InlineHTML; className?: string }) {
+  const Tag = /<(?:table|pre|div)\b/.test(html) ? 'div' : 'span';
   return (
-    <span
-      className={`${className} [&_.adjf]:font-bold [&_.col]:font-bold [&_.conjf]:font-bold [&_.plw]:font-bold [&_.pos]:italic [&_.wf]:font-bold`}
+    <Tag
+      className={`${className} overflow-x-auto [&_.adjf]:font-bold [&_.col]:font-bold [&_.conjf]:font-bold [&_.plw]:font-bold [&_.pos]:italic [&_.wf]:font-bold [&_pre]:block [&_pre]:text-sm [&_table]:text-sm [&_td]:px-2 [&_td]:py-1 [&_td]:align-top [&_th]:px-2 [&_th]:py-1 [&_th]:text-left [&_th]:align-top`}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );

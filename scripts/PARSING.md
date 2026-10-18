@@ -6,16 +6,18 @@
 
 The parser reads the source as HTML with self-closing tags enabled. This matters for empty source wrappers such as `<div class="cs"/>`.
 
-| Source                                 | Normalized output                                                          |
-| -------------------------------------- | -------------------------------------------------------------------------- |
-| `b`, `i`                               | `strong`, `em`                                                             |
-| `div`                                  | `span`, because dictionary fragments are often inline                      |
-| `.er`                                  | A local `/entry/…` link                                                    |
-| Leading and trailing inline whitespace | Moved outside the element without removing word boundaries                 |
-| Attributes                             | Only `class` and local entry-link `href` survive                           |
-| Executable containers                  | `script`, `style`, `iframe`, `object`, `embed`, and `template` are removed |
+| Source                                 | Normalized output                                                             |
+| -------------------------------------- | ----------------------------------------------------------------------------- |
+| `b`, `i`                               | `strong`, `em`                                                                |
+| `div`                                  | `span`, because dictionary fragments are often inline                         |
+| `.er`                                  | A local `/entry/…` link                                                       |
+| Leading and trailing inline whitespace | Moved outside the element without removing word boundaries                    |
+| Attributes                             | `class`, local entry-link `href`, and positive integer cell `colspan` survive |
+| Executable containers                  | `script`, `style`, `iframe`, `object`, `embed`, and `template` are removed    |
 
 Character references are decoded. Unresolved replacement characters in the source remain visible. The parser does not invent missing letters or pronunciations.
+
+`scripts/source-typography.ts` preserves explicit table rows, cells, and spanning headers as native HTML tables. A malformed row remains in a spanning cell without assigning its text to guessed columns. Tables without cell boundaries retain their preformatted text and row breaks. Source exponent and subscript markers become `sup` and `sub`.
 
 ## Homographs and headers
 
