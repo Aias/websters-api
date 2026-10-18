@@ -24,7 +24,7 @@ const DB_FILE = join(ROOT, 'app', 'data', 'dictionary.db');
 const BUILD_META_FILE = join(ROOT, 'app', 'data', 'dictionary.build-meta.json');
 const PROGRESS_EVERY = 10000;
 // Bump when parser/build output semantics change to force a rebuild.
-const PARSER_VERSION = 14;
+const PARSER_VERSION = 15;
 
 interface SourceFingerprint {
   size: number;
@@ -232,7 +232,12 @@ function loadPreprocessedDocument(html: string): cheerio.CheerioAPI {
   });
 
   $('.pr').each((_, node) => {
-    if (/^\(\s*[#?]\s*\)$/.test(getText($, node))) $(node).remove();
+    const placeholder =
+      /^\(\s*[#?�](?:\s*or\s*[#?�])*\s*(?:[;,]\s*(\d+(?:\s*,\s*\d+)*)\s*)?\)$/.exec(
+        getText($, node)
+      );
+    if (placeholder?.[1]) $(node).text(`(${placeholder[1]})`);
+    else if (placeholder) $(node).remove();
   });
   $('h2.hw, .col').each((_, node) => {
     const previous = node.previousSibling;
@@ -289,7 +294,12 @@ function loadPreprocessedDocument(html: string): cheerio.CheerioAPI {
     .contents()
     .each((_, node) => {
       if (node.type === 'text' && $(node).parents('pre,table').length === 0) {
-        node.data = node.data.replace(/(?<!\.)[ \t]+([,;:!?)]|\.(?![\s.]*\.|\d))/g, '$1');
+        const previous = node.prev;
+        if (previous && isElement(previous) && /\p{L}$/u.test($(previous).text()))
+          node.data = node.data.replace(/^\{\d+\}/, '');
+        node.data = node.data
+          .replace(/(?<=\p{L})\{\d+\}/gu, '')
+          .replace(/(?<!\.)[ \t]+([,;:!?)]|\.(?![\s.]*\.|\d))/g, '$1');
       }
     });
 
@@ -334,6 +344,21 @@ function parseQuotation($: cheerio.CheerioAPI, node: Element): Quotation {
     .map((author) => getText($, author));
   $clone.find('.qau').remove();
   return { kind: 'quotation', html: ($clone.html() ?? '').trim(), authors };
+}
+
+function endsHomograph(node: AnyNode): boolean {
+  const boundary = (other: AnyNode) => isTag(other, 'h2') && hasClass(other, 'hw');
+  let senseBetween = false;
+  for (let earlier = node.prev; earlier && !boundary(earlier); earlier = earlier.prev) {
+    if (hasClass(earlier, 'sn') || hasClass(earlier, 'sd')) senseBetween = true;
+    else if (senseBetween && hasClass(earlier, 'wordforms')) return false;
+  }
+  for (let later = node.next; later && !boundary(later); later = later.next) {
+    if (isBr(later) || (later.type === 'text' && /^[\s\u2013\u2014.,;]*$/.test(later.data)))
+      continue;
+    if (!['wordforms', 'rj', 'au', 'qau', 'mark'].some((cls) => hasClass(later, cls))) return false;
+  }
+  return true;
 }
 
 function parseContent($: cheerio.CheerioAPI, nodes: ReadonlyArray<AnyNode>): LexicalBlock[] {
@@ -479,7 +504,7 @@ function parseContent($: cheerio.CheerioAPI, nodes: ReadonlyArray<AnyNode>): Lex
     }
     if (
       !inCompound &&
-      compound &&
+      (compound || (hasClass(node, 'wordforms') && endsHomograph(node))) &&
       [
         'def2',
         'vmorph',
@@ -533,6 +558,18 @@ function parseContent($: cheerio.CheerioAPI, nodes: ReadonlyArray<AnyNode>): Lex
           blocks[previousIndex] = { ...previous, authors: [...previous.authors, ...authors] };
           return;
         }
+      }
+      if (
+        previous?.kind === 'note' ||
+        previous?.kind === 'usage' ||
+        previous?.kind === 'synonyms' ||
+        previous?.kind === 'forms'
+      ) {
+        blocks[previousIndex] = {
+          ...previous,
+          html: `${previous.html.trimEnd()} ${getOuterHtml($, node)}`,
+        };
+        return;
       }
       addHtml('text', getOuterHtml($, node));
       return;
@@ -594,21 +631,63 @@ function parseContent($: cheerio.CheerioAPI, nodes: ReadonlyArray<AnyNode>): Lex
 function parseHomograph(
   $: cheerio.CheerioAPI,
   key: string,
-  nodes: ReadonlyArray<AnyNode>
+  nodes: ReadonlyArray<AnyNode>,
+  grouped: ReadonlySet<AnyNode>
 ): Homograph {
   const header: HeaderPart[] = [];
   const body: AnyNode[] = [];
   let inHeader = true;
+  let skip = 0;
   for (const [index, node] of nodes.entries()) {
-    if (isElement(node) && isTag(node, 'h2') && hasClass(node, 'hw')) {
+    const next = nodes.slice(index + 1).find((later) => later.type !== 'text' || later.data.trim());
+    const after = nodes[index + 2];
+    if (skip > 0) {
+      skip--;
+    } else if (isElement(node) && isTag(node, 'h2') && hasClass(node, 'hw')) {
       header.push({ kind: 'headword', text: getText($, node) });
       inHeader = true;
     } else if (inHeader && hasClass(node, 'pr')) {
       header.push({ kind: 'pronunciation', html: getHtml($, node).trim() });
     } else if (inHeader && hasClass(node, 'pos')) {
       header.push({ kind: 'partOfSpeech', text: getText($, node) });
+    } else if (inHeader && hasClass(node, 'mark') && next && hasClass(next, 'pos')) {
+      header.push({ kind: 'inline', html: getOuterHtml($, node) });
+    } else if (
+      inHeader &&
+      header.at(-1)?.kind === 'partOfSpeech' &&
+      node.type === 'text' &&
+      /^\s*of\s*$/.test(node.data) &&
+      hasClass(nodes[index + 1] ?? node, 'er') &&
+      after?.type === 'text' &&
+      after.data.startsWith('.')
+    ) {
+      header.push({ kind: 'inline', html: `of ${getOuterHtml($, nodes[index + 1])}.` });
+      after.data = after.data.slice(1);
+      skip = 1;
+    } else if (
+      inHeader &&
+      header.at(-1)?.kind === 'partOfSpeech' &&
+      node.type === 'text' &&
+      /^\s*of\s+\p{Lu}[\p{L}′ˊ-]*\.\s*$/u.test(node.data)
+    ) {
+      header.push({ kind: 'inline', html: getOuterHtml($, node).trim() });
+    } else if (inHeader && header.at(-1)?.kind === 'partOfSpeech' && hasClass(node, 'mord')) {
+      const following = nodes[index + 1];
+      const period = following?.type === 'text' && following.data.startsWith('.');
+      header.push({ kind: 'inline', html: getHtml($, node).trim() + (period ? '.' : '') });
+      if (period) following.data = following.data.slice(1);
     } else if (inHeader && node.type === 'text' && /^[\s.,;:{}‖]*$/.test(node.data)) {
-      if (/[,;]/.test(node.data) && nodes.slice(index + 1).some((later) => hasClass(later, 'hw'))) {
+      if (
+        /[,;]/.test(node.data) &&
+        header.at(-1)?.kind === 'partOfSpeech' &&
+        next &&
+        hasClass(next, 'pos')
+      ) {
+        header.push({ kind: 'text', text: node.data.replace(/[^,;]/g, '') });
+      } else if (
+        /[,;]/.test(node.data) &&
+        nodes.slice(index + 1).some((later) => hasClass(later, 'hw'))
+      ) {
         const punctuation = node.data.replace(/[^,;]/g, '');
         const previous = header.at(-1);
         if (previous?.kind === 'forms')
@@ -620,15 +699,23 @@ function parseHomograph(
       /^[\s,;]*(or|also)[\s,;]*$/i.test(getText($, node)) &&
       (inHeader || hasClass(nodes[index + 1] ?? node, 'hw'))
     ) {
-      header.push({ kind: 'text', text: getText($, node) });
+      header.push(
+        isElement(node)
+          ? { kind: 'inline', html: getOuterHtml($, node) }
+          : { kind: 'text', text: getText($, node) }
+      );
     } else if (
       isElement(node) &&
       ['vmorph', 'amorph', 'nmorph', 'plu', 'sing'].some((cls) => hasClass(node, cls)) &&
       nodes.slice(index + 1).some((later) => hasClass(later, 'hw'))
     ) {
       header.push({ kind: 'forms', html: inlineHtml($, node) });
-    } else if (!isBr(node) && nodes.slice(index + 1).some((later) => hasClass(later, 'hw'))) {
-      header.push({ kind: 'inline', html: getOuterHtml($, node) });
+    } else if (
+      !isBr(node) &&
+      (grouped.has(node) || nodes.slice(index + 1).some((later) => hasClass(later, 'hw')))
+    ) {
+      const html = getOuterHtml($, node).replace(/[{}]/g, '');
+      if (html.trim()) header.push({ kind: 'inline', html });
     } else if (!isBr(node)) {
       inHeader = false;
       body.push(node);
@@ -638,13 +725,13 @@ function parseHomograph(
     .filter((part) => part.kind === 'headword')
     .map((part) => part.text.replace(/^‖\s*/, ''));
   if (headwords.length === 0) header.unshift({ kind: 'headword', text: key });
-  const pronunciation = header.find((part) => part.kind === 'pronunciation');
+  const pronunciation = header
+    .flatMap((part) => (part.kind === 'pronunciation' ? [cheerio.load(part.html).text()] : []))
+    .find((text) => !/^\([\d,\s]+\)$/.test(text));
   return {
     headword: headwords[0] ?? key,
     alternateHeadwords: headwords.slice(1),
-    pronunciation: pronunciation
-      ? unwrapParenthesized(cheerio.load(pronunciation.html).text())
-      : null,
+    pronunciation: pronunciation ? unwrapParenthesized(pronunciation) : null,
     partOfSpeech: header.find((part) => part.kind === 'partOfSpeech')?.text ?? null,
     header,
     content: parseContent($, body),
@@ -658,11 +745,13 @@ export function parseEntry(key: string, rawHtml: string): DictionaryEntry {
   let current = sections[0];
   let hasHeadword = false;
   let hasBody = false;
-  function collect(node: AnyNode): void {
+  const grouped = new Set<AnyNode>();
+  function collect(node: AnyNode, inGroup: boolean): void {
     if (isElement(node) && hasClass(node, 'mhw')) {
-      for (const child of $(node).contents().toArray()) collect(child);
+      for (const child of $(node).contents().toArray()) collect(child, true);
       return;
     }
+    if (inGroup) grouped.add(node);
     if (isElement(node) && isTag(node, 'h2') && hasClass(node, 'hw')) {
       if (hasHeadword && hasBody) {
         current = [];
@@ -678,6 +767,7 @@ export function parseEntry(key: string, rawHtml: string): DictionaryEntry {
     ) {
       hasBody = true;
     } else if (
+      !inGroup &&
       node.type === 'text' &&
       /[\p{L}\p{N}]/u.test(node.data) &&
       !/^[\s,;]*(also|or)[\s,;]*$/i.test(node.data)
@@ -686,11 +776,11 @@ export function parseEntry(key: string, rawHtml: string): DictionaryEntry {
     }
     current.push(node);
   }
-  for (const node of $.root().contents().toArray()) collect(node);
+  for (const node of $.root().contents().toArray()) collect(node, false);
   return {
     key: decodedKey,
     slug: slugify(decodedKey),
-    homographs: sections.map((nodes) => parseHomograph($, decodedKey, nodes)),
+    homographs: sections.map((nodes) => parseHomograph($, decodedKey, nodes, grouped)),
   };
 }
 

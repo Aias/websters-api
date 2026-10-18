@@ -57,8 +57,10 @@ describe('preprocess', () => {
     expect(result).toContain('href="/entry/test_ref"');
   });
 
-  test('normalizes source sense annotations before creating reference slugs', () => {
-    expect(preprocess('<div class="er">Whitecap{2}</div>')).toContain('href="/entry/whitecap"');
+  test('omits source sense annotations from display text and reference slugs', () => {
+    const result = preprocess('<div class="er">Whitecap{2}</div> tissue{1}');
+    expect(result).toContain('href="/entry/whitecap"');
+    expect(plain(result)).toBe('Whitecap tissue');
   });
 
   test('preserves local dictionary illustrations and descriptions without allowing remote image sources', () => {
@@ -253,6 +255,43 @@ describe('headwords and sections', () => {
     ).toEqual(['First', '(first)', 'noun', ', or', 'Second', '(second)', 'adjective']);
   });
 
+  test('keeps usage marks, joined labels and base words on the header line', () => {
+    const header = (html: string) =>
+      parseEntry('Example', html).homographs[0].header.map((part) =>
+        'html' in part ? plain(part.html) : part.text
+      );
+    expect(
+      header(
+        '<h2 class="hw">Example</h2>, <div class="mark">obs. </div><div class="pos">past participle </div>of <div class="er">Base</div>. <div class="def">Meaning.</div>'
+      )
+    ).toEqual(['Example', 'obs.', 'past participle', 'of Base.']);
+    expect(
+      header(
+        '<h2 class="hw">Example</h2>, <div class="pos">adjective</div>, <div class="pos">comparative </div>of <div class="er">Base</div>. <div class="ety">[Origin.]</div>'
+      )
+    ).toEqual(['Example', 'adjective', ',', 'comparative', 'of Base.']);
+    expect(
+      header(
+        '<h2 class="hw">Example</h2>, <div class="pos">plural noun </div>of Base. <div class="ety">[Origin.]</div>'
+      )
+    ).toEqual(['Example', 'plural noun', 'of Base.']);
+    expect(
+      header(
+        '<h2 class="hw">First </h2><i class="it">or </i><h2 class="hw">Second</h2><div class="def">Meaning.</div>'
+      )
+    ).toEqual(['First', 'or', 'Second']);
+  });
+
+  test('keeps connective text in a headword group with one header', () => {
+    const entry = parseEntry(
+      'Example',
+      '<div class="mhw"><h2 class="hw">First</h2>, <div class="pos">noun </div>Also <h2 class="hw">Second</h2>, older <h2 class="hw">Third</h2>, etc. }</div><div class="def">Meaning.</div>'
+    );
+    expect(entry.homographs).toHaveLength(1);
+    expect(entry.homographs[0].alternateHeadwords).toEqual(['Second', 'Third']);
+    expect(text(entry.homographs[0].content)).toBe('Meaning.');
+  });
+
   test('splits repeated headwords after lexical content', () => {
     const entry = parseEntry(
       'Example',
@@ -441,6 +480,17 @@ describe('lexical presentation fidelity', () => {
     expect(entry.homographs[1].pronunciation).toBe('real?');
   });
 
+  test('keeps pronunciation guide references when omitting unknown transcriptions', () => {
+    const entry = parseEntry(
+      'Example',
+      '<h2 class="hw">Example</h2><div class="pr">(? or ?; 277)</div><div class="pos">noun</div><div class="vmorph">[<div class="conjf">Examples</div><div class="pr">(? or &#xFFFD;)</div>.]</div><div class="def">Meaning.</div>'
+    );
+    const header = entry.homographs[0].header.find((part) => part.kind === 'pronunciation');
+    expect(header && 'html' in header ? header.html : null).toBe('(277)');
+    expect(entry.homographs[0].pronunciation).toBeNull();
+    expect(text(entry.homographs[0].content)).toBe('[Examples.]Meaning.');
+  });
+
   test('keeps foreign marks with their following headword, outside lookup metadata', () => {
     const entry = parseEntry(
       'Example',
@@ -510,6 +560,28 @@ test('keeps unscoped notes with their sense and scoped notes at homograph level'
   if (sense.kind !== 'sense') throw new Error('Missing sense');
   expect(sense.content.at(-1)).toEqual({ kind: 'note', html: 'Sense note.' });
   expect(blocks.at(-1)).toEqual({ kind: 'note', html: 'Whole-entry note.' });
+});
+
+test('keeps attributions with the note or trailing derivative line they close', () => {
+  const blocks = content(
+    '<div class="sn">1.</div><div class="def">First.</div><div class="sn">2.</div><div class="def">Second.</div><div class="note">A note.</div><div class="rj"><div class="au">Author.</div></div>– <div class="wordforms"><div class="wf">Example-ness</div>, <div class="pos">noun</div></div><div class="rj"><div class="au">Writer.</div></div><br/>'
+  );
+  const visible = blocks.filter((block) => !('html' in block) || plain(block.html).trim());
+  expect(visible.map((block) => block.kind)).toEqual(['sense', 'sense', 'forms']);
+  const second = blocks[1];
+  if (second.kind !== 'sense') throw new Error('Missing sense');
+  expect(text(second.content)).toBe('Second.A note. Author.');
+  expect(text(blocks.filter((block) => block.kind === 'forms'))).toBe('Example-ness, noun Writer.');
+});
+
+test('keeps a run-in derivative in its sense when sense content follows it', () => {
+  const blocks = content(
+    '<div class="sn">1.</div><div class="def">First.</div>– <div class="wordforms"><div class="wf">Example-ic</div></div><div class="q">A quotation.</div><div class="sn">2.</div><div class="def">Second.</div>'
+  );
+  expect(blocks.map((block) => block.kind)).toEqual(['sense', 'sense']);
+  const first = blocks[0];
+  if (first.kind !== 'sense') throw new Error('Missing sense');
+  expect(first.content.map((block) => block.kind)).toEqual(['definition', 'forms', 'quotation']);
 });
 
 test('omits verifier metadata without removing lexical abbreviations', () => {

@@ -143,19 +143,36 @@ blockquote.q > .qau::before {
 .altnpluf,
 .ant,
 .asp,
+.class,
 .cref,
 .ets,
 .etsep,
 .fam,
 .isa,
 .member,
+.ord,
+.phylum,
 .pluf,
 .prod,
 .qau,
 .sig,
 .stype,
-.uex {
+.subfam,
+.subord,
+.suborder,
+.uex,
+.var,
+.varn {
   font-style: italic;
+}
+
+.sc {
+  font-variant: small-caps;
+}
+
+.universbold {
+  font-family: var(--font-sans);
+  font-weight: 700;
 }
 
 a.er {
