@@ -2,7 +2,7 @@ import 'server-only';
 import { join } from 'node:path';
 import BetterSqlite3 from 'better-sqlite3';
 import { porterStem } from './stemmer';
-import type { DictionaryEntry } from './types';
+import type { DictionaryEntry, SearchResult } from './types';
 
 // Next route/page code runs in the Node runtime; Bun's SQLite API is still used in scripts/build-db.ts.
 const DB_PATH = join(process.cwd(), 'app', 'data', 'dictionary.db');
@@ -27,7 +27,7 @@ function parseEntryRow(row: { data: string } | undefined): DictionaryEntry | nul
   return entry;
 }
 
-export function getEntry(word: string): DictionaryEntry | null {
+function getEntry(word: string): DictionaryEntry | null {
   const row = getDb()
     .prepare<[string], { data: string }>(
       'SELECT data FROM entries WHERE normalized_key = ? ORDER BY key COLLATE NOCASE LIMIT 1'
@@ -36,13 +36,18 @@ export function getEntry(word: string): DictionaryEntry | null {
   return parseEntryRow(row);
 }
 
-export function searchEntries(
-  prefix: string,
-  limit = 20
-): Array<{ key: string; partOfSpeech: string | null }> {
+export function getEntryBySlug(slug: string): DictionaryEntry | null {
+  const row = getDb()
+    .prepare<[string], { data: string }>('SELECT data FROM entries WHERE slug = ?')
+    .get(slug);
+  return parseEntryRow(row);
+}
+
+export function searchEntries(prefix: string, limit = 20): Array<SearchResult> {
   return getDb()
-    .prepare<[string, number], { key: string; partOfSpeech: string | null }>(
+    .prepare<[string, number], SearchResult>(
       `SELECT MIN(key) AS key,
+              slug,
               json_extract(data, '$.homographs[0].partOfSpeech') AS partOfSpeech
        FROM entries
        WHERE normalized_key LIKE ?

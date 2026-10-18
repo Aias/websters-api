@@ -1,15 +1,16 @@
 import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { EntryView } from '~/components/entry';
-import { getEntry } from '~/lib/db.server';
+import { getEntryBySlug } from '~/lib/db.server';
+import { slugify } from '~/lib/slug';
 
 type EntryPageProps = {
-  params: Promise<{ word: string }>;
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateMetadata({ params }: EntryPageProps): Promise<Metadata> {
-  const { word } = await params;
-  const entry = getEntry(word);
+  const { slug } = await params;
+  const entry = getEntryBySlug(decodeURIComponent(slug));
 
   if (!entry) {
     return { title: 'Not Found' };
@@ -19,12 +20,12 @@ export async function generateMetadata({ params }: EntryPageProps): Promise<Meta
 }
 
 export default async function EntryPage({ params }: EntryPageProps) {
-  const { word } = await params;
-  const lowercase = word.toLowerCase();
-  if (word !== lowercase) {
-    permanentRedirect(`/entry/${encodeURIComponent(lowercase)}`);
+  const slug = decodeURIComponent((await params).slug);
+  const canonical = slugify(slug);
+  if (canonical && slug !== canonical) {
+    permanentRedirect(`/entry/${encodeURIComponent(canonical)}`);
   }
-  const entry = getEntry(word);
+  const entry = getEntryBySlug(slug);
 
   if (!entry) {
     notFound();

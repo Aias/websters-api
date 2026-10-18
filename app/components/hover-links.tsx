@@ -4,7 +4,7 @@ import { useEffect, useRef, type ReactNode } from 'react';
 
 // ─── Lookup cache ────────────────────────────────────────
 
-/** normalized word → canonical key (or null if not found) */
+/** normalized word → entry slug (or null if not found) */
 const cache = new Map<string, string | null>();
 
 async function lookupWord(word: string, signal: AbortSignal): Promise<string | null> {
@@ -18,10 +18,10 @@ async function lookupWord(word: string, signal: AbortSignal): Promise<string | n
       signal,
     });
     if (!res.ok) return null;
-    const data: { exists: boolean; key?: string } = await res.json();
-    const key = data.exists && data.key ? data.key : null;
-    cache.set(normalized, key);
-    return key;
+    const data: { exists: boolean; slug?: string } = await res.json();
+    const slug = data.exists && data.slug ? data.slug : null;
+    cache.set(normalized, slug);
+    return slug;
   } catch {
     // Aborted or network error — don't cache
     return null;
@@ -70,9 +70,9 @@ function getWordAtPoint(x: number, y: number): WordAtPoint | null {
 
 // ─── Highlight management ────────────────────────────────
 
-function createHighlight(range: Range, key: string): HTMLAnchorElement {
+function createHighlight(range: Range, slug: string): HTMLAnchorElement {
   const link = document.createElement('a');
-  link.href = `/entry/${encodeURIComponent(key.toLowerCase())}`;
+  link.href = `/entry/${slug}`;
   link.setAttribute('data-hover-link', '');
   range.surroundContents(link);
 
@@ -165,12 +165,12 @@ export function HoverLinks({ children }: { children: ReactNode }) {
 
       delayTimer = setTimeout(() => {
         delayTimer = null;
-        void lookupWord(currentWord, signal).then((key) => {
-          if (signal.aborted || !key) return;
+        void lookupWord(currentWord, signal).then((slug) => {
+          if (signal.aborted || !slug) return;
 
           // Verify the range is still valid (DOM hasn't changed)
           try {
-            activeLink = createHighlight(range, key);
+            activeLink = createHighlight(range, slug);
           } catch {
             // Range invalid — DOM changed during delay
           }

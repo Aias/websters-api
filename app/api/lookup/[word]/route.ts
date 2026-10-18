@@ -8,5 +8,5 @@ export async function GET(_request: Request, { params }: { params: Promise<{ wor
     return Response.json({ exists: false });
   }
 
-  return Response.json({ exists: true, key: entry.key });
+  return Response.json({ exists: true, key: entry.key, slug: entry.slug });
 }
