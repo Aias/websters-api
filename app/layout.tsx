@@ -59,8 +59,15 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
           <Suspense>
             <SearchBar />
           </Suspense>
+          <nav className="mt-2 text-right text-sm">
+            <Link href="/authors" className="text-muted-foreground hover:text-foreground">
+              Authors
+            </Link>
+          </nav>
         </header>
-        <main className="mx-auto w-full max-w-2xl grow overflow-y-auto px-4 pb-8">{children}</main>
+        <main className="mx-auto w-full max-w-2xl grow overflow-y-auto px-4 pb-8 has-data-wide:max-w-6xl">
+          {children}
+        </main>
       </body>
     </html>
   );

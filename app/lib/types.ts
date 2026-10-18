@@ -59,3 +59,15 @@ export interface SearchResult {
   slug: string;
   partOfSpeech: string | null;
 }
+
+export interface Author {
+  slug: string;
+  name: string;
+  quotationCount: number;
+}
+
+export interface QuotedWord {
+  key: string;
+  slug: string;
+  quotations: ReadonlyArray<Quotation>;
+}

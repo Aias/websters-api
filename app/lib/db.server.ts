@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import BetterSqlite3 from 'better-sqlite3';
 import { normalizeLookup } from './lookup';
 import { porterStem } from './stemmer';
-import type { DictionaryEntry, SearchResult } from './types';
+import type { Author, DictionaryEntry, Quotation, QuotedWord, SearchResult } from './types';
 
 // Next route/page code runs in the Node runtime; Bun's SQLite API is still used in scripts/build-db.ts.
 const DB_PATH = join(process.cwd(), 'app', 'data', 'dictionary.db');
@@ -87,4 +87,42 @@ export function getRandomEntry(): DictionaryEntry | null {
     .prepare<[], { data: string }>('SELECT data FROM entries ORDER BY RANDOM() LIMIT 1')
     .get();
   return parseEntryRow(row);
+}
+
+const SELECT_AUTHORS = 'SELECT slug, name, quotation_count AS quotationCount FROM authors';
+
+export function getAuthors(): Array<Author> {
+  return getDb().prepare<[], Author>(`${SELECT_AUTHORS} ORDER BY quotation_count DESC, name`).all();
+}
+
+export function getAuthor(slug: string): Author | null {
+  return getDb().prepare<[string], Author>(`${SELECT_AUTHORS} WHERE slug = ?`).get(slug) ?? null;
+}
+
+export function getCitedForm(authorSlug: string): string | null {
+  return (
+    getDb()
+      .prepare<[string], { cited: string }>(
+        'SELECT cited FROM quotations WHERE author_slug = ? GROUP BY cited ORDER BY COUNT(*) DESC, cited LIMIT 1'
+      )
+      .get(authorSlug)?.cited ?? null
+  );
+}
+
+export function getQuotedWords(authorSlug: string): Array<QuotedWord> {
+  const rows = getDb()
+    .prepare<[string], { key: string; slug: string; html: string; citation: string | null }>(
+      `SELECT entries.key, entries.slug, quotations.html, quotations.citation
+       FROM quotations JOIN entries ON entries.key = quotations.key
+       WHERE quotations.author_slug = ?
+       ORDER BY entries.normalized_key, quotations.rowid`
+    )
+    .all(authorSlug);
+  const words = new Map<string, { key: string; slug: string; quotations: Array<Quotation> }>();
+  for (const { key, slug, html, citation } of rows) {
+    const word = words.get(key) ?? { key, slug, quotations: [] };
+    word.quotations.push({ kind: 'quotation', html, authors: citation ? [citation] : [] });
+    words.set(key, word);
+  }
+  return [...words.values()];
 }

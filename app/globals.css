@@ -143,19 +143,24 @@ blockquote.q > .qau::before {
 .altnpluf,
 .ant,
 .asp,
+.au,
 .class,
+.contr,
 .cref,
 .ets,
 .etsep,
 .fam,
+.gen,
 .isa,
 .member,
 .ord,
 .phylum,
 .pluf,
+.pos,
 .prod,
 .qau,
 .sig,
+.spn,
 .stype,
 .subfam,
 .subord,
@@ -164,6 +169,16 @@ blockquote.q > .qau::before {
 .var,
 .varn {
   font-style: italic;
+}
+
+.adjf,
+.col,
+.conjf,
+.decf,
+.plw,
+.singw,
+.wf {
+  font-weight: 700;
 }
 
 .sc {
@@ -192,6 +207,23 @@ a.er {
 .mark,
 .fld {
   font-style: italic;
+}
+
+pre {
+  @apply block text-sm;
+}
+
+table {
+  @apply text-sm;
+}
+
+td,
+th {
+  @apply px-2 py-1 align-top;
+}
+
+th {
+  text-align: left;
 }
 
 /* Hover-discovered word links */

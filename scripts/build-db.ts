@@ -4,6 +4,7 @@ import { dirname, join } from 'node:path';
 import * as cheerio from 'cheerio';
 import type { AnyNode, Element } from 'domhandler';
 import { normalizeLookup } from '../app/lib/lookup';
+import { entryQuotations } from '../app/lib/quotation-authors';
 import { slugify } from '../app/lib/slug.ts';
 import type {
   CompoundForm,
@@ -24,7 +25,7 @@ const DB_FILE = join(ROOT, 'app', 'data', 'dictionary.db');
 const BUILD_META_FILE = join(ROOT, 'app', 'data', 'dictionary.build-meta.json');
 const PROGRESS_EVERY = 10000;
 // Bump when parser/build output semantics change to force a rebuild.
-const PARSER_VERSION = 15;
+const PARSER_VERSION = 16;
 
 interface SourceFingerprint {
   size: number;
@@ -802,10 +803,16 @@ function writeDatabase(sourceData: Map<string, string>, keys: ReadonlyArray<stri
     )
   `);
   db.run('CREATE TABLE aliases (normalized_key TEXT PRIMARY KEY, key TEXT NOT NULL)');
+  db.run(
+    'CREATE TABLE quotations (author_slug TEXT NOT NULL, author TEXT NOT NULL, cited TEXT NOT NULL, key TEXT NOT NULL, html TEXT NOT NULL, citation TEXT)'
+  );
   const aliasesByEntry = new Map<string, ReadonlyArray<string>>();
 
   const insert = db.prepare(
     'INSERT INTO entries (key, normalized_key, slug, data) VALUES ($key, $normalizedKey, $slug, $data)'
+  );
+  const insertQuotation = db.prepare(
+    'INSERT INTO quotations (author_slug, author, cited, key, html, citation) VALUES (?, ?, ?, ?, ?, ?)'
   );
 
   let parsedCount = 0;
@@ -827,6 +834,9 @@ function writeDatabase(sourceData: Map<string, string>, keys: ReadonlyArray<stri
           $slug: entry.slug,
           $data: JSON.stringify(entry),
         });
+        for (const { slug, name, cited, html, citation } of entryQuotations(entry)) {
+          insertQuotation.run(slug, name, cited, entry.key, html, citation);
+        }
         parsedCount++;
       } catch (err) {
         errorCount++;
@@ -851,6 +861,12 @@ function writeDatabase(sourceData: Map<string, string>, keys: ReadonlyArray<stri
     }
   })();
   db.run('CREATE INDEX idx_normalized_key ON entries(normalized_key)');
+  db.run('CREATE INDEX idx_quotations_author ON quotations(author_slug)');
+  db.run(`
+    CREATE TABLE authors AS
+    SELECT author_slug AS slug, MIN(author) AS name, COUNT(*) AS quotation_count
+    FROM quotations GROUP BY author_slug
+  `);
   db.close();
 
   return { parsedCount, errorCount };

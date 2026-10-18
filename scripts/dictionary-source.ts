@@ -2,6 +2,7 @@ import { readFileSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 export const SOURCE_FILE = join(import.meta.dir, '..', 'src', 'dict.jsonl');
+const AUTHOR_NAMES_FILE = join(import.meta.dir, '..', 'app', 'lib', 'author-names.json');
 
 function isEntry(value: unknown): value is { key: string; html: string } {
   return (
@@ -38,6 +39,9 @@ export function writeDictionarySource(source: ReadonlyMap<string, string>): void
 }
 
 export function sourceFingerprint(): { size: number; mtimeMs: number } {
-  const stat = statSync(SOURCE_FILE);
-  return { size: stat.size, mtimeMs: stat.mtimeMs };
+  const stats = [SOURCE_FILE, AUTHOR_NAMES_FILE].map((file) => statSync(file));
+  return {
+    size: stats.reduce((total, stat) => total + stat.size, 0),
+    mtimeMs: Math.max(...stats.map((stat) => stat.mtimeMs)),
+  };
 }

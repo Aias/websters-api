@@ -1,14 +1,20 @@
+import Link from 'next/link';
 import { Fragment } from 'react';
-import type { DictionaryEntry, HeaderPart, InlineHTML, LexicalBlock, Sense } from '~/lib/types';
+import { quotationAuthor } from '~/lib/quotation-authors';
+import type {
+  DictionaryEntry,
+  HeaderPart,
+  InlineHTML,
+  LexicalBlock,
+  Quotation,
+  Sense,
+} from '~/lib/types';
 import { HoverLinks } from './hover-links';
 
 function InlineHtml({ html, className = '' }: { html: InlineHTML; className?: string }) {
   const Tag = /<(?:table|pre|div|blockquote)\b/.test(html) ? 'div' : 'span';
   return (
-    <Tag
-      className={`${className} overflow-x-auto [&_.adjf]:font-bold [&_.au]:italic [&_.col]:font-bold [&_.conjf]:font-bold [&_.contr]:italic [&_.decf]:font-bold [&_.gen]:italic [&_.plw]:font-bold [&_.pos]:italic [&_.singw]:font-bold [&_.spn]:italic [&_.wf]:font-bold [&_pre]:block [&_pre]:text-sm [&_table]:text-sm [&_td]:px-2 [&_td]:py-1 [&_td]:align-top [&_th]:px-2 [&_th]:py-1 [&_th]:text-left [&_th]:align-top`}
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
+    <Tag className={`${className} overflow-x-auto`} dangerouslySetInnerHTML={{ __html: html }} />
   );
 }
 
@@ -49,9 +55,11 @@ function needsLeadingSpace(block: LexicalBlock | undefined): boolean {
 
 function ContentView({
   content,
+  entryKey,
   inline = false,
 }: {
   content: ReadonlyArray<LexicalBlock>;
+  entryKey: string;
   inline?: boolean;
 }) {
   const groups: ContentGroup[] = [];
@@ -76,18 +84,57 @@ function ContentView({
               {sense.number}
             </span>
             <div className="min-w-0 flex-1">
-              <ContentView content={sense.content} />
+              <ContentView content={sense.content} entryKey={entryKey} />
             </div>
           </li>
         ))}
       </ol>
     ) : (
-      <BlockView key={i} block={group.block} inline={inline} />
+      <BlockView key={i} block={group.block} entryKey={entryKey} inline={inline} />
     )
   );
 }
 
-function BlockView({ block, inline }: { block: Exclude<LexicalBlock, Sense>; inline: boolean }) {
+export function QuotationView({
+  quotation,
+  entryKey,
+  linkAuthors = true,
+}: {
+  quotation: Quotation;
+  entryKey: string;
+  linkAuthors?: boolean;
+}) {
+  return (
+    <blockquote className="q">
+      <InlineHtml html={quotation.html} />
+      {quotation.authors.map((author, i) => {
+        const { slug } = quotationAuthor(author, entryKey);
+        return (
+          <span key={i} className="quotation-author">
+            —{' '}
+            {linkAuthors && slug ? (
+              <Link href={`/authors/${slug}`} className="hover:underline">
+                {author}
+              </Link>
+            ) : (
+              author
+            )}
+          </span>
+        );
+      })}
+    </blockquote>
+  );
+}
+
+function BlockView({
+  block,
+  entryKey,
+  inline,
+}: {
+  block: Exclude<LexicalBlock, Sense>;
+  entryKey: string;
+  inline: boolean;
+}) {
   switch (block.kind) {
     case 'compound': {
       const first = block.content[0];
@@ -97,27 +144,18 @@ function BlockView({ block, inline }: { block: Exclude<LexicalBlock, Sense>; inl
             <InlineHtml html={block.headwordHtml} />
           </strong>
           {needsLeadingSpace(first) ? ' ' : null}
-          <ContentView content={block.content} inline />
+          <ContentView content={block.content} entryKey={entryKey} inline />
         </div>
       );
     }
     case 'section':
       return (
         <section className="mt-3">
-          <ContentView content={block.content} />
+          <ContentView content={block.content} entryKey={entryKey} />
         </section>
       );
     case 'quotation':
-      return (
-        <blockquote className="q">
-          <InlineHtml html={block.html} />
-          {block.authors.map((author, i) => (
-            <span key={i} className="quotation-author">
-              — {author}
-            </span>
-          ))}
-        </blockquote>
-      );
+      return <QuotationView quotation={block} entryKey={entryKey} />;
     case 'etymology':
     case 'forms': {
       const Tag = inline && block.kind === 'etymology' ? 'span' : 'div';
@@ -160,7 +198,7 @@ export function EntryView({ entry }: { entry: DictionaryEntry }) {
         {entry.homographs.map((homograph, i) => (
           <section key={i} className="mb-8">
             <HeaderView parts={homograph.header} />
-            <ContentView content={homograph.content} />
+            <ContentView content={homograph.content} entryKey={entry.key} />
           </section>
         ))}
       </article>
