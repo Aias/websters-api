@@ -90,3 +90,44 @@ describe('dictionary source restoration', () => {
     expect($('.pr i').text()).toMatch(/^[ae]$/);
   });
 });
+
+test.each([
+  ['Abietine', 'A resinous substance obtained'],
+  ['Ability', 'It always supposes something to be'],
+  ['Abiogenist', 'independently of antecedent life'],
+  ['Able', 'A manly man, to ben an abbot'],
+  ['Abnormal', 'That abnormal and singular condition.'],
+  ['Abolish', 'a power of attorney'],
+])('%s retains the complete printed text', (key, phrase) => {
+  expect(cheerio.load(entrySource(key)).text()).toContain(phrase);
+});
+
+test.each([
+  ['Ablastemic', 'βλάστημα'],
+  ['Ablepsy', 'ἀβλεψία'],
+  ['Abnormal', 'ἀνώμαλος'],
+])('%s retains its Greek etymon', (key, word) => {
+  const $ = cheerio.load(entrySource(key));
+  expect($('.ety .grk').text()).toContain(word);
+  expect($('.ety').text()).not.toContain('�');
+});
+
+test('Ablation keeps consecutive senses and Ablative keeps its noun homograph', () => {
+  const ablation = cheerio.load(entrySource('Ablation'));
+  expect(
+    ablation('.sn')
+      .map((_, node) => ablation(node).text().trim())
+      .get()
+  ).toEqual(['1.', '2.', '3.']);
+  const ablative = cheerio.load(entrySource('Ablative'));
+  expect(ablative('.pos').last().text().trim()).toBe('noun');
+});
+
+test('keeps the Abominator definition and attribution separate from Abomination', () => {
+  const $ = cheerio.load(entrySource('Abominator'));
+  expect($('.hw').text()).toBe('A-bom′i-naˊtor');
+  expect($('.pos').text().trim()).toBe('noun');
+  expect($('.def').text().trim()).toBe('One who abominates.');
+  expect($('.au').text()).toBe('Sir W. Scott.');
+  expect(cheerio.load(entrySource('Abomination'))('.au').text()).not.toContain('Sir W. Scott.');
+});
