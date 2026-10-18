@@ -6,7 +6,7 @@
 - React 19
 - Tailwind CSS v4
 - Bun runtime + package manager
-- TypeScript 7 preview (`tsgo`) + `oxlint` + `oxfmt` (plus `typescript@5` for Next.js toolchain compatibility)
+- TypeScript 7 + `oxlint` + `oxfmt`
 
 ## Setup
 
@@ -40,7 +40,7 @@ Use `build:db:force` to rebuild regardless of source fingerprint checks.
 bun check
 ```
 
-`check` runs lint + type-check + format with auto-fixes (`oxlint`, `tsgo`, `oxfmt`).
+`check` runs lint + type-check + format with auto-fixes (`oxlint`, `tsc`, `oxfmt`).
 
 ```sh
 bun run lint:check
