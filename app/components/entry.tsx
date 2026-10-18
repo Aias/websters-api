@@ -1,5 +1,12 @@
 import { Fragment } from 'react';
-import type { DictionaryEntry, HeaderPart, InlineHTML, LexicalBlock, Sense } from '~/lib/types';
+import type {
+  DictionaryEntry,
+  HeaderPart,
+  InlineHTML,
+  LexicalBlock,
+  Quotation,
+  Sense,
+} from '~/lib/types';
 import { HoverLinks } from './hover-links';
 
 function InlineHtml({ html, className = '' }: { html: InlineHTML; className?: string }) {
@@ -87,6 +94,19 @@ function ContentView({
   );
 }
 
+export function QuotationView({ quotation }: { quotation: Quotation }) {
+  return (
+    <blockquote className="q">
+      <InlineHtml html={quotation.html} />
+      {quotation.authors.map((author, i) => (
+        <span key={i} className="quotation-author">
+          — {author}
+        </span>
+      ))}
+    </blockquote>
+  );
+}
+
 function BlockView({ block, inline }: { block: Exclude<LexicalBlock, Sense>; inline: boolean }) {
   switch (block.kind) {
     case 'compound': {
@@ -108,16 +128,7 @@ function BlockView({ block, inline }: { block: Exclude<LexicalBlock, Sense>; inl
         </section>
       );
     case 'quotation':
-      return (
-        <blockquote className="q">
-          <InlineHtml html={block.html} />
-          {block.authors.map((author, i) => (
-            <span key={i} className="quotation-author">
-              — {author}
-            </span>
-          ))}
-        </blockquote>
-      );
+      return <QuotationView quotation={block} />;
     case 'etymology':
     case 'forms': {
       const Tag = inline && block.kind === 'etymology' ? 'span' : 'div';
