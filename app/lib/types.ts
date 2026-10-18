@@ -1,77 +1,51 @@
-/** Inline HTML string containing only inline markup (em, .er, .ex, etc.) */
 export type InlineHTML = string;
 
-export interface InflectedForm {
-  /** POS label, e.g. "imperfect or past participle", "comparative", "superlative" */
-  label: string;
-  form: string;
-  pronunciation: string | null;
-}
+type HeaderTextKind = 'headword' | 'partOfSpeech' | 'text';
 
-export interface PluralForm {
-  form: string;
-  pronunciation: string | null;
-}
+export type HeaderPart =
+  | { [Kind in HeaderTextKind]: { kind: Kind; text: string } }[HeaderTextKind]
+  | { kind: 'pronunciation'; html: InlineHTML }
+  | { kind: 'forms'; html: InlineHTML }
+  | { kind: 'inline'; html: InlineHTML };
 
-export interface DerivedForm {
-  form: string;
-  partOfSpeech: string | null;
-  pronunciation: string | null;
-}
-
-export interface Etymology {
+export interface InlineBlock {
+  kind: 'text' | 'definition' | 'etymology' | 'forms' | 'note' | 'synonyms' | 'usage' | 'label';
   html: InlineHTML;
 }
 
 export interface Quotation {
+  kind: 'quotation';
   html: InlineHTML;
-  author: string | null;
-}
-
-export interface CompoundForm {
-  headwords: ReadonlyArray<string>;
-  /** Full HTML of headword group including connectors ("or", ",") for display */
-  headwordHtml: InlineHTML | null;
-  etymology: Etymology | null;
-  /** Domain label: "(Theol.)", "(Law)", etc. */
-  field: string | null;
-  definition: InlineHTML | null;
-  mark: string | null;
-  quotations: ReadonlyArray<Quotation>;
-  attributions: ReadonlyArray<string>;
+  authors: ReadonlyArray<string>;
 }
 
 export interface Sense {
-  /** "1.", "2.", "(a)", etc. — null for unnumbered senses */
-  number: string | null;
-  /** Domain label: "(Mus.)", "(Mar. Law)", etc. */
-  field: string | null;
-  definition: InlineHTML;
-  /** Secondary part of speech from def2 blocks, e.g. "noun" on an adjective entry */
-  partOfSpeech: string | null;
-  /** "[Obs.]", "[R.]", "[Colloq.]", etc. */
-  mark: string | null;
-  quotations: ReadonlyArray<Quotation>;
-  attributions: ReadonlyArray<string>;
-  examples: InlineHTML | null;
-  note: InlineHTML | null;
+  kind: 'sense';
+  number: string;
+  content: ReadonlyArray<LexicalBlock>;
 }
+
+export interface CompoundForm {
+  kind: 'compound';
+  headwords: ReadonlyArray<string>;
+  headwordHtml: InlineHTML;
+  content: ReadonlyArray<LexicalBlock>;
+}
+
+export interface LexicalSection {
+  kind: 'section';
+  content: ReadonlyArray<LexicalBlock>;
+}
+
+export type LexicalBlock = InlineBlock | Quotation | Sense | CompoundForm | LexicalSection;
 
 export interface Homograph {
   headword: string;
   alternateHeadwords: ReadonlyArray<string>;
   pronunciation: string | null;
   partOfSpeech: string | null;
-  morphology: ReadonlyArray<InflectedForm> | null;
-  pluralForms: ReadonlyArray<PluralForm> | null;
-  etymology: Etymology | null;
-  senses: ReadonlyArray<Sense>;
-  synonyms: InlineHTML | null;
-  usage: InlineHTML | null;
-  compoundForms: ReadonlyArray<CompoundForm>;
-  derivedForms: ReadonlyArray<DerivedForm> | null;
-  alternateSpellings: ReadonlyArray<string> | null;
-  note: InlineHTML | null;
+  header: ReadonlyArray<HeaderPart>;
+  content: ReadonlyArray<LexicalBlock>;
 }
 
 export interface DictionaryEntry {

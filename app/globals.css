@@ -30,7 +30,9 @@
 }
 
 @theme {
-  --font-serif: var(--font-cardo), 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --font-serif:
+    var(--font-webster), var(--font-cardo), 'Iowan Old Style', 'Palatino Linotype', Palatino,
+    Georgia, serif;
   --font-sans: system-ui, -apple-system, sans-serif;
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -119,6 +121,10 @@ body {
   text-underline-offset: 0.175em;
 }
 
+.altname,
+.altnpluf,
+.member,
+.prod,
 .ets {
   font-style: italic;
 }

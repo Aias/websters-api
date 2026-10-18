@@ -6,6 +6,18 @@ import Script from 'next/script';
 import { Suspense, type ReactNode } from 'react';
 import { SearchBar } from '~/components/search-bar';
 
+const webster = localFont({
+  src: [
+    { path: './fonts/OldStandard-Regular.woff2', weight: '400', style: 'normal' },
+    { path: './fonts/OldStandard-Italic.woff2', weight: '400', style: 'italic' },
+    { path: './fonts/Besley-ExtraBold.woff2', weight: '700', style: 'normal' },
+    { path: './fonts/OldStandard-BoldItalic.woff2', weight: '700', style: 'italic' },
+  ],
+  variable: '--font-webster',
+  display: 'swap',
+  adjustFontFallback: 'Times New Roman',
+});
+
 const cardo = localFont({
   src: [
     { path: './fonts/Cardo-Regular.woff2', weight: '400', style: 'normal' },
@@ -29,7 +41,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en" className={cardo.variable}>
+    <html lang="en" className={`${webster.variable} ${cardo.variable}`}>
       <head>
         {process.env.NODE_ENV === 'development' && (
           <Script

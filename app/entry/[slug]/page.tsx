@@ -10,7 +10,7 @@ type EntryPageProps = {
 
 export async function generateMetadata({ params }: EntryPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const entry = getEntryBySlug(decodeURIComponent(slug));
+  const entry = getEntryBySlug(slugify(decodeURIComponent(slug)));
 
   if (!entry) {
     return { title: 'Not Found' };
@@ -21,14 +21,13 @@ export async function generateMetadata({ params }: EntryPageProps): Promise<Meta
 
 export default async function EntryPage({ params }: EntryPageProps) {
   const slug = decodeURIComponent((await params).slug);
-  const canonical = slugify(slug);
-  if (canonical && slug !== canonical) {
-    permanentRedirect(`/entry/${encodeURIComponent(canonical)}`);
-  }
-  const entry = getEntryBySlug(slug);
+  const entry = getEntryBySlug(slugify(slug));
 
   if (!entry) {
     notFound();
+  }
+  if (slug !== entry.slug) {
+    permanentRedirect(`/entry/${encodeURIComponent(entry.slug)}`);
   }
 
   return (

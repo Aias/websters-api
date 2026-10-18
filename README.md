@@ -5,10 +5,13 @@
 - Next.js 16 (App Router, Turbopack default)
 - React 19
 - Tailwind CSS v4
-- Bun runtime + package manager
-- TypeScript 7 preview (`tsgo`) + `oxlint` + `oxfmt` (plus `typescript@5` for Next.js toolchain compatibility)
+- Node.js 26 runs the Next.js server (`bun run` honors the `next` binary's `node` shebang)
+- Bun for package management, `build:db`, and tests
+- TypeScript 7 + `oxlint` + `oxfmt`
 
 ## Setup
+
+Requires Node.js 26 (`.node-version`) and Bun.
 
 ```sh
 bun install
@@ -40,7 +43,7 @@ Use `build:db:force` to rebuild regardless of source fingerprint checks.
 bun check
 ```
 
-`check` runs lint + type-check + format with auto-fixes (`oxlint`, `tsgo`, `oxfmt`).
+`check` runs lint + type-check + format with auto-fixes (`oxlint`, `tsc`, `oxfmt`).
 
 ```sh
 bun run lint:check
@@ -53,6 +56,8 @@ bun run format:check
 ```sh
 bun run start
 ```
+
+`ecosystem.config.cjs` runs this under pm2 on port 3031.
 
 ## Data Notes
 

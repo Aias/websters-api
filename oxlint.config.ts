@@ -10,7 +10,6 @@ const config = defineConfig({
     ],
     '@typescript-eslint/consistent-type-imports': 'warn',
     '@typescript-eslint/ban-ts-comment': 'warn',
-    'import/order': 'warn',
     'typescript/await-thenable': 'warn',
     'typescript/no-floating-promises': 'warn',
     'typescript/no-misused-promises': 'warn',
