@@ -37,7 +37,7 @@ export function getEntryBySlug(slug: string): DictionaryEntry | null {
   const row = getDb()
     .prepare<[string], { data: string }>('SELECT data FROM entries WHERE slug = ?')
     .get(slug);
-  return parseEntryRow(row);
+  return parseEntryRow(row) ?? getEntry(slug.replace(/_/g, ' '));
 }
 
 export function searchEntries(prefix: string, limit = 20): Array<SearchResult> {

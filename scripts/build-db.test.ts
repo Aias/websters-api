@@ -57,6 +57,10 @@ describe('preprocess', () => {
     expect(result).toContain('href="/entry/test_ref"');
   });
 
+  test('normalizes source sense annotations before creating reference slugs', () => {
+    expect(preprocess('<div class="er">Whitecap{2}</div>')).toContain('href="/entry/whitecap"');
+  });
+
   test('retains unresolved source characters and typographic quotation marks', () => {
     expect(plain(preprocess('“word” ‘word’ &#xFFFD;'))).toBe('“word” ‘word’ �');
   });
@@ -202,7 +206,10 @@ describe('ordered lexical content', () => {
 
 describe('headwords and sections', () => {
   test('keeps display keys separate from URL slugs', () => {
-    const entry = parseEntry('A 1', '<h2 class="hw">A 1</h2><div class="def">A registry mark.</div>');
+    const entry = parseEntry(
+      'A 1',
+      '<h2 class="hw">A 1</h2><div class="def">A registry mark.</div>'
+    );
     expect(entry.key).toBe('A 1');
     expect(entry.slug).toBe('a_1');
   });

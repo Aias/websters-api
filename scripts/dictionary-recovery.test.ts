@@ -38,7 +38,7 @@ describe('dictionary extraction recovery', () => {
       expect.objectContaining({ kind: 'definition', html: expect.stringContaining('See ') })
     );
     expect(entry.homographs[0]?.content).toContainEqual(
-      expect.objectContaining({ kind: 'note', html: expect.stringContaining('/entry/Un-') })
+      expect.objectContaining({ kind: 'note', html: expect.stringContaining('/entry/un-') })
     );
   });
 
