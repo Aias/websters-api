@@ -14,6 +14,22 @@ export function normalizeSourceTypography($: CheerioAPI): void {
     .each((_, node) => {
       if (node.type === 'text') $(node).replaceWith($.html(node).replace(/\d+/g, '<sub>$&</sub>'));
     });
+  $('.grk')
+    .find('*')
+    .addBack()
+    .contents()
+    .each((_, node) => {
+      if (node.type === 'text')
+        node.data = node.data
+          .replace(
+            /(\p{Script=Greek}\p{M}*),(?=\p{Script=Greek}|\s*$)/gu,
+            (match, vowel: string) =>
+              /^[αηω]/i.test(vowel.normalize('NFD'))
+                ? (vowel + String.fromCodePoint(0x345)).normalize('NFC')
+                : match
+          )
+          .replace(/(?<=\p{Script=Greek}\p{M}*)σ(?![\p{L}\p{M}-])/gu, 'ς');
+    });
 
   $('.table, .mtable').each((_, table) => {
     const $table = $(table);

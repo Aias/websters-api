@@ -47,6 +47,24 @@ describe('source typography', () => {
     expect(sourceDocument(key)('.pr').first().text()).toContain(pronunciation);
   });
 
+  test('writes Greek final sigma and iota subscripts without changing other text', () => {
+    const $ = cheerio.load(
+      '<span class="grk">ζῦθοσ ξιφοειδήσ σ ἀσ- ζῶ,ον ὠ,όν</span><span class="grk">α,</span><span class="ets">os, as</span>'
+    );
+    normalizeSourceTypography($);
+    normalizeSourceTypography($);
+    expect($('.grk').first().text()).toBe('ζῦθος ξιφοειδής σ ἀσ- ζῷον ᾠόν');
+    expect($('.grk').last().text()).toBe('ᾳ');
+    expect($('.ets').text()).toBe('os, as');
+  });
+
+  test.each([
+    ['Zythum', 'ζῦθος'],
+    ['Egg', 'ᾠόν'],
+  ])('%s writes its Greek etymon as printed', (key, greek) => {
+    expect(sourceDocument(key)('.grk').text().normalize('NFC')).toContain(greek.normalize('NFC'));
+  });
+
   test('leaves correctly encoded double and single diacritics unchanged', () => {
     const text = 'o͝o o͞o ō ŏ';
     const $ = cheerio.load(`<span class="pr">${text}</span>`);
