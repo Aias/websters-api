@@ -13,7 +13,7 @@ function InlineHtml({ html, className = '' }: { html: InlineHTML; className?: st
   const Tag = /<(?:table|pre|div|blockquote)\b/.test(html) ? 'div' : 'span';
   return (
     <Tag
-      className={`${className} overflow-x-auto [&_.adjf]:font-bold [&_.au]:italic [&_.col]:font-bold [&_.conjf]:font-bold [&_.contr]:italic [&_.decf]:font-bold [&_.gen]:italic [&_.plw]:font-bold [&_.pos]:italic [&_.singw]:font-bold [&_.spn]:italic [&_.wf]:font-bold [&_pre]:block [&_pre]:text-sm [&_table]:text-sm [&_td]:px-2 [&_td]:py-1 [&_td]:align-top [&_th]:px-2 [&_th]:py-1 [&_th]:text-left [&_th]:align-top`}
+      className={`${className} overflow-x-auto`}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );
