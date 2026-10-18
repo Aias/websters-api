@@ -35,6 +35,15 @@ describe('dictionary reference lookup', () => {
     expect(entryAliases('Abacus', '<div class="pos">noun</div>')).not.toContain('To Abacus');
   });
 
+  test('indexes explicit inflections and derived forms', () => {
+    expect(
+      entryAliases(
+        'Index',
+        '<div class="plw">Indices</div><div class="conjf">Indexed</div><div class="wf">Indexer</div>'
+      )
+    ).toEqual(['Index', 'Indices', 'Indexed', 'Indexer']);
+  });
+
   test('exact entries win and ambiguous alternate destinations stay unresolved', () => {
     const result = unambiguousAliases(
       new Map([
