@@ -2,31 +2,32 @@ import { describe, expect, test } from 'bun:test';
 import { slugify } from './slug.ts';
 
 describe('slugify', () => {
-  test('hyphenates spaces and lowercases', () => {
-    expect(slugify('Sea daffodil')).toBe('sea-daffodil');
-    expect(slugify('Young Women’s Christian Association')).toBe(
-      'young-womens-christian-association'
-    );
+  test('lowercases and joins words with underscores', () => {
+    expect(slugify('Sea daffodil')).toBe('sea_daffodil');
+    expect(slugify('Cast iron')).toBe('cast_iron');
   });
 
-  test('folds diacritics and ligatures to ASCII', () => {
-    expect(slugify('Aëro')).toBe('aero');
-    expect(slugify('Piña')).toBe('pina');
-    expect(slugify('Encyclopædia')).toBe('encyclopaedia');
-  });
-
-  test('drops intra-word punctuation', () => {
-    expect(slugify("Dutchman's-pipe")).toBe('dutchmans-pipe');
-    expect(slugify('A. F. of L.')).toBe('a-f-of-l');
-    expect(slugify('Doe, John')).toBe('doe-john');
-  });
-
-  test('keeps affix hyphens', () => {
+  test('keeps hyphens, apostrophes, periods, and accents that distinguish entries', () => {
+    expect(slugify('Cast-iron')).toBe('cast-iron');
+    expect(slugify("We'll")).toBe("we'll");
+    expect(slugify('Do.')).toBe('do.');
+    expect(slugify('Piña')).toBe('piña');
     expect(slugify('-able')).toBe('-able');
-    expect(slugify('Ab-')).toBe('ab-');
   });
 
-  test('is idempotent', () => {
-    expect(slugify('touch-me-not')).toBe('touch-me-not');
+  test('normalizes curly apostrophes and decomposed accents', () => {
+    expect(slugify('Dragon’s blood')).toBe("dragon's_blood");
+    expect(slugify('Aëro')).toBe('aëro');
+  });
+
+  test('drops other punctuation', () => {
+    expect(slugify('Doe, John')).toBe('doe_john');
+    expect(slugify('Adder fly/')).toBe('adder_fly');
+  });
+
+  test('leaves slugs unchanged', () => {
+    for (const slug of ['sea_daffodil', "we'll", 'cast-iron', 'piña', 'a._f._of_l.']) {
+      expect(slugify(slug)).toBe(slug);
+    }
   });
 });

@@ -37,14 +37,10 @@ function getEntry(word: string): DictionaryEntry | null {
 }
 
 export function getEntryBySlug(slug: string): DictionaryEntry | null {
-  const entries = getDb()
-    .prepare<[string], { data: string }>(
-      'SELECT data FROM entries WHERE slug = ? ORDER BY normalized_key <> slug, key'
-    )
-    .all(slug)
-    .map((row): DictionaryEntry => JSON.parse(row.data));
-  if (entries.length === 0) return null;
-  return { ...entries[0], homographs: entries.flatMap((entry) => entry.homographs) };
+  const row = getDb()
+    .prepare<[string], { data: string }>('SELECT data FROM entries WHERE slug = ?')
+    .get(slug);
+  return parseEntryRow(row);
 }
 
 export function searchEntries(prefix: string, limit = 20): Array<SearchResult> {

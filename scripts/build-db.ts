@@ -640,8 +640,6 @@ interface HomographSection {
 
 export function parseEntry(key: string, rawHtml: string): DictionaryEntry {
   const decodedKey = decodeHtmlCharRefs(key).normalize('NFC');
-  const slug = slugify(decodedKey);
-  if (!slug) throw new Error(`Key "${decodedKey}" has no URL slug`);
   const $ = loadPreprocessedDocument(rawHtml);
   const topNodes = $.root().contents().toArray();
 
@@ -727,7 +725,7 @@ export function parseEntry(key: string, rawHtml: string): DictionaryEntry {
     parseHomograph($, decodedKey, section.hwNode, section.alternateHwNodes, section.nodes)
   );
 
-  return { key: decodedKey, slug, homographs };
+  return { key: decodedKey, slug: slugify(decodedKey), homographs };
 }
 
 function parseHomograph(
@@ -1009,7 +1007,7 @@ function writeDatabase(
     CREATE TABLE entries (
       key TEXT PRIMARY KEY,
       normalized_key TEXT NOT NULL,
-      slug TEXT NOT NULL,
+      slug TEXT NOT NULL UNIQUE,
       data TEXT NOT NULL
     )
   `);
@@ -1054,7 +1052,6 @@ function writeDatabase(
 
   insertMany(keys);
   db.run('CREATE INDEX idx_normalized_key ON entries(normalized_key)');
-  db.run('CREATE INDEX idx_slug ON entries(slug)');
   db.close();
 
   return { parsedCount, errorCount };

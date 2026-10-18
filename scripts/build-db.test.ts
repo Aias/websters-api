@@ -38,7 +38,7 @@ describe('preprocess', () => {
     expect(result).not.toContain('<script');
     expect(result).not.toContain('onclick=');
     expect(result).not.toContain('style=');
-    expect(result).toContain('href="/entry/test-ref"');
+    expect(result).toContain('href="/entry/test_ref"');
   });
 });
 
@@ -53,7 +53,7 @@ describe('parseEntry — simple entries', () => {
 
     const entry = parseEntry('A 1', html);
     expect(entry.key).toBe('A 1');
-    expect(entry.slug).toBe('a-1');
+    expect(entry.slug).toBe('a_1');
     expect(entry.homographs).toHaveLength(1);
 
     const h = entry.homographs[0];
