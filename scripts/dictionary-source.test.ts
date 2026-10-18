@@ -59,4 +59,34 @@ describe('dictionary source restoration', () => {
     expect($('.ety').text()).toContain('Gr. ἄμη');
     expect($('.ety').text()).not.toContain('�');
   });
+
+  test('restores the Phoenician letter and article history in A', () => {
+    const $ = cheerio.load(entrySource('A'));
+    expect($('.def').first().text()).toContain('first letter (𐤀)');
+    expect($('.note').text()).toContain('Formerly an was used');
+  });
+
+  test('restores Collyrium Greek and complete pronunciation fields', () => {
+    const $ = cheerio.load(entrySource('Collyrium'));
+    expect($('.ety').text()).toContain('κολλύριον');
+    expect(
+      $('.pr')
+        .map((_, node) => $(node).text())
+        .get()
+    ).toEqual(['(kŏl-lĭr′ĭ-ŭm)', '(-ŭmz)', '(-ȧ)']);
+  });
+
+  test.each([
+    'Aaronical',
+    'Aback',
+    'Abactinal',
+    'Abaisance',
+    'Abalienate',
+    'Abalienation',
+    'Abandonment',
+    'Abasement',
+  ])('%s retains reduced-vowel italic notation', (key) => {
+    const $ = cheerio.load(entrySource(key));
+    expect($('.pr i').text()).toMatch(/^[ae]$/);
+  });
 });

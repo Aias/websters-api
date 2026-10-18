@@ -14,6 +14,16 @@ function entrySource(key: string): cheerio.CheerioAPI {
 }
 
 describe('historical sense numbering', () => {
+  test('retains all three A priori senses', () => {
+    const $ = entrySource('A priori');
+    expect(
+      $('.sn')
+        .map((_, element) => $(element).text().trim())
+        .get()
+    ).toEqual(['1.', '2.', '3.']);
+    expect($('.def').eq(1).text()).toBe('Presumptive; presumptively; without examination.');
+  });
+
   test.each(['Menu', 'Cocoanut', 'Flying fox', 'Starchy', 'Coverage'])(
     '%s keeps its original unnumbered definitions',
     (key) => {
