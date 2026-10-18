@@ -1,15 +1,12 @@
 import { describe, expect, test } from 'bun:test';
-import { readFileSync } from 'node:fs';
 import * as cheerio from 'cheerio';
+import { readDictionarySource } from './dictionary-source';
 
-const source: unknown = JSON.parse(
-  readFileSync(new URL('../src/dict.json', import.meta.url), 'utf8')
-);
+const source = readDictionarySource();
 
 function entrySource(key: string): string {
-  if (!source || typeof source !== 'object') throw new Error('Dictionary source is not an object');
-  const html = Reflect.get(source, key);
-  if (typeof html !== 'string') throw new Error(`Missing dictionary entry: ${key}`);
+  const html = source.get(key);
+  if (html === undefined) throw new Error(`Missing dictionary entry: ${key}`);
   return html;
 }
 

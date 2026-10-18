@@ -1,15 +1,13 @@
 import { describe, expect, test } from 'bun:test';
 import { readFileSync } from 'node:fs';
 import * as cheerio from 'cheerio';
+import { readDictionarySource, serializeDictionarySource, SOURCE_FILE } from './dictionary-source';
 
-const source: unknown = JSON.parse(
-  readFileSync(new URL('../src/dict.json', import.meta.url), 'utf8')
-);
+const source = readDictionarySource();
 
 function entrySource(key: string): string {
-  if (!source || typeof source !== 'object') throw new Error('Dictionary source is not an object');
-  const html = Reflect.get(source, key);
-  if (typeof html !== 'string') throw new Error(`Missing dictionary entry: ${key}`);
+  const html = source.get(key);
+  if (html === undefined) throw new Error(`Missing dictionary entry: ${key}`);
   return html;
 }
 
@@ -130,4 +128,8 @@ test('keeps the Abominator definition and attribution separate from Abomination'
   expect($('.def').text().trim()).toBe('One who abominates.');
   expect($('.au').text()).toBe('Sir W. Scott.');
   expect(cheerio.load(entrySource('Abomination'))('.au').text()).not.toContain('Sir W. Scott.');
+});
+
+test('stores each entry on its own line in key order', () => {
+  expect(readFileSync(SOURCE_FILE, 'utf8')).toBe(serializeDictionarySource(source));
 });
