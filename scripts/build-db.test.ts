@@ -162,9 +162,9 @@ describe('ordered lexical content', () => {
       '; E. <div class="plu"><i>pl.</i> <div class="plw">Examples</div>; L. pl. <div class="plw">Exempla</div>.</div><div class="def">Meaning.</div>'
     );
     expect(blocks[0]).toEqual(
-      expect.objectContaining({ kind: 'forms', html: expect.stringContaining('; E. ') })
+      expect.objectContaining({ kind: 'forms', html: expect.stringContaining('E. ') })
     );
-    expect(text(blocks)).toBe('; E. pl. Examples; L. pl. Exempla.Meaning.');
+    expect(text(blocks)).toBe('E. pl. Examples; L. pl. Exempla.Meaning.');
   });
 
   test('preserves spaces around inline references without separating word fragments', () => {
@@ -360,4 +360,110 @@ describe('sense hierarchy and compounds', () => {
       blocks.filter((block) => block.kind === 'compound').map((block) => text(block.content))
     ).toEqual([', bare meaning.', 'Second meaning.']);
   });
+});
+
+describe('lexical presentation fidelity', () => {
+  test('closes punctuation gaps after inline words without changing decimal or table spacing', () => {
+    expect(
+      plain(
+        preprocess(
+          '<div class="def">Give up <i>entirely </i>; <i>fully</i> , or <i>finally </i>.</div>'
+        )
+      )
+    ).toBe('Give up entirely; fully, or finally.');
+    expect(plain(preprocess('<i>value</i> .1'))).toBe('value .1');
+    expect(plain(preprocess('<div class="q">Before . . . after.</div>'))).toBe(
+      'Before . . . after.'
+    );
+    expect(text(parseEntry('Abandon', sourceHtml('Abandon')).homographs[0].content)).toContain(
+      'forsake entirely;'
+    );
+    expect(text(parseEntry('Abandoned', sourceHtml('Abandoned')).homographs[0].content)).toContain(
+      'irreclaimably wicked;'
+    );
+
+    expect(plain(preprocess('<pre><span>value</span> ; column</pre>'))).toBe('value ; column');
+  });
+
+  test('keeps pronunciation emphasis without changing plain lookup metadata', () => {
+    const entry = parseEntry(
+      'Example',
+      '<h2 class="hw">Example</h2><div class="pr">(-m<i>e</i>nt)</div><div class="def">Meaning.</div>'
+    );
+    expect(entry.homographs[0].pronunciation).toBe('-ment');
+    expect(entry.homographs[0].header[1]).toEqual({
+      kind: 'pronunciation',
+      html: '(-m<em>e</em>nt)',
+    });
+  });
+
+  test('omits placeholder-only pronunciation nodes while retaining real phonetics and other uncertainty', () => {
+    const entry = parseEntry(
+      'Example',
+      '<h2 class="hw">Example</h2><div class="pr">(#)</div><div class="pos">noun</div><div class="plu">pl. <div class="plw">Examples</div><div class="pr">(?)</div></div><div class="def">Unknown (?) character #.</div><h2 class="hw">Example</h2><div class="pr">(real?)</div><div class="def">Other.</div>'
+    );
+    expect(entry.homographs[0].pronunciation).toBeNull();
+    expect(text(entry.homographs[0].content)).toBe('pl. ExamplesUnknown (?) character #.');
+    expect(entry.homographs[1].pronunciation).toBe('real?');
+  });
+
+  test('keeps foreign marks with their following headword, outside lookup metadata', () => {
+    const entry = parseEntry(
+      'Example',
+      '‖<h2 class="hw">Example</h2><div class="def">First.</div> ‖<h2 class="hw">Other</h2><div class="def">Second.</div>'
+    );
+    expect(entry.homographs.map((homograph) => homograph.headword)).toEqual(['Example', 'Other']);
+    expect(entry.homographs.map((homograph) => homograph.header[0])).toEqual([
+      { kind: 'headword', text: '‖Example' },
+      { kind: 'headword', text: '‖Other' },
+    ]);
+    expect(text(entry.homographs[0].content).trim()).toBe('First.');
+  });
+
+  test.each(['Abandon', 'Abandoned', 'Abase'])(
+    'keeps concluding synonyms and usage outside the final sense in %s',
+    (key) => {
+      const blocks = parseEntry(key, sourceHtml(key)).homographs[0].content;
+      expect(blocks.some((block) => block.kind === 'synonyms')).toBe(true);
+      for (const block of blocks) {
+        if (block.kind === 'sense')
+          expect(
+            block.content.some((child) => child.kind === 'synonyms' || child.kind === 'usage')
+          ).toBe(false);
+      }
+    }
+  );
+});
+
+test('preserves sense-local synonyms and standalone usage', () => {
+  const acknowledgment = parseEntry('Acknowledgement', sourceHtml('Acknowledgement')).homographs[0];
+  const third = acknowledgment.content.find(
+    (block) => block.kind === 'sense' && block.number === '3.'
+  );
+  if (third?.kind !== 'sense') throw new Error('Missing third sense');
+  expect(third.content.some((block) => block.kind === 'synonyms')).toBe(true);
+  expect(acknowledgment.content.some((block) => block.kind === 'synonyms')).toBe(true);
+  const artifact = parseEntry('Artifact', sourceHtml('Artifact')).homographs[0];
+  for (const sense of artifact.content.filter((block) => block.kind === 'sense')) {
+    expect(sense.content.some((block) => block.kind === 'synonyms')).toBe(true);
+  }
+  expect(artifact.content.some((block) => block.kind === 'synonyms')).toBe(false);
+  const blocks = content(
+    '<div class="sn">1.</div><div class="def">First.</div><div class="sn">2.</div><div class="usage">Usage for the second sense.</div><div class="def">Second.</div>'
+  );
+  expect(blocks.map((block) => block.kind)).toEqual(['sense', 'sense']);
+  expect(preprocess('<div class="q"><i>word</i> . . . another.</div>')).toContain(
+    '</em> . . . another.'
+  );
+});
+
+test('allows only explicit synonym homograph scope metadata', () => {
+  const html = preprocess(
+    '<div class="syn" data-scope="homograph">Whole entry.</div><div class="syn" data-scope="other">Other.</div><div class="def" data-scope="homograph">Meaning.</div>'
+  );
+  expect(html.match(/data-scope/g)).toHaveLength(1);
+  const blocks = content(
+    '<div class="sn">1.</div><div class="def">First.</div><div class="sn">2.</div><div class="def">Second.</div><div class="syn" data-scope="homograph">Whole-entry comparison.</div>'
+  );
+  expect(blocks.at(-1)).toEqual({ kind: 'synonyms', html: 'Whole-entry comparison.' });
 });

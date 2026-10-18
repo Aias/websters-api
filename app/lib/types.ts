@@ -1,9 +1,10 @@
 export type InlineHTML = string;
 
-type HeaderTextKind = 'headword' | 'pronunciation' | 'partOfSpeech' | 'text';
+type HeaderTextKind = 'headword' | 'partOfSpeech' | 'text';
 
 export type HeaderPart =
   | { [Kind in HeaderTextKind]: { kind: Kind; text: string } }[HeaderTextKind]
+  | { kind: 'pronunciation'; html: InlineHTML }
   | { kind: 'forms'; html: InlineHTML }
   | { kind: 'inline'; html: InlineHTML };
 

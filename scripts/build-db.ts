@@ -24,7 +24,7 @@ const DB_FILE = join(ROOT, 'app', 'data', 'dictionary.db');
 const BUILD_META_FILE = join(ROOT, 'app', 'data', 'dictionary.build-meta.json');
 const PROGRESS_EVERY = 10000;
 // Bump when parser/build output semantics change to force a rebuild.
-const PARSER_VERSION = 8;
+const PARSER_VERSION = 9;
 
 interface SourceFingerprint {
   size: number;
@@ -205,6 +205,8 @@ function loadPreprocessedDocument(html: string): cheerio.CheerioAPI {
       const normalizedName = attributeName.toLowerCase();
 
       if (normalizedName === 'class') continue;
+      if (normalizedName === 'data-scope' && attributeValue === 'homograph' && hasClass(el, 'syn'))
+        continue;
       if (
         normalizedName === 'colspan' &&
         /^(?:[1-9]\d*)$/.test(attributeValue) &&
@@ -215,6 +217,17 @@ function loadPreprocessedDocument(html: string): cheerio.CheerioAPI {
         if (attributeValue.startsWith('/entry/')) continue;
       }
       delete el.attribs[attributeName];
+    }
+  });
+
+  $('.pr').each((_, node) => {
+    if (/^\(\s*[#?]\s*\)$/.test(getText($, node))) $(node).remove();
+  });
+  $('h2.hw').each((_, node) => {
+    const previous = node.previousSibling;
+    if (previous?.type === 'text' && /‖\s*$/.test(previous.data)) {
+      previous.data = previous.data.replace(/‖\s*$/, '');
+      $(node).prepend('‖');
     }
   });
 
@@ -258,6 +271,16 @@ function loadPreprocessedDocument(html: string): cheerio.CheerioAPI {
       }
     }
   }
+
+  $.root()
+    .find('*')
+    .addBack()
+    .contents()
+    .each((_, node) => {
+      if (node.type === 'text' && $(node).parents('pre,table').length === 0) {
+        node.data = node.data.replace(/(?<!\.)[ \t]+([,;:!?)]|\.(?![\s.]*\.|\d))/g, '$1');
+      }
+    });
 
   return $;
 }
@@ -316,7 +339,7 @@ function parseContent($: cheerio.CheerioAPI, nodes: ReadonlyArray<AnyNode>): Lex
     const blocks = target();
     const previous = blocks[blocks.length - 1];
     if (kind === 'forms' && blocks.length === 1 && previous.kind === 'text') {
-      blocks[0] = { kind, html: previous.html + html };
+      blocks[0] = { kind, html: (previous.html + html).replace(/^\s*;\s*/, '') };
       return;
     }
     if (previous?.kind === kind && (kind === 'text' || kind === 'forms' || kind === 'definition')) {
@@ -511,6 +534,11 @@ function parseContent($: cheerio.CheerioAPI, nodes: ReadonlyArray<AnyNode>): Lex
       return;
     }
     if (hasClass(node, 'syn')) {
+      if (node.attribs['data-scope'] === 'homograph') {
+        compound = null;
+        main.senses = [];
+        continuation = null;
+      }
       addHtml('synonyms', getHtml($, node));
       return;
     }
@@ -546,7 +574,7 @@ function parseHomograph(
       header.push({ kind: 'headword', text: getText($, node) });
       inHeader = true;
     } else if (inHeader && hasClass(node, 'pr')) {
-      header.push({ kind: 'pronunciation', text: getText($, node) });
+      header.push({ kind: 'pronunciation', html: getHtml($, node).trim() });
     } else if (inHeader && hasClass(node, 'pos')) {
       header.push({ kind: 'partOfSpeech', text: getText($, node) });
     } else if (inHeader && node.type === 'text' && /^[\s.,;:{}‖]*$/.test(node.data)) {
@@ -569,13 +597,17 @@ function parseHomograph(
       body.push(node);
     }
   }
-  const headwords = header.filter((part) => part.kind === 'headword').map((part) => part.text);
+  const headwords = header
+    .filter((part) => part.kind === 'headword')
+    .map((part) => part.text.replace(/^‖\s*/, ''));
   if (headwords.length === 0) header.unshift({ kind: 'headword', text: key });
-  const pronunciation = header.find((part) => part.kind === 'pronunciation')?.text;
+  const pronunciation = header.find((part) => part.kind === 'pronunciation');
   return {
     headword: headwords[0] ?? key,
     alternateHeadwords: headwords.slice(1),
-    pronunciation: pronunciation ? unwrapParenthesized(pronunciation) : null,
+    pronunciation: pronunciation
+      ? unwrapParenthesized(cheerio.load(pronunciation.html).text())
+      : null,
     partOfSpeech: header.find((part) => part.kind === 'partOfSpeech')?.text ?? null,
     header,
     content: parseContent($, body),
@@ -594,7 +626,6 @@ export function parseEntry(key: string, rawHtml: string): DictionaryEntry {
       for (const child of $(node).contents().toArray()) collect(child);
       return;
     }
-    if (node.type === 'text') node.data = node.data.replace(/\u2016/g, '');
     if (isElement(node) && isTag(node, 'h2') && hasClass(node, 'hw')) {
       if (hasHeadword && hasBody) {
         current = [];

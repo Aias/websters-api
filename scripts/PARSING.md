@@ -15,13 +15,13 @@ The parser reads the source as HTML with self-closing tags enabled. This matters
 | Attributes                             | `class`, local entry-link `href`, and positive integer cell `colspan` survive |
 | Executable containers                  | `script`, `style`, `iframe`, `object`, `embed`, and `template` are removed    |
 
-Character references are decoded. Unresolved replacement characters in the source remain visible. The parser does not invent missing letters or pronunciations.
+Character references are decoded. Unresolved replacement characters in the source remain visible. Pronunciation nodes containing only `(?)` or `(#)` are unfilled fields and are omitted from display. The parser does not invent missing letters or pronunciations. Spaces before punctuation are closed without changing decimal notation, spaced ellipses, or preformatted tables.
 
-`scripts/source-typography.ts` preserves explicit table rows, cells, and spanning headers as native HTML tables. A malformed row remains in a spanning cell without assigning its text to guessed columns. Tables without cell boundaries retain their preformatted text and row breaks. Source exponent and subscript markers become `sup` and `sub`.
+`scripts/source-typography.ts` preserves explicit table rows, cells, and spanning headers as native HTML tables. A malformed row remains in a spanning cell without assigning its text to guessed columns. Tables without cell boundaries retain their preformatted text and row breaks. Source exponent and subscript markers become `sup` and `sub`. Double breves and macrons on `oo` are encoded between the vowels so the mark spans both letters, following [Unicode's double-diacritic encoding](https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-7/).
 
 ## Homographs and headers
 
-A headword starts a separate homograph after lexical content has begun. Adjacent headwords, including those inside `.mhw`, share one homograph. Each header preserves its headwords, pronunciations, parts of speech, connectors, and interleaved inflections or qualifiers in source order.
+A headword starts a separate homograph after lexical content has begun. Adjacent headwords, including those inside `.mhw`, share one homograph. Each header preserves its headwords, pronunciations, parts of speech, connectors, and interleaved inflections or qualifiers in source order. Pronunciation HTML retains italic vowel notation. Foreign-word marks remain with the displayed headword but are excluded from lookup metadata.
 
 For example, a masculine headword followed by its plural and a feminine headword followed by its plural keeps those associations. Lookup metadata exposes the first headword, alternate headwords, first pronunciation, and first part of speech. A record without a source headword uses its dictionary key.
 
@@ -47,6 +47,8 @@ A homograph has an ordered `content` array. Nested senses, compound forms, and s
 Numeric senses contain lettered subsenses. Roman section markers contain their following senses. A repeated empty marker is collapsed while retaining its labels. Nested markers inside inline definition HTML remain visible in that HTML.
 
 Compound context continues through trailing quotations and lettered definitions outside a `.cs` wrapper. Root forms, secondary sections, notes, synonyms, and usage blocks resume root content. Definitions and etymologies retain an active compound until an explicit boundary. Explicit `.col` and `.cd` also work without a `.cs` wrapper.
+
+Synonym lists retain their active sense unless the source explicitly marks `.syn` with `data-scope="homograph"`. This annotation is for a verified whole-word comparison, not a guess based on its position after the final sense. Compound etymologies remain inline with their heading and definition.
 
 Quotation authors inside `.qau` are stored separately. An immediately following `.au`, `.qau`, or `.rj` attribution attaches to the preceding structured quotation. Other inline attributions remain in their original positions. Secondary sections retain trailing attributions with their final quotation.
 

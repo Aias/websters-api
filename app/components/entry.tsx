@@ -6,7 +6,7 @@ function InlineHtml({ html, className = '' }: { html: InlineHTML; className?: st
   const Tag = /<(?:table|pre|div)\b/.test(html) ? 'div' : 'span';
   return (
     <Tag
-      className={`${className} overflow-x-auto [&_.adjf]:font-bold [&_.col]:font-bold [&_.conjf]:font-bold [&_.plw]:font-bold [&_.pos]:italic [&_.wf]:font-bold [&_pre]:block [&_pre]:text-sm [&_table]:text-sm [&_td]:px-2 [&_td]:py-1 [&_td]:align-top [&_th]:px-2 [&_th]:py-1 [&_th]:text-left [&_th]:align-top`}
+      className={`${className} overflow-x-auto [&_.adjf]:font-bold [&_.au]:italic [&_.col]:font-bold [&_.conjf]:font-bold [&_.contr]:italic [&_.gen]:italic [&_.plw]:font-bold [&_.pos]:italic [&_.spn]:italic [&_.wf]:font-bold [&_pre]:block [&_pre]:text-sm [&_table]:text-sm [&_td]:px-2 [&_td]:py-1 [&_td]:align-top [&_th]:px-2 [&_th]:py-1 [&_th]:text-left [&_th]:align-top`}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );
@@ -27,7 +27,7 @@ function HeaderView({ parts }: { parts: ReadonlyArray<HeaderPart> }) {
           ) : part.kind === 'headword' ? (
             <h2 className="inline text-2xl font-bold text-foreground">{part.text}</h2>
           ) : part.kind === 'pronunciation' ? (
-            <span className="text-lg text-muted-foreground">{part.text}</span>
+            <InlineHtml html={part.html} className="text-lg text-muted-foreground" />
           ) : part.kind === 'partOfSpeech' ? (
             <span className="text-muted-foreground italic">{part.text}</span>
           ) : (
@@ -43,15 +43,28 @@ type ContentGroup =
   | { kind: 'senses'; senses: Sense[] }
   | { kind: 'block'; block: Exclude<LexicalBlock, Sense> };
 
-function ContentView({ content }: { content: ReadonlyArray<LexicalBlock> }) {
+function needsLeadingSpace(block: LexicalBlock | undefined): boolean {
+  return Boolean(block && (!('html' in block) || !/^[\s,.;:!?)]/.test(block.html)));
+}
+
+function ContentView({
+  content,
+  inline = false,
+}: {
+  content: ReadonlyArray<LexicalBlock>;
+  inline?: boolean;
+}) {
   const groups: ContentGroup[] = [];
-  for (const block of content) {
+  for (const [index, block] of content.entries()) {
     const previous = groups[groups.length - 1];
     if (block.kind === 'sense') {
       if (previous?.kind === 'senses') previous.senses.push(block);
       else groups.push({ kind: 'senses', senses: [block] });
     } else {
       groups.push({ kind: 'block', block });
+      if (block.kind === 'label' && needsLeadingSpace(content[index + 1])) {
+        groups.push({ kind: 'block', block: { kind: 'text', html: ' ' } });
+      }
     }
   }
   return groups.map((group, i) =>
@@ -69,22 +82,25 @@ function ContentView({ content }: { content: ReadonlyArray<LexicalBlock> }) {
         ))}
       </ol>
     ) : (
-      <BlockView key={i} block={group.block} />
+      <BlockView key={i} block={group.block} inline={inline} />
     )
   );
 }
 
-function BlockView({ block }: { block: Exclude<LexicalBlock, Sense> }) {
+function BlockView({ block, inline }: { block: Exclude<LexicalBlock, Sense>; inline: boolean }) {
   switch (block.kind) {
-    case 'compound':
+    case 'compound': {
+      const first = block.content[0];
       return (
         <div className="mt-4 mb-2">
           <strong>
             <InlineHtml html={block.headwordHtml} />
-          </strong>{' '}
-          <ContentView content={block.content} />
+          </strong>
+          {needsLeadingSpace(first) ? ' ' : null}
+          <ContentView content={block.content} inline />
         </div>
       );
+    }
     case 'section':
       return (
         <section className="mt-3">
@@ -107,12 +123,14 @@ function BlockView({ block }: { block: Exclude<LexicalBlock, Sense> }) {
         </blockquote>
       );
     case 'etymology':
-    case 'forms':
+    case 'forms': {
+      const Tag = inline && block.kind === 'etymology' ? 'span' : 'div';
       return (
-        <div className="mb-2 text-sm text-muted-foreground">
+        <Tag className="mb-2 text-sm text-muted-foreground">
           <InlineHtml html={block.html} />
-        </div>
+        </Tag>
       );
+    }
     case 'note':
       return (
         <div className="mt-1 text-sm text-muted-foreground">
@@ -132,7 +150,7 @@ function BlockView({ block }: { block: Exclude<LexicalBlock, Sense> }) {
         </div>
       );
     case 'label':
-      return <InlineHtml html={block.html} className="mr-1 text-sm text-muted-foreground italic" />;
+      return <InlineHtml html={block.html} className="text-sm text-muted-foreground italic" />;
     case 'definition':
     case 'text':
       return <InlineHtml html={block.html} />;

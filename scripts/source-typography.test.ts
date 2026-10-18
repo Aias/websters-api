@@ -24,6 +24,22 @@ function sourceDocument(key: string): cheerio.CheerioAPI {
 }
 
 describe('source typography', () => {
+  test.each([
+    ['Aard-wolf', 'wo͝olf'],
+    ['Abb wool', 'wo͝ol'],
+    ['Ado', 'do͞o′'],
+  ])('%s places its double diacritic between the two vowels', (key, pronunciation) => {
+    expect(sourceDocument(key)('.pr').first().text()).toContain(pronunciation);
+  });
+
+  test('leaves correctly encoded double and single diacritics unchanged', () => {
+    const text = 'o͝o o͞o ō ŏ';
+    const $ = cheerio.load(`<span class="pr">${text}</span>`);
+    normalizeSourceTypography($);
+    normalizeSourceTypography($);
+    expect($('.pr').text()).toBe(text);
+  });
+
   test('preserves explicit calendar cells and spanning headers in native tables', () => {
     const $ = sourceDocument('Perpetual calendar');
     const calendar = $('table.table');

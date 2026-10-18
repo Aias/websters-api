@@ -1,6 +1,11 @@
 import type { CheerioAPI } from 'cheerio';
 
 export function normalizeSourceTypography($: CheerioAPI): void {
+  $('*')
+    .contents()
+    .each((_, node) => {
+      if (node.type === 'text') node.data = node.data.replace(/oo([\u035d\u035e])/g, 'o$1o');
+    });
   $('.exp, .sups, .subs').each((_, element) => {
     element.tagName = $(element).hasClass('subs') ? 'sub' : 'sup';
   });
