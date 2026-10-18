@@ -15,7 +15,7 @@ The parser reads the source as HTML with self-closing tags enabled. This matters
 | Attributes                             | `class`, local entry-link `href`, and positive integer cell `colspan` survive |
 | Executable containers                  | `script`, `style`, `iframe`, `object`, `embed`, and `template` are removed    |
 
-Character references are decoded. Unresolved replacement characters in the source remain visible. Pronunciation nodes containing only `(?)` or `(#)` are unfilled fields and are omitted from display. The parser does not invent missing letters or pronunciations. Spaces before punctuation are closed without changing decimal notation, spaced ellipses, or preformatted tables.
+Verifier metadata (`.ver`) is omitted from lexical content. Character references are decoded. Unresolved replacement characters in the source remain visible. Pronunciation nodes containing only `(?)` or `(#)` are unfilled fields and are omitted from display. The parser does not invent missing letters or pronunciations. Spaces before punctuation are closed without changing decimal notation, spaced ellipses, or preformatted tables.
 
 `scripts/source-typography.ts` preserves explicit table rows, cells, and spanning headers as native HTML tables. A malformed row remains in a spanning cell without assigning its text to guessed columns. Tables without cell boundaries retain their preformatted text and row breaks. Source exponent and subscript markers become `sup` and `sub`. Double breves and macrons on `oo` are encoded between the vowels so the mark spans both letters, following [Unicode's double-diacritic encoding](https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-7/).
 
@@ -46,13 +46,13 @@ A homograph has an ordered `content` array. Nested senses, compound forms, and s
 
 Numeric senses contain lettered subsenses. Roman section markers contain their following senses. A repeated empty marker is collapsed while retaining its labels. Nested markers inside inline definition HTML remain visible in that HTML.
 
-Compound context continues through trailing quotations and lettered definitions outside a `.cs` wrapper. Root forms, secondary sections, notes, synonyms, and usage blocks resume root content. Definitions and etymologies retain an active compound until an explicit boundary. Explicit `.col` and `.cd` also work without a `.cs` wrapper.
+A `.cs` wrapper starts compound context, including any introductory labels or text before its first headword. Compound context continues through trailing quotations and lettered definitions outside a `.cs` wrapper. Root forms, secondary sections, notes, synonyms, and usage blocks resume root content. Definitions and etymologies retain an active compound until an explicit boundary. Explicit `.col` and `.cd` also work without a `.cs` wrapper.
 
-Synonym lists retain their active sense unless the source explicitly marks `.syn` with `data-scope="homograph"`. This annotation is for a verified whole-word comparison, not a guess based on its position after the final sense. Compound etymologies remain inline with their heading and definition.
+Notes and synonym lists retain their active sense unless the source explicitly marks `.note` or `.syn` with `data-scope="homograph"`. This annotation is for verified whole-word content, not a guess based on its position after the final sense. Compound etymologies remain inline with their heading and definition.
 
 Quotation authors inside `.qau` are stored separately. An immediately following `.au`, `.qau`, or `.rj` attribution attaches to the preceding structured quotation. Other inline attributions remain in their original positions. Secondary sections retain trailing attributions with their final quotation.
 
-Inline classes such as `.ets`, `.xex`, `.spn`, `.as`, and `.altsp` remain in the HTML. Embedded headwords in definitions and derived forms become `strong` elements rather than block headings.
+Inline classes such as `.ets`, `.altname`, `.altnpluf`, `.member`, `.prod`, `.xex`, `.spn`, `.as`, and `.altsp` remain in the HTML. Embedded headwords in definitions and derived forms become `strong` elements rather than block headings.
 
 ## Verification
 

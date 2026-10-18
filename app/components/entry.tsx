@@ -17,7 +17,7 @@ function HeaderView({ parts }: { parts: ReadonlyArray<HeaderPart> }) {
     <header className="mb-2">
       {parts.map((part, i) => (
         <Fragment key={i}>
-          {i > 0 && ' '}
+          {i > 0 && (part.kind !== 'text' || !/^[,.;:!?)]/.test(part.text)) && ' '}
           {part.kind === 'forms' ? (
             <div className="mb-2 text-sm text-muted-foreground">
               <InlineHtml html={part.html} />

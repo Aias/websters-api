@@ -121,6 +121,10 @@ body {
   text-underline-offset: 0.175em;
 }
 
+.altname,
+.altnpluf,
+.member,
+.prod,
 .ets {
   font-style: italic;
 }

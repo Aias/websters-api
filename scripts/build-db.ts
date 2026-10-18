@@ -24,7 +24,7 @@ const DB_FILE = join(ROOT, 'app', 'data', 'dictionary.db');
 const BUILD_META_FILE = join(ROOT, 'app', 'data', 'dictionary.build-meta.json');
 const PROGRESS_EVERY = 10000;
 // Bump when parser/build output semantics change to force a rebuild.
-const PARSER_VERSION = 10;
+const PARSER_VERSION = 11;
 
 interface SourceFingerprint {
   size: number;
@@ -180,6 +180,7 @@ function loadPreprocessedDocument(html: string): cheerio.CheerioAPI {
 
   // Drop executable containers from trusted source before extracting any HTML fragments.
   $('script,style,iframe,object,embed,template').remove();
+  $('.ver').remove();
 
   $('*').each((_, el) => {
     if (!isElement(el)) return;
@@ -205,7 +206,11 @@ function loadPreprocessedDocument(html: string): cheerio.CheerioAPI {
       const normalizedName = attributeName.toLowerCase();
 
       if (normalizedName === 'class') continue;
-      if (normalizedName === 'data-scope' && attributeValue === 'homograph' && hasClass(el, 'syn'))
+      if (
+        normalizedName === 'data-scope' &&
+        attributeValue === 'homograph' &&
+        (hasClass(el, 'syn') || hasClass(el, 'note'))
+      )
         continue;
       if (
         normalizedName === 'colspan' &&
@@ -223,7 +228,7 @@ function loadPreprocessedDocument(html: string): cheerio.CheerioAPI {
   $('.pr').each((_, node) => {
     if (/^\(\s*[#?]\s*\)$/.test(getText($, node))) $(node).remove();
   });
-  $('h2.hw').each((_, node) => {
+  $('h2.hw, .col').each((_, node) => {
     const previous = node.previousSibling;
     if (previous?.type === 'text' && /‖\s*$/.test(previous.data)) {
       previous.data = previous.data.replace(/‖\s*$/, '');
@@ -387,8 +392,8 @@ function parseContent($: cheerio.CheerioAPI, nodes: ReadonlyArray<AnyNode>): Lex
       ? $(node)
           .find('.col')
           .toArray()
-          .map((word) => getText($, word))
-      : [getText($, node)];
+          .map((word) => getText($, word).replace(/^‖\s*/, ''))
+      : [getText($, node).replace(/^‖\s*/, '')];
     if (
       compound &&
       !compound.complete &&
@@ -426,8 +431,8 @@ function parseContent($: cheerio.CheerioAPI, nodes: ReadonlyArray<AnyNode>): Lex
         if (blocks.length > 0 || compound) addHtml('text', getOuterHtml($, node));
         return;
       }
-      if (/^[\s\u2013\u2014{}]+$/.test(node.data)) {
-        if (compound && /[\u2013\u2014]/.test(node.data)) compound.complete = true;
+      if (/^[\s\u2013\u2014{}]+$/.test(node.data) || (inCompound && /^[\s-]+$/.test(node.data))) {
+        if (compound && /[-\u2013\u2014]/.test(node.data)) compound.complete = true;
         return;
       }
       const previous = blocks[blocks.length - 1];
@@ -436,6 +441,9 @@ function parseContent($: cheerio.CheerioAPI, nodes: ReadonlyArray<AnyNode>): Lex
     }
 
     if (hasClass(node, 'cs')) {
+      compound = null;
+      main.senses = [];
+      continuation = null;
       for (const child of $(node).contents().toArray()) process(child, true);
       return;
     }
@@ -529,16 +537,19 @@ function parseContent($: cheerio.CheerioAPI, nodes: ReadonlyArray<AnyNode>): Lex
       addHtml('etymology', getHtml($, node));
       return;
     }
+    if (
+      (hasClass(node, 'note') || hasClass(node, 'syn')) &&
+      node.attribs['data-scope'] === 'homograph'
+    ) {
+      compound = null;
+      main.senses = [];
+      continuation = null;
+    }
     if (hasClass(node, 'note')) {
       addHtml('note', getHtml($, node));
       return;
     }
     if (hasClass(node, 'syn')) {
-      if (node.attribs['data-scope'] === 'homograph') {
-        compound = null;
-        main.senses = [];
-        continuation = null;
-      }
       addHtml('synonyms', getHtml($, node));
       return;
     }
@@ -578,6 +589,13 @@ function parseHomograph(
     } else if (inHeader && hasClass(node, 'pos')) {
       header.push({ kind: 'partOfSpeech', text: getText($, node) });
     } else if (inHeader && node.type === 'text' && /^[\s.,;:{}‖]*$/.test(node.data)) {
+      if (/[,;]/.test(node.data) && nodes.slice(index + 1).some((later) => hasClass(later, 'hw'))) {
+        const punctuation = node.data.replace(/[^,;]/g, '');
+        const previous = header.at(-1);
+        if (previous?.kind === 'forms')
+          header[header.length - 1] = { ...previous, html: previous.html.trimEnd() + punctuation };
+        else header.push({ kind: 'text', text: punctuation });
+      }
       continue;
     } else if (
       /^[\s,;]*(or|also)[\s,;]*$/i.test(getText($, node)) &&

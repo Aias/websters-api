@@ -464,13 +464,75 @@ test('preserves sense-local synonyms and standalone usage', () => {
   );
 });
 
-test('allows only explicit synonym homograph scope metadata', () => {
+test('allows explicit homograph scope only for notes and synonyms', () => {
   const html = preprocess(
-    '<div class="syn" data-scope="homograph">Whole entry.</div><div class="syn" data-scope="other">Other.</div><div class="def" data-scope="homograph">Meaning.</div>'
+    '<div class="syn" data-scope="homograph">Whole entry.</div><div class="syn" data-scope="other">Other.</div><div class="note" data-scope="homograph">Whole-entry note.</div><div class="def" data-scope="homograph">Meaning.</div>'
   );
-  expect(html.match(/data-scope/g)).toHaveLength(1);
+  expect(html.match(/data-scope/g)).toHaveLength(2);
   const blocks = content(
     '<div class="sn">1.</div><div class="def">First.</div><div class="sn">2.</div><div class="def">Second.</div><div class="syn" data-scope="homograph">Whole-entry comparison.</div>'
   );
   expect(blocks.at(-1)).toEqual({ kind: 'synonyms', html: 'Whole-entry comparison.' });
+});
+
+test('keeps unscoped notes with their sense and scoped notes at homograph level', () => {
+  const blocks = content(
+    '<div class="sn">1.</div><div class="def">Meaning.</div><div class="note">Sense note.</div><div class="note" data-scope="homograph">Whole-entry note.</div>'
+  );
+  const sense = blocks[0];
+  if (sense.kind !== 'sense') throw new Error('Missing sense');
+  expect(sense.content.at(-1)).toEqual({ kind: 'note', html: 'Sense note.' });
+  expect(blocks.at(-1)).toEqual({ kind: 'note', html: 'Whole-entry note.' });
+});
+
+test('omits verifier metadata without removing lexical abbreviations', () => {
+  const entry = parseEntry(
+    'Example',
+    '<h2 class="hw">Example</h2><div class="ety">AS. example.</div><div class="def">Meaning.</div><div class="ver">AS</div>'
+  );
+  expect(text(entry.homographs[0].content)).toBe('AS. example.Meaning.');
+  expect(preprocess('<div class="ver">PJC</div>')).toBe('');
+});
+
+test.each([
+  ['Abide', 'Followed by by:'],
+  ['Aboard', '(Naut.):'],
+])('keeps the compound introduction outside the final sense in %s', (key, phrase) => {
+  const blocks = parseEntry(key, sourceHtml(key)).homographs[0].content;
+  const compoundIndex = blocks.findIndex((block) => block.kind === 'compound');
+  expect(compoundIndex).toBeGreaterThan(0);
+  const lastSenseIndex = blocks
+    .slice(0, compoundIndex)
+    .findLastIndex((block) => block.kind === 'sense');
+  expect(text(blocks.slice(lastSenseIndex + 1, compoundIndex)).trim()).toBe(phrase);
+});
+
+test('keeps foreign compound marks with headings and out of lookup names', () => {
+  const blocks = content(
+    '<div class="sn">1.</div><div class="def">Meaning.</div><div class="cs">‖<div class="col">First phrase</div><div class="cd">First.</div> – ‖<div class="col">Second phrase</div><div class="cd">Second.</div></div>'
+  );
+  expect(blocks.map((block) => block.kind)).toEqual(['sense', 'compound', 'compound']);
+  const compounds = blocks.filter((block) => block.kind === 'compound');
+  expect(compounds.map((block) => block.headwords)).toEqual([['First phrase'], ['Second phrase']]);
+  expect(compounds.map((block) => plain(block.headwordHtml))).toEqual([
+    '‖First phrase',
+    '‖Second phrase',
+  ]);
+});
+
+test('treats isolated hyphens as compound separators without changing lexical hyphens', () => {
+  const blocks = content(
+    '<div class="ety">prefix-suffix</div><div class="cs">- <div class="col">First phrase</div> - <div class="col">Second phrase</div><div class="cd">Meaning.</div></div>'
+  );
+  expect(blocks.map((block) => block.kind)).toEqual(['etymology', 'compound', 'compound']);
+  expect(text([blocks[0]])).toBe('prefix-suffix');
+});
+
+test.each(['Inadvertency', 'Poseuse'])('%s keeps a header separator on its forms line', (key) => {
+  const header = parseEntry(key, sourceHtml(key)).homographs[0].header;
+  const formsIndex = header.findIndex((part) => part.kind === 'forms');
+  const forms = header[formsIndex];
+  if (forms.kind !== 'forms') throw new Error('Missing header forms');
+  expect(plain(forms.html)).toMatch(/,$/);
+  expect(header[formsIndex + 1].kind).toBe('headword');
 });

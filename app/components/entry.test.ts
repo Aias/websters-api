@@ -51,3 +51,10 @@ test('Abandon renders its comparison without an isolated source separator', () =
   expect($('article span').filter((_, node) => $(node).text().trim() === '–')).toHaveLength(0);
   expect($('div.border-l-2').first().text()).toMatch(/^To Abandon/);
 });
+
+test.each([
+  ['Ablen', 'Ab′let, Ab′len'],
+  ['Ablins', 'Ai′blins, A′blins'],
+])('%s preserves punctuation between alternate headwords', (key, phrase) => {
+  expect(rendered(key)('article header').text()).toContain(phrase);
+});
