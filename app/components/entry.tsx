@@ -3,7 +3,7 @@ import type { DictionaryEntry, HeaderPart, InlineHTML, LexicalBlock, Sense } fro
 import { HoverLinks } from './hover-links';
 
 function InlineHtml({ html, className = '' }: { html: InlineHTML; className?: string }) {
-  const Tag = /<(?:table|pre|div)\b/.test(html) ? 'div' : 'span';
+  const Tag = /<(?:table|pre|div|blockquote)\b/.test(html) ? 'div' : 'span';
   return (
     <Tag
       className={`${className} overflow-x-auto [&_.adjf]:font-bold [&_.au]:italic [&_.col]:font-bold [&_.conjf]:font-bold [&_.contr]:italic [&_.gen]:italic [&_.plw]:font-bold [&_.pos]:italic [&_.spn]:italic [&_.wf]:font-bold [&_pre]:block [&_pre]:text-sm [&_table]:text-sm [&_td]:px-2 [&_td]:py-1 [&_td]:align-top [&_th]:px-2 [&_th]:py-1 [&_th]:text-left [&_th]:align-top`}
@@ -109,14 +109,10 @@ function BlockView({ block, inline }: { block: Exclude<LexicalBlock, Sense>; inl
       );
     case 'quotation':
       return (
-        <blockquote className="relative mt-3 pl-3.5 text-sm text-muted-foreground italic">
-          <span
-            className="pointer-events-none absolute inset-y-0.25 inset-s-0 w-[3px] rounded bg-border content-['']"
-            aria-hidden="true"
-          />
+        <blockquote className="q">
           <InlineHtml html={block.html} />
           {block.authors.map((author, i) => (
-            <span key={i} className="mt-1 block text-muted-foreground/60 not-italic">
+            <span key={i} className="quotation-author">
               — {author}
             </span>
           ))}

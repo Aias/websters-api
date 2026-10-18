@@ -75,6 +75,23 @@ describe('preprocess', () => {
     expect(plain(preprocess('“word” ‘word’ &#xFFFD;'))).toBe('“word” ‘word’ �');
   });
 
+  test.each(['note', 'usage', 'def'])(
+    'retains native quotations inside %s without splitting the surrounding content',
+    (kind) => {
+      const blocks = content(
+        `<div class="${kind}">Before.<div class="q">First line.<br/>Second line.<div class="qau">Author.</div></div>After.</div>`
+      );
+      expect(blocks).toHaveLength(1);
+      const block = blocks[0];
+      if (!('html' in block)) throw new Error('Expected retained HTML');
+      const $ = cheerio.load(block.html);
+      expect($('blockquote.q')).toHaveLength(1);
+      expect($('blockquote.q > .qau').text()).toBe('Author.');
+      expect($('blockquote.q br')).toHaveLength(1);
+      expect(plain(block.html)).toBe('Before.First line.Second line.Author.After.');
+    }
+  );
+
   test('respects self-closing source wrappers', () => {
     const result = parseEntry(
       'Example',

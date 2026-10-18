@@ -6,14 +6,16 @@
 
 The parser reads the source as HTML with self-closing tags enabled. This matters for empty source wrappers such as `<div class="cs"/>`.
 
-| Source                                 | Normalized output                                                             |
-| -------------------------------------- | ----------------------------------------------------------------------------- |
-| `b`, `i`                               | `strong`, `em`                                                                |
-| `div`                                  | `span`, because dictionary fragments are often inline                         |
-| `.er`                                  | A local `/entry/…` link                                                       |
-| Leading and trailing inline whitespace | Moved outside the element without removing word boundaries                    |
-| Attributes                             | `class`, local entry-link `href`, and positive integer cell `colspan` survive |
-| Executable containers                  | `script`, `style`, `iframe`, `object`, `embed`, and `template` are removed    |
+| Source                                 | Normalized output                                                                  |
+| -------------------------------------- | ---------------------------------------------------------------------------------- |
+| `b`, `i`                               | `strong`, `em`                                                                     |
+| `div.q`                                | `blockquote`, including quotations nested in retained HTML                         |
+| Other `div`                            | `span`, because dictionary fragments are often inline                              |
+| `.er`                                  | A local `/entry/…` link                                                            |
+| Leading and trailing inline whitespace | Moved outside the element without removing word boundaries                         |
+| Attributes                             | `class`, local entry-link `href`, and positive integer cell `colspan` survive      |
+| Image attributes                       | Local illustration `src`, `alt`, and positive integer `width` and `height` survive |
+| Executable containers                  | `script`, `style`, `iframe`, `object`, `embed`, and `template` are removed         |
 
 Verifier metadata (`.ver`) is omitted from lexical content. Character references are decoded. Unresolved replacement characters in the source remain visible. Pronunciation nodes containing only `(?)` or `(#)` are unfilled fields and are omitted from display. The parser does not invent missing letters or pronunciations. Spaces before punctuation are closed without changing decimal notation, spaced ellipses, or preformatted tables.
 
@@ -50,7 +52,7 @@ A `.cs` wrapper starts compound context, including any introductory labels or te
 
 Notes and synonym lists retain their active sense unless the source explicitly marks `.note` or `.syn` with `data-scope="homograph"`. This annotation is for verified whole-word content, not a guess based on its position after the final sense. Compound etymologies remain inline with their heading and definition.
 
-Quotation authors inside `.qau` are stored separately. An immediately following `.au`, `.qau`, or `.rj` attribution attaches to the preceding structured quotation. Other inline attributions remain in their original positions. Secondary sections retain trailing attributions with their final quotation.
+Structured quotations store authors inside `.qau` separately. An immediately following `.au`, `.qau`, or `.rj` attribution attaches to the preceding structured quotation. Other inline attributions remain in their original positions. Secondary sections retain trailing attributions with their final quotation. Quotations embedded in notes, usage and definitions retain native blockquote markup and share the same presentation as structured quotations.
 
 Inline classes such as `.ets`, `.altname`, `.altnpluf`, `.member`, `.prod`, `.xex`, `.spn`, `.as`, and `.altsp` remain in the HTML. Embedded headwords in definitions and derived forms become `strong` elements rather than block headings.
 

@@ -24,7 +24,7 @@ const DB_FILE = join(ROOT, 'app', 'data', 'dictionary.db');
 const BUILD_META_FILE = join(ROOT, 'app', 'data', 'dictionary.build-meta.json');
 const PROGRESS_EVERY = 10000;
 // Bump when parser/build output semantics change to force a rebuild.
-const PARSER_VERSION = 13;
+const PARSER_VERSION = 14;
 
 interface SourceFingerprint {
   size: number;
@@ -190,8 +190,7 @@ function loadPreprocessedDocument(html: string): cheerio.CheerioAPI {
     } else if (el.tagName === 'i') {
       el.tagName = 'em';
     } else if (el.tagName === 'div') {
-      // Source HTML uses divs for inline fragments; span avoids invalid inline nesting.
-      el.tagName = 'span';
+      el.tagName = hasClass(el, 'q') ? 'blockquote' : 'span';
     }
 
     if (hasClass(el, 'er')) {
