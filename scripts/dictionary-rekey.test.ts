@@ -21,18 +21,30 @@ describe('dictionary headword keys', () => {
     ['Apophasis', 'A figure by which a speaker formally declines'],
     ['Piperazine', 'A crystalline substance'],
     ['Pyrazine', 'A feebly basic solid'],
+    ['Yakamik', 'See Trumpeter'],
+    ['Yallah', 'The oil of the mahwa tree'],
+    ['Zincographical', 'Of or pertaining to zincography'],
+    ['Zoophorus', 'The part between the architrave and cornice'],
   ])('%s resolves to its complete source definition', (key, definition) => {
     const $ = cheerio.load(entrySource(key), { xml: false }, false);
     expect($('.def').first().text()).toContain(definition);
     expect($('h2.hw')).not.toHaveLength(0);
   });
 
-  test.each(['-min', '-tin', '-retted', '-zin', '. . .', '‖Apophasis'])(
-    '%s is not a standalone dictionary key',
-    (key) => {
-      expect(() => entrySource(key)).toThrow(`Missing dictionary entry: ${key}`);
-    }
-  );
+  test.each([
+    '-min',
+    '-tin',
+    '-retted',
+    '-zin',
+    '. . .',
+    '‖Apophasis',
+    'Yakamilk',
+    'Yalah',
+    'Zincongraphical',
+    'Zoophorous',
+  ])('%s is not a standalone dictionary key', (key) => {
+    expect(() => entrySource(key)).toThrow(`Missing dictionary entry: ${key}`);
+  });
 
   test('keeps Piperazine and Pyrazine in separate source entries', () => {
     const piperazine = cheerio.load(entrySource('Piperazine'), { xml: false }, false);
