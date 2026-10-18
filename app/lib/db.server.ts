@@ -25,12 +25,15 @@ function parseEntryRow(row: { data: string } | undefined): DictionaryEntry | nul
 }
 
 function getEntry(word: string): DictionaryEntry | null {
-  const row = getDb()
-    .prepare<[string], { data: string }>(
-      'SELECT entries.data FROM aliases JOIN entries ON entries.key = aliases.key WHERE aliases.normalized_key = ?'
-    )
-    .get(normalizeLookup(word));
-  return parseEntryRow(row);
+  const query = getDb().prepare<[string], { data: string }>(
+    'SELECT entries.data FROM aliases JOIN entries ON entries.key = aliases.key WHERE aliases.normalized_key = ?'
+  );
+  const normalized = normalizeLookup(word);
+  const withoutDiaeresis = normalized
+    .normalize('NFD')
+    .replace(/\u0308/g, '')
+    .normalize('NFC');
+  return parseEntryRow(query.get(normalized) ?? query.get(withoutDiaeresis));
 }
 
 export function getEntryBySlug(slug: string): DictionaryEntry | null {

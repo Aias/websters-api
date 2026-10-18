@@ -18,6 +18,35 @@ describe('dictionary reference lookup', () => {
     expect(aliases.get('caesarian')).toBe('Cæsarian');
   });
 
+  test('resolves printed diaeresis forms with and without the diaeresis', () => {
+    const aliases = unambiguousAliases(
+      new Map([
+        [
+          'Cooperate',
+          entryAliases(
+            'Cooperate',
+            '<h2 class="hw">Co-o&#x308;p&#x2032;er-ate</h2><div class="conjf">Co-o&#x308;p&#x2032;er-a&#x2CA;ted</div>'
+          ),
+        ],
+      ])
+    );
+    expect(aliases.get('coöperated')).toBe('Cooperate');
+    expect(aliases.get('cooperated')).toBe('Cooperate');
+  });
+
+  test('gives an ambiguous spelling to the entry whose key it spells', () => {
+    const aliases = unambiguousAliases(
+      new Map([
+        ['Leukaemia', ['Leukæmia']],
+        ['Leuchaemia', ['Leuchæmia', 'leukæmia']],
+        ['Orthoepical', ['Orthoëpic']],
+      ])
+    );
+    expect(aliases.get('leukæmia')).toBe('Leukaemia');
+    expect(aliases.get('orthœpic')).toBe('Orthoepical');
+    expect(aliases.get('orthoepic')).toBe('Orthoepical');
+  });
+
   test('preserves exact ligature aliases and refuses ambiguous equivalent spellings', () => {
     const aliases = unambiguousAliases(
       new Map([

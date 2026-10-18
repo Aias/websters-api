@@ -7,6 +7,7 @@ export function entryAliases(key: string, rawHtml: string): string[] {
   $('.hw, .asp, .col, .conjf, .adjf, .plw, .wf').each((_, element) => {
     const text = $(element)
       .text()
+      .normalize('NFC')
       .replace(/[′ˊˋˈˌ`*\u00ad‖]/g, '')
       .trim();
     if (!text || (text.startsWith('-') && !key.startsWith('-'))) return;
@@ -29,6 +30,7 @@ export function unambiguousAliases(
 ): Map<string, string> {
   const exact = new Map<string, string | null>();
   const equivalent = new Map<string, string | null>();
+  const folded = new Map<string, string | null>();
   const aliases = new Map<string, string>();
   const canonical = new Map([...entries.keys()].map((key) => [normalizeLookup(key), key]));
   const forms = new Map([
@@ -37,27 +39,37 @@ export function unambiguousAliases(
     ['oe', ['oe', 'œ']],
     ['œ', ['oe', 'œ']],
   ]);
+  const withoutDiaeresis = (value: string) =>
+    value
+      .normalize('NFD')
+      .replace(/\u0308/g, '')
+      .normalize('NFC');
+  const fold = (value: string) => withoutDiaeresis(value).replace(/æ/g, 'ae').replace(/œ/g, 'oe');
   function add(candidates: Map<string, string | null>, name: string, key: string) {
     if (!name) return;
     const previous = candidates.get(name);
     candidates.set(name, previous === undefined || previous === key ? key : null);
   }
   for (const [key, names] of entries) {
+    add(folded, fold(normalizeLookup(key)), key);
     for (const name of new Set([key, ...names])) {
       const normalized = normalizeLookup(name);
       add(exact, normalized, key);
-      let variants = [''];
-      for (const part of normalized.split(/(ae|oe|æ|œ)/g)) {
-        variants = variants.flatMap((prefix) =>
-          (forms.get(part) ?? [part]).map((form) => prefix + form)
-        );
+      for (const spelling of new Set([normalized, withoutDiaeresis(normalized)])) {
+        let variants = [''];
+        for (const part of spelling.split(/(ae|oe|æ|œ)/g)) {
+          variants = variants.flatMap((prefix) =>
+            (forms.get(part) ?? [part]).map((form) => prefix + form)
+          );
+        }
+        for (const variant of variants) add(equivalent, variant, key);
       }
-      for (const variant of variants) add(equivalent, variant, key);
     }
   }
   for (const [name, key] of [...equivalent, ...exact]) {
-    if (key === null) aliases.delete(name);
-    else aliases.set(name, key);
+    const resolved = key ?? folded.get(fold(name));
+    if (resolved) aliases.set(name, resolved);
+    else aliases.delete(name);
   }
   return new Map([...aliases, ...canonical]);
 }
