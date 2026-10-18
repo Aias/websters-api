@@ -3,6 +3,7 @@ import { existsSync, mkdirSync, readFileSync, statSync, unlinkSync, writeFileSyn
 import { dirname, join } from 'node:path';
 import * as cheerio from 'cheerio';
 import type { AnyNode, Element } from 'domhandler';
+import { normalizeLookup } from '../app/lib/lookup';
 import { slugify } from '../app/lib/slug.ts';
 import type {
   CompoundForm,
@@ -16,6 +17,7 @@ import type {
   Quotation,
   Sense,
 } from '../app/lib/types.ts';
+import { entryAliases, unambiguousAliases } from './entry-aliases';
 
 const ROOT = join(import.meta.dir, '..');
 const SRC_FILE = join(ROOT, 'src', 'dict.json');
@@ -108,7 +110,7 @@ function decodeHtmlCharRefs(str: string): string {
 }
 
 function normalizeKey(key: string): string {
-  return decodeHtmlCharRefs(key).normalize('NFC').toLowerCase().trim();
+  return normalizeLookup(decodeHtmlCharRefs(key));
 }
 
 function getSourceFingerprint(): SourceFingerprint {
@@ -1011,6 +1013,8 @@ function writeDatabase(
       data TEXT NOT NULL
     )
   `);
+  db.run('CREATE TABLE aliases (normalized_key TEXT PRIMARY KEY, key TEXT NOT NULL)');
+  const aliasesByEntry = new Map<string, ReadonlyArray<string>>();
 
   const insert = db.prepare(
     'INSERT INTO entries (key, normalized_key, slug, data) VALUES ($key, $normalizedKey, $slug, $data)'
@@ -1028,6 +1032,7 @@ function writeDatabase(
         if (typeof rawHtml !== 'string') continue;
 
         const entry = parseEntry(key, rawHtml);
+        aliasesByEntry.set(entry.key, entryAliases(entry.key, rawHtml));
         insert.run({
           $key: entry.key,
           $normalizedKey: normalizeKey(entry.key),
@@ -1051,6 +1056,12 @@ function writeDatabase(
   });
 
   insertMany(keys);
+  const insertAlias = db.prepare('INSERT INTO aliases (normalized_key, key) VALUES (?, ?)');
+  db.transaction(() => {
+    for (const [alias, key] of unambiguousAliases(aliasesByEntry)) {
+      insertAlias.run(alias, key);
+    }
+  })();
   db.run('CREATE INDEX idx_normalized_key ON entries(normalized_key)');
   db.close();
 

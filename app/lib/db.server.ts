@@ -1,6 +1,7 @@
 import 'server-only';
 import { join } from 'node:path';
 import BetterSqlite3 from 'better-sqlite3';
+import { normalizeLookup } from './lookup';
 import { porterStem } from './stemmer';
 import type { DictionaryEntry, SearchResult } from './types';
 
@@ -17,10 +18,6 @@ function getDb(): BetterSqlite3.Database {
   return db;
 }
 
-function normalizeLookup(value: string): string {
-  return value.normalize('NFC').toLowerCase().trim();
-}
-
 function parseEntryRow(row: { data: string } | undefined): DictionaryEntry | null {
   if (!row) return null;
   const entry: DictionaryEntry = JSON.parse(row.data);
@@ -30,7 +27,7 @@ function parseEntryRow(row: { data: string } | undefined): DictionaryEntry | nul
 function getEntry(word: string): DictionaryEntry | null {
   const row = getDb()
     .prepare<[string], { data: string }>(
-      'SELECT data FROM entries WHERE normalized_key = ? ORDER BY key COLLATE NOCASE LIMIT 1'
+      'SELECT entries.data FROM aliases JOIN entries ON entries.key = aliases.key WHERE aliases.normalized_key = ?'
     )
     .get(normalizeLookup(word));
   return parseEntryRow(row);
