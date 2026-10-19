@@ -56,6 +56,8 @@ Qualify verification by role and field. Success on ordinary prose does not quali
 
 Identical tag sequences do not prove preserved text ownership. A repair that moves words across a markup boundary needs structural review, even when it also fixes an ordinary spelling error.
 
+Keep each accepted replacement minimal. A definite typo does not authorize an adjacent optional article, historical spelling change, or punctuation normalization bundled into the same proposal. Split the proposal only with separately bound evidence, or hold it intact.
+
 For latency benchmarks, retain cached and uncached input separately. Lossless initial image attachments can remove image-tool round trips, but require actual native-pixel receipts from the saved initial message. Establish glyph gold by direct independent inspection, not agreement between models. Treat a narrow packet or one run per effort as limited evidence.
 
 For a fresh batch controller, verify output-directory creation, interpreter dependencies, and one actual request before bulk dispatch. Halt on a runner failure with no output rather than draining the queue. Replay a failed invocation only after proving whether a model call occurred, preserving its original logs and any session evidence.
@@ -97,6 +99,8 @@ A useful ledger records `index`, original and current key, the completed review 
 Unscaled contact sheets are acceptable if every entry remains legible and the reviewer opens every sheet. Record the exact indices inspected when a sheet overlaps two assignments. Do not downscale long entries to fit a single screen or assume a full-page app screenshot includes an internal scroll region.
 
 To reduce image-tool calls, pack consecutive native-width entry segments into bounded-height sheets. Preserve every source pixel, record each placement and entry identity, and verify each placed region against the original image. Keep individual segments available for closer inspection.
+
+Scrolling captures may overlap. Record their source offsets and trim repeated rows when assembling new sheets, with gap-free pixel coverage. Preserve frozen originals. Confirm apparent seam duplication against raw source, parsed content, browser text, and an independent viewport before treating it as a product defect.
 
 Before integration, assert unique, gap-free coverage of the frozen keys and reconcile reviewer boundaries. Count restored entries separately from the original requested batch.
 
