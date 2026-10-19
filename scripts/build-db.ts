@@ -17,15 +17,16 @@ import type {
   Sense,
 } from '../app/lib/types.ts';
 import { readDictionarySource, sourceFingerprint } from './dictionary-source';
-import { entryAliases, unambiguousAliases } from './entry-aliases';
-import { normalizeSourceTypography } from './source-typography';
+import { createEntryReferences, decodeEntryKey, type EntryResolver } from './entry-references';
+import { getHtml, getOuterHtml, getText, hasClass, isBr, isElement, isTag } from './source-dom';
+import { loadPreprocessedDocument } from './source-preprocessing';
 
 const ROOT = join(import.meta.dir, '..');
 const DB_FILE = join(ROOT, 'app', 'data', 'dictionary.db');
 const BUILD_META_FILE = join(ROOT, 'app', 'data', 'dictionary.build-meta.json');
 const PROGRESS_EVERY = 10000;
 // Bump when parser/build output semantics change to force a rebuild.
-const PARSER_VERSION = 17;
+const PARSER_VERSION = 28;
 
 interface SourceFingerprint {
   size: number;
@@ -51,54 +52,8 @@ interface BuildOptions {
 
 // ─── Helpers ─────────────────────────────────────────────
 
-function isElement(node: AnyNode): node is Element {
-  return node.type === 'tag';
-}
-
-function hasClass(node: AnyNode, cls: string): boolean {
-  if (!isElement(node)) return false;
-  const classes = node.attribs['class'];
-  if (!classes) return false;
-  if (classes === cls) return true;
-  return ` ${classes} `.includes(` ${cls} `);
-}
-
-function isTag(node: AnyNode, tag: string): boolean {
-  return isElement(node) && node.tagName === tag;
-}
-
-function isBr(node: AnyNode): boolean {
-  return isTag(node, 'br');
-}
-
-function getText($: cheerio.CheerioAPI, node: AnyNode): string {
-  return $(node).text().trim();
-}
-
-function getHtml($: cheerio.CheerioAPI, node: AnyNode): string {
-  return $(node).html() ?? '';
-}
-
-function getOuterHtml($: cheerio.CheerioAPI, node: AnyNode): string {
-  const $clone = $(node).clone();
-  $clone.find('h2').each((_, child) => {
-    child.tagName = 'strong';
-  });
-  return $clone.toString();
-}
-
 function unwrapParenthesized(value: string): string {
   return value.trim().replace(/^\(/, '').replace(/\)$/, '');
-}
-
-function decodeHtmlCharRefs(str: string): string {
-  return str
-    .replace(/&#x([0-9a-fA-F]+);/g, (_, hex: string) => String.fromCodePoint(parseInt(hex, 16)))
-    .replace(/&#(\d+);/g, (_, dec: string) => String.fromCodePoint(parseInt(dec, 10)));
-}
-
-function normalizeKey(key: string): string {
-  return normalizeLookup(decodeHtmlCharRefs(key));
 }
 
 function isBuildMetadata(value: unknown): value is BuildMetadata {
@@ -167,143 +122,8 @@ function writeBuildMetadata(
 
 // ─── Preprocessing ───────────────────────────────────────
 
-function loadPreprocessedDocument(html: string): cheerio.CheerioAPI {
-  const $ = cheerio.load(
-    html,
-    { xml: { xmlMode: false, recognizeSelfClosing: true, encodeEntities: 'utf8' } },
-    false
-  );
-
-  // Drop executable containers from trusted source before extracting any HTML fragments.
-  $('script,style,iframe,object,embed,template').remove();
-  $('.ver').remove();
-
-  $('*').each((_, el) => {
-    if (!isElement(el)) return;
-
-    if (el.tagName === 'b') {
-      el.tagName = 'strong';
-    } else if (el.tagName === 'i') {
-      el.tagName = 'em';
-    } else if (el.tagName === 'div') {
-      el.tagName = hasClass(el, 'q') ? 'blockquote' : 'span';
-    }
-
-    if (hasClass(el, 'er')) {
-      const slug = slugify(normalizeLookup($(el).text()));
-      if (slug) {
-        el.tagName = 'a';
-        el.attribs['href'] = `/entry/${slug}`;
-      }
-    }
-
-    for (const [attributeName, attributeValue] of Object.entries(el.attribs)) {
-      const normalizedName = attributeName.toLowerCase();
-
-      if (normalizedName === 'class') continue;
-      if (
-        el.tagName === 'img' &&
-        (normalizedName === 'alt' ||
-          (normalizedName === 'src' && /^\/illustrations\/[a-z0-9-]+\.png$/.test(attributeValue)) ||
-          (['width', 'height'].includes(normalizedName) && /^[1-9]\d*$/.test(attributeValue)))
-      )
-        continue;
-      if (
-        normalizedName === 'data-scope' &&
-        attributeValue === 'homograph' &&
-        (hasClass(el, 'syn') || hasClass(el, 'note'))
-      )
-        continue;
-      if (
-        normalizedName === 'colspan' &&
-        /^(?:[1-9]\d*)$/.test(attributeValue) &&
-        (hasClass(el, 'td') || hasClass(el, 'th') || el.tagName === 'td' || el.tagName === 'th')
-      )
-        continue;
-      if (normalizedName === 'href' && typeof attributeValue === 'string') {
-        if (attributeValue.startsWith('/entry/')) continue;
-      }
-      delete el.attribs[attributeName];
-    }
-  });
-
-  $('.pr').each((_, node) => {
-    const placeholder =
-      /^\(\s*[#?�](?:\s*or\s*[#?�])*\s*(?:[;,]\s*(\d+(?:\s*,\s*\d+)*)\s*)?\)$/.exec(
-        getText($, node)
-      );
-    if (placeholder?.[1]) $(node).text(`(${placeholder[1]})`);
-    else if (placeholder) $(node).remove();
-  });
-  $('h2.hw, .col').each((_, node) => {
-    const previous = node.previousSibling;
-    if (previous?.type === 'text' && /‖\s*$/.test(previous.data)) {
-      previous.data = previous.data.replace(/‖\s*$/, '');
-      $(node).prepend('‖');
-    }
-  });
-
-  normalizeSourceTypography($);
-
-  // Normalize whitespace: move leading/trailing spaces outside inline elements
-  // so CSS decorations (underlines, etc.) don't extend over whitespace.
-  // Merge into adjacent text nodes rather than creating whitespace-only nodes
-  // (which get filtered by parsers that skip empty text).
-  // Process in reverse document order so nested elements propagate outward.
-  const inlineElements = $('em, span, strong, a').toArray().reverse();
-  for (const el of inlineElements) {
-    const { children } = el;
-    if (children.length === 0) continue;
-
-    const last = children[children.length - 1];
-    if (last.type === 'text') {
-      const trailing = last.data.match(/(\s+)$/);
-      if (trailing) {
-        last.data = last.data.slice(0, -trailing[1].length);
-        const next = el.nextSibling;
-        if (next?.type === 'text') {
-          next.data = trailing[1] + next.data;
-        } else {
-          $(el).after(trailing[1]);
-        }
-      }
-    }
-
-    const first = children[0];
-    if (first.type === 'text') {
-      const leading = first.data.match(/^(\s+)/);
-      if (leading) {
-        first.data = first.data.slice(leading[1].length);
-        const prev = el.previousSibling;
-        if (prev?.type === 'text') {
-          prev.data += leading[1];
-        } else {
-          $(el).before(leading[1]);
-        }
-      }
-    }
-  }
-
-  $.root()
-    .find('*')
-    .addBack()
-    .contents()
-    .each((_, node) => {
-      if (node.type === 'text' && $(node).parents('pre,table').length === 0) {
-        const previous = node.prev;
-        if (previous && isElement(previous) && /\p{L}$/u.test($(previous).text()))
-          node.data = node.data.replace(/^\{\d+\}/, '');
-        node.data = node.data
-          .replace(/(?<=\p{L})\{\d+\}/gu, '')
-          .replace(/(?<!\.)[ \t]+([,;:!?)]|\.(?![\s.]*\.|\d))/g, '$1');
-      }
-    });
-
-  return $;
-}
-
-export function preprocess(html: string): string {
-  return loadPreprocessedDocument(html).html();
+export function preprocess(html: string, resolve?: EntryResolver): string {
+  return loadPreprocessedDocument(html, resolve).html();
 }
 
 interface MutableSense extends Sense {
@@ -325,11 +145,7 @@ function contentTarget(scope: ContentScope): LexicalBlock[] {
 }
 
 function inlineHtml($: cheerio.CheerioAPI, node: Element): string {
-  const $clone = $(node).clone();
-  $clone.find('h2').each((_, child) => {
-    child.tagName = 'strong';
-  });
-  return $clone.html() ?? '';
+  return getOuterHtml($, node, !hasClass(node, 'col') && !hasClass(node, 'mcol'));
 }
 
 function parseQuotation($: cheerio.CheerioAPI, node: Element): Quotation {
@@ -359,7 +175,12 @@ function endsHomograph(node: AnyNode): boolean {
 
 function parseContent($: cheerio.CheerioAPI, nodes: ReadonlyArray<AnyNode>): LexicalBlock[] {
   const main: ContentScope = { content: [], senses: [] };
-  let compound: { form: MutableCompound; scope: ContentScope; complete: boolean } | null = null;
+  let compound: {
+    form: MutableCompound;
+    scope: ContentScope;
+    parent: LexicalBlock[];
+    complete: boolean;
+  } | null = null;
   let continuation: LexicalBlock[] | null = null;
 
   function target(): LexicalBlock[] {
@@ -370,6 +191,17 @@ function parseContent($: cheerio.CheerioAPI, nodes: ReadonlyArray<AnyNode>): Lex
     if (!html) return;
     const blocks = target();
     const previous = blocks[blocks.length - 1];
+    if (
+      kind === 'text' &&
+      /^[\s]*[.,;:!?][\s.,;:!?]*$/.test(html) &&
+      (previous?.kind === 'synonyms' ||
+        previous?.kind === 'note' ||
+        previous?.kind === 'usage' ||
+        previous?.kind === 'forms')
+    ) {
+      blocks[blocks.length - 1] = { ...previous, html: previous.html + html };
+      return;
+    }
     if (kind === 'forms' && blocks.length === 1 && previous.kind === 'text') {
       blocks[0] = { kind, html: (previous.html + html).replace(/^\s*;\s*/, '') };
       return;
@@ -414,14 +246,12 @@ function parseContent($: cheerio.CheerioAPI, nodes: ReadonlyArray<AnyNode>): Lex
     return trailingContent(nested);
   }
 
-  function addCompound(node: Element): void {
+  function addCompound(node: Element, parent: LexicalBlock[]): void {
     continuation = null;
-    const headwords = hasClass(node, 'mcol')
-      ? $(node)
-          .find('.col')
-          .toArray()
-          .map((word) => getText($, word).replace(/^‖\s*/, ''))
-      : [getText($, node).replace(/^‖\s*/, '')];
+    const headwords = (hasClass(node, 'mcol') ? $(node).find('.col') : $(node))
+      .filter((_, word) => $(word).attr('data-headword') !== '')
+      .toArray()
+      .map((word) => ($(word).attr('data-headword') ?? getText($, word)).replace(/^‖\s*/, ''));
     if (
       compound &&
       !compound.complete &&
@@ -445,12 +275,16 @@ function parseContent($: cheerio.CheerioAPI, nodes: ReadonlyArray<AnyNode>): Lex
       headwordHtml: inlineHtml($, node).trim(),
       content: [],
     };
-    main.senses = [];
-    main.content.push(form);
-    compound = { form, scope: { content: form.content, senses: [] }, complete: false };
+    if (parent === main.content) main.senses = [];
+    parent.push(form);
+    compound = { form, scope: { content: form.content, senses: [] }, parent, complete: false };
   }
 
-  function process(node: AnyNode, inCompound: boolean): void {
+  function process(
+    node: AnyNode,
+    inCompound: boolean,
+    parent: LexicalBlock[] = main.content
+  ): void {
     if (isBr(node)) return;
     if (!isElement(node)) {
       if (node.type !== 'text') return;
@@ -478,13 +312,15 @@ function parseContent($: cheerio.CheerioAPI, nodes: ReadonlyArray<AnyNode>): Lex
 
     if (hasClass(node, 'cs')) {
       compound = null;
-      main.senses = [];
       continuation = null;
-      for (const child of $(node).contents().toArray()) process(child, true);
+      if (node.attribs['data-scope'] !== 'sense') main.senses = [];
+      else while ((main.senses.at(-1)?.level ?? 0) > 1) main.senses.pop();
+      const parent = contentTarget(main);
+      for (const child of $(node).contents().toArray()) process(child, true, parent);
       return;
     }
     if (hasClass(node, 'col') || hasClass(node, 'mcol')) {
-      addCompound(node);
+      addCompound(node, inCompound ? parent : (compound?.parent ?? main.content));
       return;
     }
     if (hasClass(node, 'sn') || hasClass(node, 'sd')) {
@@ -515,7 +351,11 @@ function parseContent($: cheerio.CheerioAPI, nodes: ReadonlyArray<AnyNode>): Lex
       ].some((cls) => hasClass(node, cls))
     ) {
       compound = null;
-      main.senses = [];
+      if (
+        node.attribs['data-scope'] !== 'sense' ||
+        (!hasClass(node, 'note') && !hasClass(node, 'syn'))
+      )
+        main.senses = [];
       continuation = null;
     }
     if (
@@ -525,8 +365,10 @@ function parseContent($: cheerio.CheerioAPI, nodes: ReadonlyArray<AnyNode>): Lex
       const content = parseContent($, $(node).contents().toArray());
       continuation = null;
       const scope = compound?.scope ?? main;
-      scope.content.push({ kind: 'section', content });
-      scope.senses = [];
+      const container =
+        hasClass(node, 'def2') && $(node).prev().hasClass('specif') ? target() : scope.content;
+      container.push({ kind: 'section', content });
+      if (container === scope.content) scope.senses = [];
       continuation = trailingContent(content);
       return;
     }
@@ -572,7 +414,21 @@ function parseContent($: cheerio.CheerioAPI, nodes: ReadonlyArray<AnyNode>): Lex
     }
     if (hasClass(node, 'def') || hasClass(node, 'cd')) {
       if (compound) compound.complete = true;
-      addHtml('definition', inlineHtml($, node));
+      if ($(node).children('.sd[data-role="definition"]').length > 0) {
+        let fragment = '';
+        for (const child of $(node).contents().toArray()) {
+          if (
+            isElement(child) &&
+            hasClass(child, 'sd') &&
+            child.attribs['data-role'] === 'definition'
+          ) {
+            addHtml('definition', fragment);
+            fragment = '';
+            process(child, inCompound, parent);
+          } else fragment += getOuterHtml($, child);
+        }
+        addHtml('definition', fragment);
+      } else addHtml('definition', inlineHtml($, node));
       return;
     }
     if (
@@ -589,16 +445,29 @@ function parseContent($: cheerio.CheerioAPI, nodes: ReadonlyArray<AnyNode>): Lex
       addHtml('etymology', getHtml($, node));
       return;
     }
-    if (
-      (hasClass(node, 'note') || hasClass(node, 'syn')) &&
-      node.attribs['data-scope'] === 'homograph'
-    ) {
-      compound = null;
-      main.senses = [];
-      continuation = null;
+    if (hasClass(node, 'note') || hasClass(node, 'syn')) {
+      if (node.attribs['data-scope'] === 'homograph') {
+        compound = null;
+        main.senses = [];
+        continuation = null;
+      } else if (node.attribs['data-scope'] === 'sense') {
+        const scope = compound?.scope ?? main;
+        while ((scope.senses.at(-1)?.level ?? 0) > 1) scope.senses.pop();
+        continuation = null;
+      }
     }
     if (hasClass(node, 'note')) {
-      addHtml('note', getHtml($, node));
+      const owner = node.attribs['data-scope']?.match(/^sense:(\d+)$/)?.[1];
+      const ownerSense = owner ? `${owner}.` : undefined;
+      if (
+        ownerSense &&
+        main.content.some((block) => block.kind === 'sense' && block.number === ownerSense)
+      ) {
+        compound = null;
+        main.senses = [];
+        continuation = null;
+        main.content.push({ kind: 'note', html: getHtml($, node), ownerSense });
+      } else addHtml('note', getHtml($, node));
       return;
     }
     if (hasClass(node, 'syn')) {
@@ -646,7 +515,47 @@ function parseHomograph(
       header.push({ kind: 'pronunciation', html: getHtml($, node).trim() });
     } else if (inHeader && hasClass(node, 'pos')) {
       header.push({ kind: 'partOfSpeech', text: getText($, node) });
-    } else if (inHeader && hasClass(node, 'mark') && next && hasClass(next, 'pos')) {
+    } else if (inHeader && node.type === 'text' && /^\s*,\s*a\.\s*$/.test(node.data)) {
+      header.push({ kind: 'text', text: ',' }, { kind: 'partOfSpeech', text: 'a.' });
+    } else if (inHeader && node.type === 'text' && /^\s*\([?#]\)[,;]?\s*$/.test(node.data)) {
+      const punctuation = node.data.replace(/\([?#]\)/, '').trim();
+      if (punctuation) header.push({ kind: 'text', text: punctuation });
+    } else if (
+      inHeader &&
+      node.type === 'text' &&
+      /^\s*,?\s*(?:but\s+)?(?:(?:often|sometimes|usually)\s+)?used as\s*$/i.test(node.data) &&
+      hasClass(nodes[index + 1] ?? node, 'xex') &&
+      /^sing\.?$/.test(getText($, nodes[index + 1])) &&
+      after?.type === 'text' &&
+      /^\s*\.?\s*with\s*$/.test(after.data) &&
+      hasClass(nodes[index + 3] ?? node, 'plu')
+    ) {
+      header.push({
+        kind: 'inline',
+        html: nodes
+          .slice(index, index + 4)
+          .map((part) => getOuterHtml($, part))
+          .join(''),
+      });
+      skip = 3;
+    } else if (
+      inHeader &&
+      node.type === 'text' &&
+      /^\s*[,;]?\s*\(\d+\)\s*$/.test(node.data) &&
+      next &&
+      hasClass(next, 'pos')
+    ) {
+      header.push({ kind: 'text', text: node.data.trim() });
+    } else if (
+      inHeader &&
+      (hasClass(node, 'mark') || hasClass(node, 'au')) &&
+      hasClass(
+        nodes
+          .slice(index + 1)
+          .find((later) => later.type !== 'text' || /[^\s,;]/.test(later.data)) ?? node,
+        'pos'
+      )
+    ) {
       header.push({ kind: 'inline', html: getOuterHtml($, node) });
     } else if (
       inHeader &&
@@ -675,7 +584,7 @@ function parseHomograph(
     } else if (inHeader && node.type === 'text' && /^[\s.,;:{}‖]*$/.test(node.data)) {
       if (
         /[,;]/.test(node.data) &&
-        header.at(-1)?.kind === 'partOfSpeech' &&
+        (header.at(-1)?.kind === 'partOfSpeech' || header.at(-1)?.kind === 'inline') &&
         next &&
         hasClass(next, 'pos')
       ) {
@@ -734,9 +643,9 @@ function parseHomograph(
   };
 }
 
-export function parseEntry(key: string, rawHtml: string): DictionaryEntry {
-  const decodedKey = decodeHtmlCharRefs(key).normalize('NFC');
-  const $ = loadPreprocessedDocument(rawHtml);
+export function parseEntry(key: string, rawHtml: string, resolve?: EntryResolver): DictionaryEntry {
+  const decodedKey = decodeEntryKey(key);
+  const $ = loadPreprocessedDocument(rawHtml, resolve);
   const sections: AnyNode[][] = [[]];
   let current = sections[0];
   let hasHeadword = false;
@@ -766,7 +675,8 @@ export function parseEntry(key: string, rawHtml: string): DictionaryEntry {
       !inGroup &&
       node.type === 'text' &&
       /[\p{L}\p{N}]/u.test(node.data) &&
-      !/^[\s,;]*(also|or)[\s,;]*$/i.test(node.data)
+      !/^[\s,;]*(also|or)[\s,;]*$/i.test(node.data) &&
+      !/^\s*,\s*a\.\s*$/.test(node.data)
     ) {
       hasBody = true;
     }
@@ -806,7 +716,7 @@ function writeDatabase(sourceData: Map<string, string>, keys: ReadonlyArray<stri
   db.run(
     'CREATE TABLE quotations (author_slug TEXT NOT NULL, author TEXT NOT NULL, cited TEXT NOT NULL, key TEXT NOT NULL, html TEXT NOT NULL, citation TEXT)'
   );
-  const aliasesByEntry = new Map<string, ReadonlyArray<string>>();
+  const references = createEntryReferences(sourceData);
 
   const insert = db.prepare(
     'INSERT INTO entries (key, normalized_key, slug, data) VALUES ($key, $normalizedKey, $slug, $data)'
@@ -826,11 +736,10 @@ function writeDatabase(sourceData: Map<string, string>, keys: ReadonlyArray<stri
         const rawHtml = sourceData.get(key);
         if (rawHtml === undefined) continue;
 
-        const entry = parseEntry(key, rawHtml);
-        aliasesByEntry.set(entry.key, entryAliases(entry.key, rawHtml));
+        const entry = parseEntry(key, rawHtml, references.resolve);
         insert.run({
           $key: entry.key,
-          $normalizedKey: normalizeKey(entry.key),
+          $normalizedKey: normalizeLookup(decodeEntryKey(entry.key)),
           $slug: entry.slug,
           $data: JSON.stringify(entry),
         });
@@ -856,7 +765,7 @@ function writeDatabase(sourceData: Map<string, string>, keys: ReadonlyArray<stri
   insertMany(keys);
   const insertAlias = db.prepare('INSERT INTO aliases (normalized_key, key) VALUES (?, ?)');
   db.transaction(() => {
-    for (const [alias, key] of unambiguousAliases(aliasesByEntry)) {
+    for (const [alias, key] of references.aliases) {
       insertAlias.run(alias, key);
     }
   })();

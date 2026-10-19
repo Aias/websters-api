@@ -21,6 +21,17 @@ function sourceDocument(key: string): cheerio.CheerioAPI {
 }
 
 describe('source typography', () => {
+  test('separates a pronunciation alternative without changing phonetic fragments', () => {
+    const $ = cheerio.load(
+      '<span class="pr">(ăm-brō′zhȧ<em class="it">or</em>ăm-brō′zhĭ-ȧ)</span><span class="pr">(k<em class="it">a</em>l)</span><span class="ety">x<em>or</em>y</span>'
+    );
+    normalizeSourceTypography($);
+    normalizeSourceTypography($);
+    expect($('.pr').first().text()).toBe('(ăm-brō′zhȧ or ăm-brō′zhĭ-ȧ)');
+    expect($('.pr').last().html()).toBe('(k<em class="it">a</em>l)');
+    expect($('.ety').text()).toBe('xory');
+  });
+
   test('subscripts chemical formula digits without changing text or existing superscripts', () => {
     const $ = cheerio.load(
       '<span class="chform">C6H5.NH.CO.CH3</span><span class="chform">NO3<sup>-</sup></span><span class="chform">H<sub>2</sub>O</span><span>Chapter 12</span>'

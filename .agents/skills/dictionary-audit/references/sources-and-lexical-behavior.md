@@ -4,7 +4,7 @@
 
 ```text
 src/dict.jsonl + scripts/dictionary-source.ts
-    -> scripts/build-db.ts + source-typography.ts + entry-aliases.ts
+    -> scripts/build-db.ts + source-preprocessing.ts + source-typography.ts + entry-references.ts + entry-aliases.ts
     -> app/data/dictionary.db
     -> app/lib/db.server.ts
     -> app/components/entry.tsx + app/globals.css + app/layout.tsx
@@ -25,11 +25,15 @@ Read `scripts/PARSING.md` and the corresponding current functions and tests. Use
 
 Download needed sources once and preserve edition, URL, printed page, scan image identifier, and relevant excerpts. Gutenberg and GCIDE share transcription ancestry. Their agreement can corroborate a representation but does not make a shared error correct. GCIDE also contains later additions and editorial revisions, so the application corpus is not a word-for-word historical facsimile.
 
+Search grouped headings, aliases, and cross-letter source files before declaring an electronic witness absent. A canonical application key may differ from the source article's other heading. Bind recovered candidates to the complete matching article and retain disagreements instead of inferring ownership from a name match alone.
+
 The International print is a related edition, not the exact electronic 1913 source. State the volume and printing accurately when citing it. Use print to resolve identifiable corruption without replacing legitimate electronic-edition differences. Do not add every print-only headword or delete every electronic-only sense. For a substantial omission, seek an electronic witness or surviving source context as well as print.
 
 Use OCR to locate pages, then inspect the actual image for letters, stress, and accents. An archive.org item's `_hocr_pageindex.json.gz` and `_hocr_searchtext.txt.gz` together give the OCR text of each leaf, which `_djvu.txt` does not separate. The image for a zero-based leaf is `https://archive.org/download/<id>/page/n<leaf>.jpg?scale=1`. OCR garbles stress-marked headwords, so locate an entry by each leaf's running heads, the first and last words on the page, rather than by searching for the headword. Printed page numbers, archive leaf numbers, and image URL indices can differ. Confirm the visible page and entry before recording it as evidence. Inspect adjacent entries when a fragment or attribution appears displaced.
 
 ## Source recovery decisions
+
+Preserve inherited electronic sense numbers when a later contributor inserted a sense that the conversion excluded. A resulting gap alone does not establish a corrupted numeral. Likewise, a printed heading's different stress pattern does not establish damage when both electronic witnesses consistently preserve the existing heading.
 
 | Finding                                                    | Investigation and correction                                                                                                         |
 | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
@@ -63,7 +67,11 @@ Preserve source order and association across homographs, header fragments, forms
 
 Header parts can interleave a headword, pronunciation, inflection, qualifier, and another headword. Keep punctuation and language qualifiers attached to their original parts. Connectors within a multiple-headword group and grammatical references such as a comparative's "of" phrase remain on that header. Compound introductions belong with their compound rather than the previous numbered sense. Distinguish final run-in derivatives from forms within a continuing numbered sense. Closing every sense at `wordforms` can split the list or detach its quotation. Secondary parts of speech and derivatives can contain definitions and must not collapse into an inflection string.
 
-Use `data-scope="homograph"` on a note or synonym list only after verifying whole-word scope. Do not infer that every final note belongs outside the last sense. Preserve nested Roman, numeric, and lettered markers and their content.
+When a grouped heading shares words across alternatives, preserve the printed ellipsis and record the complete witnessed lexical identities. Check aliases for unintended fragments and newly resolved ambiguities. Keep valid canonical destinations when an alternate spelling collides with another entry.
+
+An attribution between the headword and part of speech belongs to the header, even when punctuation intervenes. Preserve the attribution while retaining the grammatical label in lookup metadata. A body attribution remains with its own passage.
+
+Use `data-scope="homograph"` on a note or synonym list only after verifying whole-word scope. Do not infer that every final note belongs outside the last sense. Preserve nested Roman, numeric, and lettered markers and their content. Preserve witnessed block order when correcting ownership rather than moving a note or quotation around a sense to accommodate the parser. GCIDE overloads `sd` for definitions and references. Use `data-role="definition"` on a witnessed nested definition marker when its role is otherwise ambiguous, and keep unmarked references inline. Do not infer either marker role or following note/author scope from a closing definition wrapper.
 
 Boundary normalization must preserve both spaces and intentional adjacency. For example, joining `frost` and `or rain` needs a word boundary, while joining `some` and `thing` may continue one word. Inspect the source wrappers and punctuation before generalizing. Keep decimals, spaced ellipses, preformatted text, and table spacing intact. Consume compound-separator dashes only at confirmed structural boundaries, retaining adjacent author punctuation and lexical dashes.
 
@@ -78,12 +86,28 @@ Consult the tag definitions before changing a class. Many lexical classes imply 
 Both audits share a restoration rule for pronunciations:
 
 - A composite placeholder such as `(?; 277)` or `(# or #; 135)` is a damaged field, and so is a field GCIDE marks unreadable with `&unr_;`. Restore it from print when legible and keep the guide number, as in `(zīm; 277)`. When the conversion dropped such a field, insert it after its form word.
-- A bare `(?)`, or a pronunciation absent from both the source and GCIDE, stays empty. Do not add pronunciations from print.
+- A bare `(?)` or `(#)`, or a pronunciation absent from both the source and GCIDE, stays empty. Do not add pronunciations from print.
 - Repair damaged marks inside an existing field when print corroborates them.
+
+Before integration, inventory newly inserted pronunciation fields against the frozen electronic record. Check each headword, homograph, inflection, and derivative separately. An aggregate count of explicit unreadable fields catches unsupported insertions but does not prove correct placement. A complete printed pronunciation with no corresponding electronic field remains ineligible.
+
+Keep cumulative field accounting bound to the original frozen raw value across successive integrations. An earlier restoration does not replenish that owner's insertion allowance. Nested alternate spellings, references, and plurals can own their own fields. A plural's damaged field does not authorize insertion after the singular's bare `(?)`. Verify the exact child owner and ordinal before promoting an inventory match.
+
+Treat eligibility inventories as locators, not ownership judgments. A folded-name match can conflate separate lexical entries or attach a singular form's field to its plural headword. An unreadable Greek etymon does not authorize a pronunciation. Mixed historical and contributor tags require field-level provenance: neither reject an inherited field solely because a paragraph also has a later tag nor accept every unreadable marker in that paragraph.
+
+Preserve witness markup semantics when building inventories. An HTML parser can discard XML-like lexical tags that collide with HTML elements. Verify extracted owners, their order, and original byte or character spans against the witness. Recognize singular, comparative, and superlative form owners. A pronunciation after an `.adjf` belongs to that form, not the preceding headword. Restrict unwrapped damaged pronunciation markers to the corresponding header or form field, not later etymology or definition text.
+
+The exporter can leave a damaged inflection pronunciation outside its `.pr` wrapper. Count it only with an exact frozen fragment and matching unreadable electronic field, then verify the printed form independently. Keep that evidence distinct from tagged-field counts and preserve the original eligibility inventory when adding a correction.
+
+Insertion eligibility does not decide whether an existing phonetic field is correct. Repair a demonstrated copied field or missing character against its own matching witnesses, preserving coherent electronic conventions. An existing unwrapped pronunciation can receive semantic markup and a transcription-token correction without inventing phonetic text. Bind such a wrapper allowance to the exact owner and frozen old/new fragments, separately from unreadable-field eligibility. Never infer a diacritic from a neighboring word.
+
+An exact existing-field transfer is not a new phonetic recovery. For a witnessed lexical-boundary repair, guard both donor and recipient, prove that the complete transferred body and its pronunciation bytes occur once at the destination and are removed from the donor, and verify content conservation across the pair. Keep detached sense or note fields separate from lexical owners rather than inventing owner identities for them.
 
 Pronunciation fields made entirely of unknown placeholders or unknown alternatives are omitted from display while retained in raw source. Composite fields may also contain a pronunciation-guide number, language qualifier, or real phonetic text. The parser preserves a guide reference such as `(#; 73)` as `(73)` while omitting the unknown phonetics. Preserve all meaningful commentary and document the missing transcription. Do not drop an entire field because part of it is unknown.
 
 Retain italic reduced-vowel notation within pronunciation HTML. For a double breve or macron spanning two vowels, encode the combining mark after the first base character. Fix a misplaced mark at the shared typography boundary when the source pattern is systematic, then verify text and glyph placement across every affected record.
+
+Read the printed guide and enlarge ambiguous glyphs before transcribing pronunciations. Supply the guide section that illustrates the uncertain mark, not only the stress-mark section. Preserve primary stress `′` (U+2032) versus secondary stress `ˊ` (U+02CA), uptacks such as `ō̍` and `ē̍`, breves on `y`, and italic reduced vowels. A plain macron or a second primary prime is not an equivalent substitute. A related edition's different but valid spelling or phonetic convention alone does not establish conversion damage. The same applies to coherent wording, labels, and punctuation: a related print’s optional adjective or example is not evidence of a lost word in an intact electronic definition. Require a corroborating eligible witness or a demonstrated corruption, such as an internally conflicting stress mark. For underdotted u, consult the printed guide’s one-dot and two-dot distinctions rather than treating the marks as interchangeable.
 
 Within `.grk`, shared normalization handles word-final sigma and the transcription convention representing an iota subscript as a comma after α, η, or ω. The comma conversion applies before another Greek letter or at the end of a text node, including a standalone `α,`. These are constrained notation conversions, not recovery of missing Greek letters. Keep the conversion scoped to Greek markup and test punctuation and combining-mark boundaries.
 
@@ -94,6 +118,8 @@ Use existing application treatments for lexical italics, quotation attribution, 
 ## Lookup and reference preservation
 
 Check actual reference targets, not just the visible label or a guessed canonical key. Source links can name compounds, alternate spellings, plurals, or an infinitive. Read `entry-aliases.ts`, `lookup.ts`, `slug.ts`, and `db.server.ts` to reproduce current behavior.
+
+When punctuation sits inside a source reference, preserve its visible text. Remove a terminal period from its target only after proving that the dotted URL is unresolved and the undotted URL resolves. A genuine dotted name takes precedence. Build the resolver once from the exact source under review and pass it to preprocessing and parsing, including comparison exporters. Compare identical source with and without the resolver and verify every existing canonical and alias destination. Normalized names alone do not reproduce URL lookup when slug generation drops punctuation.
 
 Canonical slugs resolve before alias fallback. Existing exact aliases and canonical names take precedence over inferred ligature equivalents. A blanket `æ -> ae` or `œ -> oe` lookup normalization can merge distinct existing destinations. Add only unambiguous equivalent spellings and compare every old alias destination against the new map on identical decoded input.
 

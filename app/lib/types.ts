@@ -8,10 +8,12 @@ export type HeaderPart =
   | { kind: 'forms'; html: InlineHTML }
   | { kind: 'inline'; html: InlineHTML };
 
-export interface InlineBlock {
-  kind: 'text' | 'definition' | 'etymology' | 'forms' | 'note' | 'synonyms' | 'usage' | 'label';
-  html: InlineHTML;
-}
+export type InlineBlock =
+  | {
+      kind: 'text' | 'definition' | 'etymology' | 'forms' | 'synonyms' | 'usage' | 'label';
+      html: InlineHTML;
+    }
+  | { kind: 'note'; html: InlineHTML; ownerSense?: string };
 
 export interface Quotation {
   kind: 'quotation';

@@ -1,6 +1,13 @@
 import type { CheerioAPI } from 'cheerio';
 
 export function normalizeSourceTypography($: CheerioAPI): void {
+  $('.pr em').each((_, node) => {
+    if ($(node).text().trim() !== 'or') return;
+    const previous = node.previousSibling;
+    const next = node.nextSibling;
+    if (previous?.type === 'text' && /\S$/.test(previous.data)) previous.data += ' ';
+    if (next?.type === 'text' && /^\S/.test(next.data)) next.data = ' ' + next.data;
+  });
   $('*')
     .contents()
     .each((_, node) => {

@@ -22,6 +22,7 @@ from fontTools.varLib.instancer import instantiateVariableFont
 
 OLD_STANDARD = 'https://mirrors.ctan.org/fonts/oldstandard.zip'
 BESLEY = 'https://github.com/google/fonts/raw/85c5cea9da66117723c05bf5d7a7143fd10a411b/ofl/besley/Besley%5Bwght%5D.ttf'
+NOTO_MUSIC = 'https://raw.githubusercontent.com/google/fonts/85c5cea9da66117723c05bf5d7a7143fd10a411b/ofl/notomusic/NotoMusic-Regular.ttf'
 OUT = Path(__file__).resolve().parents[1] / 'app' / 'fonts'
 DOTLESS = {0x69: 0x131, 0x6A: 0x237}
 
@@ -33,7 +34,7 @@ def fetch(url):
 
 def map_codepoint(font, codepoint, name):
     for table in font['cmap'].tables:
-        if table.isUnicode():
+        if table.isUnicode() and (codepoint <= 0xFFFF or table.format in (12, 13)):
             table.cmap[codepoint] = name
 
 
@@ -145,6 +146,25 @@ def patch_old_standard(font):
     add_mark(font, 'uni035E', 0x035E, draw_double_macron)
 
 
+def patch_music(font, donor):
+    cff = font['CFF '].cff
+    top, glyphs, cmap = cff.topDictIndex[0], donor.getGlyphSet(), donor.getBestCmap()
+    scale = font['OS/2'].sCapHeight / donor['OS/2'].sCapHeight
+    for codepoint in (0x1D10B, 0x1D135):
+        name, source = f'u{codepoint:05X}', cmap[codepoint]
+        advance = round(donor['hmtx'][source][0] * scale)
+        pen, box = T2CharStringPen(advance, None), BoundsPen(None)
+        for target in (pen, box):
+            glyphs[source].draw(TransformPen(target, (scale, 0, 0, scale, 0, 0)))
+        top.CharStrings.charStringsIndex.append(pen.getCharString(private=top.Private, globalSubrs=cff.GlobalSubrs))
+        top.CharStrings.charStrings[name] = len(top.CharStrings.charStringsIndex) - 1
+        top.charset.append(name)
+        font['hmtx'][name] = (advance, round(box.bounds[0]))
+        font['GDEF'].table.GlyphClassDef.classDefs[name] = 1
+        map_codepoint(font, codepoint, name)
+    font.setGlyphOrder(top.charset)
+
+
 def patch_besley(font, donor):
     donor_cmap, donor_glyphs, glyf = donor.getBestCmap(), donor.getGlyphSet(), font['glyf']
     scale = font['OS/2'].sCapHeight / donor['OS/2'].sCapHeight
@@ -159,15 +179,19 @@ def patch_besley(font, donor):
 
 
 def save(font, name):
+    font.recalcTimestamp = False
     font.flavor = 'woff2'
     font.save(OUT / f'{name}.woff2')
 
 
 archive = zipfile.ZipFile(io.BytesIO(fetch(OLD_STANDARD)))
 old_standard = lambda style: TTFont(io.BytesIO(archive.read(f'oldstandard/opentype/OldStandard-{style}.otf')))
+music = TTFont(io.BytesIO(fetch(NOTO_MUSIC)))
 for style in ('Regular', 'Italic', 'BoldItalic'):
     font = old_standard(style)
     patch_old_standard(font)
+    if style == 'Regular':
+        patch_music(font, music)
     save(font, f'OldStandard-{style}')
 besley = instantiateVariableFont(TTFont(io.BytesIO(fetch(BESLEY))), {'wght': 800})
 patch_besley(besley, old_standard('Bold'))

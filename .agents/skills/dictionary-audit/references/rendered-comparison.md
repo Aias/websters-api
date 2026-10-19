@@ -32,7 +32,7 @@ Keep before/after width, padding, font smoothing, font sizes, and baseline CSS f
 
 Compile Tailwind with both snapshot renderers and the viewer shell in its source set so neither revision loses utility styles. Keep font and illustration URLs reachable after browser navigation. If a capture wrapper or font setup is wrong, fix it and replace the affected evidence before accepting a product defect.
 
-The app's `main` is internally scrollable. A full-page screenshot may include only the visible entry portion. Either scroll that container through the entire entry or render the same entry HTML in a full-content static page. Inspect complete images at native resolution, including every segment of a long contact sheet.
+The app's `main` is internally scrollable. A full-page screenshot may include only the visible entry portion. Either scroll that container through the entire entry or render the same entry HTML in a full-content static page. Inspect complete images at native resolution, including every segment of a long contact sheet. For unusually tall pages, verify bottom-region pixels against the actual viewport and check overlaps for repeated earlier rows. Plausible dimensions do not prove a full-page capture is complete. Use independently captured entry or viewport images when the capture path repeats or omits content, and replace affected evidence with explicit supplemental review.
 
 ## Character-level rendered highlighting
 
@@ -54,6 +54,8 @@ Compare semantic layout and non-text content too. A new illustration, a changed 
 
 The After pane is identical only when text, relevant typography, semantic layout, and non-text content agree. A JSON difference alone does not prove a visual difference, and equal text alone does not prove visual equality.
 
+Loaded font faces do not prove coverage of every character. Investigate a missing-glyph box with the actual font cmap and rendered glyph, including supplementary-plane symbols. Keep each pane's font bytes and CSS revision faithful. For a glyph repair, verify unchanged existing outlines and metrics, and highlight the affected glyph even when its Unicode text and computed family are unchanged. Include every key using a changed lexical style or glyph in the final recheck, not only source-edited keys.
+
 ## Verify the viewer itself
 
 Check every selected entry programmatically after the final export:
@@ -69,3 +71,5 @@ Check every selected entry programmatically after the final export:
 Also exercise selection, filtering, hash navigation, keyboard controls, all modes, and a narrow viewport. Inspect representative short, long, notation-heavy, typography-only, restored-entry, and illustration cases. Check for horizontal overflow and complete alt text. Automated checks do not replace the entry-by-entry visual audit.
 
 After rebuilding assets, cache-bust the viewer URL or asset URLs and verify the loaded bundle before interpreting changed-entry counts. Cached JavaScript can produce a convincing but stale result. Save the verification output and representative screenshots with the batch report, and check that every delivered local link exists and every preview URL responds.
+
+Final visual review can overlap integration for stable entries. Capture per-entry raw, parsed, rendered, stylesheet, renderer, and font hashes. At the final export, prove that each reviewed output is unchanged and requeue every changed entry. Preserve the original capture and review records rather than silently replacing their inputs.

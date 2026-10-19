@@ -4,9 +4,12 @@ import { normalizeLookup } from '../app/lib/lookup';
 export function entryAliases(key: string, rawHtml: string): string[] {
   const $ = cheerio.load(rawHtml, { xml: false }, false);
   const aliases = new Set([key]);
-  $('.hw, .asp, .col, .conjf, .adjf, .plw, .wf').each((_, element) => {
-    const text = $(element)
-      .text()
+  $('.hw, .asp, .col, .conjf, .adjf, .plw, .wf, .plu .er').each((_, element) => {
+    const text = (
+      $(element).hasClass('col')
+        ? ($(element).attr('data-headword') ?? $(element).text())
+        : $(element).text()
+    )
       .normalize('NFC')
       .replace(/[′ˊˋˈˌ`*\u00ad‖]/g, '')
       .trim();

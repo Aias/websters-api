@@ -12,6 +12,20 @@ function entrySource(key: string): string {
 
 describe('dictionary headword keys', () => {
   test.each([
+    ['Advisable-ness', 'Advisableness', 'The quality of being advisable'],
+    ['Aemail ombrant', 'Émail ombrant', 'An art or process of flooding'],
+    ['AEsthetican', 'AEsthetician', 'One versed in æsthetics'],
+    ['Aisless', 'Aisleless', 'Without an aisle'],
+    ['Anemorphilous', 'Anemophilous', 'Fertilized by the agency of the wind'],
+    ['Apprehensibiity', 'Apprehensibility', 'The quality of being apprehensible'],
+    ["Alectryom'achy", 'Alectryomachy', 'Cockfighting'],
+  ])('resolves %s through corrected key %s', (oldKey, key, definition) => {
+    expect(source.has(oldKey)).toBe(false);
+    const $ = cheerio.load(entrySource(key), { xml: false }, false);
+    expect($('.def').first().text()).toContain(definition);
+  });
+
+  test.each([
     ['Argentamine', 'A solution of silver phosphate'],
     ['Azotine', 'An explosive consisting of sodium nitrate'],
     ['Bicarbureted', 'Containing two atoms or equivalents of carbon'],
@@ -33,6 +47,7 @@ describe('dictionary headword keys', () => {
     '-tin',
     '-retted',
     '-zin',
+    'Arboraceous',
     '. . .',
     '‖Apophasis',
     'Yakamilk',
@@ -41,6 +56,12 @@ describe('dictionary headword keys', () => {
     'Zoophorous',
   ])('%s is not a standalone dictionary key', (key) => {
     expect(() => entrySource(key)).toThrow(`Missing dictionary entry: ${key}`);
+  });
+
+  test('keeps Arbor Day with Arbor rather than an excluded neighboring entry', () => {
+    const $ = cheerio.load(entrySource('Arbor'), { xml: false }, false);
+    expect($('.cs .col').text()).toBe('Arbor Day');
+    expect($('.cs .cd').text()).toContain('a day appointed for planting trees and shrubs');
   });
 
   test('keeps Piperazine and Pyrazine in separate source entries', () => {
