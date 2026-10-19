@@ -54,13 +54,15 @@ Test candidate verification against withheld, independently established gold con
 
 Qualify verification by role and field. Success on ordinary prose does not qualify pronunciation, stress, Greek, entry identity, or structural numbering. Give the verifier the exact proposed change and source context, keeping the proposal worker's rationale separate from witness evidence.
 
+Identical tag sequences do not prove preserved text ownership. A repair that moves words across a markup boundary needs structural review, even when it also fixes an ordinary spelling error.
+
 For latency benchmarks, retain cached and uncached input separately. Lossless initial image attachments can remove image-tool round trips, but require actual native-pixel receipts from the saved initial message. Establish glyph gold by direct independent inspection, not agreement between models. Treat a narrow packet or one run per effort as limited evidence.
 
 For a fresh batch controller, verify output-directory creation, interpreter dependencies, and one actual request before bulk dispatch. Halt on a runner failure with no output rather than draining the queue. Replay a failed invocation only after proving whether a model call occurred, preserving its original logs and any session evidence.
 
 Check structured-output schema support through the provider, not only a local JSON Schema validator. A provider can reject an otherwise valid keyword before starting the model. Preserve that failure, version the corrected schema, and prove actual initial delivery before bulk admission. Enforce exact ordered identities in post-validation when the provider schema cannot express them.
 
-Bound text chunks by the reading tool's actual output limit, not entry count alone. A long entry may need separate raw, parsed, and witness sections. Share page-level font metadata once rather than repeating it throughout every entry. Keep model output compact with stable evidence identifiers and exact edits, then enrich guarded manifests from frozen input mechanically.
+Bound text chunks by the reading tool's actual output limit, not entry count alone. A long entry may need separate raw, parsed, and witness sections. Share page-level font metadata once rather than repeating it throughout every entry. Keep model output compact with stable evidence identifiers and exact edits, then enrich guarded manifests from frozen input mechanically. Compute hashes from immutable inputs and verify their actual delivery rather than asking the model to reproduce hash strings.
 
 Constrain each packet's structured output to its exact entry count and assigned identities. A schema-valid partial ledger is still incomplete. Independently check unique key/index pairs and every review dimension. When only row order differs, preserve the original answer and canonicalize a derived ledger against the frozen sequence rather than repeating the review.
 
