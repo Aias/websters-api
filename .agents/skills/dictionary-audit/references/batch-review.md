@@ -52,6 +52,8 @@ Distinguish noticing a defect from supplying a usable exact correction. Measure 
 
 Test candidate verification against withheld, independently established gold containing correct proposals, wrong proposals, and unchanged controls. Register both the false-acceptance limit and a useful correct-acceptance threshold before the run. A reviewer that rejects everything has not demonstrated useful throughput. Preserve original outputs and report limited samples honestly rather than interpreting zero observed errors as a guarantee.
 
+Qualify verification by role and field. Success on ordinary prose does not qualify pronunciation, stress, Greek, entry identity, or structural numbering. Give the verifier the exact proposed change and source context, keeping the proposal worker's rationale separate from witness evidence.
+
 For latency benchmarks, retain cached and uncached input separately. Lossless initial image attachments can remove image-tool round trips, but require actual native-pixel receipts from the saved initial message. Establish glyph gold by direct independent inspection, not agreement between models. Treat a narrow packet or one run per effort as limited evidence.
 
 For a fresh batch controller, verify output-directory creation, interpreter dependencies, and one actual request before bulk dispatch. Halt on a runner failure with no output rather than draining the queue. Replay a failed invocation only after proving whether a model call occurred, preserving its original logs and any session evidence.
