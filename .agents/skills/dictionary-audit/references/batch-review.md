@@ -50,11 +50,15 @@ Choose models and reasoning effort from measured quality and latency on the same
 
 Distinguish noticing a defect from supplying a usable exact correction. Measure incorrect accepted corrections separately from missed defects, including a wrong repair to an already defective field. When the user prioritizes avoiding false corrections over recall, reuse existing proposal reviews and give cheaper reviewers only the proposed edits with their exact owners and witnesses. Allow accept, reject, or uncertain without requesting new discoveries. Retain unchanged-entry evidence without automatically repeating strong-model review. Reserve strong judgment for selected difficult candidates and defer the rest.
 
+Where missed defects are acceptable, a text-only discovery pass may omit unchanged-entry witness and image review. Send its proposals to an independent native-witness verifier before approval. Benchmark discovery and verification separately, and keep text-only coverage distinct from complete initial review. Record unreviewed fields mechanically rather than asking the model to repeat known phonetic holds.
+
 Test candidate verification against withheld, independently established gold containing correct proposals, wrong proposals, and unchanged controls. Register both the false-acceptance limit and a useful correct-acceptance threshold before the run. A reviewer that rejects everything has not demonstrated useful throughput. Preserve original outputs and report limited samples honestly rather than interpreting zero observed errors as a guarantee.
 
-Qualify verification by role and field. Success on ordinary prose does not qualify pronunciation, stress, Greek, entry identity, or structural numbering. Give the verifier the exact proposed change and source context, keeping the proposal worker's rationale separate from witness evidence.
+Qualify verification by role and field. Success on ordinary prose does not qualify pronunciation, stress, Greek, transliterated etymological glyphs, entry identity, or structural numbering. Give the verifier the exact proposed change and source context, keeping the proposal worker's rationale separate from witness evidence.
 
 Identical tag sequences do not prove preserved text ownership. A repair that moves words across a markup boundary needs structural review, even when it also fixes an ordinary spelling error.
+
+Keep each accepted replacement minimal. A definite typo does not authorize an adjacent optional article, historical spelling change, or punctuation normalization bundled into the same proposal. Split the proposal only with separately bound evidence, or hold it intact.
 
 For latency benchmarks, retain cached and uncached input separately. Lossless initial image attachments can remove image-tool round trips, but require actual native-pixel receipts from the saved initial message. Establish glyph gold by direct independent inspection, not agreement between models. Treat a narrow packet or one run per effort as limited evidence.
 
@@ -97,6 +101,8 @@ A useful ledger records `index`, original and current key, the completed review 
 Unscaled contact sheets are acceptable if every entry remains legible and the reviewer opens every sheet. Record the exact indices inspected when a sheet overlaps two assignments. Do not downscale long entries to fit a single screen or assume a full-page app screenshot includes an internal scroll region.
 
 To reduce image-tool calls, pack consecutive native-width entry segments into bounded-height sheets. Preserve every source pixel, record each placement and entry identity, and verify each placed region against the original image. Keep individual segments available for closer inspection.
+
+Scrolling captures may overlap. Record their source offsets and trim repeated rows when assembling new sheets, with gap-free pixel coverage. Preserve frozen originals. Confirm apparent seam duplication against raw source, parsed content, browser text, and an independent viewport before treating it as a product defect.
 
 Before integration, assert unique, gap-free coverage of the frozen keys and reconcile reviewer boundaries. Count restored entries separately from the original requested batch.
 
