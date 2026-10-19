@@ -16,6 +16,7 @@ When the user accepts missed defects to reduce usage, use a conservative candida
 - For batch setup, delegation, integration, and completion, read [Batch review](references/batch-review.md).
 - For source recovery or shared parser, lookup, and typography changes, read [Sources and lexical behavior](references/sources-and-lexical-behavior.md).
 - For browser evidence or the comparison viewer, read [Rendered comparison](references/rendered-comparison.md).
+- For a text-only sweep of an unaudited range that applies only certain corrections, read [Quick-wins pass](references/quick-wins.md).
 
 Read the repository's [parsing guide](../../../scripts/PARSING.md), current implementation, and relevant tests before changing lexical behavior. Confirm boundary conditions in code and tests when the guide summarizes a rule. Paths in the references are relative to the repository root unless identified otherwise. Existing `.context/dictionary-audit/` reports and helpers can accelerate a continuation, but they are gitignored and may be absent. The references here describe the process without depending on those files.
 
