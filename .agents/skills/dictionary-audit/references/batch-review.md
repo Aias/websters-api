@@ -50,9 +50,11 @@ Choose models and reasoning effort from measured quality and latency on the same
 
 Distinguish noticing a defect from supplying a usable exact correction. Measure incorrect accepted corrections separately from missed defects, including a wrong repair to an already defective field. When the user prioritizes avoiding false corrections over recall, reuse existing proposal reviews and give cheaper reviewers only the proposed edits with their exact owners and witnesses. Allow accept, reject, or uncertain without requesting new discoveries. Retain unchanged-entry evidence without automatically repeating strong-model review. Reserve strong judgment for selected difficult candidates and defer the rest.
 
+Where missed defects are acceptable, a text-only discovery pass may omit unchanged-entry witness and image review. Send its proposals to an independent native-witness verifier before approval. Benchmark discovery and verification separately, and keep text-only coverage distinct from complete initial review. Record unreviewed fields mechanically rather than asking the model to repeat known phonetic holds.
+
 Test candidate verification against withheld, independently established gold containing correct proposals, wrong proposals, and unchanged controls. Register both the false-acceptance limit and a useful correct-acceptance threshold before the run. A reviewer that rejects everything has not demonstrated useful throughput. Preserve original outputs and report limited samples honestly rather than interpreting zero observed errors as a guarantee.
 
-Qualify verification by role and field. Success on ordinary prose does not qualify pronunciation, stress, Greek, entry identity, or structural numbering. Give the verifier the exact proposed change and source context, keeping the proposal worker's rationale separate from witness evidence.
+Qualify verification by role and field. Success on ordinary prose does not qualify pronunciation, stress, Greek, transliterated etymological glyphs, entry identity, or structural numbering. Give the verifier the exact proposed change and source context, keeping the proposal worker's rationale separate from witness evidence.
 
 Identical tag sequences do not prove preserved text ownership. A repair that moves words across a markup boundary needs structural review, even when it also fixes an ordinary spelling error.
 
