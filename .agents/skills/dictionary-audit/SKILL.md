@@ -9,6 +9,8 @@ Review the requested entries from source through browser output. Correct witness
 
 An exhaustive batch requires a complete raw-source read, parsed-structure review, actual browser-text check, and visual inspection of every entry. Automated scans help find defects and check regressions. They do not establish manual coverage. For a targeted defect, use the relevant parts of this workflow without expanding it into an unrequested batch.
 
+When the user accepts missed defects to reduce usage, use a conservative candidate-only verification pass instead of repeating exhaustive source judgment for every unchanged entry. Preserve completed reviews, candidates, evidence, and checks across model changes. Leave uncertain edits unapplied and record them for later. Report initial review, candidate verification, and exhaustive completion separately. The reduced-coverage mode does not relax the evidence required to accept a correction.
+
 ## Read the relevant guidance
 
 - For batch setup, delegation, integration, and completion, read [Batch review](references/batch-review.md).
