@@ -140,9 +140,7 @@ function BlockView({
       const first = block.content[0];
       return (
         <div className="mt-4 mb-2">
-          <strong>
-            <InlineHtml html={block.headwordHtml} />
-          </strong>
+          <InlineHtml html={block.headwordHtml} />
           {needsLeadingSpace(first) ? ' ' : null}
           <ContentView content={block.content} entryKey={entryKey} inline />
         </div>
@@ -167,7 +165,7 @@ function BlockView({
     }
     case 'note':
       return (
-        <div className="mt-1 text-sm text-muted-foreground">
+        <div data-sense={block.ownerSense} className="mt-1 text-sm text-muted-foreground">
           <InlineHtml html={block.html} />
         </div>
       );

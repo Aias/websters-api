@@ -32,7 +32,7 @@ test('A per se keeps its etymology on the compound line', () => {
   const heading = $('strong')
     .filter((_, node) => $(node).text().trim() === 'A per se')
     .first();
-  const compound = heading.parent();
+  const compound = heading.closest('div');
   expect(compound.text().replace(/\s+/g, ' ')).toContain('A per se (L. per se by itself), one');
   expect(compound.children('div')).toHaveLength(0);
 });

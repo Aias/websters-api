@@ -54,10 +54,38 @@ describe('preprocess', () => {
     expect(result).toContain('href="/entry/test_ref"');
   });
 
+  test.each(['#', '?', '�'])('omits an unwrapped unknown conjugation field: %s', (marker) => {
+    const html = `<div class="vmorph"><div class="conjf">Given</div>(${marker});</div>`;
+    expect(plain(preprocess(html))).toBe('Given;');
+  });
+
+  test.each([
+    '<div class="vmorph"><div class="conjf">Given</div>(-n�);</div>',
+    '<div class="vmorph"><div class="conjf">Given</div>(�; 73);</div>',
+    '<div class="vmorph"><div class="conjf">Given</div>(�)word;</div>',
+    '<div class="q"><div class="conjf">Given</div>(�);</div>',
+    '<div class="conjf">Given</div>(�);',
+  ])('retains uncertainty outside a complete conjugation placeholder: %s', (html) => {
+    expect(plain(preprocess(html))).toContain('�');
+  });
+
   test('omits source sense annotations from display text and reference slugs', () => {
     const result = preprocess('<div class="er">Whitecap{2}</div> tissue{1}');
     expect(result).toContain('href="/entry/whitecap"');
     expect(plain(result)).toBe('Whitecap tissue');
+  });
+
+  test.each([
+    ['Ampulla, 2.', 'ampulla'],
+    ['Apple, 2.', 'apple'],
+    ['Appointee, 2', 'appointee'],
+    ['Common, noun', 'common_noun'],
+    ['A 1', 'a_1'],
+    ['Doe, John', 'doe_john'],
+  ])('preserves %s while resolving its lexical target', (label, slug) => {
+    const result = preprocess(`<div class="er">${label}</div>`);
+    expect(result).toContain(`href="/entry/${slug}"`);
+    expect(plain(result)).toBe(label);
   });
 
   test('preserves local dictionary illustrations and descriptions without allowing remote image sources', () => {
@@ -252,6 +280,39 @@ describe('headwords and sections', () => {
     ).toEqual(['First', '(first)', 'noun', ', or', 'Second', '(second)', 'adjective']);
   });
 
+  test.each(['Bechic', 'Beetle-browed', 'Condemnable'])(
+    '%s recognizes its unmarked adjective label without changing the abbreviation',
+    (key) => {
+      const homograph = parseEntry(key, sourceHtml(key)).homographs[0];
+      expect(homograph.partOfSpeech).toBe('a.');
+      expect(homograph.header.slice(-2)).toEqual([
+        { kind: 'text', text: ',' },
+        { kind: 'partOfSpeech', text: 'a.' },
+      ]);
+      expect(text(homograph.content).trimStart()).not.toMatch(/^, a\./);
+    }
+  );
+
+  test('keeps an unmarked adjective label within an adjacent-headword group', () => {
+    const entry = parseEntry(
+      'Example',
+      '<h2 class="hw">First</h2>, a. <h2 class="hw">Second</h2><div class="pos">adjective</div><div class="def">Meaning.</div>'
+    );
+    expect(entry.homographs).toHaveLength(1);
+    expect(entry.homographs[0].alternateHeadwords).toEqual(['Second']);
+    expect(text(entry.homographs[0].content)).toBe('Meaning.');
+  });
+
+  test.each([
+    '<div class="ety">, a. </div><div class="def">Meaning.</div>',
+    '<div class="def">Meaning.</div>, a. <h2 class="hw">Second</h2><div class="def">Other.</div>',
+    ', a. longer text <div class="def">Meaning.</div>',
+  ])('keeps label-like body text out of the header: %s', (html) => {
+    const entry = parseEntry('Example', `<h2 class="hw">Example</h2>${html}`);
+    expect(entry.homographs[0].partOfSpeech).toBeNull();
+    expect(text(entry.homographs[0].content)).toContain(', a.');
+  });
+
   test('keeps usage marks, joined labels and base words on the header line', () => {
     const header = (html: string) =>
       parseEntry('Example', html).homographs[0].header.map((part) =>
@@ -279,6 +340,19 @@ describe('headwords and sections', () => {
     ).toEqual(['First', 'or', 'Second']);
   });
 
+  test('keeps header attributions before grammatical labels', () => {
+    const entry = parseEntry(
+      'Example',
+      '<h2 class="hw">Example</h2><div class="au">Editor</div>, <div class="pos">noun</div><div class="def">Meaning.</div><div class="au">Writer</div>, <div class="pos">adjective</div>'
+    );
+    const homograph = entry.homographs[0];
+    expect(homograph.partOfSpeech).toBe('noun');
+    expect(homograph.header[1]).toEqual({ kind: 'inline', html: '<span class="au">Editor</span>' });
+    expect(homograph.header[2]).toEqual({ kind: 'text', text: ',' });
+    expect(homograph.header.at(-1)).toEqual({ kind: 'partOfSpeech', text: 'noun' });
+    expect(text(homograph.content)).toBe('Meaning.Writer, adjective');
+  });
+
   test('keeps connective text in a headword group with one header', () => {
     const entry = parseEntry(
       'Example',
@@ -287,6 +361,30 @@ describe('headwords and sections', () => {
     expect(entry.homographs).toHaveLength(1);
     expect(entry.homographs[0].alternateHeadwords).toEqual(['Second', 'Third']);
     expect(text(entry.homographs[0].content)).toBe('Meaning.');
+  });
+
+  test('omits bare header placeholders without dropping grammar or body uncertainty', () => {
+    const entry = parseEntry(
+      'Example',
+      '<h2 class="hw">Example</h2><div class="pr">(sound)</div>(#), <div class="pos">noun</div><div class="def">Meaning (#).</div>'
+    );
+    expect(entry.homographs[0].pronunciation).toBe('sound');
+    expect(entry.homographs[0].partOfSpeech).toBe('noun');
+    expect(text(entry.homographs[0].content)).toBe('Meaning (#).');
+  });
+
+  test('keeps singular-use qualifications with the plural header forms', () => {
+    const entry = parseEntry(
+      'Example',
+      '<h2 class="hw">Example</h2>, <div class="pos">plural noun</div>, but often used as <i class="xex">sing</i>. with <div class="plu"><i>pl.</i> Examples.</div><div class="def">Meaning.</div>'
+    );
+    const homograph = entry.homographs[0];
+    expect(homograph.partOfSpeech).toBe('plural noun');
+    const qualification = homograph.header.at(-1);
+    expect(qualification?.kind === 'inline' && plain(qualification.html)).toBe(
+      ', but often used as sing. with pl. Examples.'
+    );
+    expect(text(homograph.content)).toBe('Meaning.');
   });
 
   test('splits repeated headwords after lexical content', () => {
@@ -538,16 +636,112 @@ test('preserves sense-local synonyms and standalone usage', () => {
   );
 });
 
-test('allows explicit homograph scope only for notes and synonyms', () => {
+test('allows explicit lexical scope only for notes and synonyms', () => {
   const html = preprocess(
-    '<div class="syn" data-scope="homograph">Whole entry.</div><div class="syn" data-scope="other">Other.</div><div class="note" data-scope="homograph">Whole-entry note.</div><div class="def" data-scope="homograph">Meaning.</div>'
+    '<div class="syn" data-scope="homograph">Whole entry.</div><div class="syn" data-scope="sense">Sense.</div><div class="syn" data-scope="other">Other.</div><div class="note" data-scope="homograph">Whole-entry note.</div><div class="def" data-scope="sense">Meaning.</div>'
   );
-  expect(html.match(/data-scope/g)).toHaveLength(2);
+  expect(html.match(/data-scope/g)).toHaveLength(3);
   const blocks = content(
     '<div class="sn">1.</div><div class="def">First.</div><div class="sn">2.</div><div class="def">Second.</div><div class="syn" data-scope="homograph">Whole-entry comparison.</div>'
   );
   expect(blocks.at(-1)).toEqual({ kind: 'synonyms', html: 'Whole-entry comparison.' });
 });
+
+test('places a numbered-sense comparison after its lettered subsenses', () => {
+  const blocks = content(
+    '<div class="sd">I.</div><div class="sn">1.</div><div class="sd">(a)</div><div class="def">First case.</div><div class="note">Local note.</div><div class="sd">(b)</div><div class="def">Second case.</div><div class="syn" data-scope="sense">Both cases.</div><div class="sn">2.</div><div class="def">Another meaning.</div>'
+  );
+  const section = blocks[0];
+  if (section.kind !== 'sense') throw new Error('Missing Roman section');
+  const first = section.content[0];
+  if (first.kind !== 'sense') throw new Error('Missing numbered sense');
+  expect(first.content.map((block) => block.kind)).toEqual(['sense', 'sense', 'synonyms']);
+  const subsense = first.content[0];
+  if (subsense.kind !== 'sense') throw new Error('Missing lettered subsense');
+  expect(subsense.content.at(-1)).toEqual({ kind: 'note', html: 'Local note.' });
+  expect(first.content.at(-1)).toEqual({ kind: 'synonyms', html: 'Both cases.' });
+  expect(section.content).toHaveLength(2);
+});
+
+test('keeps an explicitly extended secondary definition in its sense', () => {
+  const blocks = content(
+    '<div class="sn">1.</div><div class="def">A person.</div><div class="specif">Also</div><div class="def2"><div class="pos">adjective</div><div class="def">Descriptive.</div></div><div class="au">Writer.</div><div class="sn">2.</div><div class="def">A language.</div>'
+  );
+  expect(blocks.map((block) => block.kind)).toEqual(['sense', 'sense']);
+  const first = blocks[0];
+  if (first.kind !== 'sense') throw new Error('Missing first sense');
+  expect(first.content.at(-1)?.kind).toBe('section');
+  expect(text(first.content)).toBe('A person.AlsoadjectiveDescriptive.Writer.');
+});
+
+test('keeps unintroduced secondary parts of speech at homograph level', () => {
+  const blocks = content(
+    '<div class="sn">1.</div><div class="sd">(a)</div><div class="def">First.</div><div class="sd">(b)</div><div class="def">Second.</div><div class="def2"><div class="pos">noun</div><div class="def">Another part of speech.</div></div><div class="col">A compound</div><div class="def">Its meaning.</div>'
+  );
+  expect(blocks.map((block) => block.kind)).toEqual(['sense', 'section', 'compound']);
+});
+
+test('keeps numbered grammatical labels in the header', () => {
+  const homograph = parseEntry(
+    'Example',
+    '<h2 class="hw">Example</h2><div class="pr">(example)</div>, (1) <div class="pos">infinitive verb</div>, (2) <div class="pos">noun</div><div class="sn">1.</div><div class="def">To act.</div><div class="sn">2.</div><div class="def">An action.</div>'
+  ).homographs[0];
+  expect(homograph.header.slice(2)).toEqual([
+    { kind: 'text', text: ', (1)' },
+    { kind: 'partOfSpeech', text: 'infinitive verb' },
+    { kind: 'text', text: ', (2)' },
+    { kind: 'partOfSpeech', text: 'noun' },
+  ]);
+  expect(homograph.partOfSpeech).toBe('infinitive verb');
+  expect(homograph.content.map((block) => block.kind)).toEqual(['sense', 'sense']);
+});
+
+test('keeps an explicitly scoped compound and its continuation in its numbered sense', () => {
+  const blocks = content(
+    '<div class="sn">1.</div><div class="def">Mineral.</div><div class="cs" data-scope="sense"><div class="col">A mineral variety</div><div class="cd">Its description.</div></div><div class="q">An example.</div><div class="qau">Writer.</div><div class="sn">2.</div><div class="def">A color.</div><div class="cs"><div class="col">A general compound</div><div class="cd">Another description.</div></div>'
+  );
+  expect(blocks.map((block) => block.kind)).toEqual(['sense', 'sense', 'compound']);
+  const first = blocks[0];
+  if (first.kind !== 'sense') throw new Error('Missing mineral sense');
+  const compound = first.content.at(-1);
+  if (compound?.kind !== 'compound') throw new Error('Missing mineral compound');
+  expect(compound.content.at(-1)).toEqual({
+    kind: 'quotation',
+    html: 'An example.',
+    authors: ['Writer.'],
+  });
+});
+
+test('keeps Agreement synonyms after both subsenses and Amethyst compounds in sense one', () => {
+  const agreement = parseEntry('Agreement', sourceHtml('Agreement')).homographs[0];
+  const third = agreement.content.find((block) => block.kind === 'sense' && block.number === '3.');
+  if (third?.kind !== 'sense') throw new Error('Missing Agreement sense three');
+  expect(third.content.filter((block) => block.kind === 'sense')).toHaveLength(2);
+  expect(third.content.some((block) => block.kind === 'synonyms')).toBe(true);
+
+  const amethyst = parseEntry('Amethyst', sourceHtml('Amethyst')).homographs[0];
+  const first = amethyst.content.find((block) => block.kind === 'sense' && block.number === '1.');
+  if (first?.kind !== 'sense') throw new Error('Missing Amethyst sense one');
+  expect(first.content.some((block) => block.kind === 'compound')).toBe(true);
+  expect(amethyst.content.some((block) => block.kind === 'compound')).toBe(false);
+});
+
+test.each(['note', 'syn'])(
+  'keeps a sense-scoped %s after a sense-local compound with its numbered sense',
+  (className) => {
+    const blocks = content(
+      `<div class="sn">1.</div><div class="def">First.</div><div class="cs" data-scope="sense"><div class="col">A phrase</div><div class="cd">Its meaning.</div></div><div class="${className}" data-scope="sense">Applies to the first sense.</div><div class="sn">2.</div><div class="def">Second.</div>`
+    );
+    expect(blocks.map((block) => block.kind)).toEqual(['sense', 'sense']);
+    const first = blocks[0];
+    if (first.kind !== 'sense') throw new Error('Missing first sense');
+    expect(first.content.map((block) => block.kind)).toEqual([
+      'definition',
+      'compound',
+      className === 'note' ? 'note' : 'synonyms',
+    ]);
+  }
+);
 
 test('keeps unscoped notes with their sense and scoped notes at homograph level', () => {
   const blocks = content(
@@ -662,4 +856,105 @@ test.each(['Inadvertency', 'Poseuse'])('%s keeps a header separator on its forms
   if (forms.kind !== 'forms') throw new Error('Missing header forms');
   expect(plain(forms.html)).toMatch(/,$/);
   expect(header[formsIndex + 1].kind).toBe('headword');
+});
+
+test('separates explicitly identified nested definitions without splitting example words', () => {
+  const entry = parseEntry(
+    'Fixture',
+    '<h2 class="hw">Fixture</h2><div class="sn">2.</div><div class="sd">(a)</div><div class="def"><i class="xex">re</i>join. <div class="sd" data-role="definition">(b)</div><div class="fld">(Law)</div>Second meaning.</div><div class="au">Author.</div>'
+  );
+  const sense = entry.homographs[0]?.content[0];
+  if (sense?.kind !== 'sense') throw new Error('Missing numbered sense');
+  expect(
+    sense.content.map((block) => (block.kind === 'sense' ? block.number : block.kind))
+  ).toEqual(['(a)', '(b)']);
+  const first = sense.content[0];
+  const second = sense.content[1];
+  if (first?.kind !== 'sense' || second?.kind !== 'sense') throw new Error('Missing subsenses');
+  expect(first.content).toEqual([{ kind: 'definition', html: '<em class="xex">re</em>join. ' }]);
+  expect(second.content.at(-1)).toEqual({ kind: 'text', html: '<span class="au">Author.</span>' });
+});
+
+test('keeps overloaded nested reference markers inline unless their role is explicit', () => {
+  const entry = parseEntry(
+    'Reference',
+    '<h2 class="hw">Reference</h2><div class="sd">(a)</div><div class="def">See Illust. <div class="sd">(b)</div> of <div class="er">Bird</div>.</div>'
+  );
+  const first = entry.homographs[0]?.content[0];
+  if (first?.kind !== 'sense') throw new Error('Missing first subsense');
+  expect(entry.homographs[0]?.content).toHaveLength(1);
+  expect(first.content[0]).toEqual({
+    kind: 'definition',
+    html: 'See Illust. <span class="sd">(b)</span> of <a class="er" href="/entry/bird">Bird</a>.',
+  });
+  expect(
+    preprocess(
+      '<div class="def" data-role="definition">Body.</div><div class="sd" data-role="unknown">(b)</div>'
+    )
+  ).not.toContain('data-role');
+});
+
+test('retains mixed compound heading spans without widening their emphasis', () => {
+  const blocks = content(
+    '<div class="mcol"><div class="col">First name</div> or <div class="col">Second name</div> (<div class="spn">Species</div>)</div><div class="cd">Meaning.</div>'
+  );
+  const compound = blocks[0];
+  if (compound?.kind !== 'compound') throw new Error('Missing compound');
+  expect(compound.headwords).toEqual(['First name', 'Second name']);
+  expect(compound.headwordHtml).toBe(
+    '<span class="mcol"><span class="col">First name</span> or <span class="col">Second name</span> (<span class="spn">Species</span>)</span>'
+  );
+});
+
+test('references an earlier note owner without changing source order', () => {
+  const blocks = content(
+    '<div class="sn">1.</div><div class="def">First.</div><div class="sn">2.</div><div class="def">Second.</div><div class="sn">3.</div><div class="def">Third.</div><div class="note" data-scope="sense:2">About the second meaning.</div>'
+  );
+  expect(blocks.map((block) => block.kind)).toEqual(['sense', 'sense', 'sense', 'note']);
+  expect(blocks[3]).toEqual({
+    kind: 'note',
+    html: 'About the second meaning.',
+    ownerSense: '2.',
+  });
+  expect(text(blocks)).toBe('1.First.2.Second.3.Third.About the second meaning.');
+});
+
+test('retains separators around unknown alternate-header pronunciations', () => {
+  const entry = parseEntry(
+    'Pair',
+    '<div class="mhw"><h2 class="hw">First</h2> (#), <h2 class="hw">Second</h2> (?), </div><div class="pos">noun</div><div class="def">Meaning.</div>'
+  );
+  const header = entry.homographs[0]?.header;
+  expect(header?.filter((part) => part.kind === 'text')).toEqual([
+    { kind: 'text', text: ',' },
+    { kind: 'text', text: ',' },
+  ]);
+  expect(entry.homographs[0]?.pronunciation).toBeNull();
+});
+
+test('keeps closing punctuation within its preceding lexical block', () => {
+  const blocks = content(
+    '<div class="syn">Similar words</div>. <div class="usage">Different uses.</div>'
+  );
+  expect(blocks).toEqual([
+    { kind: 'synonyms', html: 'Similar words. ' },
+    { kind: 'usage', html: 'Different uses.' },
+  ]);
+  expect(content('<div class="syn">Similar words.</div> Different text.')).toEqual([
+    { kind: 'synonyms', html: 'Similar words.' },
+    { kind: 'text', html: ' Different text.' },
+  ]);
+});
+
+test('indexes complete compound names without expanding displayed ellipses', () => {
+  const blocks = content(
+    '<div class="mcol"><div class="col" data-headword="At close range">At close</div> (or <div class="col" data-headword="At long range">long</div>) <div class="col" data-headword="">range</div></div><div class="cd">Meaning.</div>'
+  );
+  const compound = blocks[0];
+  if (compound?.kind !== 'compound') throw new Error('Missing compound');
+  expect(compound.headwords).toEqual(['At close range', 'At long range']);
+  expect(plain(compound.headwordHtml)).toBe('At close (or long) range');
+  expect(preprocess('<div class="def" data-headword="Wrong">Meaning.</div>')).not.toContain(
+    'data-headword'
+  );
 });

@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'bun:test';
 import { normalizeLookup } from '../app/lib/lookup';
+import { readDictionarySource } from './dictionary-source';
 import { entryAliases, unambiguousAliases } from './entry-aliases';
 
 describe('dictionary reference lookup', () => {
@@ -105,6 +106,21 @@ describe('dictionary reference lookup', () => {
     ).toEqual(['Index', 'Indices', 'Indexed', 'Indexer']);
   });
 
+  test('indexes linked plural forms without displacing canonical entries', () => {
+    const agama = readDictionarySource().get('Agama');
+    if (!agama) throw new Error('Missing Agama source');
+    expect(entryAliases('Agama', agama)).toContain('Agamas');
+    const aliases = unambiguousAliases(
+      new Map([
+        ['Agama', entryAliases('Agama', agama)],
+        ['Stamen', entryAliases('Stamen', '<div class="plu"><div class="er">Stamina</div></div>')],
+        ['Stamina', ['Stamina']],
+      ])
+    );
+    expect(aliases.get('agamas')).toBe('Agama');
+    expect(aliases.get('stamina')).toBe('Stamina');
+  });
+
   test('exact entries win and ambiguous alternate destinations stay unresolved', () => {
     const result = unambiguousAliases(
       new Map([
@@ -115,5 +131,17 @@ describe('dictionary reference lookup', () => {
     expect(result.get('beta')).toBe('Beta');
     expect(result.get('gamma')).toBe('Beta');
     expect(result.has('shared')).toBe(false);
+  });
+
+  test('indexes explicit complete compound names rather than their shared fragments', () => {
+    expect(
+      entryAliases(
+        'Range',
+        '<div class="col" data-headword="At close range">At close</div> (or <div class="col" data-headword="At long range">long</div>) <div class="col" data-headword="">range</div>'
+      )
+    ).toEqual(['Range', 'At close range', 'At long range']);
+    expect(entryAliases('Range', '<h2 class="hw" data-headword="Wrong">Range</h2>')).toEqual([
+      'Range',
+    ]);
   });
 });

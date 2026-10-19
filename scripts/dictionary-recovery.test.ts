@@ -11,6 +11,29 @@ function entrySource(key: string): string {
 }
 
 describe('dictionary extraction recovery', () => {
+  test('keeps Admeasure and Admeasurement as separate numbered entries', () => {
+    const verb = parseEntry('Admeasure', entrySource('Admeasure')).homographs[0];
+    const noun = parseEntry('Admeasurement', entrySource('Admeasurement')).homographs[0];
+    expect(
+      verb.content.filter((block) => block.kind === 'sense').map((sense) => sense.number)
+    ).toEqual(['1.', '2.']);
+    expect(
+      noun.content.filter((block) => block.kind === 'sense').map((sense) => sense.number)
+    ).toEqual(['1.', '2.', '3.']);
+    expect(JSON.stringify(noun.content)).toContain('The measure of a thing');
+    expect(JSON.stringify(noun.content)).toContain('This was done by writ of');
+    expect(JSON.stringify(verb.content)).not.toContain('The measure of a thing');
+  });
+
+  test('keeps the Alternate angles diagram with its compound definition', () => {
+    const entry = parseEntry('Alternate', entrySource('Alternate'));
+    const angles = entry.homographs[0]?.content.find(
+      (block) => block.kind === 'compound' && block.headwords.includes('Alternate angles')
+    );
+    if (angles?.kind !== 'compound') throw new Error('Missing Alternate angles compound');
+    expect(JSON.stringify(angles.content)).toContain('/illustrations/alternate-angles.png');
+  });
+
   test.each([
     'Undoubtful',
     'Unheritable',

@@ -36,11 +36,35 @@ Extract each selected entry's witnesses once, so every reviewer starts from the 
 - **Gutenberg:** the paragraphs from the entry's headword paragraph up to the next different headword. A headword paragraph starts with the stress-marked form, an optional parenthesized pronunciation, a comma, and an abbreviated part of speech. Stop at the `=====` divider before the 1913 supplement. Run-in derivatives and supplement-only entries can lack a block, so search the file directly for those.
 - **Print:** the leaf found from the page's running heads, plus full-resolution crops of each column in three overlapping parts. Crops about 750 px wide keep the small type legible after image downscaling.
 
+Verify each packet’s printed page number, running head, and actual entry text against its image before assignment. OCR page indices and image-endpoint leaf numbers can diverge when one sequence includes duplicate scans. Reanchor the mapping after such a discontinuity and preserve frozen incorrect inputs when issuing targeted supplements.
+
 Write one dossier per entry. Each holds the raw HTML, parsed model, rendered HTML, witness extracts with file positions, print leaf range, and crop paths. Report how many entries lack each witness.
+
+Check public-network access before assigning downloads to a headless worker. When its sandbox has no network, use an authorized downloader and give reviewers immutable local files with verified hashes and dimensions.
 
 ## Divide independent review work
 
 Distribute disjoint ranges according to text volume and complexity as well as entry count. Balancing by the combined length of raw HTML and GCIDE text, ranges of roughly 75 to 170 entries fit one reviewer. Each reviewer receives the frozen records, dossiers, baseline exports, the print leaves covering its range, working browser URLs, evidence requirements, and a private scratch directory. Require completion of the assigned range rather than an early sample.
+
+Choose models and reasoning effort from measured quality and latency on the same frozen representative packets. Compare usable witnessed repairs, unsupported changes, preserved content, actual model/effort, and end-to-end time. A fast failed review is not a throughput improvement. Keep proposal workers, mechanical validators, and fresh source judges independent, and increase concurrency at the measured bottleneck. Benchmark results and active packets remain immutable when instructions improve. For headless runs, retain the executable/version, resolved effort, frozen inputs, usage, and full successful tool trace. A compact event stream may omit image-tool events, so validate the underlying trace rather than treating an absent event as a failed image or an inspection claim as proof. Disable automatic restart for finite batch jobs unless their restart behavior is explicitly safe.
+
+For latency benchmarks, retain cached and uncached input separately. Lossless initial image attachments can remove image-tool round trips, but require actual native-pixel receipts from the saved initial message. Establish glyph gold by direct independent inspection, not agreement between models. Treat a narrow packet or one run per effort as limited evidence.
+
+For a fresh batch controller, verify output-directory creation, interpreter dependencies, and one actual request before bulk dispatch. Halt on a runner failure with no output rather than draining the queue. Replay a failed invocation only after proving whether a model call occurred, preserving its original logs and any session evidence.
+
+Check structured-output schema support through the provider, not only a local JSON Schema validator. A provider can reject an otherwise valid keyword before starting the model. Preserve that failure, version the corrected schema, and prove actual initial delivery before bulk admission. Enforce exact ordered identities in post-validation when the provider schema cannot express them.
+
+Bound text chunks by the reading tool's actual output limit, not entry count alone. A long entry may need separate raw, parsed, and witness sections. Share page-level font metadata once rather than repeating it throughout every entry. Keep model output compact with stable evidence identifiers and exact edits, then enrich guarded manifests from frozen input mechanically.
+
+Constrain each packet's structured output to its exact entry count and assigned identities. A schema-valid partial ledger is still incomplete. Independently check unique key/index pairs and every review dimension. When only row order differs, preserve the original answer and canonicalize a derived ledger against the frozen sequence rather than repeating the review.
+
+Separate model execution from coverage closure. Quarantine entry-specific source gaps and unproved proposals without crediting them as complete. Unrelated primary jobs can continue after transport, schema, input integrity, and exact identities pass. Require actual raw, decoded, parsed, browser-text, and rendered-image evidence before admitting a packet to independent SOURCE review. Missing print remains a source-only obligation, never a successful print read. Halt dispatch for systemic runner or integrity failures.
+
+Probe both total-result and per-line limits. A successful text read can still be clipped. Use byte-bounded, gap-free read windows and verify returned line coverage. Split long source strings losslessly rather than truncating them. Initial inline delivery can remove text-tool round trips, but requires exact persisted request-payload proof and a matched quality benchmark before adoption. Keep inline receipts distinct from successful tool reads.
+
+Start independent source judgment when each packet passes mechanical validation. Use a rolling queue for independent jobs rather than waiting for an entire wave when completed slots could accept ready work. Prepare later packets concurrently, then verify integrated output as it stabilizes. Keep the final source and implementation equality checks before declaring the batch complete.
+
+Share provider concurrency across primary and visual controllers. Count actual model processes and reserved runners from every active batch, deduplicated by working directory. Use one dispatch owner or explicit phase gates to prevent two controllers from taking the same free capacity. Qualify higher concurrency with disjoint bounded cohorts, preserve active jobs, and close new admissions on provider failures. Report latency and completed work without claiming a controlled speed comparison from different packets.
 
 Some agent harnesses block subagents from writing report files. Ask reviewers to put the full report in their final message, and save it from there.
 
@@ -62,7 +86,15 @@ A useful ledger records `index`, original and current key, the completed review 
 
 Unscaled contact sheets are acceptable if every entry remains legible and the reviewer opens every sheet. Record the exact indices inspected when a sheet overlaps two assignments. Do not downscale long entries to fit a single screen or assume a full-page app screenshot includes an internal scroll region.
 
+To reduce image-tool calls, pack consecutive native-width entry segments into bounded-height sheets. Preserve every source pixel, record each placement and entry identity, and verify each placed region against the original image. Keep individual segments available for closer inspection.
+
 Before integration, assert unique, gap-free coverage of the frozen keys and reconcile reviewer boundaries. Count restored entries separately from the original requested batch.
+
+Validate successful tool results against the frozen file hashes, returned text-line intervals, and native image dimensions. A requested read, an oversized failed result, or a worker's claim is not read evidence. Fill gaps with targeted supplemental review attributed to its actual reviewer, preserving the original incomplete ledger. Reuse byte-identical overlapping images by digest without claiming an unopened image was inspected.
+
+Check image-tool size limits on guides and diagrams as well as entry captures. A successful read may return a resized image. Split oversized originals into overlapping unscaled crops, verify complete pixel coverage, and require actual reads of those crops. Preserve the resized receipt and attribute any supplemental review separately.
+
+When older image results acquire a `[media removed: request limit]` placeholder, distinguish later context removal from an originally failed read. Do not reopen an image already actually inspected solely because that placeholder appears. Reopen unresolved glyphs or images whose original delivery or inspection is incomplete. Delivery receipts alone never establish inspection. Keep prompts and original review traces immutable when adding this guidance to future invocations.
 
 ## Apply guarded source patches
 
@@ -79,6 +111,8 @@ Use a patch manifest with these fields:
 Track additions and key renames separately. Check destination collisions before renaming and retain the original review identity for paired comparisons. A restored neighboring entry may require moving a stranded quotation or author out of the preceding record. Account for both sides of that move.
 
 Merge reviewer manifests into one combined manifest keyed by original key, and reject a key patched twice. Apply integrator adjustments as exact find-and-replace edits on the reviewer's result, each with its own reason and evidence.
+
+After adjudicating a validation discrepancy, regenerate derived manifests and coverage from the original answers and frozen values. Independently replay every accepted, adjusted, rejected, and additional edit, then reconcile the complete edit partition. Changing a validation status alone can leave an accepted repair absent from the manifest.
 
 Review every patch, then validate all guards before writing. On a mismatch, read the concurrent change and reconcile it instead of overwriting or merely updating the expected hash. If a patch receives a supplement, retain the baseline hash in the final manifest and guard the supplement against the intermediate value too.
 
