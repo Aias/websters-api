@@ -36,7 +36,7 @@ Extract each selected entry's witnesses once, so every reviewer starts from the 
 - **Gutenberg:** the paragraphs from the entry's headword paragraph up to the next different headword. A headword paragraph starts with the stress-marked form, an optional parenthesized pronunciation, a comma, and an abbreviated part of speech. Stop at the `=====` divider before the 1913 supplement. Run-in derivatives and supplement-only entries can lack a block, so search the file directly for those.
 - **Print:** the leaf found from the page's running heads, plus full-resolution crops of each column in three overlapping parts. Crops about 750 px wide keep the small type legible after image downscaling.
 
-Verify each packet’s printed page number, running head, and actual entry text against its image before assignment. OCR page indices and image-endpoint leaf numbers can diverge when one sequence includes duplicate scans. Reanchor the mapping after such a discontinuity and preserve frozen incorrect inputs when issuing targeted supplements.
+Verify each packet’s printed page number, running head, and actual entry text against its image before assignment. When a dossier includes a verified native print locator, dispatch from that locator and assert agreement with the native page map. Preserve provisional OCR locations as diagnostic context. OCR page indices and image-endpoint leaf numbers can diverge when one sequence includes duplicate scans. Reanchor the mapping after such a discontinuity and preserve frozen incorrect inputs when issuing targeted supplements.
 
 Write one dossier per entry. Each holds the raw HTML, parsed model, rendered HTML, witness extracts with file positions, print leaf range, and crop paths. Report how many entries lack each witness.
 
@@ -58,7 +58,7 @@ Qualify verification by role and field. Success on ordinary prose does not quali
 
 Identical tag sequences do not prove preserved text ownership. A repair that moves words across a markup boundary needs structural review, even when it also fixes an ordinary spelling error.
 
-Keep each accepted replacement minimal. A definite typo does not authorize an adjacent optional article, historical spelling change, or punctuation normalization bundled into the same proposal. Split the proposal only with separately bound evidence, or hold it intact.
+Keep each accepted replacement minimal. A definite typo does not authorize an adjacent optional article, historical spelling change, or punctuation normalization bundled into the same proposal. Split the proposal only with separately bound evidence, or hold it intact. When an acceptance rationale identifies a different printed replacement, hold the proposal until an independent source check resolves the exact edit.
 
 For latency benchmarks, retain cached and uncached input separately. Lossless initial image attachments can remove image-tool round trips, but require actual native-pixel receipts from the saved initial message. Establish glyph gold by direct independent inspection, not agreement between models. Treat a narrow packet or one run per effort as limited evidence.
 
