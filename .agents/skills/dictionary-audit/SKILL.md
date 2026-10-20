@@ -1,6 +1,6 @@
 ---
 name: dictionary-audit
-description: Audit and repair Webster dictionary entries against source witnesses, verify parsing and rendered presentation, and produce the established before/after comparison. Use for exhaustive entry batches or targeted dictionary-content defects, not unrelated application work.
+description: Audit and repair Webster dictionary entries against source witnesses, verify parsing and rendered presentation, and produce the established before/after comparison. Use for exhaustive entry batches, targeted dictionary-content defects, or a text-only quick-wins sweep over an unaudited range, not unrelated application work.
 ---
 
 # Dictionary audit
