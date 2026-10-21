@@ -29,10 +29,17 @@ export function loadPreprocessedDocument(
     }
 
     if (hasClass(el, 'er')) {
-      const slug = entryReferenceSlug($(el).text(), resolve);
-      if (slug) {
-        el.tagName = 'a';
-        el.attribs['href'] = `/entry/${slug}`;
+      if (
+        $(el).closest('.ety').length &&
+        /^\p{Script=Greek}[\p{Script=Greek}\p{M}]*$/u.test(getText($, el))
+      ) {
+        $(el).removeClass('er').addClass('grk');
+      } else {
+        const slug = entryReferenceSlug($(el).text(), resolve);
+        if (slug) {
+          el.tagName = 'a';
+          el.attribs['href'] = `/entry/${slug}`;
+        }
       }
     }
 

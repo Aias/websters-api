@@ -75,6 +75,19 @@ describe('preprocess', () => {
     expect(plain(result)).toBe('Whitecap tissue');
   });
 
+  test('keeps Greek etymons distinct from entry references', () => {
+    const $ = cheerio.load(
+      preprocess(
+        '<div class="ety">Gr. <div class="er">λόγος </div>word. See <div class="er">Logic</div>.</div><div class="def">See <div class="er">λόγος</div>.</div>'
+      )
+    );
+    expect($('.ety .grk').text()).toBe('λόγος');
+    expect($('.ety .grk').is('a')).toBe(false);
+    expect($('.ety a').attr('href')).toBe('/entry/logic');
+    expect($('.def a').text()).toBe('λόγος');
+    expect($('.def a').attr('href')).toBe('/entry/λόγος');
+  });
+
   test.each([
     ['Ampulla, 2.', 'ampulla'],
     ['Apple, 2.', 'apple'],
