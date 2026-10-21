@@ -23,7 +23,7 @@ Verifier metadata (`.ver`) and GCIDE sense pointers such as `wryneck{1}` are omi
 
 `scripts/source-typography.ts` preserves explicit table rows, cells, and spanning headers as native HTML tables. A malformed row remains in a spanning cell without assigning its text to guessed columns. Tables without cell boundaries retain their preformatted text and row breaks. Source exponent and subscript markers become `sup` and `sub`. Double breves and macrons on `oo` are encoded between the vowels so the mark spans both letters, following [Unicode's double-diacritic encoding](https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-7/). In `.grk` text, a word-final σ becomes ς, and a comma written after α, η, or ω inside a word becomes that vowel's iota subscript, as in ζῷον.
 
-`scripts/build-fonts.py` generates the bundled Webster fonts. The regular face includes the segno and cut-time glyphs from the pinned Noto Music donor, whose license is in `app/fonts/NotoMusic-OFL.txt`. Supplementary-plane characters map only through cmap formats that support them. Existing glyph outlines, metrics, and mappings remain unchanged when adding symbols.
+`scripts/build-fonts.py` generates the bundled Webster fonts. The regular face includes the segno, fermata, cut-time, turn, and turn-up glyphs from the pinned Noto Music donor, whose license is in `app/fonts/NotoMusic-OFL.txt`. Supplementary-plane characters map only through cmap formats that support them. Existing glyph outlines, metrics, and mappings remain unchanged when adding symbols.
 
 ## Homographs and headers
 

@@ -150,7 +150,7 @@ def patch_music(font, donor):
     cff = font['CFF '].cff
     top, glyphs, cmap = cff.topDictIndex[0], donor.getGlyphSet(), donor.getBestCmap()
     scale = font['OS/2'].sCapHeight / donor['OS/2'].sCapHeight
-    for codepoint in (0x1D10B, 0x1D135):
+    for codepoint in (0x1D10B, 0x1D110, 0x1D135, 0x1D197, 0x1D19A):
         name, source = f'u{codepoint:05X}', cmap[codepoint]
         advance = round(donor['hmtx'][source][0] * scale)
         pen, box = T2CharStringPen(advance, None), BoundsPen(None)
