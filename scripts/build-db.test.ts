@@ -386,6 +386,24 @@ describe('headwords and sections', () => {
     expect(text(entry.homographs[0].content)).toBe('Meaning (#).');
   });
 
+  test.each([
+    ['(sound), ', 'sound', '(sound)'],
+    ['(-v<i>e</i>n); ', '-ven', '(-v<em>e</em>n)'],
+    ['(&#xFFFD;), ', null, null],
+    ['(277) ', null, null],
+  ])('keeps an unwrapped header field before its grammar: %s', (field, pronunciation, html) => {
+    const homograph = parseEntry(
+      'Example',
+      `<h2 class="hw">Example</h2>${field}<div class="pos">noun</div><div class="def">Meaning (?).</div>`
+    ).homographs[0];
+    expect(homograph.pronunciation).toBe(pronunciation);
+    expect(homograph.partOfSpeech).toBe('noun');
+    expect(homograph.header.find((part) => part.kind === 'pronunciation')?.html ?? null).toBe(html);
+    if (field === '(277) ')
+      expect(homograph.header).toContainEqual({ kind: 'text', text: '(277)' });
+    expect(text(homograph.content)).toBe('Meaning (?).');
+  });
+
   test('keeps singular-use qualifications with the plural header forms', () => {
     const entry = parseEntry(
       'Example',
