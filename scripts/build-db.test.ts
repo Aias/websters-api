@@ -75,6 +75,19 @@ describe('preprocess', () => {
     expect(plain(result)).toBe('Whitecap tissue');
   });
 
+  test('keeps Greek etymons distinct from entry references', () => {
+    const $ = cheerio.load(
+      preprocess(
+        '<div class="ety">Gr. <div class="er">λόγος </div>word. See <div class="er">Logic</div>.</div><div class="def">See <div class="er">λόγος</div>.</div>'
+      )
+    );
+    expect($('.ety .grk').text()).toBe('λόγος');
+    expect($('.ety .grk').is('a')).toBe(false);
+    expect($('.ety a').attr('href')).toBe('/entry/logic');
+    expect($('.def a').text()).toBe('λόγος');
+    expect($('.def a').attr('href')).toBe('/entry/λόγος');
+  });
+
   test.each([
     ['Ampulla, 2.', 'ampulla'],
     ['Apple, 2.', 'apple'],
@@ -371,6 +384,24 @@ describe('headwords and sections', () => {
     expect(entry.homographs[0].pronunciation).toBe('sound');
     expect(entry.homographs[0].partOfSpeech).toBe('noun');
     expect(text(entry.homographs[0].content)).toBe('Meaning (#).');
+  });
+
+  test.each([
+    ['(sound), ', 'sound', '(sound)'],
+    ['(-v<i>e</i>n); ', '-ven', '(-v<em>e</em>n)'],
+    ['(&#xFFFD;), ', null, null],
+    ['(277) ', null, null],
+  ])('keeps an unwrapped header field before its grammar: %s', (field, pronunciation, html) => {
+    const homograph = parseEntry(
+      'Example',
+      `<h2 class="hw">Example</h2>${field}<div class="pos">noun</div><div class="def">Meaning (?).</div>`
+    ).homographs[0];
+    expect(homograph.pronunciation).toBe(pronunciation);
+    expect(homograph.partOfSpeech).toBe('noun');
+    expect(homograph.header.find((part) => part.kind === 'pronunciation')?.html ?? null).toBe(html);
+    if (field === '(277) ')
+      expect(homograph.header).toContainEqual({ kind: 'text', text: '(277)' });
+    expect(text(homograph.content)).toBe('Meaning (?).');
   });
 
   test('keeps singular-use qualifications with the plural header forms', () => {

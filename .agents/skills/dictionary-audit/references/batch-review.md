@@ -36,7 +36,7 @@ Extract each selected entry's witnesses once, so every reviewer starts from the 
 - **Gutenberg:** the paragraphs from the entry's headword paragraph up to the next different headword. A headword paragraph starts with the stress-marked form, an optional parenthesized pronunciation, a comma, and an abbreviated part of speech. Stop at the `=====` divider before the 1913 supplement. Run-in derivatives and supplement-only entries can lack a block, so search the file directly for those.
 - **Print:** the leaf found from the page's running heads, plus full-resolution crops of each column in three overlapping parts. Crops about 750 px wide keep the small type legible after image downscaling.
 
-Verify each packet’s printed page number, running head, and actual entry text against its image before assignment. OCR page indices and image-endpoint leaf numbers can diverge when one sequence includes duplicate scans. Reanchor the mapping after such a discontinuity and preserve frozen incorrect inputs when issuing targeted supplements.
+Verify each packet’s printed page number, running head, and actual entry text against its image before assignment. When a dossier includes a verified native print locator, dispatch from that locator and assert agreement with the native page map. Preserve provisional OCR locations as diagnostic context. OCR page indices and image-endpoint leaf numbers can diverge when one sequence includes duplicate scans. Reanchor the mapping after such a discontinuity and preserve frozen incorrect inputs when issuing targeted supplements.
 
 Write one dossier per entry. Each holds the raw HTML, parsed model, rendered HTML, witness extracts with file positions, print leaf range, and crop paths. Report how many entries lack each witness.
 
@@ -58,7 +58,7 @@ Qualify verification by role and field. Success on ordinary prose does not quali
 
 Identical tag sequences do not prove preserved text ownership. A repair that moves words across a markup boundary needs structural review, even when it also fixes an ordinary spelling error.
 
-Keep each accepted replacement minimal. A definite typo does not authorize an adjacent optional article, historical spelling change, or punctuation normalization bundled into the same proposal. Split the proposal only with separately bound evidence, or hold it intact.
+Keep each accepted replacement minimal. A definite typo does not authorize an adjacent optional article, historical spelling change, or punctuation normalization bundled into the same proposal. Split the proposal only with separately bound evidence, or hold it intact. When an acceptance rationale identifies a different printed replacement, hold the proposal until an independent source check resolves the exact edit.
 
 For latency benchmarks, retain cached and uncached input separately. Lossless initial image attachments can remove image-tool round trips, but require actual native-pixel receipts from the saved initial message. Establish glyph gold by direct independent inspection, not agreement between models. Treat a narrow packet or one run per effort as limited evidence.
 
@@ -68,7 +68,7 @@ Check structured-output schema support through the provider, not only a local JS
 
 Bound text chunks by the reading tool's actual output limit, not entry count alone. A long entry may need separate raw, parsed, and witness sections. Share page-level font metadata once rather than repeating it throughout every entry. Keep model output compact with stable evidence identifiers and exact edits, then enrich guarded manifests from frozen input mechanically. Compute hashes from immutable inputs and verify their actual delivery rather than asking the model to reproduce hash strings.
 
-Constrain each packet's structured output to its exact entry count and assigned identities. A schema-valid partial ledger is still incomplete. Independently check unique key/index pairs and every review dimension. When only row order differs, preserve the original answer and canonicalize a derived ledger against the frozen sequence rather than repeating the review.
+Constrain each packet's structured output to its exact entry count and assigned identities. Constrain image-citation arrays to the packet's exact image IDs, keeping explanations in a separate reason field. A schema-valid partial ledger is still incomplete. Independently check unique key/index pairs and every review dimension. When only row order differs, preserve the original answer and canonicalize a derived ledger against the frozen sequence rather than repeating the review.
 
 Separate model execution from coverage closure. Quarantine entry-specific source gaps and unproved proposals without crediting them as complete. Unrelated primary jobs can continue after transport, schema, input integrity, and exact identities pass. Require actual raw, decoded, parsed, browser-text, and rendered-image evidence before admitting a packet to independent SOURCE review. Missing print remains a source-only obligation, never a successful print read. Halt dispatch for systemic runner or integrity failures.
 

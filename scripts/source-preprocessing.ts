@@ -1,6 +1,7 @@
 import * as cheerio from 'cheerio';
+import type { AnyNode } from 'domhandler';
 import { entryReferenceSlug, type EntryResolver } from './entry-references';
-import { getText, hasClass, isElement } from './source-dom';
+import { getOuterHtml, getText, hasClass, isElement } from './source-dom';
 import { normalizeSourceTypography } from './source-typography';
 
 export function loadPreprocessedDocument(
@@ -29,10 +30,17 @@ export function loadPreprocessedDocument(
     }
 
     if (hasClass(el, 'er')) {
-      const slug = entryReferenceSlug($(el).text(), resolve);
-      if (slug) {
-        el.tagName = 'a';
-        el.attribs['href'] = `/entry/${slug}`;
+      if (
+        $(el).closest('.ety').length &&
+        /^\p{Script=Greek}[\p{Script=Greek}\p{M}]*$/u.test(getText($, el))
+      ) {
+        $(el).removeClass('er').addClass('grk');
+      } else {
+        const slug = entryReferenceSlug($(el).text(), resolve);
+        if (slug) {
+          el.tagName = 'a';
+          el.attribs['href'] = `/entry/${slug}`;
+        }
       }
     }
 
@@ -77,6 +85,24 @@ export function loadPreprocessedDocument(
     }
   });
 
+  $('.pos').each((_, node) => {
+    const fragments: AnyNode[] = [];
+    let previous = node.previousSibling;
+    while (
+      previous &&
+      (previous.type === 'text' || (isElement(previous) && previous.tagName === 'em'))
+    ) {
+      fragments.unshift(previous);
+      previous = previous.previousSibling;
+    }
+    if (!previous || !hasClass(previous, 'hw')) return;
+    const field = /^\s*(\((?!\s*\d)[^()]+\))\s*([,;]?)\s*$/.exec(
+      fragments.map((part) => getOuterHtml($, part)).join('')
+    );
+    if (!field) return;
+    $(node).before(`<span class="pr">${field[1]}</span>${field[2]}`);
+    for (const fragment of fragments) $(fragment).remove();
+  });
   $('.pr').each((_, node) => {
     const placeholder =
       /^\(\s*[#?�](?:\s*or\s*[#?�])*\s*(?:[;,]\s*(\d+(?:\s*,\s*\d+)*)\s*)?\)$/.exec(
