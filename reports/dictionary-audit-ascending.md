@@ -9,10 +9,10 @@ The remaining complete-entry queue contains 3,494 entries, ordered by JavaScript
 | Stage                                                                       | Entries |
 | --------------------------------------------------------------------------- | ------: |
 | Earlier pilot inspections reconciled with current source and browser output |      24 |
-| Additional entries examined, Arthrodesis through Ectypal                    |     164 |
-| Source, parser, browser text, and visual review closed                      |     134 |
-| Examined entries with unresolved source readings or lookup defects          |      54 |
-| Entries awaiting initial review                                             |   3,306 |
+| Additional entries examined, Arthrodesis through Empyreal                   |     188 |
+| Source, parser, browser text, and visual review closed                      |     150 |
+| Examined entries with unresolved source readings or lookup defects          |      62 |
+| Entries awaiting initial review                                             |   3,282 |
 
 The pilot's closed entries are -ite, -yl, Algometer, Aliphatic, Amylopsin, Anaseismic, Anoetic, Anthracnose, Aplotomy, Apneumatic, Aristotype, Arm, and Arnaout. Additional closed entries are Auxometer, Arthrodesis, Arthrospore, Ascariasis, Bacteriolysis, Baresthesiometer, Barothermograph, Blepharitis, Brontograph, Brontometer, Cachemia, Cacostomia, Capsulotomy, Cataclasm, and Catelectrotonus. Closed entries from Celiac through Crenelate are listed below. The pilot's earlier initial inspections are preserved. Reconciliation and post-integration verification are separate from new source review.
 
@@ -154,6 +154,29 @@ This 24-entry group has 53 witnessed source operations across all 24 entries. Ni
 
 The second printing corroborates exact fields rather than authorizing revised definitions or omitted components. Ecthoreum retains the printed forms without adding modern iota subscripts. Ecphractic's middle infinitive remains wholly unreadable because neither print establishes its initial breathing. Exact frozen offsets keep that held field unchanged while repairing its later component.
 
+## Edify through Empyreal
+
+This 24-entry group has 64 accepted operations across 23 changed entries. Empyesis remains unchanged. Sixteen entries are source-closed, and eight remain held.
+
+| Entries                             | Accepted readings                                                                            |
+| ----------------------------------- | -------------------------------------------------------------------------------------------- |
+| Edify; Effendi; Egg                 | first homograph transitive label; ἀφέντης, αὐθέντης; √1                                      |
+| Egyptian; Elaeagnus                 | Αἰγύπτιος; ἐλαίαγνος, ἐλαία                                                                  |
+| Electuary                           | ἐκλεικτόν, ἐκλείχειν, λείχειν; existing guide-bearing pronunciation; comma after electarium  |
+| Elegy; Elephantine; Ell             | ἐλεγεία, ἐλεγεῖα, ἐλεγεῖον, ἐλεγεῖος; ἐλεφάντινος; ὠλένη                                     |
+| Emanate; Ember; Emery               | μαδός, μαδαρός, μαδᾶν, quotation “form”; ǣmyrie; σμίρις, σμύρις, σμῆρις, σμᾶν, final “forms” |
+| Empaistic; Empasm                   | ἐμπαιστική, τεχνή, ἐμπαίειν, ἐν, παίειν; ἐμπάσσειν, ἐν, πάσσειν                              |
+| Emphractic; Emphysema               | ἐμφρακτικός, ἐμφράσσειν; ἐμφύσημα, ἐμφυσᾶν, ἐν, φυσᾶν                                        |
+| Emplaster; Emplecton                | ἔμπλαστρον, ἐμπλάσσειν, ἐν, πλάσσειν; ἔμπλεκτον, ἔμπλεκτος, ἐμπλέκειν, ἐν, πλέκειν           |
+| Emporetical; Emprosthotonos; Empuse | ἐμπορευτικός; ἔμπροσθεν, τείνειν; ἔμπουσα                                                    |
+| Empyema; Empyreal                   | ἐμπύημα, ἐμπυεῖν, ἐν, πύον; ἐμπύριος, ἔμπυρος, ἐν, πῦρ                                       |
+
+[Edify's own header, page 471](https://archive.org/download/webstersinternat01webs/page/n576.jpg?scale=1), labels the first homograph transitive. Its other homographs are unchanged. [Electuary, page 478](https://archive.org/download/webstersinternat01webs/page/n583.jpg?scale=1), and the pronunciation guide support `(-tū̍-ā̍-ry̆; 135)`, retaining both uptacks, the final y breve, and the guide number. Only the existing composite field changes, with no new pronunciation owner.
+
+[Emanate's continuation, page 482](https://archive.org/download/webstersinternat01webs/page/n587.jpg?scale=1), supplies “form” in the quotation and its whole-intransitive synonym list. “Flow” and “issue” reproduce sense 1's defining verbs. “Arise,” “proceed,” and “originate” reproduce sense 2's defining verbs. The existing homograph-scope annotation preserves that combined ownership while leaving the quotation under sense 2 and the following adjective unchanged. [Emery, page 484](https://archive.org/download/webstersinternat01webs/page/n589.jpg?scale=1), supplies the word “forms” missing from a broken definition.
+
+Empaistic's unfamiliar τεχνή retains its final-eta acute, visible in both its [1907 owner, page 485](https://archive.org/download/webstersinternat01webs/page/n590.jpg?scale=1), and [1915 owner, page 717](https://archive.org/download/bwb_O8-DDQ-914/page/n834.jpg). Empyesis's two own printings disagree about accent placement, so its unknown Greek word remains unchanged. Revised related-edition etymologies are not substituted for the electronic entries.
+
 ## Adjective-form ownership
 
 Divine, Greasy, and Showy have explicit printed comparative and superlative lists stored as etymology and entry references. Nine class-attribute corrections give those three blocks the existing `amorph` and `adjf` roles. All text and pronunciation bytes are unchanged. Their own [Divine](https://archive.org/download/webstersinternat01webs/page/n543.jpg?scale=1), [Greasy](https://archive.org/download/webstersinternat01webs/page/n753.jpg?scale=1), and [Showy](https://archive.org/download/webstersinternat02websuoft/page/n381.jpg?scale=1) print lines establish the form ownership.
@@ -176,14 +199,16 @@ Dicynodont, Dinichthys, and Dipnoi retain illustration-provenance holds. Dipnoi 
 
 Drake's parenthesized Greek form and Dysodile's final Greek form retain unresolved breathing marks. Duck retains an illustration-provenance hold. Drone remains held for witnessed terminal punctuation lost when part-of-speech abbreviations were expanded. That recurring defect, also present in Duck, is recorded for a corpus pass rather than repaired locally. Ecphractic retains its unresolved middle Greek word.
 
+Edify, Egyptian, Elaeagnus, Electuary, and Elegy each retain one unreadable Greek field with unresolved breathing marks. Egg retains three illustration-provenance holds. Empyesis retains its edition-accent hold, and Emplaster retains its deferred terminal-punctuation hold.
+
 ## Continuation and verification
 
 The ascending review owns the early-alphabet batches. Concurrent descending review owns separate late-alphabet claims on `chengdu-v4/full-entry-z`. Exact keys are recorded before review, and each branch has its own index and services. The ascending changes are published in [draft PR #26 (Restore dictionary characters from print and continue entry reviews)](https://github.com/Aias/websters-api/pull/26). Descending changes are published separately in [draft PR #27 (Restore lost characters and print-witnessed slips from the end of the alphabet)](https://github.com/Aias/websters-api/pull/27). Shared print scans remain read-only.
 
-The next claimed ascending batches are Edify through Emery and Empaistic through Empyreal. Their unfinished work is excluded from the counts above. The next unclaimed key is Enchylemma, derived from the frozen key sequence. The separate three-entry form-role repair grants no complete-entry review credit to Greasy or Showy.
+The next claimed ascending batches are Enchylemma through Enomotarch, Enomoty through Epiclinal, and Epidemical through Epodic. Their unfinished work is excluded from the counts above. The next unclaimed key is Epoophoron, derived from the frozen key sequence. The separate three-entry form-role repair grants no complete-entry review credit to Greasy or Showy. The reverse-direction model has reached its session usage limit; its claims and unpublished work remain reserved and untouched.
 
 Every counted inspection includes the complete raw entry, decoded text, parsed model, available electronic witnesses, actual browser text, and full native-width rendered images. Printed owners and explicit component references were read individually. Full intervening print columns were not reviewed, so these counts do not establish an exhaustive review of the surrounding alphabetic ranges.
 
-The integrated database contains 100,771 entries with no parse errors. Current runtime text agrees with the current After exports for all 164 additional entries. Divine's form-role export supersedes its earlier source-only export. The pilot has separate current browser-text and visual verification. The corrupt Chillostomata alias is replaced with Cheilostomata. Existing lookup destinations are preserved except for that witnessed spelling repair. All other source records are byte-identical to their preceding checkpoints. Character-level comparison checks cover source filtering, keyboard navigation, all display modes, unchanged panes where present, loaded fonts, and narrow viewports. Each accepted source change has an original-value hash guard and independent native-witness judgment.
+The integrated database contains 100,771 entries with no parse errors. Current runtime text agrees with the current After exports for all 188 additional entries. Divine's form-role export supersedes its earlier source-only export. The pilot has separate current browser-text and visual verification. The corrupt Chillostomata alias is replaced with Cheilostomata. Existing lookup destinations are preserved except for that witnessed spelling repair. All other source records are byte-identical to their preceding checkpoints. Character-level comparison checks cover source filtering, keyboard navigation, all display modes, unchanged panes where present, loaded fonts, and narrow viewports. Each accepted source change has an original-value hash guard and independent native-witness judgment.
 
 Temporary review storage is bounded per batch. Cleanup removes regenerable SQLite copies from inactive snapshots while preserving frozen source, code, fonts, exported entries, compact review records, and shared witnesses. The cleanup receipt records 7,732,379,648 bytes removed from 55 database copies. Exact, independently decompressed archives replace two further raw source snapshots, reclaiming a net 111,521,775 bytes without losing source data.
