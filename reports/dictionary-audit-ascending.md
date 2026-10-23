@@ -10,8 +10,8 @@ The remaining complete-entry queue contains 3,494 entries, ordered by JavaScript
 | --------------------------------------------------------------------------- | ------: |
 | Earlier pilot inspections reconciled with current source and browser output |      24 |
 | Additional entries examined, Arthrodesis through Ectypal                    |     164 |
-| Source, parser, browser text, and visual review closed                      |     133 |
-| Examined entries with unresolved source readings or lookup defects          |      55 |
+| Source, parser, browser text, and visual review closed                      |     134 |
+| Examined entries with unresolved source readings or lookup defects          |      54 |
 | Entries awaiting initial review                                             |   3,306 |
 
 The pilot's closed entries are -ite, -yl, Algometer, Aliphatic, Amylopsin, Anaseismic, Anoetic, Anthracnose, Aplotomy, Apneumatic, Aristotype, Arm, and Arnaout. Additional closed entries are Auxometer, Arthrodesis, Arthrospore, Ascariasis, Bacteriolysis, Baresthesiometer, Barothermograph, Blepharitis, Brontograph, Brontometer, Cachemia, Cacostomia, Capsulotomy, Cataclasm, and Catelectrotonus. Closed entries from Celiac through Crenelate are listed below. The pilot's earlier initial inspections are preserved. Reconciliation and post-integration verification are separate from new source review.
@@ -109,7 +109,7 @@ Seventeen existing phonetic fields recover their printed notation. The recoverie
 
 ## Diatryma through Drabble
 
-This 36-entry group has 75 accepted source operations across 35 changed entries. Dihedral remains unchanged. Twenty-six entries are source-closed, and ten retain source or lookup holds.
+This 36-entry group has 75 accepted source operations across 35 changed entries. Dihedral remains unchanged. Twenty-seven entries are source-closed, including Divine after its separate form-role repair. Nine retain source holds.
 
 | Entries                            | Accepted readings                                          |
 | ---------------------------------- | ---------------------------------------------------------- |
@@ -154,6 +154,14 @@ This 24-entry group has 53 witnessed source operations across all 24 entries. Ni
 
 The second printing corroborates exact fields rather than authorizing revised definitions or omitted components. Ecthoreum retains the printed forms without adding modern iota subscripts. Ecphractic's middle infinitive remains wholly unreadable because neither print establishes its initial breathing. Exact frozen offsets keep that held field unchanged while repairing its later component.
 
+## Adjective-form ownership
+
+Divine, Greasy, and Showy have explicit printed comparative and superlative lists stored as etymology and entry references. Nine class-attribute corrections give those three blocks the existing `amorph` and `adjf` roles. All text and pronunciation bytes are unchanged. Their own [Divine](https://archive.org/download/webstersinternat01webs/page/n543.jpg?scale=1), [Greasy](https://archive.org/download/webstersinternat01webs/page/n753.jpg?scale=1), and [Showy](https://archive.org/download/webstersinternat02websuoft/page/n381.jpg?scale=1) print lines establish the form ownership.
+
+The repair removes six permanent form links, including Divine's misleading Diviner link and broken Divinest link. Five missing aliases resolve to their adjective entries: Divinest, Greasier, Greasiest, Showier, and Showiest. Canonical noun entries Diviner and Fuller retain precedence. Full's existing unlinked Fuller form supplies the matching control. True base references in Chiefest and Rather, and the See references in Far, Farther, and Little, remain unchanged. No parser or resolver code changes are needed.
+
+Live alias routes and lookup responses pass for all five forms and both canonical noun controls. Divine's lookup hold is closed. Greasy and Showy receive targeted role verification only, with no complete-entry review credit. All 238,652 existing lookup names are preserved, and the five additions bring the current total to 238,657.
+
 ## Unresolved readings
 
 The pilot retains source holds for Actinogram, Actinophone, Adipolytic, Aërodonetics, Aërodrome, Aerophone, Alalia, Anisometropia, Anisospore, Aplasia, and Appendicectomy. Alalia's Greek is restored, but its historical definition and the word "ataxis" lack a matching print witness.
@@ -166,18 +174,16 @@ Characterize retains its four text-variant holds. Chlorite retains a slate-defin
 
 Dicynodont, Dinichthys, and Dipnoi retain illustration-provenance holds. Dipnoi also has an explicit appendix illustration reference. Direct's musical custos and Dismantle's synonym ownership remain unresolved. Dihedral's two Greek words and one Greek word each in Dieresis, Diesis, and Diiambus remain unreadable because the breathing direction cannot be established from the available print. A second printing did not resolve those marks.
 
-Divine retains a lookup hold. Its comparative Diviner links to the noun-only Diviner entry, and its superlative Divinest links to a missing entry. Both links reproduce GCIDE's reference markup, but the printed adjective line establishes a different lexical role. The certain source recoveries do not resolve this shared reference-classification defect, and canonical noun precedence is preserved.
-
 Drake's parenthesized Greek form and Dysodile's final Greek form retain unresolved breathing marks. Duck retains an illustration-provenance hold. Drone remains held for witnessed terminal punctuation lost when part-of-speech abbreviations were expanded. That recurring defect, also present in Duck, is recorded for a corpus pass rather than repaired locally. Ecphractic retains its unresolved middle Greek word.
 
 ## Continuation and verification
 
 The ascending review owns the early-alphabet batches. Concurrent descending review owns separate late-alphabet claims on `chengdu-v4/full-entry-z`. Exact keys are recorded before review, and each branch has its own index and services. The ascending changes are published in [draft PR #26 (Restore dictionary characters from print and continue entry reviews)](https://github.com/Aias/websters-api/pull/26). Descending changes are published separately in [draft PR #27 (Restore lost characters and print-witnessed slips from the end of the alphabet)](https://github.com/Aias/websters-api/pull/27). Shared print scans remain read-only.
 
-The next claimed ascending batches are Edify through Emery and Empaistic through Empyreal. Their unfinished work is excluded from the counts above. The next unclaimed key is Enchylemma, derived from the frozen key sequence. A separate three-entry form-role investigation covers Divine, Greasy, and Showy without granting complete-entry review credit to Greasy or Showy.
+The next claimed ascending batches are Edify through Emery and Empaistic through Empyreal. Their unfinished work is excluded from the counts above. The next unclaimed key is Enchylemma, derived from the frozen key sequence. The separate three-entry form-role repair grants no complete-entry review credit to Greasy or Showy.
 
 Every counted inspection includes the complete raw entry, decoded text, parsed model, available electronic witnesses, actual browser text, and full native-width rendered images. Printed owners and explicit component references were read individually. Full intervening print columns were not reviewed, so these counts do not establish an exhaustive review of the surrounding alphabetic ranges.
 
-The integrated database contains 100,771 entries with no parse errors. Current runtime text agrees with exported After text for all 164 additional entries. The pilot has separate current browser-text and visual verification. The corrupt Chillostomata alias is replaced with Cheilostomata. All 238,652 current source names retain their lookup destinations through the later group. All other source records are byte-identical to their preceding checkpoints. Character-level comparison checks cover source filtering, keyboard navigation, all display modes, unchanged panes where present, loaded fonts, and narrow viewports. Each accepted source change has an original-value hash guard and independent native-witness judgment.
+The integrated database contains 100,771 entries with no parse errors. Current runtime text agrees with the current After exports for all 164 additional entries. Divine's form-role export supersedes its earlier source-only export. The pilot has separate current browser-text and visual verification. The corrupt Chillostomata alias is replaced with Cheilostomata. Existing lookup destinations are preserved except for that witnessed spelling repair. All other source records are byte-identical to their preceding checkpoints. Character-level comparison checks cover source filtering, keyboard navigation, all display modes, unchanged panes where present, loaded fonts, and narrow viewports. Each accepted source change has an original-value hash guard and independent native-witness judgment.
 
 Temporary review storage is bounded per batch. Cleanup removes regenerable SQLite copies from inactive snapshots while preserving frozen source, code, fonts, exported entries, compact review records, and shared witnesses. The cleanup receipt records 7,732,379,648 bytes removed from 55 database copies. Exact, independently decompressed archives replace two further raw source snapshots, reclaiming a net 111,521,775 bytes without losing source data.
