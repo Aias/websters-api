@@ -9,10 +9,10 @@ The remaining complete-entry queue contains 3,494 entries, ordered by JavaScript
 | Stage                                                                       | Entries |
 | --------------------------------------------------------------------------- | ------: |
 | Earlier pilot inspections reconciled with current source and browser output |      24 |
-| Additional entries examined, Arthrodesis through Homogonous                 |     368 |
-| Source, parser, browser text, and visual review closed                      |     238 |
-| Examined entries with unresolved source readings or lookup defects          |     154 |
-| Entries awaiting initial review                                             |   3,102 |
+| Additional entries examined, Arthrodesis through Horror                     |     405 |
+| Source, parser, browser text, and visual review closed                      |     251 |
+| Examined entries with unresolved source readings or lookup defects          |     178 |
+| Entries awaiting initial review                                             |   3,065 |
 
 The pilot's closed entries are -ite, -yl, Algometer, Aliphatic, Amylopsin, Anaseismic, Anoetic, Anthracnose, Aplotomy, Apneumatic, Aristotype, Arm, and Arnaout. Additional closed entries are Auxometer, Arthrodesis, Arthrospore, Ascariasis, Bacteriolysis, Baresthesiometer, Barothermograph, Blepharitis, Brontograph, Brontometer, Cachemia, Cacostomia, Capsulotomy, Cataclasm, and Catelectrotonus. Closed entries from Celiac through Crenelate are listed below. The pilot's earlier initial inspections are preserved. Reconciliation and post-integration verification are separate from new source review.
 
@@ -201,7 +201,7 @@ Six pronunciation recoveries belong to exact fields retained as unreadable in GC
 
 ## Exogyra through Hidrosis
 
-These 48 selected entries have 74 accepted operations across 37 changed entries. Twenty entries are source-closed, and 32 remain held. Sixty-two operations restore Greek fields. Independent readers corrected the proposed hair noun to θρῖξ and Hexapod’s genitive to ἑξαπόδος before integration.
+These 48 selected entries have 74 accepted operations across 37 changed entries. Twenty entries are source-closed, and 28 remain held. Sixty-two operations restore Greek fields. Independent readers corrected the proposed hair noun to θρῖξ and Hexapod’s genitive to ἑξαπόδος before integration.
 
 [Hepar, page 686](https://archive.org/download/webstersinternat01webs/page/n791.jpg?scale=1), supplies three separately owned body pronunciations. GCIDE retains unreadable fields for those exact children. Two missing fields are inserted, and one existing damaged field is repaired. The bare headword pronunciation remains unfilled. [Hepatite on the same page](https://archive.org/download/webstersinternat01webs/page/n791.jpg?scale=1), and [Heresiarch, page 687](https://archive.org/download/webstersinternat01webs/page/n792.jpg?scale=1), recover existing composite pronunciation fields, preserving guide number 277, reduced a, vowel marks, and distinct uptack positions.
 
@@ -222,6 +222,18 @@ These 48 selected entries have 45 accepted operations across 33 changed entries.
 [Holt, Holy, and Homage, page 700](https://archive.org/download/webstersinternat01webs/page/n805.jpg?scale=1), restore “through” in the Tennyson quotation, the Old Saxon hēlag, and the Greek χαμαί. Homage’s synonym list has positive cross-sense evidence: fealty matches sense 1, respect matches sense 2, and reverence matches sense 3. Its usage and contrasting quotations belong to the noun as a whole. Chaucer remains under sense 3, Hooker and Pope remain under sense 2, and the following verb is unchanged.
 
 [Homochromous through Homogonous, page 701](https://archive.org/download/webstersinternat01webs/page/n806.jpg?scale=1), restores eight clear Greek fields. Homodont’s proposed front-to-form change is held. The inspected print reads form, but the electronic front remains grammatically possible, without sufficient evidence to classify it as corruption. Homoeomery’s printed Homœometry heading remains a name hold. The coherent electronic past-tense wording in Homogeny is preserved.
+
+## Homoioptoton through Horror
+
+These 37 selected entries have 37 accepted operations across 26 changed entries. Thirteen entries are source-closed, and 24 retain holds. Thirty-three operations restore Greek fields. No pronunciation fields are inserted or repaired.
+
+[Homoiothermic, page 701](https://archive.org/download/webstersinternat01webs/page/n806.jpg?scale=1), restores the broken phrase “in distinct from” to “in distinction from.” Its expanded electronic definition and synonyms remain intact. The grouped Homoiothermal and Homoiothermic headings are preserved. [Homology, page 702](https://archive.org/download/webstersinternat01webs/page/n807.jpg?scale=1), restores ὁμολογία while preserving its three senses, chemical subscripts, three compounds, and reference destinations.
+
+[Homothermous, page 702](https://archive.org/download/webstersinternat01webs/page/n807.jpg?scale=1), preserves literal θέρμα with final alpha. Homoplasmy’s coherent electronic wording and stress pattern remain unchanged. Homotaxis retains its expanded definition. The later WordNet Homophonous record supplies no historical pronunciation evidence.
+
+[Horehound, page 705](https://archive.org/download/webstersinternat01webs/page/n810.jpg?scale=1), restores κονίλη, Sanskrit knūy, and the missing i in origanum. The botanical gloss requires the plant genus Origanum, which the dictionary distinguishes from the instrument or method Organum. The matching print reads origanum. Hoplite’s Milford attribution remains unchanged: the related print reads Mitford, but both electronic witnesses agree on Milford, and the inspected 1915 owner omits the attribution. The available evidence does not establish that surname as conversion damage.
+
+[Horror, pages 706–707](https://archive.org/download/webstersinternat01webs/page/n811.jpg?scale=1), restores the underdotted r in Sanskrit hṛsh. Its four senses, Chapman, Milton, and Pope quotations, and compound remain unchanged. All 37 current article texts match their approved After exports, and all 238,657 catalog lookup destinations are conserved.
 
 ## Adjective-form ownership
 
@@ -255,14 +267,16 @@ Exogyra’s first Greek word remains held. Glycose lacks a matching native owner
 
 Hilarious, Hinny, Hippocampus, Hippopotamus, and Hippurite retain source holds, including four unresolved Greek fields, three illustrations, and Hippocampus’s coherent Zoology/Anatomy label difference. All twelve Historionomer-through-Holostraca entries retain holds, including fourteen whole Greek readings, Holophytic’s unreadable field, and two illustration dependencies. Holothure, Homacanth, Homaxonial, Homeopathy, Homiletical, Homilite, Homily, Homocentric, and Homocercal remain held. Ten Homochromous-through-Homogonous entries retain seventeen Greek-word holds, Homodont’s ordinary-word hold, or Homoeomery’s name discrepancy.
 
+Six whole Greek readings remain held across five Homoioptoton-through-Homonymous entries. Eight Homonymy-through-Homotropous entries retain thirteen whole Greek readings. Eleven Hoopoo-through-Horoscope entries retain seventeen whole Greek readings, Hoopoo’s illustration provenance, or Hoplite’s attribution variance.
+
 ## Continuation and verification
 
 The ascending review owns the early-alphabet batches. Concurrent descending review owns separate late-alphabet claims on `chengdu-v4/full-entry-z`. Exact keys are recorded before review, and each branch has its own index and services. The ascending changes are published in [draft PR #26 (Restore dictionary characters from print and continue entry reviews)](https://github.com/Aias/websters-api/pull/26). Descending changes are published separately in [draft PR #27 (Restore lost characters and print-witnessed slips from the end of the alphabet)](https://github.com/Aias/websters-api/pull/27). Shared print scans remain read-only.
 
-The next claimed ascending batches are Homoioptoton through Homonymous, Homonymy through Homotropous, Hoopoo through Horoscope, and the single Horror entry. Their unfinished work is excluded from the counts above. The frozen queue skips entries excluded by the character-only checkpoint, so these are selected-entry boundaries rather than continuous alphabetic coverage. The next unclaimed key is Horse. The separate three-entry form-role repair grants no complete-entry review credit to Greasy or Showy. The reverse-direction model has reached its session usage limit; its claims and unpublished work remain reserved and untouched.
+The next claimed ascending batches are the single Horse entry, Hosanna through Hours, and the single House entry. Their unfinished work is excluded from the counts above. The frozen queue skips entries excluded by the character-only checkpoint, so these are selected-entry boundaries rather than continuous alphabetic coverage. The next unclaimed key is How. The separate three-entry form-role repair grants no complete-entry review credit to Greasy or Showy. The reverse-direction model has reached its session usage limit; its claims and unpublished work remain reserved and untouched.
 
 Every counted inspection includes the complete raw entry, decoded text, parsed model, available electronic witnesses, actual browser text, and full native-width rendered images. Printed owners and explicit component references were read individually. Full intervening print columns were not reviewed, so these counts do not establish an exhaustive review of the surrounding alphabetic ranges.
 
-The integrated database contains 100,771 entries with no parse errors. Current runtime text agrees with the current After exports for all 368 additional entries. Divine's form-role export supersedes its earlier source-only export. The pilot has separate current browser-text and visual verification. The corrupt Chillostomata alias is replaced with Cheilostomata, and the Ex- references in Excantation and Exoterical target the prefix. Other lookup destinations are preserved. All other source records are byte-identical to their preceding checkpoints. Character-level comparison checks cover source filtering, keyboard navigation, all display modes, unchanged panes where present, loaded fonts, and narrow viewports. Each accepted source change has an original-value hash guard and independent native-witness judgment.
+The integrated database contains 100,771 entries with no parse errors. Current runtime text agrees with the current After exports for all 405 additional entries. Divine's form-role export supersedes its earlier source-only export. The pilot has separate current browser-text and visual verification. The corrupt Chillostomata alias is replaced with Cheilostomata, and the Ex- references in Excantation and Exoterical target the prefix. Other lookup destinations are preserved. All other source records are byte-identical to their preceding checkpoints. Character-level comparison checks cover source filtering, keyboard navigation, all display modes, unchanged panes where present, loaded fonts, and narrow viewports. Each accepted source change has an original-value hash guard and independent native-witness judgment.
 
 Temporary review storage is bounded per batch. Cleanup removes regenerable SQLite copies from inactive snapshots while preserving frozen source, code, fonts, exported entries, compact review records, and shared witnesses. The cleanup receipt records 7,732,379,648 bytes removed from 55 database copies. Exact, independently decompressed archives replace two further raw source snapshots, reclaiming a net 111,521,775 bytes without losing source data. Three further byte-identical archived source duplicates were removed, reclaiming 207,259,684 bytes while retaining their exact compressed sources.
