@@ -9,10 +9,10 @@ The remaining complete-entry queue contains 3,494 entries, ordered by JavaScript
 | Stage                                                                          | Entries |
 | ------------------------------------------------------------------------------ | ------: |
 | Earlier pilot inspections reconciled with current source and browser output    |      24 |
-| Additional entries examined, Arthrodesis through Crenelate                     |      68 |
-| Source, parser, browser text, and visual review closed                         |      54 |
-| Examined entries with unresolved source readings or missing matching witnesses |      38 |
-| Entries awaiting initial review                                                |   3,402 |
+| Additional entries examined, Arthrodesis through Diathermometer                |     104 |
+| Source, parser, browser text, and visual review closed                         |      88 |
+| Examined entries with unresolved source readings or missing matching witnesses |      40 |
+| Entries awaiting initial review                                                |   3,366 |
 
 The pilot's closed entries are -ite, -yl, Algometer, Aliphatic, Amylopsin, Anaseismic, Anoetic, Anthracnose, Aplotomy, Apneumatic, Aristotype, Arm, and Arnaout. Additional closed entries are Auxometer, Arthrodesis, Arthrospore, Ascariasis, Bacteriolysis, Baresthesiometer, Barothermograph, Blepharitis, Brontograph, Brontometer, Cachemia, Cacostomia, Capsulotomy, Cataclasm, and Catelectrotonus. Closed entries from Celiac through Crenelate are listed below. The pilot's earlier initial inspections are preserved. Reconciliation and post-integration verification are separate from new source review.
 
@@ -80,6 +80,33 @@ Characterize's printed synonym list spans multiple senses. Its source uses the p
 
 The 26 newly closed entries are Celiac, Cenogenesis, Centrosphere, Cerotype, Chemiotaxis, Chiliarch, Chloroplast, Chromatology, Chromophotograph, Chronological, Chronophotograph, Chrysopa, Cinemograph, Circinal, Clinostat, Coolie, Coprophagous, Corage, Cordon, Cordon bleu, Corniculum, Corpus, Correspondency, Cotyledon, Couched, and Cough.
 
+## Criterion through Diathermometer
+
+This 36-entry group has 92 witnessed corrections across 35 changed entries. Dash remains unchanged. No new pronunciation owners are introduced. Criteria and Cypresses retain their existing unwrapped inflection fields, and Deciduous retains its guide reference, 135.
+
+| Entries                                     | Accepted readings                                                                            |
+| ------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Criterion                                   | κριτήριον, κριτής, κρίνειν; missing comma in “principles, opinions”                          |
+| Crunkle; Cumber                             | Historical krūnka; Sanskrit çū and the self-reference Cumber rather than Cuber               |
+| Cryometer                                   | κρύος, through its printed cryo- component reference                                         |
+| Cyclone; Cymometer; Cymoscope               | κυκλῶν, κυκλοῦν; κῦμα in both wave instruments; Cymometer's missing plus sign and “electric” |
+| Cynarrhodium; Cynegetics; Cyperus           | κυνόροδον, κύων, κυνός, ῥόδον; ἡγεῖσθαι; κύπειρος                                            |
+| Cyphonism; Cypress                          | κυφωνισμός, κύφων, κυφός; κυπάρισσος, cyprès, gōpher, and Ipomœa                             |
+| Cyprinodont; Cytherean                      | κυπρῖνος, ὀδούς, ὀδόντος; Κύθηρα                                                             |
+| Daedalian; Decagon; Denticete               | δαίδαλος, δαιδάλλειν, Δαίδαλος; γωνία; κῆτος                                                 |
+| Deontology; Dermestes; Derotremata          | δέον, δέοντος, δεῖ; ἐσθίειν; τρῆμα, τρήματος                                                 |
+| Diacodium; Diadelphia; Diadem               | διά, κωδειῶν, κώδεια; ἀδελφός; διάδημα, διαδεῖν, δεῖν                                        |
+| Diaphragm; Diarthrosis                      | διάφραγμα, διαφραγνύναι, φραγνύναι, φράσσειν; διάρθρωσις, διαρθροῦν, ἀρθροῦν                 |
+| Diaspora; Diastase; Diastem; Diathermometer | διασπορά; διάστασις, διαστῆναι, διιστάναι, στῆναι, ἱστάναι; διάστημα, διαστῆναι; διάθερμος   |
+
+The [Criterion owner, page 346](https://archive.org/download/webstersinternat01webs/page/n451.jpg?scale=1), [Cyphonism and Cypress, page 363](https://archive.org/download/webstersinternat01webs/page/n468.jpg?scale=1), and [Diaphragm through Diathermometer, page 407](https://archive.org/download/webstersinternat01webs/page/n512.jpg?scale=1) supply representative direct witnesses. The [1915 Diaspora entry, page 616](https://archive.org/download/bwb_O8-DDQ-914/page/n733.jpg?scale=1), supplies its missing Greek field. Historical single-rho κυνόροδον and the printed accents are preserved rather than normalized to familiar forms.
+
+D restores the guide's section signs, §§, and the two archaic numeral forms ↀ and CIↃ. Dal segno restores the musical sign 𝄋. Their [D owner](https://archive.org/download/webstersinternat01webs/page/n469.jpg?scale=1) and [Dal segno owner](https://archive.org/download/webstersinternat01webs/page/n471.jpg?scale=1) were compared with actual rendered glyphs and the bundled font maps. Existing fonts supply these signs. Dash's tapered articulation mark has no established faithful encoding and remains unresolved.
+
+Daedalian restores “Then doth” in its Spenser quotation. Deciduous restores Latin decĭdere, and Decile restores the colon after “ten.” Diaphragm restores farcire: its own printed entry and its explicit Farce cross-reference agree, including Farce's reciprocal Diaphragm reference. The electronic form fareire conflicts with that source pair. Diastase's contributor definition is preserved despite the related printing's older ferment wording.
+
+Seventeen existing phonetic fields recover their printed notation. The recoveries preserve Criterion's initial ī̍, Crura's ṳ and ȧ, Crustalogist's ō̍, Cumber's ẽ, Cyperus's ē̍, Cyphonism's primary stress, Cytherean's secondary stress and reduced italic a, and Deciduous's two uptacks and guide number. The 34 closed entries are the group keys other than Dash and Dermestes.
+
 ## Unresolved readings
 
 The pilot retains source holds for Actinogram, Actinophone, Adipolytic, Aërodonetics, Aërodrome, Aerophone, Alalia, Anisometropia, Anisospore, Aplasia, and Appendicectomy. Alalia's Greek is restored, but its historical definition and the word "ataxis" lack a matching print witness.
@@ -88,16 +115,16 @@ Atmiatry's healing etymon, Aurora's second Greek form, Auto's Greek field, both 
 
 Additional holds remain for Arthropathy, Arthrotome, Ascomycetes, Assets, and Asterope. Assets' exact Greek breathing is unclear. Asterope's related print entry does not supply the original two-sense text. Basidiomycota has no matching native owner. Breve's historical and modern musical graphics remain unresolved. Bromatology's eligible unreadable pronunciation and Brontozoum's pronunciation stress remain open. Brontozoum and Buprestidan have print illustrations absent from both electronic witnesses, with insufficient evidence to classify them as conversion omissions or edition differences.
 
-Characterize retains its four text-variant holds. Chlorite retains a slate-definition variance. Chilostomata, Coleoptera, Coly, Crenel, and Crenelate retain illustration-provenance holds. Clavicle's special curved character, Clavier's phonetic note, and Congruity's alternative pronunciation need stronger witnesses. These ten held entries receive no complete-entry closure credit.
+Characterize retains its four text-variant holds. Chlorite retains a slate-definition variance. Chilostomata, Coleoptera, Coly, Crenel, and Crenelate retain illustration-provenance holds. Clavicle's special curved character, Clavier's phonetic note, and Congruity's alternative pronunciation need stronger witnesses. These ten held entries receive no complete-entry closure credit. Dash adds an unresolved musical-symbol hold, and Dermestes adds an illustration-provenance hold.
 
 ## Continuation and verification
 
 The ascending review owns the A-to-D batches. Concurrent descending review owns separate late-alphabet claims on `chengdu-v4/full-entry-z`. Exact keys are recorded before review, and each branch has its own index and services. The ascending changes are published in [draft PR #26 (Restore dictionary characters from print and continue entry reviews)](https://github.com/Aias/websters-api/pull/26). Descending changes are published separately in [draft PR #27 (Restore lost characters and print-witnessed slips from the end of the alphabet)](https://github.com/Aias/websters-api/pull/27). Shared print scans remain read-only.
 
-The next claimed ascending batches are Criterion through Cyperus, Cyphonism through Denticete, and Deontology through Diathermometer. Their unfinished work is excluded from the counts above. The next unclaimed key is Diatryma, derived from the frozen key sequence.
+The next claimed ascending batches are Diatryma through Dine, Dinetical through Dismantle, and Distyle through Drabble. Their unfinished work is excluded from the counts above. The next unclaimed key is Dragoman, derived from the frozen key sequence.
 
 Every counted inspection includes the complete raw entry, decoded text, parsed model, available electronic witnesses, actual browser text, and full native-width rendered images. Printed owners and explicit component references were read individually. Full intervening print columns were not reviewed, so these counts do not establish an exhaustive review of the surrounding alphabetic ranges.
 
-The integrated database contains 100,771 entries with no parse errors. Current runtime text agrees with exported After text for all 68 additional entries. The pilot has separate current browser-text and visual verification. All 238,653 source names retain their lookup destinations except the intentional removal of the corrupt Chillostomata alias and addition of Cheilostomata. All other source records are byte-identical to their preceding checkpoints. Character-level comparison checks cover source filtering, keyboard navigation, all display modes, unchanged panes where present, loaded fonts, and narrow viewports. Each accepted source change has an original-value hash guard and independent native-witness judgment.
+The integrated database contains 100,771 entries with no parse errors. Current runtime text agrees with exported After text for all 104 additional entries. The pilot has separate current browser-text and visual verification. The corrupt Chillostomata alias is replaced with Cheilostomata. All 238,652 current source names retain their lookup destinations through the later group. All other source records are byte-identical to their preceding checkpoints. Character-level comparison checks cover source filtering, keyboard navigation, all display modes, unchanged panes where present, loaded fonts, and narrow viewports. Each accepted source change has an original-value hash guard and independent native-witness judgment.
 
-Temporary review storage is bounded per batch. Cleanup removes regenerable SQLite copies from inactive snapshots while preserving frozen source, code, fonts, exported entries, compact review records, and shared witnesses. The cleanup receipt records 7,732,379,648 bytes removed from 55 database copies.
+Temporary review storage is bounded per batch. Cleanup removes regenerable SQLite copies from inactive snapshots while preserving frozen source, code, fonts, exported entries, compact review records, and shared witnesses. The cleanup receipt records 7,732,379,648 bytes removed from 55 database copies. Exact, independently decompressed archives replace two further raw source snapshots, reclaiming a net 111,521,775 bytes without losing source data.
