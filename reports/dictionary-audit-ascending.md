@@ -9,10 +9,10 @@ The remaining complete-entry queue contains 3,494 entries, ordered by JavaScript
 | Stage                                                                       | Entries |
 | --------------------------------------------------------------------------- | ------: |
 | Earlier pilot inspections reconciled with current source and browser output |      24 |
-| Additional entries examined, Arthrodesis through Drabble                    |     140 |
-| Source, parser, browser text, and visual review closed                      |     114 |
-| Examined entries with unresolved source readings or lookup defects          |      50 |
-| Entries awaiting initial review                                             |   3,330 |
+| Additional entries examined, Arthrodesis through Ectypal                    |     164 |
+| Source, parser, browser text, and visual review closed                      |     133 |
+| Examined entries with unresolved source readings or lookup defects          |      55 |
+| Entries awaiting initial review                                             |   3,306 |
 
 The pilot's closed entries are -ite, -yl, Algometer, Aliphatic, Amylopsin, Anaseismic, Anoetic, Anthracnose, Aplotomy, Apneumatic, Aristotype, Arm, and Arnaout. Additional closed entries are Auxometer, Arthrodesis, Arthrospore, Ascariasis, Bacteriolysis, Baresthesiometer, Barothermograph, Blepharitis, Brontograph, Brontometer, Cachemia, Cacostomia, Capsulotomy, Cataclasm, and Catelectrotonus. Closed entries from Celiac through Crenelate are listed below. The pilot's earlier initial inspections are preserved. Reconciliation and post-integration verification are separate from new source review.
 
@@ -131,6 +131,29 @@ Existing damaged pronunciation fields recover Dieresis's guide-bearing notation 
 
 Direct's transitive synonym list and Divine's adjective and transitive lists use the existing homograph-scope annotation. Each list spans several named senses and does not belong to the final sense. Dismantle's ownership remains unchanged because its synonym terms do not establish that broader scope. The repaired Déjeuner, Iambus, and Demolish references were followed in the live application and resolve to Dejeuner, Iambus, and Demolish respectively.
 
+## Dragoman through Ectypal
+
+This 24-entry group has 53 witnessed source operations across all 24 entries. Nineteen entries are source-closed, and five remain held. Only one pronunciation owner is added: Ecchymoses, whose plural field is explicitly unreadable in GCIDE and legible as `(-sēz)` in print. Its singular headword remains unfilled.
+
+| Entries                 | Accepted readings                                                         |
+| ----------------------- | ------------------------------------------------------------------------- |
+| Dragoman; Drake         | δραγούμανος; νῆσσα                                                        |
+| Drawback; Dray; Dusk    | M'Culloch; √73; √71                                                       |
+| Drone                   | τενθρήνη, θρῶναξ, θρῆνος, θρέεσθαι; missing space after a quotation comma |
+| Duck; Durbar; Durio     | tūhhan, tūchen, “It belongs to the subclass”; darbār; dūri                |
+| Dysmenorrhea; Dysodile  | μήν, ῥεῖν; δυσωδία, δυσώδης                                               |
+| Dyspnoea                | δύσπνοια, δύσπνοος, πνοή, πνοιή, πνεῖν                                    |
+| Eagre; Ebriety          | ēgor; Sober, uninterrupted “from ebrius,” final acute in ébriété          |
+| Ecchymosis; Eclegm      | ἐκχύμωσις, ἐκχυμοῦσθαι, χέειν; ἔκλειγμα, ἐκλείχειν                        |
+| Ecphractic; Ecthlipsis  | ἐκφρακτικός, φράσσειν; ἔκθλιψις, ἐκθλίβειν                                |
+| Ecthoreum; Ecthyma      | ἐκθρώσκειν, θρώσκειν, θορεῖν; ἔκθυμα, ἐκθύειν                             |
+| Ectolecithal; Ectropion | λέκιθος; ἐκτρόπιον, ἔκτροπος, ἐκ, τρέπειν                                 |
+| Ectrotic; Ectypal       | ἐκτρωτικός, τιτρώσκειν; ἔκτυπος, τύπος, omitted standalone ἐκ             |
+
+[Dragoman's own entry, page 450](https://archive.org/download/webstersinternat01webs/page/n555.jpg?scale=1), fixes the acute over upsilon. [Duck, page 459](https://archive.org/download/webstersinternat01webs/page/n564.jpg?scale=1), supplies both macrons and the missing preposition in its broken duck-mole sentence. [Ecchymosis, page 468](https://archive.org/download/webstersinternat01webs/page/n573.jpg?scale=1), supplies the plural pronunciation and Greek fields. The [1915 Ecchymosis owner, page 695](https://archive.org/download/bwb_O8-DDQ-914/page/n812.jpg), corroborates its Greek marks. Ectypal's missing standalone ἐκ is present in Gutenberg and both its [1907 owner, page 470](https://archive.org/download/webstersinternat01webs/page/n575.jpg?scale=1), and [1915 owner, page 698](https://archive.org/download/bwb_O8-DDQ-914/page/n815.jpg).
+
+The second printing corroborates exact fields rather than authorizing revised definitions or omitted components. Ecthoreum retains the printed forms without adding modern iota subscripts. Ecphractic's middle infinitive remains wholly unreadable because neither print establishes its initial breathing. Exact frozen offsets keep that held field unchanged while repairing its later component.
+
 ## Unresolved readings
 
 The pilot retains source holds for Actinogram, Actinophone, Adipolytic, Aërodonetics, Aërodrome, Aerophone, Alalia, Anisometropia, Anisospore, Aplasia, and Appendicectomy. Alalia's Greek is restored, but its historical definition and the word "ataxis" lack a matching print witness.
@@ -145,14 +168,16 @@ Dicynodont, Dinichthys, and Dipnoi retain illustration-provenance holds. Dipnoi 
 
 Divine retains a lookup hold. Its comparative Diviner links to the noun-only Diviner entry, and its superlative Divinest links to a missing entry. Both links reproduce GCIDE's reference markup, but the printed adjective line establishes a different lexical role. The certain source recoveries do not resolve this shared reference-classification defect, and canonical noun precedence is preserved.
 
+Drake's parenthesized Greek form and Dysodile's final Greek form retain unresolved breathing marks. Duck retains an illustration-provenance hold. Drone remains held for witnessed terminal punctuation lost when part-of-speech abbreviations were expanded. That recurring defect, also present in Duck, is recorded for a corpus pass rather than repaired locally. Ecphractic retains its unresolved middle Greek word.
+
 ## Continuation and verification
 
 The ascending review owns the early-alphabet batches. Concurrent descending review owns separate late-alphabet claims on `chengdu-v4/full-entry-z`. Exact keys are recorded before review, and each branch has its own index and services. The ascending changes are published in [draft PR #26 (Restore dictionary characters from print and continue entry reviews)](https://github.com/Aias/websters-api/pull/26). Descending changes are published separately in [draft PR #27 (Restore lost characters and print-witnessed slips from the end of the alphabet)](https://github.com/Aias/websters-api/pull/27). Shared print scans remain read-only.
 
-The next claimed ascending batches are Dragoman through Dyspnoea and Eagre through Ectypal. Their unfinished work is excluded from the counts above. The next unclaimed key is Edify, derived from the frozen key sequence.
+The next claimed ascending batches are Edify through Emery and Empaistic through Empyreal. Their unfinished work is excluded from the counts above. The next unclaimed key is Enchylemma, derived from the frozen key sequence. A separate three-entry form-role investigation covers Divine, Greasy, and Showy without granting complete-entry review credit to Greasy or Showy.
 
 Every counted inspection includes the complete raw entry, decoded text, parsed model, available electronic witnesses, actual browser text, and full native-width rendered images. Printed owners and explicit component references were read individually. Full intervening print columns were not reviewed, so these counts do not establish an exhaustive review of the surrounding alphabetic ranges.
 
-The integrated database contains 100,771 entries with no parse errors. Current runtime text agrees with exported After text for all 140 additional entries. The pilot has separate current browser-text and visual verification. The corrupt Chillostomata alias is replaced with Cheilostomata. All 238,652 current source names retain their lookup destinations through the later group. All other source records are byte-identical to their preceding checkpoints. Character-level comparison checks cover source filtering, keyboard navigation, all display modes, unchanged panes where present, loaded fonts, and narrow viewports. Each accepted source change has an original-value hash guard and independent native-witness judgment.
+The integrated database contains 100,771 entries with no parse errors. Current runtime text agrees with exported After text for all 164 additional entries. The pilot has separate current browser-text and visual verification. The corrupt Chillostomata alias is replaced with Cheilostomata. All 238,652 current source names retain their lookup destinations through the later group. All other source records are byte-identical to their preceding checkpoints. Character-level comparison checks cover source filtering, keyboard navigation, all display modes, unchanged panes where present, loaded fonts, and narrow viewports. Each accepted source change has an original-value hash guard and independent native-witness judgment.
 
 Temporary review storage is bounded per batch. Cleanup removes regenerable SQLite copies from inactive snapshots while preserving frozen source, code, fonts, exported entries, compact review records, and shared witnesses. The cleanup receipt records 7,732,379,648 bytes removed from 55 database copies. Exact, independently decompressed archives replace two further raw source snapshots, reclaiming a net 111,521,775 bytes without losing source data.
