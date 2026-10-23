@@ -104,12 +104,11 @@ export function loadPreprocessedDocument(
     for (const fragment of fragments) $(fragment).remove();
   });
   $('.pr').each((_, node) => {
+    const text = getText($, node);
     const placeholder =
-      /^\(\s*[#?�](?:\s*or\s*[#?�])*\s*(?:[;,]\s*(\d+(?:\s*,\s*\d+)*)\s*)?\)$/.exec(
-        getText($, node)
-      );
+      /^\(\s*[#?�](?:\s*or\s*[#?�])*\s*(?:[;,]\s*(\d+(?:\s*,\s*\d+)*)\s*)?\)$/.exec(text);
     if (placeholder?.[1]) $(node).text(`(${placeholder[1]})`);
-    else if (placeholder) $(node).remove();
+    else if (placeholder || /^\s*(?:\(\s*\))?\s*$/.test(text)) $(node).remove();
   });
   $('.vmorph .conjf').each((_, node) => {
     const next = node.nextSibling;
