@@ -9,10 +9,10 @@ The remaining complete-entry queue contains 3,494 entries, ordered by JavaScript
 | Stage                                                                       | Entries |
 | --------------------------------------------------------------------------- | ------: |
 | Earlier pilot inspections reconciled with current source and browser output |      24 |
-| Additional entries examined, Arthrodesis through Hypnology                  |     538 |
-| Source, parser, browser text, and visual review closed                      |     277 |
-| Examined entries with unresolved source readings or lookup defects          |     285 |
-| Entries outside the published review checkpoint                             |   2,932 |
+| Additional entries examined, Arthrodesis through Hypocritical               |     556 |
+| Source, parser, browser text, and visual review closed                      |     278 |
+| Examined entries with unresolved source readings or lookup defects          |     302 |
+| Entries outside the published review checkpoint                             |   2,914 |
 
 The pilot's closed entries are -ite, -yl, Algometer, Aliphatic, Amylopsin, Anaseismic, Anoetic, Anthracnose, Aplotomy, Apneumatic, Aristotype, Arm, and Arnaout. Additional closed entries are Auxometer, Arthrodesis, Arthrospore, Ascariasis, Bacteriolysis, Baresthesiometer, Barothermograph, Blepharitis, Brontograph, Brontometer, Cachemia, Cacostomia, Capsulotomy, Cataclasm, and Catelectrotonus. Closed entries from Celiac through Crenelate are listed below. The pilot's earlier initial inspections are preserved. Reconciliation and post-integration verification are separate from new source review.
 
@@ -333,6 +333,29 @@ Hypermyriorama preserves the unusual printed acute on iota in μυρίος. Hyph
 
 Whole Greek fields with unclear breathing marks remain unknown. Hyperthetical's expression/expressions variance, Hyphen's native apostrophe, the Berkley/Berkeley attribution difference, and Hypermetropy's qualified editorial difference remain unchanged. Hypnocyst preserves inclose. Hypnogenic retains its existing Greek form and the historical De Watteville claim. All 18 current article texts agree with their After exports. The remaining source records and all 238,657 catalog lookup destinations are preserved.
 
+## Hypnoscope through Hypocritical
+
+These 18 selected entries have nine accepted operations across eight changed entries. Eight operations restore Greek fields. One repairs the English etymology gloss in Hypochondriac. No pronunciation fields are added. Hypocarpogean is source-closed. 17 entries retain holds.
+
+| Entry         | Restored fields      |
+| ------------- | -------------------- |
+| Hypobole      | βάλλειν              |
+| Hypocarpium   | καρπός               |
+| Hypocarpogean | καρπός, γῆ           |
+| Hypocaust     | καίειν               |
+| Hypochondriac | affocated → affected |
+| Hypochondrium | χόνδρος              |
+| Hypocleidium  | κλειδίον             |
+| Hypocoristic  | κορίζεσθαι           |
+
+The matching owners on [page 720](https://archive.org/download/webstersinternat01webs/page/n825.jpg?scale=1) and [page 721](https://archive.org/download/webstersinternat01webs/page/n826.jpg?scale=1) supply the restored Greek. Hypocarpium continues across the page boundary. Hypochondrium and Hypocleidium retain their etymologies after the plural blocks in the parsed model.
+
+Hypochondriac's 1907 gloss prints af- and fected across a line break. The matching [1915 etymology on page 1059](https://archive.org/download/bwb_O8-DDQ-914/page/n1178.jpg?scale=1) prints affected in the hypochondrium without a line break, followed by the same French forms. Two distinct native readers agree on affected. These related printings may share editorial ancestry. Only the isolated matching gloss is corrected, without adopting the later definition body. Hypocaust's bath/baths and Hypochondriac's noun hypochondria/hypochondriasis differences remain unchanged.
+
+Hypnoscope's owner is located in the [1915 New International, page 1058](https://archive.org/download/bwb_O8-DDQ-914/page/n1177.jpg?scale=1), but its shorter etymology does not witness the electronic entry's missing Greek field. All six Hypnoscope-through-Hypo- entries remain unchanged and held. Hypnosis and Hypnotism preserve their electronic editorial expansions, and Hypo- retains oxidization. The empty restoration packet establishes no independent reading of those unresolved fields.
+
+Whole Greek fields with unclear marks remain unknown. Hypocarpium's illustration provenance and Hypocleidium's plural discrepancy remain held. Hypocoristic retains or favor. Hypocrite retains its two electronic quotations without importing the related printing's additional Dryden quotation or its OF. label. All 18 current article texts agree with their After exports. The remaining source records and all 238,657 catalog lookup destinations are preserved.
+
 ## Adjective-form ownership
 
 Divine, Greasy, and Showy have explicit printed comparative and superlative lists stored as etymology and entry references. Nine class-attribute corrections give those three blocks the existing `amorph` and `adjf` roles. All text and pronunciation bytes are unchanged. Their own [Divine](https://archive.org/download/webstersinternat01webs/page/n543.jpg?scale=1), [Greasy](https://archive.org/download/webstersinternat01webs/page/n753.jpg?scale=1), and [Showy](https://archive.org/download/webstersinternat02websuoft/page/n381.jpg?scale=1) print lines establish the form ownership.
@@ -371,10 +394,10 @@ Six whole Greek readings remain held across five Homoioptoton-through-Homonymous
 
 The ascending review owns the early-alphabet batches. Concurrent descending review owns separate late-alphabet claims on `chengdu-v4/full-entry-z`. Exact keys are recorded before review, and each branch has its own index and services. The ascending changes are published in [draft PR #26 (Restore dictionary characters from print and continue entry reviews)](https://github.com/Aias/websters-api/pull/26). Descending changes are published separately in [draft PR #27 (Restore lost characters and print-witnessed slips from the end of the alphabet)](https://github.com/Aias/websters-api/pull/27). Shared print scans remain read-only.
 
-The next claimed ascending batches cover Hypnoscope through Hypocritical. Their unfinished work is excluded from the counts above. The frozen queue skips entries excluded by the character-only checkpoint, so these are selected-entry boundaries rather than continuous alphabetic coverage. The next unclaimed key is Hypodactylum. The separate three-entry form-role repair grants no complete-entry review credit to Greasy or Showy. The descending review preserves its separate published work and reserved claims. Released, unreviewed descending claims receive no coverage credit.
+The next claimed ascending batches cover Hypodactylum through Hypostyle. Their unfinished work is excluded from the counts above. The frozen queue skips entries excluded by the character-only checkpoint, so these are selected-entry boundaries rather than continuous alphabetic coverage. The next unclaimed key is Hypotheca. The separate three-entry form-role repair grants no complete-entry review credit to Greasy or Showy. The descending review preserves its separate published work and reserved claims. Released, unreviewed descending claims receive no coverage credit.
 
 Every counted inspection includes the complete raw entry, decoded text, parsed model, available electronic witnesses, actual browser text, and full native-width rendered images. Printed owners and explicit component references were read individually. Full intervening print columns were not reviewed, so these counts do not establish an exhaustive review of the surrounding alphabetic ranges.
 
-The integrated database contains 100,771 entries with no parse errors. Current runtime text agrees with the current After exports for all 538 additional entries. Divine's form-role export supersedes its earlier source-only export. The pilot has separate current browser-text and visual verification. The corrupt Chillostomata alias is replaced with Cheilostomata, and the Ex- references in Excantation and Exoterical target the prefix. Other lookup destinations are preserved. All other source records are byte-identical to their preceding checkpoints. Character-level comparison checks cover source filtering, keyboard navigation, all display modes, unchanged panes where present, loaded fonts, and narrow viewports. Each accepted source change has an original-value hash guard and independent native-witness judgment.
+The integrated database contains 100,771 entries with no parse errors. Current runtime text agrees with the current After exports for all 556 additional entries. Divine's form-role export supersedes its earlier source-only export. The pilot has separate current browser-text and visual verification. The corrupt Chillostomata alias is replaced with Cheilostomata, and the Ex- references in Excantation and Exoterical target the prefix. Other lookup destinations are preserved. All other source records are byte-identical to their preceding checkpoints. Character-level comparison checks cover source filtering, keyboard navigation, all display modes, unchanged panes where present, loaded fonts, and narrow viewports. Each accepted source change has an original-value hash guard and independent native-witness judgment.
 
 Temporary review storage is bounded per batch. Cleanup removes regenerable SQLite copies from inactive snapshots while preserving frozen source, code, fonts, exported entries, compact review records, and shared witnesses. The cleanup receipt records 7,732,379,648 bytes removed from 55 database copies. Exact, independently decompressed archives replace two further raw source snapshots, reclaiming a net 111,521,775 bytes without losing source data. Five further byte-identical archived source duplicates were removed, reclaiming 345,452,838 bytes while retaining their exact compressed sources. Unused root diagnostic locators and OCR scratch reclaim another 8,180,588 bytes, with accepted witness images preserved. Three completed source snapshots were byte-compared with their retained gzip archives before removal, reclaiming 207,296,902 further bytes.
