@@ -65,9 +65,9 @@ describe('dictionary extraction recovery', () => {
   test('keeps the prefix explanation and example lists under Un-', () => {
     const html = entrySource('Un-');
     expect(html.match(/<h2\b/g)).toHaveLength(2);
-    expect(html).toContain('To past particles');
+    expect(html).toContain('To past participles');
     expect(html).toContain('To present participles');
-    expect(html).toContain('Those which have acquired an opposed or contrary');
+    expect(html).toContain('Those which have acquired an opposing or contrary');
     expect(html).toContain('is prefixed to nouns to express the absence');
     expect(html).toContain('class="er">Unabolishable');
     expect(html).toContain('class="er">Unyielded');
