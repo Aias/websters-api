@@ -9,10 +9,10 @@ The remaining complete-entry queue contains 3,494 entries, ordered by JavaScript
 | Stage                                                                       | Entries |
 | --------------------------------------------------------------------------- | ------: |
 | Earlier pilot inspections reconciled with current source and browser output |      24 |
-| Additional entries examined, Arthrodesis through Iambus                     |     592 |
-| Source, parser, browser text, and visual review closed                      |     283 |
-| Examined entries with unresolved source readings or lookup defects          |     333 |
-| Entries outside the published review checkpoint                             |   2,878 |
+| Additional entries examined, Arthrodesis through Ichthyophthira             |     610 |
+| Source, parser, browser text, and visual review closed                      |     286 |
+| Examined entries with unresolved source readings or lookup defects          |     348 |
+| Entries outside the published review checkpoint                             |   2,860 |
 
 The pilot's closed entries are -ite, -yl, Algometer, Aliphatic, Amylopsin, Anaseismic, Anoetic, Anthracnose, Aplotomy, Apneumatic, Aristotype, Arm, and Arnaout. Additional closed entries are Auxometer, Arthrodesis, Arthrospore, Ascariasis, Bacteriolysis, Baresthesiometer, Barothermograph, Blepharitis, Brontograph, Brontometer, Cachemia, Cacostomia, Capsulotomy, Cataclasm, and Catelectrotonus. Closed entries from Celiac through Crenelate are listed below. The pilot's earlier initial inspections are preserved. Reconciliation and post-integration verification are separate from new source review.
 
@@ -408,6 +408,26 @@ Iambic's adjective sense-2 See reference prints Iambus with an initial full capi
 
 Hypothenuse and Hypotricha retain related-edition illustration holds. Hypothenuse retains its coherent prob./prop. abbreviation difference. Hyssop retains the electronic omission of the related printing's Bot. label. Hysterical preserves its supported electronic expansion. Iambus preserves its existing ămāns quantity notation, rather than changing a marked short syllable to a long vowel. Unclear whole Greek fields and ineligible pronunciations remain unchanged. All 18 current article texts agree with their After exports. The remaining source records and all 238,657 catalog lookup destinations are preserved.
 
+## Ianthina through Ichthyophthira
+
+These 18 selected entries have six accepted operations across five changed entries. Five operations restore Greek fields, and one repairs Ichnography's French form. No pronunciation fields are added. Ichthyodorulite and Ichthyolatry are source-closed. 16 entries retain holds.
+
+| Entry           | Restored fields                       |
+| --------------- | ------------------------------------- |
+| Ichnography     | γράφειν; ichonographie → ichnographie |
+| Ichthyocolla    | κόλλα                                 |
+| Ichthyodorulite | δόρυ                                  |
+| Ichthyolatry    | λατρεύειν                             |
+| Ichthyophthira  | φθείρ                                 |
+
+The matching owners on [page 724](https://archive.org/download/webstersinternat01webs/page/n829.jpg?scale=1) support the repairs. Ichnography's French form is read separately from its Greek field. The 1907 owner breaks the French word after ich-, while the matching [1915 owner on page 1064](https://archive.org/download/bwb_O8-DDQ-914/page/n1183.jpg?scale=1) breaks it after ichnogra-. Both print ichnographie without the extra electronic o. Distinct primary and blind readers agree, with the discretionary line break documented. The independent reader's earlier view of the native covering column is disclosed, without exposure to the primary candidate or reading. Only the matching French field is corrected, not the related printing's different definition.
+
+All six Ianthina-through-Ibis entries remain unchanged and held. Their fourteen unclear Greek fields, Ibis's edition differences, and illustration provenance remain recorded. The empty packet supplies no independent entry or held-field reading credit. Iatromathematician's existing students agrees with print and is preserved.
+
+Hypostoma's earlier completed inspection is reconciled as source-closed. Its original published receipt is preserved. A separate adjudication preserves mouth, without the print's optional a, as a coherent electronic variant. Both bare pronunciations are ineligible rather than source holds. Current raw source and browser text still match its validated After. This classification recovery adds no initial inspection or source operation.
+
+Ichneumon's two related-print illustrations and Ichthyophthira's figure remain provenance holds. Whole Greek words with unclear initial marks and ineligible bare pronunciations remain unchanged. All 18 current article texts agree with their After exports. The remaining source records and all 238,657 catalog lookup destinations are preserved.
+
 ## Adjective-form ownership
 
 Divine, Greasy, and Showy have explicit printed comparative and superlative lists stored as etymology and entry references. Nine class-attribute corrections give those three blocks the existing `amorph` and `adjf` roles. All text and pronunciation bytes are unchanged. Their own [Divine](https://archive.org/download/webstersinternat01webs/page/n543.jpg?scale=1), [Greasy](https://archive.org/download/webstersinternat01webs/page/n753.jpg?scale=1), and [Showy](https://archive.org/download/webstersinternat02websuoft/page/n381.jpg?scale=1) print lines establish the form ownership.
@@ -446,10 +466,10 @@ Six whole Greek readings remain held across five Homoioptoton-through-Homonymous
 
 The ascending review owns the early-alphabet batches. Concurrent descending review owns separate late-alphabet claims on `chengdu-v4/full-entry-z`. Exact keys are recorded before review, and each branch has its own index and services. The ascending changes are published in [draft PR #26 (Restore dictionary characters from print and continue entry reviews)](https://github.com/Aias/websters-api/pull/26). Descending changes are published separately in [draft PR #27 (Restore lost characters and print-witnessed slips from the end of the alphabet)](https://github.com/Aias/websters-api/pull/27). Shared print scans remain read-only.
 
-The next claimed ascending batches cover Ianthina through Ichthyophthira. Their unfinished work is excluded from the counts above. The frozen queue skips entries excluded by the character-only checkpoint, so these are selected-entry boundaries rather than continuous alphabetic coverage. The next unclaimed key is Ichthyopsida. The separate three-entry form-role repair grants no complete-entry review credit to Greasy or Showy. The descending review preserves its separate published work and reserved claims. Released, unreviewed descending claims receive no coverage credit.
+The next claimed ascending batches cover Ichthyopsida through Idea. Their unfinished work is excluded from the counts above. The frozen queue skips entries excluded by the character-only checkpoint, so these are selected-entry boundaries rather than continuous alphabetic coverage. The next unclaimed key is Ideogeny. The separate three-entry form-role repair grants no complete-entry review credit to Greasy or Showy. The descending review preserves its separate published work and reserved claims. Released, unreviewed descending claims receive no coverage credit.
 
 Every counted inspection includes the complete raw entry, decoded text, parsed model, available electronic witnesses, actual browser text, and full native-width rendered images. Printed owners and explicit component references were read individually. Full intervening print columns were not reviewed, so these counts do not establish an exhaustive review of the surrounding alphabetic ranges.
 
-The integrated database contains 100,771 entries with no parse errors. Current runtime text agrees with the current After exports for all 592 additional entries. Divine's form-role export supersedes its earlier source-only export. The pilot has separate current browser-text and visual verification. The corrupt Chillostomata alias is replaced with Cheilostomata, and the Ex- references in Excantation and Exoterical target the prefix. The printed Dyspnœa and Iambus references resolve to existing entries. Other catalog lookup destinations are preserved. All other source records are byte-identical to their preceding checkpoints. Character-level comparison checks cover source filtering, keyboard navigation, all display modes, unchanged panes where present, loaded fonts, and narrow viewports. Each accepted source change has an original-value hash guard and independent native-witness judgment.
+The integrated database contains 100,771 entries with no parse errors. Current runtime text agrees with the current After exports for all 610 additional entries. Divine's form-role export supersedes its earlier source-only export. The pilot has separate current browser-text and visual verification. The corrupt Chillostomata alias is replaced with Cheilostomata, and the Ex- references in Excantation and Exoterical target the prefix. The printed Dyspnœa and Iambus references resolve to existing entries. Other catalog lookup destinations are preserved. All other source records are byte-identical to their preceding checkpoints. Character-level comparison checks cover source filtering, keyboard navigation, all display modes, unchanged panes where present, loaded fonts, and narrow viewports. Each accepted source change has an original-value hash guard and independent native-witness judgment.
 
 Temporary review storage is bounded per batch. Cleanup removes regenerable SQLite copies from inactive snapshots while preserving frozen source, code, fonts, exported entries, compact review records, and shared witnesses. The cleanup receipt records 7,732,379,648 bytes removed from 55 database copies. Exact, independently decompressed archives replace two further raw source snapshots, reclaiming a net 111,521,775 bytes without losing source data. Five further byte-identical archived source duplicates were removed, reclaiming 345,452,838 bytes while retaining their exact compressed sources. Unused root diagnostic locators and OCR scratch reclaim another 8,180,588 bytes, with accepted witness images preserved. Three completed source snapshots were byte-compared with their retained gzip archives before removal, reclaiming 207,296,902 further bytes.
