@@ -14,6 +14,7 @@ When the user accepts missed defects to reduce usage, use a conservative candida
 ## Read the relevant guidance
 
 - For batch setup, delegation, integration, and completion, read [Batch review](references/batch-review.md).
+- For executable packet checks, semantic comparisons, acceptance records, and resumable progress, read [Process checks](references/process-checks.md).
 - For source recovery or shared parser, lookup, and typography changes, read [Sources and lexical behavior](references/sources-and-lexical-behavior.md).
 - For browser evidence or the comparison viewer, read [Rendered comparison](references/rendered-comparison.md).
 - For a text-only sweep of an unaudited range that applies only certain corrections, read [Quick-wins pass](references/quick-wins.md).
@@ -30,6 +31,8 @@ For substantial batches, delegate disjoint entry ranges and keep one integrator 
 
 When two audits run at once, read the other audit's latest report and the settled rules in the references before deciding an editorial question. Record a new rule in the references, send it to every running reviewer, and resume finished reviewers to apply it. Reconciling divergent decisions at integration produces inconsistent entries.
 
+Bind each packet to the same settled-rule revisions and validate its immutable evidence before dispatch. Size assignments by evidence volume and complexity. Reserve capacity for independent verification and integration, finishing ready work before admitting more discovery. Preserve completed review dimensions and reopen only unresolved fields or outputs whose recorded inputs changed.
+
 ## Review and correct
 
 For each entry, read all homographs, senses, forms, examples, quotations, notes, and compounds, including the end of long entries. Compare it with the matching electronic sources and with the printed page. In an exhaustive batch, read every print column that covers the range, not only the pages behind suspicious entries. GCIDE and Gutenberg share most transcription errors, so only the print reveals them. Record an entry-specific assessment and the evidence actually inspected.
@@ -45,11 +48,15 @@ Distinguish four causes before editing:
 
 Preserve unresolved readings and document the missing evidence. Agreement between related transcriptions is not independent corroboration. A related printed edition does not authorize wholesale replacement of the electronic entry. Source restoration is not a redesign of the application.
 
+Record the acceptance path for each exact edit. Certain independent agreement and source adjudication are separate outcomes. An adjudication needs its own inspected native evidence and independent confirmation of the disputed replacement. Convention or an uncertain glyph does not establish a reading. Route structural findings rejected by narrow text validators to the integrator's issue queue rather than discarding them.
+
 ## Integrate and verify
 
 Review patches against their witnesses, then verify every original-value SHA-256 against the current file before applying any of them. Keep additions and renames explicit. Preserve other agents' changes and re-read shared files before editing or staging.
 
 Recheck the integrated output, including entries affected only by shared behavior. For shared changes, compare old and new behavior on identical source across the relevant corpus population. Check ordered semantic text, hierarchy, quotation ownership, and existing lookup destinations, not only counts or JSON equality.
+
+Check raw-to-preprocessed text separately from parsed ownership. Classify intended omissions and notation conversions explicitly, retaining punctuation, word boundaries, and combining marks in comparisons. Compare complete lookup destinations and newly ambiguous aliases after source integrations too, including disjoint-key merges.
 
 Use the canonical database build and repository checks. Restart the task-owned app after a database replacement, then verify the selected routes and cross-references against that runtime. Keep the source baseline separate from the code-only regression comparison.
 
