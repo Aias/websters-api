@@ -1,5 +1,7 @@
 # Ascending dictionary review
 
+The [adjudicated edit review](dictionary-audit-exception-recheck.md) records a targeted recheck of forty descending exceptions. It retains twenty-two edits and reverses eighteen unsupported edits across sixteen entries, without changing the ascending coverage counts or granting new complete-entry credit.
+
 ## Scope and progress
 
 The repair inventory contains 4,468 entries. The character-only checkpoint repairs 1,692 spans across 974 entries. Those entries do not receive complete-entry review credit from that pass.
