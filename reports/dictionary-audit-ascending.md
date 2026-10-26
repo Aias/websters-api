@@ -9,10 +9,10 @@ The remaining complete-entry queue contains 3,494 entries, ordered by JavaScript
 | Stage                                                                       | Entries |
 | --------------------------------------------------------------------------- | ------: |
 | Earlier pilot inspections reconciled with current source and browser output |      24 |
-| Additional entries examined, Arthrodesis through Jack                       |     718 |
-| Source, parser, browser text, and visual review closed                      |     324 |
-| Examined entries with unresolved source readings or lookup defects          |     418 |
-| Entries outside the published review checkpoint                             |   2,752 |
+| Additional entries examined, Arthrodesis through Katastate                  |     736 |
+| Source, parser, browser text, and visual review closed                      |     330 |
+| Examined entries with unresolved source readings or lookup defects          |     430 |
+| Entries outside the published review checkpoint                             |   2,734 |
 
 The pilot's closed entries are -ite, -yl, Algometer, Aliphatic, Amylopsin, Anaseismic, Anoetic, Anthracnose, Aplotomy, Apneumatic, Aristotype, Arm, and Arnaout. Additional closed entries are Auxometer, Arthrodesis, Arthrospore, Ascariasis, Bacteriolysis, Baresthesiometer, Barothermograph, Blepharitis, Brontograph, Brontometer, Cachemia, Cacostomia, Capsulotomy, Cataclasm, and Catelectrotonus. Closed entries from Celiac through Crenelate are listed below. The pilot's earlier initial inspections are preserved. Reconciliation and post-integration verification are separate from new source review.
 
@@ -583,6 +583,33 @@ Jackpot's canonical target is absent. The actual click settles on a missing arti
 
 All 18 current article texts agree with their After exports. The remaining source records and all 238,657 lookup destinations are preserved. The complete tall Jack entry is inspected through overlapping native-width image parts, with full text, source filtering, all comparison modes, keyboard navigation and desktop/narrow layouts checked.
 
+## Jaspachate through Katastate
+
+These 18 selected entries have eighteen accepted source operations across twelve changed entries. Fifteen restore Greek fields. The other repairs recover an existing inline pronunciation, a language label and a shared part-of-speech label. No pronunciation fields are added. Jet, Kainite, Kaleidoscope, Kampylite, Karpholite, Karyostenosis are source-closed. 12 entries retain holds.
+
+| Entry         | Restored fields                               |
+| ------------- | --------------------------------------------- |
+| Jasperize     | Existing Jasperized child pronunciation, -īzd |
+| Jesse         | Herb. → Heb.                                  |
+| Jet           | γαγάτης, Γάγας, Γάγγαι                        |
+| Kainite       | καινός                                        |
+| Kaleidophone  | καλός, φωνή; shared noun label                |
+| Kaleidoscope  | καλός                                         |
+| Kamptulicon   | κάμπτειν                                      |
+| Kampylite     | καμπύλος, κάμπτειν                            |
+| Karpholite    | κάρφος                                        |
+| Karyostenosis | στένωσις                                      |
+| Katabolism    | κατά, βάλλειν                                 |
+| Katastate     | κατά                                          |
+
+Distinct native readers agree on every accepted field at its exact frozen owner. Jasperized's existing unwrapped pronunciation is explicitly unreadable in GCIDE and the supplied source. The [printed owner, page 797](https://archive.org/download/webstersinternat01webs/page/n902.jpg?scale=1) and the inspected [pronunciation guide, page lv](https://archive.org/download/webstersinternat01webs/page/n62.jpg?scale=1) establish the hyphen, long-i macron and final zd. The combining macron follows i. The original child position and parentheses remain unchanged, while Jasperize's separate bare headword field stays empty.
+
+Jesse's [printed owner, page 799](https://archive.org/download/webstersinternat01webs/page/n904.jpg?scale=1) identifies Hebrew before Yishai, supporting the narrow language-label repair. Kaleidophone's complete [printed header, page 808](https://archive.org/download/webstersinternat01webs/page/n913.jpg?scale=1) groups both spellings under a shared n. label. Restoring noun preserves the two names, their order and their single homograph. Its uncertain middle Greek field remains held.
+
+Jet retains the coherent shorter electronic quotation beginning he jets under his advanced plumes. The related print's additional How does not establish a lost word. This is an adjudicated retention with no source operation. Whole Greek fields with uncertain accents or breathing remain held. Jasperized and Katabolism's Catabolism reference still reach missing entries, with no invented targets or aliases. The neighboring Kamichi illustration is not assigned to Kamptulicon.
+
+All 18 current article texts agree with their After exports. Every stored Before hash and all four After hashes are checked, including the comparison copies and exact queue indices. The remaining source records and all 238,657 lookup destinations are preserved. The inline pronunciation and shared noun header are also checked directly in the rebuilt application.
+
 ## Adjective-form ownership
 
 Divine, Greasy, and Showy have explicit printed comparative and superlative lists stored as etymology and entry references. Nine class-attribute corrections give those three blocks the existing `amorph` and `adjf` roles. All text and pronunciation bytes are unchanged. Their own [Divine](https://archive.org/download/webstersinternat01webs/page/n543.jpg?scale=1), [Greasy](https://archive.org/download/webstersinternat01webs/page/n753.jpg?scale=1), and [Showy](https://archive.org/download/webstersinternat02websuoft/page/n381.jpg?scale=1) print lines establish the form ownership.
@@ -621,11 +648,11 @@ Six whole Greek readings remain held across five Homoioptoton-through-Homonymous
 
 The ascending review owns the early-alphabet batches. Concurrent descending review owns separate late-alphabet claims on `chengdu-v4/full-entry-z`. Exact keys are recorded before review, and each branch has its own index and services. The ascending changes are published in [draft PR #26 (Restore dictionary characters from print and continue entry reviews)](https://github.com/Aias/websters-api/pull/26). Descending changes are published separately in [draft PR #27 (Restore lost characters and print-witnessed slips from the end of the alphabet)](https://github.com/Aias/websters-api/pull/27). Shared print scans remain read-only.
 
-The next claimed ascending batches cover Jaspachate through Katastate. Their unfinished work is excluded from the counts above. The frozen queue skips entries excluded by the character-only checkpoint, so these are selected-entry boundaries rather than continuous alphabetic coverage. The next unclaimed key is Kathetal. The separate three-entry form-role repair grants no complete-entry review credit to Greasy or Showy. The descending review preserves its separate published work and reserved claims. Released, unreviewed descending claims receive no coverage credit.
+The next claimed ascending batches cover Kathetal through Kynurenic. Their unfinished work is excluded from the counts above. The frozen queue skips entries excluded by the character-only checkpoint, so these are selected-entry boundaries rather than continuous alphabetic coverage. The next unclaimed key is Kyriology. The separate three-entry form-role repair grants no complete-entry review credit to Greasy or Showy. The descending review preserves its separate published work and reserved claims. Released, unreviewed descending claims receive no coverage credit.
 
 Every counted inspection includes the complete raw entry, decoded text, parsed model, available electronic witnesses, actual browser text, and full native-width rendered images. Printed owners and explicit component references were read individually. Full intervening print columns were not reviewed, so these counts do not establish an exhaustive review of the surrounding alphabetic ranges.
 
-The integrated database contains 100,771 entries with no parse errors. Current runtime text agrees with the current After exports for all 718 additional entries. Divine's form-role export supersedes its earlier source-only export. The pilot has separate current browser-text and visual verification. The corrupt Chillostomata alias is replaced with Cheilostomata, and the Ex- references in Excantation and Exoterical target the prefix. The printed Dyspnœa and Iambus references resolve to existing entries. Other catalog lookup destinations are preserved. All other source records are byte-identical to their preceding checkpoints. Character-level comparison checks cover source filtering, keyboard navigation, all display modes, unchanged panes where present, loaded fonts, and narrow viewports. Each accepted source change has an original-value hash guard and independent native-witness judgment.
+The integrated database contains 100,771 entries with no parse errors. Current runtime text agrees with the current After exports for all 736 additional entries. Divine's form-role export supersedes its earlier source-only export. The pilot has separate current browser-text and visual verification. The corrupt Chillostomata alias is replaced with Cheilostomata, and the Ex- references in Excantation and Exoterical target the prefix. The printed Dyspnœa and Iambus references resolve to existing entries. Other catalog lookup destinations are preserved. All other source records are byte-identical to their preceding checkpoints. Character-level comparison checks cover source filtering, keyboard navigation, all display modes, unchanged panes where present, loaded fonts, and narrow viewports. Each accepted source change has an original-value hash guard and independent native-witness judgment.
 
 Temporary review storage is bounded per batch. Cleanup removes regenerable SQLite copies from inactive snapshots while preserving frozen source, code, fonts, exported entries, compact review records, and shared witnesses. The cleanup receipt records 7,732,379,648 bytes removed from 55 database copies. Exact, independently decompressed archives replace two further raw source snapshots, reclaiming a net 111,521,775 bytes without losing source data. Five further byte-identical archived source duplicates were removed, reclaiming 345,452,838 bytes while retaining their exact compressed sources. Unused root diagnostic locators and OCR scratch reclaim another 8,180,588 bytes, with accepted witness images preserved. Three completed source snapshots were byte-compared with their retained gzip archives before removal, reclaiming 207,296,902 further bytes.
 
