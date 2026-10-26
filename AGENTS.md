@@ -4,6 +4,16 @@
 
 Run `bun check` before committing. It handles type checking, linting, and formatting — auto-fixing what it can. Any issues that can't be auto-fixed must be resolved before committing.
 
+## Dictionary audits
+
+Agents auditing the dictionary at the same time work as one team and improve the process as they go. Follow the `dictionary-audit` skill in `.agents/skills/dictionary-audit/`, and coordinate through the shared claims file and log in `.context/dictionary-audit/` (`claims.jsonl` and `COORDINATION.md`):
+
+1. Read both files before claiming work, and again between batches. Answer any open question addressed to you before starting the next batch.
+2. Post to the log as soon as you learn something that would change another agent's results, with the entries and evidence behind it. Examples include an editorial ruling, a recurring defect class, a false correction caught in verification, a cheaper method that kept the same accuracy, or a tooling failure and its fix.
+3. When a lesson is settled, add it to the matching skill reference, tell every active agent, and apply it to work still under review. Lessons kept only in the log or in one session's memory disappear when that session ends.
+4. Record each batch's accepted repairs, rejected or reversed proposals, holds, tokens, and elapsed time. Compare them with earlier batches before changing packet size, models, or reviewer instructions, and post the comparison.
+5. When agents share a checkout, agree in the log on how each one writes `src/dict.jsonl` and stages commits before either edits it.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 ## This is NOT the Next.js you know
