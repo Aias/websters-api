@@ -40,11 +40,13 @@ Verify each packet’s printed page number, running head, and actual entry text 
 
 Write one dossier per entry. Each holds the raw HTML, parsed model, rendered HTML, witness extracts with file positions, print leaf range, and crop paths. Report how many entries lack each witness.
 
+Run the [packet checks](process-checks.md#packet-preparation) before dispatch. Bind actual file bytes, complete text-delivery intervals, native image dimensions, page identities, and crop coverage. A mechanical pass establishes input integrity, not that a person read the entry or identified its printed owner. Freeze validated packets. Issue a separately identified supplement when an input is incomplete or incorrect, retaining the original packet and its affected review statuses.
+
 Check public-network access before assigning downloads to a headless worker. When its sandbox has no network, use an authorized downloader and give reviewers immutable local files with verified hashes and dimensions.
 
 ## Divide independent review work
 
-Distribute disjoint ranges according to text volume and complexity as well as entry count. Balancing by the combined length of raw HTML and GCIDE text, ranges of roughly 75 to 170 entries fit one reviewer. Each reviewer receives the frozen records, dossiers, baseline exports, the print leaves covering its range, working browser URLs, evidence requirements, and a private scratch directory. Require completion of the assigned range rather than an early sample.
+Distribute disjoint ranges according to raw and witness bytes, rendered height, print-column coverage, field difficulty, and measured reviewer throughput. Give exceptionally long entries separate assignments. Qualify a bounded representative packet before choosing packet size. Each reviewer receives the frozen records, dossiers, baseline exports, print leaves, working browser URLs, evidence requirements, and a private scratch directory. Include the same digests of `scripts/PARSING.md` and the applicable skill references so reviewers follow the settled rules. Require completion of the assigned range rather than an early sample.
 
 Choose models and reasoning effort from measured quality and latency on the same frozen representative packets. Compare usable witnessed repairs, unsupported changes, preserved content, actual model/effort, and end-to-end time. A fast failed review is not a throughput improvement. Keep proposal workers, mechanical validators, and fresh source judges independent, and increase concurrency at the measured bottleneck. Benchmark results and active packets remain immutable when instructions improve. For headless runs, retain the executable/version, resolved effort, frozen inputs, usage, and full successful tool trace. A compact event stream may omit image-tool events, so validate the underlying trace rather than treating an absent event as a failed image or an inspection claim as proof. Disable automatic restart for finite batch jobs unless their restart behavior is explicitly safe.
 
@@ -78,6 +80,8 @@ Probe both total-result and per-line limits. A successful text read can still be
 
 Start independent source judgment when each packet passes mechanical validation. Use a rolling queue for independent jobs rather than waiting for an entire wave when completed slots could accept ready work. Prepare later packets concurrently, then verify integrated output as it stabilizes. Keep the final source and implementation equality checks before declaring the batch complete.
 
+Set an admission limit from measured packet cost and available verification capacity. Reserve slots and usage for second readings, adjudication, and integration before starting discovery. Stop admissions when ready verification accumulates or the remaining budget cannot close active work. Save entry-level checkpoints between jobs. Report accepted witnessed repairs and completed review dimensions per token and elapsed run, alongside pending work, rather than using active worker count as throughput. Reuse completed initial reviews and give second readers the proposed spans with enough surrounding context to establish ownership. This reuse does not waive exhaustive coverage requirements.
+
 Share provider concurrency across primary and visual controllers. Count actual model processes and reserved runners from every active batch, deduplicated by working directory. Use one dispatch owner or explicit phase gates to prevent two controllers from taking the same free capacity. Qualify higher concurrency with disjoint bounded cohorts, preserve active jobs, and close new admissions on provider failures. Report latency and completed work without claiming a controlled speed comparison from different packets.
 
 Some agent harnesses block subagents from writing report files. Ask reviewers to put the full report in their final message, and save it from there.
@@ -106,6 +110,8 @@ Scrolling captures may overlap. Record their source offsets and trim repeated ro
 
 Before integration, assert unique, gap-free coverage of the frozen keys and reconcile reviewer boundaries. Count restored entries separately from the original requested batch.
 
+Derive examined, closed, held, unstarted, and next-unstarted keys from authoritative per-entry records and the frozen sequence. Track source, parser, browser-text, and visual review independently against their actual input hashes. Record field-specific holds and structural issues separately. A missing pronunciation witness does not erase a completed definition review. Changes to source, parser, renderer, CSS, or fonts reopen only the affected dimensions and entries. Prose reports and claim cursors are derived summaries, not additional sources of truth.
+
 Validate successful tool results against the frozen file hashes, returned text-line intervals, and native image dimensions. A requested read, an oversized failed result, or a worker's claim is not read evidence. Fill gaps with targeted supplemental review attributed to its actual reviewer, preserving the original incomplete ledger. Reuse byte-identical overlapping images by digest without claiming an unopened image was inspected.
 
 Check image-tool size limits on guides and diagrams as well as entry captures. A successful read may return a resized image. Split oversized originals into overlapping unscaled crops, verify complete pixel coverage, and require actual reads of those crops. Preserve the resized receipt and attribute any supplemental review separately.
@@ -130,6 +136,8 @@ Merge reviewer manifests into one combined manifest keyed by original key, and r
 
 After adjudicating a validation discrepancy, regenerate derived manifests and coverage from the original answers and frozen values. Independently replay every accepted, adjusted, rejected, and additional edit, then reconcile the complete edit partition. Changing a validation status alone can leave an accepted repair absent from the manifest.
 
+Use the [acceptance records](process-checks.md#acceptance-and-exceptions) to retain exact agreement, mask-boundary adjustments, and disputed source readings separately. A ruling cannot bypass source eligibility, identity, hash, uniqueness, or structural checks. Obtain a fresh independent reading of the exact adjudicated fragment before applying it. Convention-backed or unreadable glyphs remain held. On a recheck, review the exception subset without repeating completed unrelated reviews.
+
 Review every patch, then validate all guards before writing. On a mismatch, read the concurrent change and reconcile it instead of overwriting or merely updating the expected hash. If a patch receives a supplement, retain the baseline hash in the final manifest and guard the supplement against the intermediate value too.
 
 Preserve unchanged raw HTML values and serialize through the canonical writer. When `src/dict.jsonl` conflicts during a rebase, take the new base's file and re-apply the combined manifest through the guarded applier, then compare by key. Do not hand-merge its lines. Compare dictionaries by key to prove that the only changed, added, removed, or renamed records are the intended ones. In a shared checkout, distinguish the batch's change set from other agents' work. Do not stage the whole source file if that would include unrelated edits.
@@ -143,6 +151,8 @@ For shared behavior, run the old and new implementations on the same frozen inpu
 - Ordered lexical text, repeated blocks, homographs, sense and compound parentage, and quotation-author association.
 - Every existing canonical and alias destination when lookup behavior changes, plus recovered references and ambiguous inferred spellings.
 - Relevant typography or notation classes, including negative cases, nesting, existing explicit markup, and repeated normalization.
+
+Use the [semantic snapshot comparison](process-checks.md#semantic-comparison) to retain exact text and ownership candidates. Inspect raw-to-preprocessed changes separately from preprocessed-to-parsed changes. Classify each intended transformation against its rule and negative cases rather than deleting punctuation, spaces, or combining marks from the comparison. An ownership signature retains block kinds, sense labels, note owners, compound identities, and quotation authors. Check lookup destinations and new alias ambiguities after source-only integration as well as shared-code changes.
 
 Token retention is a candidate detector, not a proof of lexical correctness. Review newly introduced candidates and compare them with the baseline's classified cases. Header fallbacks, empty duplicate markers, and deliberate semantic boundaries can explain differences. Keep the explanations rather than accepting a count because it stayed constant. Check structure independently because a text-preserving move can still attach a note to the wrong sense.
 

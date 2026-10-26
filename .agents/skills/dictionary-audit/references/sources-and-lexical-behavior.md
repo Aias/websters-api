@@ -61,6 +61,8 @@ When a conversion defect recurs across the corpus, fix it once instead of in eac
 
 Keep the transforms with the evidence. Re-running them after a rebase resolves conflicts. Before patching a recurring pattern in a batch, check `git log -- src/dict.jsonl` for a pass that already covers it. Batch reviewers record further occurrences rather than patching them.
 
+Classify the population before choosing a transform. The same character may encode a stress mark in a heading and an angular measurement in a definition. An abbreviation expansion may lose sentence punctuation while an identical interior expansion is correct. Require witnessed context and negative cases for each rule. Keep source conversion, shared notation normalization, and uncertain readings separate.
+
 ## Lexical structure and boundaries
 
 Preserve source order and association across homographs, header fragments, forms, senses, compounds, notes, usage, and quotations. A repeated-looking passage may carry a distinct lexical function. Remove a duplicate only after proving it is an empty transcription error.
@@ -72,6 +74,8 @@ When a grouped heading shares words across alternatives, preserve the printed el
 An attribution between the headword and part of speech belongs to the header, even when punctuation intervenes. Preserve the attribution while retaining the grammatical label in lookup metadata. A body attribution remains with its own passage.
 
 Use `data-scope="homograph"` on a note or synonym list only after verifying whole-word scope. Do not infer that every final note belongs outside the last sense. Preserve nested Roman, numeric, and lettered markers and their content. Preserve witnessed block order when correcting ownership rather than moving a note or quotation around a sense to accommodate the parser. GCIDE overloads `sd` for definitions and references. Use `data-role="definition"` on a witnessed nested definition marker when its role is otherwise ambiguous, and keep unmarked references inline. Do not infer either marker role or following note/author scope from a closing definition wrapper.
+
+Keep a structural issue queue with the affected raw span, parsed owner path, expected witnessed ownership, and a minimal reproduction. A text-only validator's refusal of a tag or scope change routes the issue to the integrator. Prefer the existing explicit role, scope, and headword metadata where markup is ambiguous, with evidence for its value, instead of broadening a heuristic for every superficially similar entry.
 
 Boundary normalization must preserve both spaces and intentional adjacency. For example, joining `frost` and `or rain` needs a word boundary, while joining `some` and `thing` may continue one word. Inspect the source wrappers and punctuation before generalizing. Keep decimals, spaced ellipses, preformatted text, and table spacing intact. Consume compound-separator dashes only at confirmed structural boundaries, retaining adjacent author punctuation and lexical dashes.
 
@@ -104,6 +108,8 @@ Insertion eligibility does not decide whether an existing phonetic field is corr
 An exact existing-field transfer is not a new phonetic recovery. For a witnessed lexical-boundary repair, guard both donor and recipient, prove that the complete transferred body and its pronunciation bytes occur once at the destination and are removed from the donor, and verify content conservation across the pair. Keep detached sense or note fields separate from lexical owners rather than inventing owner identities for them.
 
 Pronunciation fields made entirely of unknown placeholders or unknown alternatives are omitted from display while retained in raw source. Composite fields may also contain a pronunciation-guide number, language qualifier, or real phonetic text. The parser preserves a guide reference such as `(#; 73)` as `(73)` while omitting the unknown phonetics. Preserve all meaningful commentary and document the missing transcription. Do not drop an entire field because part of it is unknown.
+
+Include this guide-reference behavior, bare-field eligibility, related-edition limitations, and shared Greek notation conversions in reviewer calibration. Reviewers consult the bound rules before reporting these settled behaviors as defects. A different editorial choice requires an explicit rule decision shared with every active reviewer.
 
 Retain italic reduced-vowel notation within pronunciation HTML. For a double breve or macron spanning two vowels, encode the combining mark after the first base character. Fix a misplaced mark at the shared typography boundary when the source pattern is systematic, then verify text and glyph placement across every affected record.
 

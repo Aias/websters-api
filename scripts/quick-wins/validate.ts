@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { parseEntry } from '../build-db.ts';
+import { ownershipSignature } from '../dictionary-audit/conservation';
 import {
   PACKETS,
   encodeText,
@@ -174,9 +175,6 @@ export function isItem(value: unknown): value is Item {
     'problems' in value
   );
 }
-
-const skeleton = (value: unknown): string =>
-  JSON.stringify(value, (_, v: unknown) => (typeof v === 'string' ? '' : v));
 
 function snippet(text: string, needle: string): string | undefined {
   const words = loose(needle).split(' ');
@@ -433,7 +431,10 @@ export function validatePacket(packet: string): {
     const accepted = group.filter((item) => item.status === 'accepted');
     if (!accepted.length) continue;
     try {
-      if (skeleton(parseEntry(key, entry.html)) !== skeleton(parseEntry(key, applied.html)))
+      if (
+        JSON.stringify(ownershipSignature(parseEntry(key, entry.html))) !==
+        JSON.stringify(ownershipSignature(parseEntry(key, applied.html)))
+      )
         throw new Error('structure-changed');
       newRawByKey[key] = { oldSha256: entry.sha256, newRaw: applied.html };
     } catch (error) {
