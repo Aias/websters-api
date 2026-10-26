@@ -36,7 +36,30 @@ export function loadPreprocessedDocument(
       ) {
         $(el).removeClass('er').addClass('grk');
       } else {
-        const slug = entryReferenceSlug($(el).text(), resolve);
+        let next = el.nextSibling;
+        while (next?.type === 'text' && /^[\s,]*$/.test(next.data)) next = next.nextSibling;
+        let partOfSpeech = next && hasClass(next, 'pos') ? getText($, next) : undefined;
+        const nestedPos = $(el).children('.pos').last();
+        const nested = nestedPos[0];
+        let text = $(el).text();
+        if (
+          nested &&
+          nested.previousSibling?.type === 'text' &&
+          /,\s*$/.test(nested.previousSibling.data)
+        ) {
+          let trailing = nested.nextSibling;
+          while (trailing?.type === 'text' && /^\s*$/.test(trailing.data))
+            trailing = trailing.nextSibling;
+          if (!trailing) {
+            text = el.children
+              .slice(0, el.children.indexOf(nested))
+              .map((child) => $(child).text())
+              .join('')
+              .replace(/,\s*$/, '');
+            partOfSpeech = getText($, nested);
+          }
+        }
+        const slug = entryReferenceSlug(text, resolve, partOfSpeech);
         if (slug) {
           el.tagName = 'a';
           el.attribs['href'] = `/entry/${slug}`;

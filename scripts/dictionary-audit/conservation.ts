@@ -157,7 +157,7 @@ export function snapshotEntry(
 
 export function snapshotLookup(
   source: ReadonlyMap<string, string>,
-  references = createEntryReferences(source)
+  references = createEntryReferences(source, parseEntry)
 ): LookupSnapshot {
   const canonical = new Map<string, string>();
   const claims = new Map<string, Set<string>>();

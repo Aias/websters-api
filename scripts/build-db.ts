@@ -26,7 +26,7 @@ const DB_FILE = join(ROOT, 'app', 'data', 'dictionary.db');
 const BUILD_META_FILE = join(ROOT, 'app', 'data', 'dictionary.build-meta.json');
 const PROGRESS_EVERY = 10000;
 // Bump when parser/build output semantics change to force a rebuild.
-const PARSER_VERSION = 31;
+const PARSER_VERSION = 32;
 
 interface SourceFingerprint {
   size: number;
@@ -716,7 +716,7 @@ function writeDatabase(sourceData: Map<string, string>, keys: ReadonlyArray<stri
   db.run(
     'CREATE TABLE quotations (author_slug TEXT NOT NULL, author TEXT NOT NULL, cited TEXT NOT NULL, key TEXT NOT NULL, html TEXT NOT NULL, citation TEXT)'
   );
-  const references = createEntryReferences(sourceData);
+  const references = createEntryReferences(sourceData, parseEntry);
 
   const insert = db.prepare(
     'INSERT INTO entries (key, normalized_key, slug, data) VALUES ($key, $normalizedKey, $slug, $data)'
