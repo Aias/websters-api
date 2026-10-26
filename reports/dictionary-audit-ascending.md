@@ -9,10 +9,10 @@ The remaining complete-entry queue contains 3,494 entries, ordered by JavaScript
 | Stage                                                                       | Entries |
 | --------------------------------------------------------------------------- | ------: |
 | Earlier pilot inspections reconciled with current source and browser output |      24 |
-| Additional entries examined, Arthrodesis through Isopathy                   |     700 |
-| Source, parser, browser text, and visual review closed                      |     315 |
-| Examined entries with unresolved source readings or lookup defects          |     409 |
-| Entries outside the published review checkpoint                             |   2,770 |
+| Additional entries examined, Arthrodesis through Jack                       |     718 |
+| Source, parser, browser text, and visual review closed                      |     324 |
+| Examined entries with unresolved source readings or lookup defects          |     418 |
+| Entries outside the published review checkpoint                             |   2,752 |
 
 The pilot's closed entries are -ite, -yl, Algometer, Aliphatic, Amylopsin, Anaseismic, Anoetic, Anthracnose, Aplotomy, Apneumatic, Aristotype, Arm, and Arnaout. Additional closed entries are Auxometer, Arthrodesis, Arthrospore, Ascariasis, Bacteriolysis, Baresthesiometer, Barothermograph, Blepharitis, Brontograph, Brontometer, Cachemia, Cacostomia, Capsulotomy, Cataclasm, and Catelectrotonus. Closed entries from Celiac through Crenelate are listed below. The pilot's earlier initial inspections are preserved. Reconciliation and post-integration verification are separate from new source review.
 
@@ -530,7 +530,7 @@ All 18 current article texts agree with their After exports. The remaining sourc
 
 ## Island through Isopathy
 
-These 18 selected entries have seventeen accepted source operations across twelve changed entries. Thirteen restore Greek fields and four restore damaged etymological letters. No pronunciation fields are added. Isobathytherm, Isocheim, Isochroous, Isoclinic, Isocryme, Isodiabatic, Isogonism, Isonephelic, Isopathy are source-closed. 9 entries retain holds.
+These 18 selected entries have seventeen accepted source operations across twelve changed entries. Thirteen restore Greek fields and four restore damaged etymological letters. No pronunciation fields are added. Isobar, Isobathytherm, Isocheim, Isochroous, Isoclinic, Isocryme, Isodiabatic, Isogonism, Isonephelic, Isopathy are source-closed. 8 entries retain holds.
 
 | Entry         | Restored fields                                          |
 | ------------- | -------------------------------------------------------- |
@@ -554,6 +554,34 @@ Isobar's optional article, Isonandra's source-family header difference, and Isog
 Isodrome's related [1915 supplement owner, page 1147](https://archive.org/download/bwb_O8-DDQ-914/page/n1266.jpg?scale=1) uses a revised -drome derivation instead of the electronic entry's missing Greek field. It does not supply that field, which remains held. Isodynamous, Isocephalism, Isonandra, Isonomic and Isonomy also retain unclear whole Greek readings. Isopathy's complete sub-senses and attribution remain intact.
 
 All 18 current article texts agree with their After exports. The remaining source records and all 238,657 lookup destinations are preserved. Complete entries are checked at desktop and narrow widths, including the restored macrons, all comparison modes, keyboard navigation, reference destinations and loaded fonts.
+
+## Isoperimetrical through Jack
+
+These 18 selected entries have eighteen accepted source operations across eleven changed entries. Fifteen restore Greek fields and three repair Jack's numbering, ordinal suffix and sense-reference markup. No pronunciation fields are added. Isopiestic, Isopogonous, Isospondyli, Isothere, Isotherm, Isothermobath, Isotrimorphism, Isotropic are source-closed. 10 entries retain holds.
+
+| Entry           | Restored fields                                                    |
+| --------------- | ------------------------------------------------------------------ |
+| Isoperimetrical | περίμετρον                                                         |
+| Isopiestic      | πιέζειν                                                            |
+| Isopogonous     | πώγων                                                              |
+| Isosceles       | σκέλος                                                             |
+| Isospondyli     | σπόνδυλος, σφόνδυλος                                               |
+| Isothere        | θέρος, θέρειν                                                      |
+| Isotherm        | θέρμη, θερμός                                                      |
+| Isothermobath   | θερμός, βάθος                                                      |
+| Isotrimorphism  | τρίς                                                               |
+| Isotropic       | τροπή, τρέπειν                                                     |
+| Jack            | Mining (b) → (d); 17 century → 17th century; final 4, noun → 4, n. |
+
+Distinct native readers agree on all selected fields at their exact frozen owners. Isospondyli's second word joins its printed line break without importing a discretionary hyphen. Isoperimetrical's existing or circumferences already matches print and receives no repair credit. Isothermobath retains its coherent electronic abbreviation punctuation rather than importing a print-only period. Isotherm's contributor-added electronic sense is distinguished from the supplied entry's scope.
+
+Jack's complete six homographs, eleven main noun senses and forty compounds are reviewed. The 1907 owners on [page 794](https://archive.org/download/webstersinternat01webs/page/n899.jpg?scale=1) and [page 795](https://archive.org/download/webstersinternat01webs/page/n900.jpg?scale=1), and the 1898 owners on [page 794](https://archive.org/download/webstersinternat00port/page/n911.jpg?scale=1) and [page 795](https://archive.org/download/webstersinternat00port/page/n912.jpg?scale=1), support three narrow repairs. The Mining subdivision belongs between (c) and (e), correcting the duplicated (b) to (d) while retaining the historical jump from (i) to (k). The Jack boots clause restores only the missing ordinal suffix in 17th century.
+
+The final reference in Jack's hunting verb selects the hunting-torch noun sense 4(n). Both printings show the italic sense letter. GCIDE wrongly marks that final n as a grammatical part of speech, and the supplied converted source already expands it to noun. The repair restores italic n and its period in that exact source span, preserving the earlier legitimate noun designation, target link and surrounding text. The parser and global grammatical conventions are unchanged.
+
+Jackpot's canonical target is absent. The actual click settles on a missing article and returns HTTP 404, recorded as an unresolved lookup dependency rather than a passed navigation. No alias or separately keyed compound is invented. Jack's figures remain provenance records, and a print-only Jack-in-the-pulpit compound absent from the supplied Jack is not imported. Seven unclear Greek fields in Ithyphallic through Jack remain held. Israelite, Isthmian, Isoperimetrical and Isosceles also retain whole-field holds. Isosceles's print-only triangle is not inserted without electronic ownership evidence.
+
+All 18 current article texts agree with their After exports. The remaining source records and all 238,657 lookup destinations are preserved. The complete tall Jack entry is inspected through overlapping native-width image parts, with full text, source filtering, all comparison modes, keyboard navigation and desktop/narrow layouts checked.
 
 ## Adjective-form ownership
 
@@ -593,14 +621,16 @@ Six whole Greek readings remain held across five Homoioptoton-through-Homonymous
 
 The ascending review owns the early-alphabet batches. Concurrent descending review owns separate late-alphabet claims on `chengdu-v4/full-entry-z`. Exact keys are recorded before review, and each branch has its own index and services. The ascending changes are published in [draft PR #26 (Restore dictionary characters from print and continue entry reviews)](https://github.com/Aias/websters-api/pull/26). Descending changes are published separately in [draft PR #27 (Restore lost characters and print-witnessed slips from the end of the alphabet)](https://github.com/Aias/websters-api/pull/27). Shared print scans remain read-only.
 
-The next claimed ascending batches cover Isoperimetrical through Jack. Their unfinished work is excluded from the counts above. The frozen queue skips entries excluded by the character-only checkpoint, so these are selected-entry boundaries rather than continuous alphabetic coverage. The next unclaimed key is Jaspachate. The separate three-entry form-role repair grants no complete-entry review credit to Greasy or Showy. The descending review preserves its separate published work and reserved claims. Released, unreviewed descending claims receive no coverage credit.
+The next claimed ascending batches cover Jaspachate through Katastate. Their unfinished work is excluded from the counts above. The frozen queue skips entries excluded by the character-only checkpoint, so these are selected-entry boundaries rather than continuous alphabetic coverage. The next unclaimed key is Kathetal. The separate three-entry form-role repair grants no complete-entry review credit to Greasy or Showy. The descending review preserves its separate published work and reserved claims. Released, unreviewed descending claims receive no coverage credit.
 
 Every counted inspection includes the complete raw entry, decoded text, parsed model, available electronic witnesses, actual browser text, and full native-width rendered images. Printed owners and explicit component references were read individually. Full intervening print columns were not reviewed, so these counts do not establish an exhaustive review of the surrounding alphabetic ranges.
 
-The integrated database contains 100,771 entries with no parse errors. Current runtime text agrees with the current After exports for all 700 additional entries. Divine's form-role export supersedes its earlier source-only export. The pilot has separate current browser-text and visual verification. The corrupt Chillostomata alias is replaced with Cheilostomata, and the Ex- references in Excantation and Exoterical target the prefix. The printed Dyspnœa and Iambus references resolve to existing entries. Other catalog lookup destinations are preserved. All other source records are byte-identical to their preceding checkpoints. Character-level comparison checks cover source filtering, keyboard navigation, all display modes, unchanged panes where present, loaded fonts, and narrow viewports. Each accepted source change has an original-value hash guard and independent native-witness judgment.
+The integrated database contains 100,771 entries with no parse errors. Current runtime text agrees with the current After exports for all 718 additional entries. Divine's form-role export supersedes its earlier source-only export. The pilot has separate current browser-text and visual verification. The corrupt Chillostomata alias is replaced with Cheilostomata, and the Ex- references in Excantation and Exoterical target the prefix. The printed Dyspnœa and Iambus references resolve to existing entries. Other catalog lookup destinations are preserved. All other source records are byte-identical to their preceding checkpoints. Character-level comparison checks cover source filtering, keyboard navigation, all display modes, unchanged panes where present, loaded fonts, and narrow viewports. Each accepted source change has an original-value hash guard and independent native-witness judgment.
 
 Temporary review storage is bounded per batch. Cleanup removes regenerable SQLite copies from inactive snapshots while preserving frozen source, code, fonts, exported entries, compact review records, and shared witnesses. The cleanup receipt records 7,732,379,648 bytes removed from 55 database copies. Exact, independently decompressed archives replace two further raw source snapshots, reclaiming a net 111,521,775 bytes without losing source data. Five further byte-identical archived source duplicates were removed, reclaiming 345,452,838 bytes while retaining their exact compressed sources. Unused root diagnostic locators and OCR scratch reclaim another 8,180,588 bytes, with accepted witness images preserved. Three completed source snapshots were byte-compared with their retained gzip archives before removal, reclaiming 207,296,902 further bytes.
 
 Eight further completed raw source copies totaling 552,797,079 bytes are removed after byte comparison with retained gzip archives. Directly referenced immutable artifact paths, code, fonts, native witnesses and review images remain available.
 
 A descriptive queueIndex field in three archived batch exports retains copied numbers. Their exact key lists, plan ranges, canonical identities and source hashes are verified against the frozen queue. A separate metadata reconciliation preserves the original evidence and supplies corrected descriptive indexes. Review counts and source operations are unchanged.
+
+Isobar’s coherent optional-article variant is an adjudicated electronic retention under the same policy as Hypostoma. A separate classification reconciliation preserves its original published closure and complete source/runtime evidence. This recovers one source closure without adding an inspection or source operation.
