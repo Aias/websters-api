@@ -29,3 +29,9 @@ The unchanged crops of the 2399 × 3371 pixel scan are bounded by (571, 1035) an
 `appoggiatura.png` is the musical example accompanying _Appoggiatura_ in _Webster’s International Dictionary_ (1907), printed page 73, [Internet Archive scan n178](https://archive.org/download/webstersinternat01webs/page/n178.jpg?scale=1).
 
 The unchanged 170 × 112 pixel crop of the 2399 × 3371 pixel scan is bounded by (613, 2260) and (783, 2372). Both grace-note and chord examples are preserved.
+
+## Iguanodon
+
+`iguanodon-tooth.png` is the tooth illustration in the pictorial appendix of _Webster’s International Dictionary_, Volume II (1895), printed page 1957, [Internet Archive scan n1004](https://archive.org/download/webstersinternat02websuoft/page/n1004.jpg?scale=1).
+
+The unchanged 202 × 390 pixel crop of the 2320 × 3256 pixel scan is bounded by (398, 1725) and (600, 2115). It preserves the complete tooth, one-half scale mark and caption, “Tooth of Iguanodon, p. 727.” The caption identifies the entry referenced by the figure. The corresponding tooth also accompanies Iguanodon in the [1907 printing, page 727](https://archive.org/download/webstersinternat01webs/page/n832.jpg?scale=1). This is a documented related-edition illustration, not an asserted exact 1913 plate.

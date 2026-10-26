@@ -9,10 +9,10 @@ The remaining complete-entry queue contains 3,494 entries, ordered by JavaScript
 | Stage                                                                       | Entries |
 | --------------------------------------------------------------------------- | ------: |
 | Earlier pilot inspections reconciled with current source and browser output |      24 |
-| Additional entries examined, Arthrodesis through Idoloclast                 |     646 |
-| Source, parser, browser text, and visual review closed                      |     298 |
-| Examined entries with unresolved source readings or lookup defects          |     372 |
-| Entries outside the published review checkpoint                             |   2,824 |
+| Additional entries examined, Arthrodesis through Inthronize                 |     664 |
+| Source, parser, browser text, and visual review closed                      |     304 |
+| Examined entries with unresolved source readings or lookup defects          |     384 |
+| Entries outside the published review checkpoint                             |   2,806 |
 
 The pilot's closed entries are -ite, -yl, Algometer, Aliphatic, Amylopsin, Anaseismic, Anoetic, Anthracnose, Aplotomy, Apneumatic, Aristotype, Arm, and Arnaout. Additional closed entries are Auxometer, Arthrodesis, Arthrospore, Ascariasis, Bacteriolysis, Baresthesiometer, Barothermograph, Blepharitis, Brontograph, Brontometer, Cachemia, Cacostomia, Capsulotomy, Cataclasm, and Catelectrotonus. Closed entries from Celiac through Crenelate are listed below. The pilot's earlier initial inspections are preserved. Reconciliation and post-integration verification are separate from new source review.
 
@@ -481,6 +481,34 @@ Idiotism's way of fashion and Idle's love to ease remain unchanged. Both electro
 
 Nineteen whole Greek fields retain unresolved marks. Idle's wheel illustration remains a provenance hold. Existing complete pronunciation fields are preserved, and bare or absent pronunciation owners remain ineligible. All 18 current article texts agree with their After exports. The remaining source records and all 238,657 catalog lookup destinations are preserved.
 
+## Idorgan through Inthronize
+
+These 18 selected entries have thirteen accepted source operations across eleven changed entries. Eight restore Greek fields, three restore missing letters inside existing etymological components, one removes a stray article, and one restores an explicitly referenced illustration. No pronunciation fields are added. Ilixanthin, Immanuel, Inoceramus, Insobriety, Interhyal, Internecine are source-closed. 12 entries retain holds.
+
+| Entry       | Restored fields                                    |
+| ----------- | -------------------------------------------------- |
+| Iguanodon   | Referenced tooth illustration                      |
+| Iliad       | -άδος, ποίησις                                     |
+| Ilixanthin  | ξανθός                                             |
+| Immanuel    | ū in each of two Hebrew-transliteration components |
+| Imp         | φύειν                                              |
+| Indian      | a common in woods → common in woods                |
+| Indonesian  | νῆσος                                              |
+| Inoceramus  | κέραμος                                            |
+| Insobriety  | Missing initial s in sobriety                      |
+| Interhyal   | Uppercase Greek Υ                                  |
+| Internecine | νεκρός                                             |
+
+Each text repair has distinct exact native readings bound to its frozen raw owner, offset and occurrence. Iliad's abbreviated -άδος retains its leading hyphen. Immanuel's two macron-u glyphs and Insobriety's initial s are restored inside the existing wrappers, preserving all surrounding text. Interhyal explicitly names the Greek letter, supporting uppercase upsilon rather than Latin Y. Indonesian's matching etymological field is supplied by the related [1915 owner, page 1099](https://archive.org/download/bwb_O8-DDQ-914/page/n1218.jpg?scale=1), with edition differences recorded separately.
+
+Indian cucumber's malformed a common in woods is checked against the matching [1907 owner, page 751](https://archive.org/download/webstersinternat01webs/page/n856.jpg?scale=1) and the [1898 owner, page 751](https://archive.org/download/webstersinternat00port/page/n868.jpg?scale=1). Both print common in woods. Only the stray article is removed. The electronic expansion Medeola Virginica is preserved instead of importing the printed abbreviation. Related-print agreement does not establish independent textual lineage or an exact 1913 exemplar.
+
+Iguanodon's definition explicitly points to an appendix illustration. The exact [1895 Volume II appendix, page 1957](https://archive.org/download/webstersinternat02websuoft/page/n1004.jpg?scale=1) labels the tooth with Iguanodon and page 727. Its complete caption, one-half scale mark and engraving correspond to the inline tooth in the [1907 entry, page 727](https://archive.org/download/webstersinternat01webs/page/n832.jpg?scale=1). Three reviewers inspect the title, full plate, entry owner and exact crop. The unchanged 202 × 390 pixel image preserves the complete tooth and labels. Its source, crop bounds and edition qualification are documented in `public/illustrations/README.md`. The original appendix-reference text remains intact. This resolves the figure's identity without claiming an exact 1913 plate or closing the entry's unclear Greek fields.
+
+Indian corn's separate electronic entry is preserved. Indian's other print figures remain provenance holds, and its Jack in the Pulpit reference remains unresolved: the canonical target is absent and the attempted navigation is not counted as a passed link check. Related mentions in Arum and Wake-robin do not establish a replacement target. Internecine's one-sense source remains intact rather than importing GCIDE's additional contributor sense. Complete existing pronunciations, intact Greek fields and coherent wording variants are preserved. Unclear whole Greek readings remain held.
+
+All 18 current article texts agree with their After exports. The remaining source records and all 238,657 catalog lookup destinations are preserved. The new image is checked in the actual entry and approved comparison at desktop and narrow widths, including complete alt text, loaded dimensions and unchanged pixel hashes.
+
 ## Adjective-form ownership
 
 Divine, Greasy, and Showy have explicit printed comparative and superlative lists stored as etymology and entry references. Nine class-attribute corrections give those three blocks the existing `amorph` and `adjf` roles. All text and pronunciation bytes are unchanged. Their own [Divine](https://archive.org/download/webstersinternat01webs/page/n543.jpg?scale=1), [Greasy](https://archive.org/download/webstersinternat01webs/page/n753.jpg?scale=1), and [Showy](https://archive.org/download/webstersinternat02websuoft/page/n381.jpg?scale=1) print lines establish the form ownership.
@@ -519,12 +547,14 @@ Six whole Greek readings remain held across five Homoioptoton-through-Homonymous
 
 The ascending review owns the early-alphabet batches. Concurrent descending review owns separate late-alphabet claims on `chengdu-v4/full-entry-z`. Exact keys are recorded before review, and each branch has its own index and services. The ascending changes are published in [draft PR #26 (Restore dictionary characters from print and continue entry reviews)](https://github.com/Aias/websters-api/pull/26). Descending changes are published separately in [draft PR #27 (Restore lost characters and print-witnessed slips from the end of the alphabet)](https://github.com/Aias/websters-api/pull/27). Shared print scans remain read-only.
 
-The next claimed ascending batches cover Idorgan through Inthronize. Their unfinished work is excluded from the counts above. The frozen queue skips entries excluded by the character-only checkpoint, so these are selected-entry boundaries rather than continuous alphabetic coverage. The next unclaimed key is Intoxicate. The separate three-entry form-role repair grants no complete-entry review credit to Greasy or Showy. The descending review preserves its separate published work and reserved claims. Released, unreviewed descending claims receive no coverage credit.
+The next claimed ascending batches cover Intoxicate through Isis. Their unfinished work is excluded from the counts above. The frozen queue skips entries excluded by the character-only checkpoint, so these are selected-entry boundaries rather than continuous alphabetic coverage. The next unclaimed key is Island. The separate three-entry form-role repair grants no complete-entry review credit to Greasy or Showy. The descending review preserves its separate published work and reserved claims. Released, unreviewed descending claims receive no coverage credit.
 
 Every counted inspection includes the complete raw entry, decoded text, parsed model, available electronic witnesses, actual browser text, and full native-width rendered images. Printed owners and explicit component references were read individually. Full intervening print columns were not reviewed, so these counts do not establish an exhaustive review of the surrounding alphabetic ranges.
 
-The integrated database contains 100,771 entries with no parse errors. Current runtime text agrees with the current After exports for all 646 additional entries. Divine's form-role export supersedes its earlier source-only export. The pilot has separate current browser-text and visual verification. The corrupt Chillostomata alias is replaced with Cheilostomata, and the Ex- references in Excantation and Exoterical target the prefix. The printed Dyspnœa and Iambus references resolve to existing entries. Other catalog lookup destinations are preserved. All other source records are byte-identical to their preceding checkpoints. Character-level comparison checks cover source filtering, keyboard navigation, all display modes, unchanged panes where present, loaded fonts, and narrow viewports. Each accepted source change has an original-value hash guard and independent native-witness judgment.
+The integrated database contains 100,771 entries with no parse errors. Current runtime text agrees with the current After exports for all 664 additional entries. Divine's form-role export supersedes its earlier source-only export. The pilot has separate current browser-text and visual verification. The corrupt Chillostomata alias is replaced with Cheilostomata, and the Ex- references in Excantation and Exoterical target the prefix. The printed Dyspnœa and Iambus references resolve to existing entries. Other catalog lookup destinations are preserved. All other source records are byte-identical to their preceding checkpoints. Character-level comparison checks cover source filtering, keyboard navigation, all display modes, unchanged panes where present, loaded fonts, and narrow viewports. Each accepted source change has an original-value hash guard and independent native-witness judgment.
 
 Temporary review storage is bounded per batch. Cleanup removes regenerable SQLite copies from inactive snapshots while preserving frozen source, code, fonts, exported entries, compact review records, and shared witnesses. The cleanup receipt records 7,732,379,648 bytes removed from 55 database copies. Exact, independently decompressed archives replace two further raw source snapshots, reclaiming a net 111,521,775 bytes without losing source data. Five further byte-identical archived source duplicates were removed, reclaiming 345,452,838 bytes while retaining their exact compressed sources. Unused root diagnostic locators and OCR scratch reclaim another 8,180,588 bytes, with accepted witness images preserved. Three completed source snapshots were byte-compared with their retained gzip archives before removal, reclaiming 207,296,902 further bytes.
 
 Eight further completed raw source copies totaling 552,797,079 bytes are removed after byte comparison with retained gzip archives. Directly referenced immutable artifact paths, code, fonts, native witnesses and review images remain available.
+
+A descriptive queueIndex field in three archived batch exports retains copied numbers. Their exact key lists, plan ranges, canonical identities and source hashes are verified against the frozen queue. A separate metadata reconciliation preserves the original evidence and supplies corrected descriptive indexes. Review counts and source operations are unchanged.
