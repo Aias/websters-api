@@ -143,3 +143,11 @@
 {"batch":"cp08","target":"cp08-t1","key":"Vomit","fragment":"Gr. <div class=\"grk\">ἐμεῖν</div>, Skr.","breathingSource":{"form":"ἐμέω","url":"https://anastrophe.uchicago.edu/logeion-api/detail?w=%E1%BC%90%CE%BC%CE%AD%CF%89&type=normal"}}
 {"batch":"cp08","target":"cp08-t2","key":"Wary","fragment":"Gr. <div class=\"grk\">ὁρᾶν</div> to","breathingSource":{"form":"ὁράω","url":"https://anastrophe.uchicago.edu/logeion-api/detail?w=%E1%BD%81%CF%81%CE%AC%CF%89&type=normal"}}
 {"batch":"cp08","target":"cp08-t3","key":"Wold","fragment":"Gr. <div class=\"grk\">ἄλσος</div> a","breathingSource":{"form":"ἄλσος","url":"https://anastrophe.uchicago.edu/logeion-api/detail?w=%E1%BC%84%CE%BB%CF%83%CE%BF%CF%82&type=normal"}}
+{"batch":"fp05","target":"fp05-t1","key":"Synopsis","fragment":"together + <div class=\"grk\">ὄψις</div> a","breathingSource":"lsj-breathing.py output (LSJ via Logeion)"}
+{"batch":"fp05","target":"fp05-t2","key":"Tarsectomy","fragment":"Gr. <div class=\"grk\">ἐκτέμνειν</div> to","breathingSource":"lsj-breathing.py output (LSJ via Logeion)"}
+{"batch":"fp05","target":"fp05-t6","key":"Tetrarch","fragment":"ruler, <div class=\"grk\">ἄρχειν</div> to","breathingSource":"lsj-breathing.py output (LSJ via Logeion)"}
+{"batch":"fp05","target":"fp05-t7","key":"Thermostat","fragment":"Gr. <div class=\"grk\">ἱστάναι</div> to","breathingSource":"lsj-breathing.py output (LSJ via Logeion)"}
+{"batch":"fp05","target":"fp05-t8","key":"Thysanura","fragment":"fringe + <div class=\"grk\">οὐρά</div> tail.]","breathingSource":"lsj-breathing.py output (LSJ via Logeion)"}
+{"batch":"fp05","target":"fp05-t9","key":"To","fragment":"in <div class=\"grk\">οἴκαδε</div> homeward.","breathingSource":"lsj-breathing.py output (LSJ via Logeion)"}
+{"batch":"fp05","target":"fp05-t10","key":"Trapezoid","fragment":"table + <div class=\"grk\">εἶδος</div> shape,","breathingSource":"lsj-breathing.py output (LSJ via Logeion)"}
+{"batch":"fp05","target":"fp05-t11","key":"Trieterical","fragment":"<div class=\"er\">Tri-</div>) + <div class=\"grk\">ἔτος</div> a","breathingSource":"lsj-breathing.py output (LSJ via Logeion)"}
