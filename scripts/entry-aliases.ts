@@ -1,9 +1,15 @@
 import * as cheerio from 'cheerio';
 import { normalizeLookup } from '../app/lib/lookup';
 
-export function entryAliases(key: string, rawHtml: string): string[] {
+export interface EntryAliases {
+  names: string[];
+  deferred: string[];
+}
+
+export function entryAliases(key: string, rawHtml: string): EntryAliases {
   const $ = cheerio.load(rawHtml, { xml: false }, false);
   const aliases = new Set([key]);
+  const deferred = new Set<string>();
   $('.hw, .asp, .col, .conjf, .adjf, .plw, .wf, .plu .er').each((_, element) => {
     const text = (
       $(element).hasClass('col')
@@ -14,8 +20,12 @@ export function entryAliases(key: string, rawHtml: string): string[] {
       .replace(/[′ˊˋˈˌ`*\u00ad‖]/g, '')
       .trim();
     if (!text || (text.startsWith('-') && !key.startsWith('-'))) return;
-    aliases.add(text);
-    aliases.add(text.replace(/(?<=\p{L})-(?=\p{L})/gu, ''));
+    const pointer =
+      $(element).hasClass('col') &&
+      /^\s*See under\b/.test($(element).nextAll('.cd').first().text());
+    const names = pointer ? deferred : aliases;
+    names.add(text);
+    names.add(text.replace(/(?<=\p{L})-(?=\p{L})/gu, ''));
   });
   if (
     $.root()
@@ -25,17 +35,28 @@ export function entryAliases(key: string, rawHtml: string): string[] {
   ) {
     aliases.add(`To ${key}`);
   }
-  return [...aliases];
+  return { names: [...aliases], deferred: [...deferred].filter((name) => !aliases.has(name)) };
 }
 
 export function unambiguousAliases(
-  entries: ReadonlyMap<string, ReadonlyArray<string>>
+  entries: ReadonlyMap<string, ReadonlyArray<string>>,
+  deferred: ReadonlyMap<string, ReadonlyArray<string>> = new Map()
 ): Map<string, string> {
+  const claimed = resolveClaims(entries);
+  const pointers = resolveClaims(deferred, entries.keys());
+  for (const name of claimed.names) pointers.aliases.delete(name);
+  const canonical = new Map([...entries.keys()].map((key) => [normalizeLookup(key), key]));
+  return new Map([...pointers.aliases, ...claimed.aliases, ...canonical]);
+}
+
+function resolveClaims(
+  entries: ReadonlyMap<string, ReadonlyArray<string>>,
+  keys: Iterable<string> = entries.keys()
+) {
   const exact = new Map<string, string | null>();
   const equivalent = new Map<string, string | null>();
   const folded = new Map<string, string | null>();
   const aliases = new Map<string, string>();
-  const canonical = new Map([...entries.keys()].map((key) => [normalizeLookup(key), key]));
   const forms = new Map([
     ['ae', ['ae', 'æ']],
     ['æ', ['ae', 'æ']],
@@ -53,8 +74,8 @@ export function unambiguousAliases(
     const previous = candidates.get(name);
     candidates.set(name, previous === undefined || previous === key ? key : null);
   }
+  for (const key of keys) add(folded, fold(normalizeLookup(key)), key);
   for (const [key, names] of entries) {
-    add(folded, fold(normalizeLookup(key)), key);
     for (const name of new Set([key, ...names])) {
       const normalized = normalizeLookup(name);
       add(exact, normalized, key);
@@ -74,5 +95,5 @@ export function unambiguousAliases(
     if (resolved) aliases.set(name, resolved);
     else aliases.delete(name);
   }
-  return new Map([...aliases, ...canonical]);
+  return { aliases, names: new Set([...equivalent.keys(), ...exact.keys()]) };
 }

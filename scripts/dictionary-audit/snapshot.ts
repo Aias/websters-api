@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { closeSync, openSync, readFileSync, writeSync } from 'node:fs';
 import { createReadStream } from 'node:fs';
 import { createInterface } from 'node:readline';
+import { parseEntry } from '../build-db';
 import { SOURCE_FILE } from '../dictionary-source';
 import { createEntryReferences } from '../entry-references';
 import {
@@ -105,7 +106,7 @@ export function writeSnapshot(outputPath: string, sourcePath = SOURCE_FILE): Hea
   const bytes = readFileSync(sourcePath);
   const sourceSha256 = createHash('sha256').update(bytes).digest('hex');
   const source = readSource(bytes);
-  const references = createEntryReferences(source);
+  const references = createEntryReferences(source, parseEntry);
   const header: Header = {
     type: 'header',
     version: 1,

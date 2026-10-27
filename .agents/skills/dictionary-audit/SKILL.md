@@ -31,7 +31,9 @@ For substantial batches, delegate disjoint entry ranges and keep one integrator 
 
 When two audits run at once, read the other audit's latest report and the settled rules in the references before deciding an editorial question. Record a new rule in the references, send it to every running reviewer, and resume finished reviewers to apply it. Reconciling divergent decisions at integration produces inconsistent entries.
 
-Bind each packet to the same settled-rule revisions and validate its immutable evidence before dispatch. Size assignments by evidence volume and complexity. Reserve capacity for independent verification and integration, finishing ready work before admitting more discovery. Preserve completed review dimensions and reopen only unresolved fields or outputs whose recorded inputs changed.
+Bind each packet to the same settled-rule revisions and validate its immutable evidence mechanically before dispatch. Size assignments by evidence volume, image bytes, and complexity. Keep every available agent slot working. Ready second readings, adjudication, and integration take the next free slot, and review packets fill the rest. Preserve completed review dimensions and reopen only unresolved fields or outputs whose recorded inputs changed.
+
+Every model request re-sends the images already in that agent's context. An agent that accumulates many page crops slows on every later step and can lose its model connection. The integrator dispatches and integrates without opening page images. Delegate image reading, including adjudication, to agents that each handle one bounded packet and then finish.
 
 ## Review and correct
 
@@ -46,7 +48,7 @@ Distinguish four causes before editing:
 | The review page has incorrect fonts, styles, dimensions, or cached assets | The review harness, followed by replacement of invalid evidence                                                                 |
 | The same conversion defect recurs across the corpus                       | A single [dictionary-wide pass](references/sources-and-lexical-behavior.md#dictionary-wide-passes), not per-entry batch patches |
 
-Preserve unresolved readings and document the missing evidence. Agreement between related transcriptions is not independent corroboration. A related printed edition does not authorize wholesale replacement of the electronic entry. Source restoration is not a redesign of the application.
+Preserve unresolved readings and document the missing evidence. Agreement between related transcriptions is not independent corroboration. Keep example characters in a reader's instructions generic, because an example that names the target's own letter can steer a blind reading. A related printed edition does not authorize wholesale replacement of the electronic entry. Source restoration is not a redesign of the application.
 
 Record the acceptance path for each exact edit. Certain independent agreement and source adjudication are separate outcomes. An adjudication needs its own inspected native evidence and independent confirmation of the disputed replacement. Convention or an uncertain glyph does not establish a reading. Route structural findings rejected by narrow text validators to the integrator's issue queue rather than discarding them.
 

@@ -18,7 +18,7 @@ const source = new Map([
   ['A?B', '<h2 class="hw">A?B</h2>'],
   ['Diaeresis', '<h2 class="hw">Diaeresis</h2><div class="asp">Face</div>'],
 ]);
-const references = createEntryReferences(source);
+const references = createEntryReferences(source, parseEntry);
 
 describe('reference href punctuation', () => {
   test('changes only the href and keeps visible terminal punctuation', () => {
@@ -63,5 +63,148 @@ describe('reference href punctuation', () => {
     expect(references.aliases.has('fäce'.normalize('NFC'))).toBe(false);
     expect(references.resolve('fäce'.normalize('NFC'))).toBe('Diaeresis');
     expect(entryReferenceSlug('Fäce.', references.resolve)).toBe('fäce');
+  });
+});
+
+const qualifiedSource = new Map([
+  ['Magic', '<h2 class="hw">Magic</h2><div class="pos">noun</div><div class="def">A noun.</div>'],
+  [
+    'Magical',
+    '<div class="mhw"><h2 class="hw">Magic</h2>, <h2 class="hw">Magical</h2></div><div class="pos">adjective</div><div class="def">An adjective.</div>',
+  ],
+  ['Bib', '<h2 class="hw">Bib</h2><div class="pos">noun</div><div class="def">A noun.</div>'],
+  [
+    'Bibbe',
+    '<h2 class="hw">Bib</h2><div class="pos">intransitive verb</div><div class="def">One verb.</div><h2 class="hw">Bib</h2><div class="pos">transitive verb</div><div class="def">Another verb.</div>',
+  ],
+  [
+    'Common',
+    '<h2 class="hw">Common</h2><div class="pos">adjective</div><div class="def">An adjective.</div><h2 class="hw">Common</h2><div class="pos">noun</div><div class="def">A noun.</div>',
+  ],
+  [
+    'First',
+    '<h2 class="hw">Shared</h2><div class="pos">adjective</div><div class="def">One.</div>',
+  ],
+  [
+    'Second',
+    '<h2 class="hw">Shared</h2><div class="pos">adjective</div><div class="def">Two.</div>',
+  ],
+  ['Shared', '<h2 class="hw">Shared</h2><div class="pos">noun</div><div class="def">Three.</div>'],
+  ['Same', '<h2 class="hw">Same</h2><div class="pos">adjective</div><div class="def">One.</div>'],
+  [
+    'Same Alternative',
+    '<h2 class="hw">Same</h2><div class="pos">adjective</div><div class="def">Two.</div>',
+  ],
+  ['Meter', '<h2 class="hw">Meter</h2><div class="pos">noun</div><div class="def">One.</div>'],
+  [
+    'Metric',
+    '<h2 class="hw">Meter</h2><div class="pos">noun</div><h2 class="hw">Metric</h2><div class="pos">adjective</div><div class="def">Two.</div>',
+  ],
+  ['Dual', '<h2 class="hw">Dual</h2><div class="pos">noun</div><div class="def">One.</div>'],
+  [
+    'Dual Form',
+    '<h2 class="hw">Dual</h2><div class="pos">feminine</div><div class="pos">adjective</div><div class="def">Two.</div>',
+  ],
+  ['St.', '<h2 class="hw">St.</h2><div class="pos">noun</div><div class="def">One.</div>'],
+  ['St', '<h2 class="hw">St</h2><div class="pos">noun</div><div class="def">Two.</div>'],
+  [
+    'Body',
+    '<h2 class="hw">Body</h2><div class="pos">noun</div><div class="def">A <div class="pos">verb</div>.</div>',
+  ],
+]);
+const qualifiedReferences = createEntryReferences(qualifiedSource, parseEntry);
+
+describe('explicit grammatical reference targets', () => {
+  test('uses the joint adjective heading while preserving unqualified and noun Magic', () => {
+    expect(
+      preprocess(
+        'See <div class="er">Magic</div>, <div class="pos">adjective</div>.',
+        qualifiedReferences.resolve
+      )
+    ).toBe(
+      'See <a class="er" href="/entry/magical">Magic</a>, <span class="pos">adjective</span>.'
+    );
+    expect(entryReferenceSlug('Magic', qualifiedReferences.resolve)).toBe('magic');
+    expect(entryReferenceSlug('Magic', qualifiedReferences.resolve, 'noun')).toBe('magic');
+    expect(entryReferenceSlug('Magic. ', qualifiedReferences.resolve, 'adjective')).toBe('magical');
+    expect(entryReferenceSlug('St.', qualifiedReferences.resolve, 'noun')).toBe('st.');
+    expect(
+      preprocess(
+        '<div class="er">Magic. </div>, <div class="pos">adjective</div>',
+        qualifiedReferences.resolve
+      )
+    ).toContain('href="/entry/magical"');
+    expect(
+      preprocess(
+        '<div class="er">St.</div>, <div class="pos">noun</div>',
+        qualifiedReferences.resolve
+      )
+    ).toContain('href="/entry/st."');
+    expect(qualifiedReferences.resolve('magic')).toBe('Magic');
+  });
+
+  test('finds a non-first homograph with an exact part of speech', () => {
+    expect(entryReferenceSlug('Bib', qualifiedReferences.resolve, 'transitive verb')).toBe('bibbe');
+    expect(entryReferenceSlug('Bib', qualifiedReferences.resolve, 'intransitive verb')).toBe(
+      'bibbe'
+    );
+    expect(entryReferenceSlug('Bib', qualifiedReferences.resolve)).toBe('bib');
+  });
+
+  test('keeps multiple matching owners and body labels from changing targets', () => {
+    expect(entryReferenceSlug('Shared', qualifiedReferences.resolve, 'adjective')).toBe('shared');
+    expect(entryReferenceSlug('Same', qualifiedReferences.resolve, 'adjective')).toBe('same');
+    expect(entryReferenceSlug('Body', qualifiedReferences.resolve, 'verb')).toBe('body');
+    expect(entryReferenceSlug('Missing', qualifiedReferences.resolve, 'adjective')).toBe('missing');
+  });
+
+  test('does not assign an interleaved headword another headword’s label', () => {
+    expect(entryReferenceSlug('Meter', qualifiedReferences.resolve, 'adjective')).toBe('meter');
+    expect(entryReferenceSlug('Meter', qualifiedReferences.resolve, 'noun')).toBe('meter');
+    expect(entryReferenceSlug('Metric', qualifiedReferences.resolve, 'adjective')).toBe('metric');
+    expect(entryReferenceSlug('Dual', qualifiedReferences.resolve, 'feminine')).toBe('dual_form');
+    expect(entryReferenceSlug('Dual', qualifiedReferences.resolve, 'adjective')).toBe('dual_form');
+  });
+
+  test('requires an adjacent label and keeps printed punctuation', () => {
+    expect(
+      preprocess(
+        '<div class="er">Magic</div>, prose <div class="pos">adjective</div>',
+        qualifiedReferences.resolve
+      )
+    ).toContain('href="/entry/magic"');
+    expect(
+      preprocess(
+        '<div class="er">Magic</div>. <div class="pos">adjective</div>',
+        qualifiedReferences.resolve
+      )
+    ).toContain('href="/entry/magic"');
+    expect(
+      preprocess(
+        '<div class="er">Magic</div>, <div class="pos">adjective</div>',
+        qualifiedReferences.resolve
+      )
+    ).toContain('href="/entry/magical"');
+  });
+
+  test('uses a nested terminal label without changing its visible text', () => {
+    expect(
+      preprocess(
+        '<div class="er">Common, <div class="pos">noun</div></div>',
+        qualifiedReferences.resolve
+      )
+    ).toBe('<a class="er" href="/entry/common">Common, <span class="pos">noun</span></a>');
+    expect(
+      preprocess(
+        '<div class="er">Magic, <div class="pos">adjective</div> </div>',
+        qualifiedReferences.resolve
+      )
+    ).toBe('<a class="er" href="/entry/magical">Magic, <span class="pos">adjective</span></a> ');
+    expect(
+      preprocess(
+        '<div class="er">Magic, <div class="pos"> adjective </div></div>',
+        qualifiedReferences.resolve
+      )
+    ).toBe('<a class="er" href="/entry/magical">Magic,  <span class="pos">adjective</span></a> ');
   });
 });
