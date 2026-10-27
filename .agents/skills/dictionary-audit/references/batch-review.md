@@ -98,7 +98,8 @@ For every selected entry:
 2. Read the complete parsed model. Check parentage and source order, not just the first definition.
 3. Read actual browser text and inspect the entire rendered entry at legible resolution.
 4. Compare with the matching electronic witnesses. Use a printed page or another primary witness for ambiguous omissions, glyphs, stress, attribution, or layout.
-5. Record specific findings, justified retention, or unresolved readings, with the evidence inspected.
+5. Follow every cross-reference that names a sense, part of speech, or compound, and record a missing or wrong target as described in [Lookup and reference preservation](sources-and-lexical-behavior.md#lookup-and-reference-preservation).
+6. Record specific findings, justified retention, or unresolved readings, with the evidence inspected.
 
 A useful ledger records `index`, original and current key, the completed review dimensions, an entry-specific assessment, inspected image paths, browser-text digest, loaded-font evidence, witness references, and proposed corrections. Keep pending work distinguishable from completed review. Generating screenshots or text files does not count as reading them.
 
@@ -168,7 +169,7 @@ bun run build
 
 `bun run build` includes database generation. Bump `PARSER_VERSION` in `scripts/build-db.ts` when stored parser or alias semantics change. Use `bun run build:db:force` when deliberately testing a rebuild. Do not hand-edit the generated database. Scratch TypeScript may participate in project type checking even under `.context`. Resolve real errors instead of adding exclusions to hide them.
 
-After replacing the database, restart the task-owned app so its cached SQLite connection opens the new file. Verify actual entry routes against expected rendered text and check cross-reference destinations through the runtime's canonical-slug-first lookup. For additions and renames, also exercise search and navigation. A successful build alone does not verify these flows.
+After replacing the database, restart the task-owned app so its cached SQLite connection opens the new file. Verify actual entry routes against expected rendered text and check cross-reference destinations, including their fragments, through the runtime's canonical-slug-first lookup. For additions and renames, also exercise search and navigation. A successful build alone does not verify these flows.
 
 ## Complete the batch
 
