@@ -240,6 +240,7 @@ test('preparation does not claim reviewer delivery or inspection', async () => {
     delete evidence.inspected;
   }
   for (const image of dossier.images) {
+    delete image.entryIdentity;
     for (const piece of image.pieces) {
       delete piece.deliveredSha256;
       delete piece.inspected;
@@ -256,6 +257,7 @@ test('preparation does not claim reviewer delivery or inspection', async () => {
   expect(reviewed?.status).toBe('hold');
   expect(reviewed?.reasons).toContain('incomplete raw delivery');
   expect(reviewed?.reasons).toContain('incomplete print image inspection: leaf-a');
+  expect(reviewed?.reasons).toContain('unverified entry identity: leaf-a');
 });
 
 test('progress uses frozen source and code identities, not glyph-only credit', () => {

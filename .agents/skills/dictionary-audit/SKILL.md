@@ -31,7 +31,9 @@ For substantial batches, delegate disjoint entry ranges and keep one integrator 
 
 When two audits run at once, read the other audit's latest report and the settled rules in the references before deciding an editorial question. Record a new rule in the references, send it to every running reviewer, and resume finished reviewers to apply it. Reconciling divergent decisions at integration produces inconsistent entries.
 
-Bind each packet to the same settled-rule revisions and validate its immutable evidence before dispatch. Size assignments by evidence volume and complexity. Reserve capacity for independent verification and integration, finishing ready work before admitting more discovery. Preserve completed review dimensions and reopen only unresolved fields or outputs whose recorded inputs changed.
+Bind each packet to the same settled-rule revisions and validate its immutable evidence mechanically before dispatch. Size assignments by evidence volume, image bytes, and complexity. Keep every available agent slot working. Ready second readings, adjudication, and integration take the next free slot, and review packets fill the rest. Preserve completed review dimensions and reopen only unresolved fields or outputs whose recorded inputs changed.
+
+Every model request re-sends the images already in that agent's context. An agent that accumulates many page crops slows on every later step and can lose its model connection. The integrator dispatches and integrates without opening page images. Delegate image reading, including adjudication, to agents that each handle one bounded packet and then finish.
 
 ## Review and correct
 

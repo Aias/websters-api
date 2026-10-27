@@ -361,9 +361,9 @@ export async function preparePacket(
           .map((piece) => piece.rect);
         if (evidence.required.some((area) => !covers(area, inspected)))
           reasons.push(`incomplete ${evidence.role} image inspection: ${evidence.pageId}`);
+        if (evidence.role === 'print' && !evidence.entryIdentity)
+          reasons.push(`unverified entry identity: ${evidence.pageId}`);
       }
-      if (evidence.role === 'print' && !evidence.entryIdentity)
-        reasons.push(`unverified entry identity: ${evidence.pageId}`);
       if (
         evidence.entryIdentity &&
         (evidence.entryIdentity.key !== item.key ||
