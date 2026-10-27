@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Script from 'next/script';
 import { Suspense, type ReactNode } from 'react';
 import { SearchBar } from '~/components/search-bar';
+import { ThemeToggle } from '~/components/theme-toggle';
 
 const webster = localFont({
   src: [
@@ -41,8 +42,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en" className={`${webster.variable} ${cardo.variable}`}>
+    <html
+      lang="en"
+      data-theme="auto"
+      className={`${webster.variable} ${cardo.variable}`}
+      suppressHydrationWarning
+    >
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{const t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}catch{}`,
+          }}
+        />
         {process.env.NODE_ENV === 'development' && (
           <Script
             src="//unpkg.com/react-grab/dist/index.global.js"
@@ -52,7 +63,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         )}
       </head>
       <body className="flex h-dvh flex-col overflow-hidden font-serif antialiased">
-        <header className="mx-auto w-full max-w-2xl shrink-0 px-4 pt-8 pb-8">
+        <header className="mx-auto w-full max-w-2xl shrink-0 px-4 pt-12 pb-8 sm:pt-8">
           <Link href="/" className="mb-4 block text-center text-4xl font-bold">
             Webster&rsquo;s 1913
           </Link>
@@ -64,8 +75,9 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
               Authors
             </Link>
           </nav>
+          <ThemeToggle />
         </header>
-        <main className="mx-auto w-full max-w-2xl grow overflow-y-auto px-4 pb-8 has-data-wide:max-w-6xl">
+        <main className="mx-auto w-full max-w-2xl grow scroll-fade scrollbar-none overflow-y-auto px-4 pb-8 has-data-wide:max-w-6xl">
           {children}
         </main>
       </body>

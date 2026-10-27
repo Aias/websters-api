@@ -19,6 +19,7 @@
     "type-check:watch": "tsc --noEmit --watch"
   },
   "dependencies": {
+    "@phosphor-icons/react": "~2.1.10",
     "better-sqlite3": "13.0.3",
     "next": "16.4.2",
     "react": "19.3.1",
@@ -36,7 +37,11 @@
     "oxfmt": "0.73.0",
     "oxlint": "1.88.0",
     "oxlint-tsgolint": "7.0.2004",
+    "shadcn": "~4.23.0",
     "tailwindcss": "4.3.3",
     "typescript": "7.0.2"
-  }
+  },
+  "browserslist": [
+    "baseline newly available"
+  ]
 }
