@@ -151,3 +151,5 @@
 {"batch":"fp05","target":"fp05-t9","key":"To","fragment":"in <div class=\"grk\">οἴκαδε</div> homeward.","breathingSource":"lsj-breathing.py output (LSJ via Logeion)"}
 {"batch":"fp05","target":"fp05-t10","key":"Trapezoid","fragment":"table + <div class=\"grk\">εἶδος</div> shape,","breathingSource":"lsj-breathing.py output (LSJ via Logeion)"}
 {"batch":"fp05","target":"fp05-t11","key":"Trieterical","fragment":"<div class=\"er\">Tri-</div>) + <div class=\"grk\">ἔτος</div> a","breathingSource":"lsj-breathing.py output (LSJ via Logeion)"}
+{"batch":"sp02","target":"sp02-t4","key":"Uloid","fragment":"[Gr. <div class=\"grk\">οὐλή</div> scar","breathingSource":{"form":"οὐλή","url":"https://anastrophe.uchicago.edu/logeion-api/detail?w=%CE%BF%E1%BD%90%CE%BB%CE%AE&type=normal"}}
+{"batch":"sp02","target":"sp02-t5","key":"Uraeus","fragment":"Gr. <div class=\"grk\">οὐραῖος</div>, fr. <div class=\"grk\">οὐρά</div> tail.]","breathingSource":{"form":"οὐραῖος, οὐρά","url":"LSJ via lsj-breathing.py"}}
