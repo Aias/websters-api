@@ -369,7 +369,7 @@ These 18 selected entries have eighteen accepted operations across sixteen chang
 | Hypogean     | γῆ                               |
 | Hypogeum     | γαῖα, γῆ                         |
 | Hypoglossal  | γλῶσσα                           |
-| Hypognatous  | γνάθος                           |
+| Hypognathous | γνάθος                           |
 | Hypogynous   | γυνή                             |
 | Hypohyal     | Υ                                |
 | Hyponastic   | ναστός                           |
@@ -385,7 +385,7 @@ The matching owners on [page 721](https://archive.org/download/webstersinternat0
 
 Hypostatical's complete 1907 sense-3 definition prints settling twice, with an explicit l at each owner. Two distinct native readers agree. The related [1915 owner on page 1060](https://archive.org/download/bwb_O8-DDQ-914/page/n1179.jpg?scale=1) also prints settling of blood by gravitation. Its shorter first clause is not adopted and does not witness the earlier first field. Only the two matching words in the electronic definition are corrected.
 
-Hypognatous retains its electronic headword despite the related printing's Hypognathous. Hypogean preserves its optional-gloss difference. Hypogynous and Hypoptilum retain their illustration-provenance holds. Hypohyal's existing ceratohyal agrees with print and is not counted as a new repair against the electronic witnesses' caratohyal. Unclear whole Greek words and ineligible bare pronunciations remain unchanged. All 18 current article texts agree with their After exports. The remaining source records and all 238,657 catalog lookup destinations are preserved.
+Hypognathous follows the printed headword, which both electronic witnesses misspell as Hypognatous. Hypogean preserves its optional-gloss difference. Hypogynous and Hypoptilum retain their illustration-provenance holds. Hypohyal's existing ceratohyal agrees with print and is not counted as a new repair against the electronic witnesses' caratohyal. Unclear whole Greek words and ineligible bare pronunciations remain unchanged. All 18 current article texts agree with their After exports. The remaining source records and all 238,657 catalog lookup destinations are preserved.
 
 ## Hypotheca through Iambus
 

@@ -19,6 +19,8 @@ describe('dictionary headword keys', () => {
     ['Anemorphilous', 'Anemophilous', 'Fertilized by the agency of the wind'],
     ['Apprehensibiity', 'Apprehensibility', 'The quality of being apprehensible'],
     ["Alectryom'achy", 'Alectryomachy', 'Cockfighting'],
+    ['Hypognatous', 'Hypognathous', 'Having the maxilla, or lower jaw'],
+    ['Plec-tognathous', 'Plectognathous', 'Of or pertaining to the Plectognathi'],
   ])('resolves %s through corrected key %s', (oldKey, key, definition) => {
     expect(source.has(oldKey)).toBe(false);
     const $ = cheerio.load(entrySource(key), { xml: false }, false);

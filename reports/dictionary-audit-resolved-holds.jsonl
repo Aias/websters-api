@@ -597,3 +597,4 @@
 {"id":"z03-Trioecious-0","batch":"z03","key":"Trioecious","field":"source edit z03-Trioecious-0","resolution":"restored in the cleanup round","commit":"this commit","new":"Gr. <div class=\"grk\">οἶκος</div> house.]","readingTarget":"ap05-t12"}
 {"id":"z23i-Sore-0","batch":"z23i","key":"Sore","field":"homographs[3].content[4](compound Gold sore).headwordHtml","resolution":"corrected under the editorial rulings","commit":"this commit","new":"Cold sore"}
 {"id":"z23i-Sore-1","batch":"z23i","key":"Sore","field":"homographs[3].content[4](compound Gold sore).content[3](definition).er[0]","resolution":"corrected under the editorial rulings","commit":"this commit","new":"Cold"}
+{"id":"Hypognatous-edition-variant","batch":"a64","key":"Hypognathous","field":"holds","resolution":"corrected under the editorial rulings","commit":"this commit","new":"Hy-pog′na-thous (key Hypognathous)"}
