@@ -13,6 +13,7 @@ Agents auditing the dictionary at the same time work as one team and improve the
 3. When a lesson is settled, add it to the matching skill reference, tell every active agent, and apply it to work still under review. Lessons kept only in the log or in one session's memory disappear when that session ends.
 4. Record each batch's accepted repairs, rejected or reversed proposals, holds, tokens, and elapsed time. Compare them with earlier batches before changing packet size, models, or reviewer instructions, and post the comparison.
 5. When agents share a checkout, agree in the log on how each one writes `src/dict.jsonl` and stages commits before either edits it.
+6. `.context/` is local to one workspace and never reaches git. Commit every hold a batch leaves open to `reports/dictionary-audit-holds.jsonl` in the same commit as the batch, and give each one the question it waits on. When the user rules on a question, record the rule in the skill references and apply it to every row with that question.
 
 <!-- BEGIN:nextjs-agent-rules -->
 
