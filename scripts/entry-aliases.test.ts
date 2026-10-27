@@ -27,7 +27,7 @@ describe('dictionary reference lookup', () => {
           entryAliases(
             'Cooperate',
             '<h2 class="hw">Co-o&#x308;p&#x2032;er-ate</h2><div class="conjf">Co-o&#x308;p&#x2032;er-a&#x2CA;ted</div>'
-          ),
+          ).names,
         ],
       ])
     );
@@ -73,7 +73,7 @@ describe('dictionary reference lookup', () => {
   });
 
   test('indexes spelled headwords, alternate spellings, and compound headings', () => {
-    const aliases = entryAliases(
+    const { names: aliases } = entryAliases(
       'Aaronical',
       '<div class="mhw"><h2 class="hw">Aa-ron′ic</h2><h2 class="hw">Aa-ron′ic-al</h2></div>' +
         '<div class="altsp"><span class="asp">Aaronic</span></div>' +
@@ -85,16 +85,18 @@ describe('dictionary reference lookup', () => {
   });
 
   test('preserves affix hyphens', () => {
-    expect(entryAliases('Ad-', '<h2 class="hw">Ad-</h2>')).toEqual(['Ad-']);
-    expect(entryAliases('-ward', '<h2 class="hw">-ward</h2>')).toEqual(['-ward']);
+    expect(entryAliases('Ad-', '<h2 class="hw">Ad-</h2>').names).toEqual(['Ad-']);
+    expect(entryAliases('-ward', '<h2 class="hw">-ward</h2>').names).toEqual(['-ward']);
     expect(
-      entryAliases('Argentamine', '<h2 class="hw">Argentamine</h2><h2 class="hw">-min</h2>')
+      entryAliases('Argentamine', '<h2 class="hw">Argentamine</h2><h2 class="hw">-min</h2>').names
     ).toEqual(['Argentamine']);
   });
 
   test('resolves infinitive references only for verb entries', () => {
-    expect(entryAliases('Abase', '<div class="pos">transitive verb</div>')).toContain('To Abase');
-    expect(entryAliases('Abacus', '<div class="pos">noun</div>')).not.toContain('To Abacus');
+    expect(entryAliases('Abase', '<div class="pos">transitive verb</div>').names).toContain(
+      'To Abase'
+    );
+    expect(entryAliases('Abacus', '<div class="pos">noun</div>').names).not.toContain('To Abacus');
   });
 
   test('indexes explicit inflections and derived forms', () => {
@@ -102,18 +104,21 @@ describe('dictionary reference lookup', () => {
       entryAliases(
         'Index',
         '<div class="plw">Indices</div><div class="conjf">Indexed</div><div class="wf">Indexer</div>'
-      )
+      ).names
     ).toEqual(['Index', 'Indices', 'Indexed', 'Indexer']);
   });
 
   test('indexes linked plural forms without displacing canonical entries', () => {
     const agama = readDictionarySource().get('Agama');
     if (!agama) throw new Error('Missing Agama source');
-    expect(entryAliases('Agama', agama)).toContain('Agamas');
+    expect(entryAliases('Agama', agama).names).toContain('Agamas');
     const aliases = unambiguousAliases(
       new Map([
-        ['Agama', entryAliases('Agama', agama)],
-        ['Stamen', entryAliases('Stamen', '<div class="plu"><div class="er">Stamina</div></div>')],
+        ['Agama', entryAliases('Agama', agama).names],
+        [
+          'Stamen',
+          entryAliases('Stamen', '<div class="plu"><div class="er">Stamina</div></div>').names,
+        ],
         ['Stamina', ['Stamina']],
       ])
     );
@@ -138,10 +143,38 @@ describe('dictionary reference lookup', () => {
       entryAliases(
         'Range',
         '<div class="col" data-headword="At close range">At close</div> (or <div class="col" data-headword="At long range">long</div>) <div class="col" data-headword="">range</div>'
-      )
+      ).names
     ).toEqual(['Range', 'At close range', 'At long range']);
-    expect(entryAliases('Range', '<h2 class="hw" data-headword="Wrong">Range</h2>')).toEqual([
+    expect(entryAliases('Range', '<h2 class="hw" data-headword="Wrong">Range</h2>').names).toEqual([
       'Range',
     ]);
+  });
+
+  test('gives a compound defined only by See under to an entry that defines it', () => {
+    const sore = entryAliases(
+      'Sore',
+      '<div class="cs"><div class="col"><b>Cold sore</b></div>. <div class="cd">See under <div class="er">Cold</div>, <div class="pos">noun</div></div></div>' +
+        '<div class="cs"><div class="col"><b>Sore throat</b></div>, <div class="cd">See under <div class="er">Throat</div>.</div></div>'
+    );
+    expect(sore.deferred).toEqual(['Cold sore', 'Sore throat']);
+    const cold = entryAliases(
+      'Cold',
+      '<div class="cs"><div class="col"><b>Cold sore </b></div>, <div class="cd">a vesicular eruption.</div></div>'
+    );
+    const aliases = unambiguousAliases(
+      new Map([
+        ['Sore', sore.names],
+        ['Cold', cold.names],
+        ['Sorehead', ['Sorehead', 'Sore throat']],
+        ['Soreness', ['Soreness', 'Sore throat']],
+      ]),
+      new Map([
+        ['Sore', sore.deferred],
+        ['Sorrow', ['Cold sore', 'Sorrow sore']],
+      ])
+    );
+    expect(aliases.get('cold sore')).toBe('Cold');
+    expect(aliases.has('sore throat')).toBe(false);
+    expect(aliases.get('sorrow sore')).toBe('Sorrow');
   });
 });

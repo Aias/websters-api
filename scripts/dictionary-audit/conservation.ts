@@ -169,13 +169,15 @@ export function snapshotLookup(
     if (previous && previous !== key) throw new Error(`Canonical slug collision: ${slug}`);
     canonical.set(slug, key);
     routeNames.add(slug);
-    for (const alias of entryAliases(key, html)) {
+    const { names, deferred } = entryAliases(key, html);
+    for (const alias of names) {
       const name = normalizeLookup(alias);
       const owners = claims.get(name) ?? new Set<string>();
       owners.add(key);
       claims.set(name, owners);
       routeNames.add(slugify(name));
     }
+    for (const alias of deferred) routeNames.add(slugify(normalizeLookup(alias)));
   }
   const routes = new Map<string, string>();
   for (const slug of routeNames) {

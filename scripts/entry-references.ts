@@ -26,12 +26,15 @@ export function createEntryReferences(
 ) {
   const canonical = new Map<string, string>();
   const aliasesByEntry = new Map<string, ReadonlyArray<string>>();
+  const pointersByEntry = new Map<string, ReadonlyArray<string>>();
   for (const [rawKey, html] of source) {
     const key = decodeEntryKey(rawKey);
     canonical.set(slugify(key), key);
-    aliasesByEntry.set(key, entryAliases(key, html));
+    const { names, deferred } = entryAliases(key, html);
+    aliasesByEntry.set(key, names);
+    if (deferred.length) pointersByEntry.set(key, deferred);
   }
-  const aliases = unambiguousAliases(aliasesByEntry);
+  const aliases = unambiguousAliases(aliasesByEntry, pointersByEntry);
   const resolve: EntryResolver = (slug) => {
     const name = normalizeLookup(slug.replaceAll('_', ' '));
     const folded = name
