@@ -1,7 +1,7 @@
 import 'server-only';
 import { join } from 'node:path';
 import BetterSqlite3 from 'better-sqlite3';
-import { normalizeLookup } from './lookup';
+import { normalizeLookup, rankHeadwords } from './lookup';
 import { porterStem } from './stemmer';
 import type { Author, DictionaryEntry, Quotation, QuotedWord, SearchResult } from './types';
 
@@ -43,19 +43,23 @@ export function getEntryBySlug(slug: string): DictionaryEntry | null {
   return parseEntryRow(row) ?? getEntry(slug.replace(/_/g, ' '));
 }
 
-export function searchEntries(prefix: string, limit = 20): Array<SearchResult> {
+let headwords: Array<string> | null = null;
+
+export function searchEntries(query: string, limit = 20): Array<SearchResult> {
+  headwords ??= getDb()
+    .prepare<[], { normalized_key: string }>('SELECT normalized_key FROM entries')
+    .all()
+    .map((row) => row.normalized_key);
   return getDb()
-    .prepare<[string, number], SearchResult>(
-      `SELECT MIN(key) AS key,
-              slug,
-              json_extract(data, '$.homographs[0].partOfSpeech') AS partOfSpeech
-       FROM entries
-       WHERE normalized_key LIKE ?
-       GROUP BY normalized_key
-       ORDER BY normalized_key
-       LIMIT ?`
+    .prepare<[string], SearchResult>(
+      `SELECT entries.key,
+              entries.slug,
+              json_extract(entries.data, '$.homographs[0].partOfSpeech') AS partOfSpeech
+       FROM json_each(?) AS ranked
+       JOIN entries ON entries.normalized_key = ranked.value
+       ORDER BY ranked.key`
     )
-    .all(`${normalizeLookup(prefix)}%`, limit);
+    .all(JSON.stringify(rankHeadwords(normalizeLookup(query), headwords, limit)));
 }
 
 /**
