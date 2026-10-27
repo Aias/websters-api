@@ -94,6 +94,8 @@ GCIDE's editors and our import dropped some 1913 compounds, and the Gutenberg su
 - A definition followed by another compound ends `text. </div>&#x2014; <div class="col">`, and the last definition in a block ends `text.</div></div><br/>`.
 - A cross-reference is an `er` element. Punctuation comes from the print, and every character of `old` stays unchanged, which takes precedence over these rules.
 
+GCIDE's editors often rewrote a whole clause, and the survey splits a rewrite into separate word hunks. Restore a rewording only when the rest of its sentence already matches the print, or widen the span to cover the whole rewritten clause. Replacing one hunk alone can leave a sentence that matches neither text, as with Feast's "when they occurs".
+
 ## Lexical structure and boundaries
 
 Preserve source order and association across homographs, header fragments, forms, senses, compounds, notes, usage, and quotations. A repeated-looking passage may carry a distinct lexical function. Remove a duplicate only after proving it is an empty transcription error.

@@ -33,10 +33,11 @@ A vote alone would make roughly one wrong edit in ten, so every hunk goes throug
 - **Compounds.** Of the 113 compounds the print supports, 63 already sit elsewhere in our corpus, often split into their own entry. Six are parsing artifacts. Of the 44 targets built from the rest, 33 are restored after two blind readings. The other 11 wait on markup conventions or on printed punctuation the readers read differently.
 - **Pilot wording.** Seven pilot corrections restore the print's wording, including Fabulous, Vise, Viable, Hospodar and Pathogene.
 - **Headwords.** 1,662 lowercase headwords whose 1913 headword is capitalized now take the capital.
+- **Short rewordings.** A batch took 48 short substitutions with a strong print vote. Of these, 36 sat in sentences that GCIDE had also rewritten elsewhere, so changing the hunk alone would leave a sentence that matches neither text. Those stay held. The 12 whose sentences otherwise match the print are restored: "want" for "lack", "Mohammedans" for "Muslims", "occluding" for "absorbing", "albumen" for "protein" and similar.
 
 ## Open decisions
 
 - **Text only ours has, where the print lacks it.** This covers 4,185 hunks with a Gutenberg vote, and about half of the sample was post-1913 additions. The options are to keep it, mark it as a later addition, or remove it.
 - **The 7,019 entries only ours has.** These are later GCIDE additions with no 1913 print. The same question applies.
-- **Substitutions with a Gutenberg vote.** There are 2,920, read in batches like the audit's, highest-confidence first.
+- **Substitutions with a Gutenberg vote.** There are 2,920, and most are parts of definitions GCIDE rewrote whole, Keratin and Malaria among them. Reconciling these means restoring the 1913 definition or sense as a unit, read twice from the print, rather than word by word. Deciding whether to do that also decides what happens to the modern wording it replaces.
 - **Entry-splitting defects.** The compound triage found several. A stray key "Bold eagle" holds Bold's compounds and synonym paragraph. Cretaceous compounds sit in Cretacic, a Chateaubriand record carries Chateau en Espagne, and others are similar. They need structural repair, not text edits.
