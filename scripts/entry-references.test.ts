@@ -193,7 +193,7 @@ describe('explicit grammatical reference targets', () => {
         '<div class="er">Common, <div class="pos">noun</div></div>',
         qualifiedReferences.resolve
       )
-    ).toBe('<a class="er" href="/entry/common">Common, <span class="pos">noun</span></a>');
+    ).toBe('<a class="er" href="/entry/common#2">Common, <span class="pos">noun</span></a>');
     expect(
       preprocess(
         '<div class="er">Magic, <div class="pos">adjective</div> </div>',
@@ -206,5 +206,69 @@ describe('explicit grammatical reference targets', () => {
         qualifiedReferences.resolve
       )
     ).toBe('<a class="er" href="/entry/magical">Magic,  <span class="pos">adjective</span></a> ');
+  });
+});
+
+const targetSource = new Map([
+  [
+    'Abatement',
+    '<h2 class="hw">Abatement</h2><div class="pos">noun</div><div class="sn">1.</div><div class="def">One.</div><div class="sn">2.</div><div class="sd">(a)</div><div class="def">Two a.</div><div class="sd">(b)</div><div class="def">Two b.</div>',
+  ],
+  [
+    'Advance',
+    '<h2 class="hw">Advance</h2><div class="pos">transitive verb</div><div class="sn">1.</div><div class="def">Verb one.</div><div class="sn">5.</div><div class="def">Verb five.</div><h2 class="hw">Advance</h2><div class="pos">noun</div><div class="sn">5.</div><div class="def">Noun five.</div>',
+  ],
+  [
+    'Ablative',
+    '<h2 class="hw">Ablative</h2><div class="pos">adjective</div><div class="def">Taking away.</div><div class="cs"><div class="col"><b>Ablative absolute</b></div>, <div class="cd">a construction.</div></div>',
+  ],
+  [
+    'Beam',
+    '<h2 class="hw">Beam</h2><div class="pos">noun</div><div class="def">A timber.</div><div class="cs"><div class="col"><b>Abaft the beam</b></div>. <div class="cd">Behind.</div></div>',
+  ],
+]);
+const targetReferences = createEntryReferences(targetSource, parseEntry);
+
+describe('sense and compound reference targets', () => {
+  test.each([
+    ['See <div class="er">Abatement</div>, 2.', '/entry/abatement#2'],
+    ['See <div class="er">Abatement</div>, 2 (b).', '/entry/abatement#2-b'],
+    ['See <div class="er">Abatement, 2.</div>', '/entry/abatement#2'],
+    ['See <div class="er">Abatement</div>, 9.', '/entry/abatement'],
+    ['See <div class="er">Abatement</div> 2.', '/entry/abatement'],
+    ['See <div class="er">Advance</div>, 5.', '/entry/advance#1-5'],
+    ['See <div class="er">Advance</div>, <div class="pos">noun</div>, 5.', '/entry/advance#2-5'],
+    ['See <div class="er">Advance</div>, <div class="pos">noun</div>.', '/entry/advance#2'],
+    [
+      'See <div class="cref">Ablative absolute</div>, under <div class="er">Ablative</div>.',
+      '/entry/ablative#ablative_absolute',
+    ],
+    [
+      '<div class="cs"><div class="col"><b>Abaft the beam</b></div>. <div class="cd">See under <div class="er">Beam</div>.</div></div>',
+      '/entry/beam#abaft_the_beam',
+    ],
+    [
+      '<div class="cs"><div class="col"><b>Abaft the beam</b></div>. <div class="cd">See the Note under <div class="er">Beam</div>.</div></div>',
+      '/entry/beam',
+    ],
+    ['See <div class="er">Abaft the beam</div>.', '/entry/abaft_the_beam#abaft_the_beam'],
+    ['See <div class="er">Beam</div>.', '/entry/beam'],
+  ])('%s links to %s', (html, href) => {
+    expect(preprocess(html, targetReferences.resolve)).toContain(`href="${href}"`);
+  });
+
+  test('prefers a recorded target that exists in the destination', () => {
+    expect(
+      preprocess(
+        'See <div class="er" data-target="2-a">Abatement</div>, 2.',
+        targetReferences.resolve
+      )
+    ).toBe('See <a class="er" href="/entry/abatement#2-a">Abatement</a>, 2.');
+    expect(
+      preprocess(
+        'See <div class="er" data-target="7">Abatement</div>, 2.',
+        targetReferences.resolve
+      )
+    ).toContain('href="/entry/abatement#2"');
   });
 });

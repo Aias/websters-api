@@ -4,6 +4,25 @@ import { entryReferenceSlug, type EntryResolver } from './entry-references';
 import { getOuterHtml, getText, hasClass, isElement } from './source-dom';
 import { normalizeSourceTypography } from './source-typography';
 
+function senseReference(text: string, following: string, qualified: boolean) {
+  const inside = /,\s*(\d+)\.?\s*$/.exec(text);
+  if (inside) return { sense: inside[1] };
+  const match = /^\s*(,?)\s*(\d+)(?:\s*\(([a-z])\))?(?=[\s.,;:)]|$)/.exec(following);
+  return match && (match[1] || qualified) ? { sense: match[2], subsense: match[3] } : {};
+}
+
+function ownerHeadwords($: cheerio.CheerioAPI, node: AnyNode): string[] {
+  for (let current: AnyNode | null = node; current; current = current.parent) {
+    for (let sibling = current.prev; sibling; sibling = sibling.prev) {
+      if (!isElement(sibling)) continue;
+      const names = $(sibling).find('.col, .hw').addBack('.col, .hw').toArray();
+      if (names.length)
+        return names.map((name) => $(name).attr('data-headword') ?? getText($, name));
+    }
+  }
+  return [];
+}
+
 export function loadPreprocessedDocument(
   html: string,
   resolve?: EntryResolver
@@ -61,8 +80,28 @@ export function loadPreprocessedDocument(
         }
         const slug = entryReferenceSlug(text, resolve, partOfSpeech);
         if (slug) {
+          const after = (next && hasClass(next, 'pos') ? next : el).nextSibling;
+          const before = el.previousSibling;
+          const lead = before?.type === 'text' ? before.data : '';
+          const cref = before?.previousSibling;
+          const phrases =
+            !/\bunder\s*$/i.test(lead) || /\bnote\s+under\s*$/i.test(lead)
+              ? []
+              : /^\s*,?\s*under\s*$/i.test(lead) && cref && hasClass(cref, 'cref')
+                ? [getText($, cref)]
+                : ownerHeadwords($, el);
+          const fragment = resolve?.fragment?.(slug, {
+            recorded: el.attribs['data-target'],
+            ...senseReference(
+              text,
+              after?.type === 'text' ? after.data : '',
+              Boolean(partOfSpeech)
+            ),
+            partOfSpeech,
+            phrases: [...phrases, text.replace(/,\s*\d+\.?\s*$/, '')],
+          });
           el.tagName = 'a';
-          el.attribs['href'] = `/entry/${slug}`;
+          el.attribs['href'] = `/entry/${slug}${fragment ? `#${fragment}` : ''}`;
         }
       }
     }

@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import BetterSqlite3 from 'better-sqlite3';
 import { normalizeLookup, rankHeadwords } from './lookup';
 import { porterStem } from './stemmer';
-import type { Author, DictionaryEntry, Quotation, QuotedWord, SearchResult } from './types';
+import type { Author, DictionaryEntry, OwnedQuotation, QuotedWord, SearchResult } from './types';
 
 // Next route/page code runs in the Node runtime; Bun's SQLite API is still used in scripts/build-db.ts.
 const DB_PATH = join(process.cwd(), 'app', 'data', 'dictionary.db');
@@ -118,17 +118,33 @@ export function getCitedForm(authorSlug: string): string | null {
 
 export function getQuotedWords(authorSlug: string): Array<QuotedWord> {
   const rows = getDb()
-    .prepare<[string], { key: string; slug: string; html: string; citation: string | null }>(
-      `SELECT entries.key, entries.slug, quotations.html, quotations.citation
+    .prepare<
+      [string],
+      {
+        key: string;
+        slug: string;
+        html: string;
+        citation: string | null;
+        ownerId: string | null;
+        ownerLabel: string | null;
+      }
+    >(
+      `SELECT entries.key, entries.slug, quotations.html, quotations.citation,
+              quotations.owner_id AS ownerId, quotations.owner_label AS ownerLabel
        FROM quotations JOIN entries ON entries.key = quotations.key
        WHERE quotations.author_slug = ?
        ORDER BY entries.normalized_key, quotations.rowid`
     )
     .all(authorSlug);
-  const words = new Map<string, { key: string; slug: string; quotations: Array<Quotation> }>();
-  for (const { key, slug, html, citation } of rows) {
+  const words = new Map<string, { key: string; slug: string; quotations: Array<OwnedQuotation> }>();
+  for (const { key, slug, html, citation, ownerId, ownerLabel } of rows) {
     const word = words.get(key) ?? { key, slug, quotations: [] };
-    word.quotations.push({ kind: 'quotation', html, authors: citation ? [citation] : [] });
+    word.quotations.push({
+      kind: 'quotation',
+      html,
+      authors: citation ? [citation] : [],
+      owner: ownerId && ownerLabel ? { id: ownerId, label: ownerLabel } : null,
+    });
     words.set(key, word);
   }
   return [...words.values()];
