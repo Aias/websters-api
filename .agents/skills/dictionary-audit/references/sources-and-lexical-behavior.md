@@ -25,6 +25,8 @@ Read `scripts/PARSING.md` and the corresponding current functions and tests. Use
 
 Download needed sources once and preserve edition, URL, printed page, scan image identifier, and relevant excerpts. Gutenberg and GCIDE share transcription ancestry. Their agreement can corroborate a representation but does not make a shared error correct. GCIDE also contains later additions and editorial revisions, so the application corpus is not a word-for-word historical facsimile.
 
+For extracted witnesses, label offsets by their encoding and newline representation. Keep native file byte ranges separate from character or UTF-8 ranges computed after newline normalization. Verify that decoding the native range and applying the recorded normalization reproduces the frozen excerpt.
+
 Search grouped headings, aliases, and cross-letter source files before declaring an electronic witness absent. A canonical application key may differ from the source article's other heading. Bind recovered candidates to the complete matching article and retain disagreements instead of inferring ownership from a name match alone.
 
 The International print is a related edition, not the exact electronic 1913 source. State the volume and printing accurately when citing it. Use print to resolve identifiable corruption without replacing legitimate electronic-edition differences. Do not add every print-only headword or delete every electronic-only sense. For a substantial omission, seek an electronic witness or surviving source context as well as print.
