@@ -1,6 +1,6 @@
 # Open dictionary audit holds
 
-[`dictionary-audit-holds.jsonl`](dictionary-audit-holds.jsonl) records 872 unresolved fields: 763 from the ascending audit through Metaleptic, 91 from descending batches z10 through z21, Synchysis back to Spermatorrhoea, and 18 from earlier reversed exceptions. The 16 entries in those exceptions are outside the ascending coverage count. Each row carries the batch, key, field, available print pages, and the reviewer's reason. Rows held at the decision stage also carry the exact `old` and `new` fragments with the frozen raw hash.
+[`dictionary-audit-holds.jsonl`](dictionary-audit-holds.jsonl) records 879 unresolved fields: 763 from the ascending audit through Metaleptic, 98 from descending batches z10 through z22, Synchysis back to Sparth, and 18 from earlier reversed exceptions. The 16 entries in those exceptions are outside the ascending coverage count. Each row carries the batch, key, field, available print pages, and the reviewer's reason. Rows held at the decision stage also carry the exact `old` and `new` fragments with the frozen raw hash.
 
 The ascending audit has examined 1012 entries. Of these, 527 are closed and 485 retain at least one field hold. Completed source, parser, browser-text, and visual reviews remain valid for their recorded inputs while the named field stays unresolved. Bare unknown pronunciations are intentional omissions under the source rules and are excluded from this list.
 
@@ -8,7 +8,7 @@ Lief's missing witness interval, Magic's qualified reference, and Make's missing
 
 A row's `needs` value says what would resolve it:
 
-- `evidence`: the available witnesses do not settle the field. These 766 rows include indistinct Greek breathings, missing matching print, and illustration questions. Reopen them when clearer or matching evidence becomes available.
+- `evidence`: the available witnesses do not settle the field. These 773 rows include indistinct Greek breathings, missing matching print, and illustration questions. Reopen them when clearer or matching evidence becomes available.
 - `ruling`: a reading or ownership question needs a source-policy decision. There are 106 such rows, grouped below. Record an approved rule in the dictionary-audit skill references, then apply it consistently through frozen decisions and final review.
 
 ## Questions awaiting a ruling
