@@ -48,7 +48,7 @@ Distinguish four causes before editing:
 | The review page has incorrect fonts, styles, dimensions, or cached assets | The review harness, followed by replacement of invalid evidence                                                                 |
 | The same conversion defect recurs across the corpus                       | A single [dictionary-wide pass](references/sources-and-lexical-behavior.md#dictionary-wide-passes), not per-entry batch patches |
 
-Preserve unresolved readings and document the missing evidence. Agreement between related transcriptions is not independent corroboration. A related printed edition does not authorize wholesale replacement of the electronic entry. Source restoration is not a redesign of the application.
+Preserve unresolved readings and document the missing evidence. Agreement between related transcriptions is not independent corroboration. Keep example characters in a reader's instructions generic, because an example that names the target's own letter can steer a blind reading. A related printed edition does not authorize wholesale replacement of the electronic entry. Source restoration is not a redesign of the application.
 
 Record the acceptance path for each exact edit. Certain independent agreement and source adjudication are separate outcomes. An adjudication needs its own inspected native evidence and independent confirmation of the disputed replacement. Convention or an uncertain glyph does not establish a reading. Route structural findings rejected by narrow text validators to the integrator's issue queue rather than discarding them.
 
