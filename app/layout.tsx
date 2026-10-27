@@ -77,7 +77,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
           </nav>
           <ThemeToggle />
         </header>
-        <main className="mx-auto w-full max-w-2xl grow scroll-fade scrollbar-none overflow-y-auto px-4 pb-8 has-data-wide:max-w-6xl">
+        <main className="mx-auto w-full max-w-2xl grow scroll-fade scroll-pt-10 scrollbar-none overflow-y-auto px-4 pb-8 has-data-wide:max-w-6xl">
           {children}
         </main>
       </body>
