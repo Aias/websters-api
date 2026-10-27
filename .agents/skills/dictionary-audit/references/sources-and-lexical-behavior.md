@@ -84,6 +84,16 @@ Keep the transforms with the evidence. Re-running them after a rebase resolves c
 
 Classify the population before choosing a transform. The same character may encode a stress mark in a heading and an angular measurement in a definition. An abbreviation expansion may lose sentence punctuation while an identical interior expansion is correct. Require witnessed context and negative cases for each rule. Keep source conversion, shared notation normalization, and uncertain readings separate.
 
+## Restoring compounds
+
+GCIDE's editors and our import dropped some 1913 compounds, and the Gutenberg survey (`reports/dictionary-gutenberg-survey.md`) lists them. Before restoring one, search the corpus for its heading, because many already sit under their own key or another entry. A reader writes the restored compound in the record's markup, and both readers place spaces by the corpus majority so that agreement depends only on what the print shows:
+
+- A new block after a line break starts `<br/>  <div class="cs">`.
+- A heading the print follows with a comma is `<b>Name</b></div>, `. One followed directly by a label is `<b>Name </b></div><div class="fld">`.
+- A label the print follows with a comma is `(Med.)</div>, <div class="cd">`, and one with no comma is `(Med.) </div><div class="cd">`.
+- A definition followed by another compound ends `text. </div>&#x2014; <div class="col">`, and the last definition in a block ends `text.</div></div><br/>`.
+- A cross-reference is an `er` element. Punctuation comes from the print, and every character of `old` stays unchanged, which takes precedence over these rules.
+
 ## Lexical structure and boundaries
 
 Preserve source order and association across homographs, header fragments, forms, senses, compounds, notes, usage, and quotations. A repeated-looking passage may carry a distinct lexical function. Remove a duplicate only after proving it is an empty transcription error.
