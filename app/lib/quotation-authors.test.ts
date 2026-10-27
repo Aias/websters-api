@@ -73,4 +73,21 @@ describe('quotation authors', () => {
       'John Dryden',
     ]);
   });
+
+  test('records the sense or compound that owns each quotation', () => {
+    const entry = parseEntry(
+      'Example',
+      '<h2 class="hw">Example</h2><span class="pos">noun</span><span class="sn">1.</span><span class="sd">(a)</span><span class="def">First.</span>' +
+        '<span class="q">One quote. <span class="qau">Shak.</span></span>' +
+        '<span class="cs"><span class="col"><b>Example case</b></span>, <span class="cd">A case.</span></span>' +
+        '<span class="q">Another quote. <span class="qau">Bacon.</span></span>' +
+        '<h2 class="hw">Example</h2><span class="pos">transitive verb</span><span class="def">To show.</span>' +
+        '<span class="q">A third quote. <span class="qau">Dryden.</span></span>'
+    );
+    expect(entryQuotations(entry).map(({ owner }) => owner)).toEqual([
+      { id: '1-1-a', label: 'noun 1. (a)' },
+      { id: 'example_case', label: 'Example case' },
+      { id: '2', label: 'transitive verb' },
+    ]);
+  });
 });

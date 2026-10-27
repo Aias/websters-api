@@ -989,3 +989,36 @@ test('indexes complete compound names without expanding displayed ellipses', () 
     'data-headword'
   );
 });
+
+test('identifies homographs, senses, and compounds by their printed path', () => {
+  const entry = parseEntry(
+    'Master',
+    '<h2 class="hw">Mast′er</h2><div class="pos">noun</div><div class="def">A vessel.</div>' +
+      '<h2 class="hw">Mas′ter</h2><div class="pos">noun</div><div class="sn">1.</div><div class="sd">(a)</div><div class="def">A ruler.</div>' +
+      '<div class="sn">2.</div><div class="def">A teacher.</div><div class="sn">2.</div><div class="def">Misnumbered.</div>' +
+      '<div class="cs"><div class="col"><b>Mas′ter touch</b></div>. <div class="sd">(a)</div> <div class="cd">A skill.</div></div>'
+  );
+  const ids = (content: ReadonlyArray<LexicalBlock>): Array<string | undefined> =>
+    content.flatMap((block) =>
+      block.kind === 'sense' || block.kind === 'compound'
+        ? [block.id, ...ids(block.content)]
+        : block.kind === 'section'
+          ? ids(block.content)
+          : []
+    );
+  expect(entry.homographs.map(({ id }) => id)).toEqual(['1', '2']);
+  expect(ids(entry.homographs[1].content)).toEqual([
+    '2-1',
+    '2-1-a',
+    '2-2',
+    undefined,
+    'master_touch',
+    'master_touch-a',
+  ]);
+  expect(
+    parseEntry(
+      'Abate',
+      '<h2 class="hw">Abate</h2><div class="sn">1.</div><div class="def">To lessen.</div>'
+    ).homographs[0]
+  ).toMatchObject({ id: undefined, content: [{ kind: 'sense', id: '1' }] });
+});

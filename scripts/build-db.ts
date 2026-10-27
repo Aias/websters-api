@@ -17,7 +17,12 @@ import type {
   Sense,
 } from '../app/lib/types.ts';
 import { readDictionarySource, sourceFingerprint } from './dictionary-source';
-import { createEntryReferences, decodeEntryKey, type EntryResolver } from './entry-references';
+import {
+  createEntryReferences,
+  decodeEntryKey,
+  phraseName,
+  type EntryResolver,
+} from './entry-references';
 import { getHtml, getOuterHtml, getText, hasClass, isBr, isElement, isTag } from './source-dom';
 import { loadPreprocessedDocument } from './source-preprocessing';
 
@@ -26,7 +31,7 @@ const DB_FILE = join(ROOT, 'app', 'data', 'dictionary.db');
 const BUILD_META_FILE = join(ROOT, 'app', 'data', 'dictionary.build-meta.json');
 const PROGRESS_EVERY = 10000;
 // Bump when parser/build output semantics change to force a rebuild.
-const PARSER_VERSION = 33;
+const PARSER_VERSION = 34;
 
 interface SourceFingerprint {
   size: number;
@@ -643,6 +648,25 @@ function parseHomograph(
   };
 }
 
+function identify(
+  content: ReadonlyArray<LexicalBlock>,
+  prefix: string,
+  claim: (id: string) => string | undefined
+): LexicalBlock[] {
+  return content.map((block) => {
+    if (block.kind === 'section')
+      return { ...block, content: identify(block.content, prefix, claim) };
+    if (block.kind !== 'sense' && block.kind !== 'compound') return block;
+    const path =
+      block.kind === 'sense'
+        ? [prefix, block.number.toLowerCase().replace(/[^\p{L}\p{N}]/gu, '')]
+            .filter(Boolean)
+            .join('-')
+        : slugify(phraseName(block.headwords[0] ?? ''));
+    return { ...block, id: claim(path), content: identify(block.content, path || prefix, claim) };
+  });
+}
+
 export function parseEntry(key: string, rawHtml: string, resolve?: EntryResolver): DictionaryEntry {
   const decodedKey = decodeEntryKey(key);
   const $ = loadPreprocessedDocument(rawHtml, resolve);
@@ -683,10 +707,24 @@ export function parseEntry(key: string, rawHtml: string, resolve?: EntryResolver
     current.push(node);
   }
   for (const node of $.root().contents().toArray()) collect(node, false);
+  const ids = new Set<string>();
+  function claim(id: string): string | undefined {
+    if (!id || ids.has(id)) return undefined;
+    ids.add(id);
+    return id;
+  }
   return {
     key: decodedKey,
     slug: slugify(decodedKey),
-    homographs: sections.map((nodes) => parseHomograph($, decodedKey, nodes, grouped)),
+    homographs: sections.map((nodes, index) => {
+      const homograph = parseHomograph($, decodedKey, nodes, grouped);
+      const prefix = sections.length > 1 ? String(index + 1) : '';
+      return {
+        ...homograph,
+        id: claim(prefix),
+        content: identify(homograph.content, prefix, claim),
+      };
+    }),
   };
 }
 
@@ -714,7 +752,7 @@ function writeDatabase(sourceData: Map<string, string>, keys: ReadonlyArray<stri
   `);
   db.run('CREATE TABLE aliases (normalized_key TEXT PRIMARY KEY, key TEXT NOT NULL)');
   db.run(
-    'CREATE TABLE quotations (author_slug TEXT NOT NULL, author TEXT NOT NULL, cited TEXT NOT NULL, key TEXT NOT NULL, html TEXT NOT NULL, citation TEXT)'
+    'CREATE TABLE quotations (author_slug TEXT NOT NULL, author TEXT NOT NULL, cited TEXT NOT NULL, key TEXT NOT NULL, html TEXT NOT NULL, citation TEXT, owner_id TEXT, owner_label TEXT)'
   );
   const references = createEntryReferences(sourceData, parseEntry);
 
@@ -722,7 +760,7 @@ function writeDatabase(sourceData: Map<string, string>, keys: ReadonlyArray<stri
     'INSERT INTO entries (key, normalized_key, slug, data) VALUES ($key, $normalizedKey, $slug, $data)'
   );
   const insertQuotation = db.prepare(
-    'INSERT INTO quotations (author_slug, author, cited, key, html, citation) VALUES (?, ?, ?, ?, ?, ?)'
+    'INSERT INTO quotations (author_slug, author, cited, key, html, citation, owner_id, owner_label) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
   );
 
   let parsedCount = 0;
@@ -743,8 +781,17 @@ function writeDatabase(sourceData: Map<string, string>, keys: ReadonlyArray<stri
           $slug: entry.slug,
           $data: JSON.stringify(entry),
         });
-        for (const { slug, name, cited, html, citation } of entryQuotations(entry)) {
-          insertQuotation.run(slug, name, cited, entry.key, html, citation);
+        for (const { slug, name, cited, html, citation, owner } of entryQuotations(entry)) {
+          insertQuotation.run(
+            slug,
+            name,
+            cited,
+            entry.key,
+            html,
+            citation,
+            owner?.id ?? null,
+            owner?.label ?? null
+          );
         }
         parsedCount++;
       } catch (err) {

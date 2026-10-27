@@ -23,12 +23,14 @@ export interface Quotation {
 
 export interface Sense {
   kind: 'sense';
+  id?: string;
   number: string;
   content: ReadonlyArray<LexicalBlock>;
 }
 
 export interface CompoundForm {
   kind: 'compound';
+  id?: string;
   headwords: ReadonlyArray<string>;
   headwordHtml: InlineHTML;
   content: ReadonlyArray<LexicalBlock>;
@@ -42,6 +44,7 @@ export interface LexicalSection {
 export type LexicalBlock = InlineBlock | Quotation | Sense | CompoundForm | LexicalSection;
 
 export interface Homograph {
+  id?: string;
   headword: string;
   alternateHeadwords: ReadonlyArray<string>;
   pronunciation: string | null;
@@ -68,8 +71,17 @@ export interface Author {
   quotationCount: number;
 }
 
+export interface QuotationOwner {
+  id: string;
+  label: string;
+}
+
+export interface OwnedQuotation extends Quotation {
+  owner: QuotationOwner | null;
+}
+
 export interface QuotedWord {
   key: string;
   slug: string;
-  quotations: ReadonlyArray<Quotation>;
+  quotations: ReadonlyArray<OwnedQuotation>;
 }

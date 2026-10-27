@@ -79,7 +79,7 @@ function ContentView({
     group.kind === 'senses' ? (
       <ol key={i} className="mt-2 space-y-4">
         {group.senses.map((sense, j) => (
-          <li key={j} className="flex gap-2">
+          <li key={j} id={sense.id} className="flex gap-2">
             <span className="shrink-0 text-right font-bold text-muted-foreground tabular-nums">
               {sense.number}
             </span>
@@ -139,7 +139,7 @@ function BlockView({
     case 'compound': {
       const first = block.content[0];
       return (
-        <div className="mt-4 mb-2">
+        <div id={block.id} className="mt-4 mb-2">
           <InlineHtml html={block.headwordHtml} />
           {needsLeadingSpace(first) ? ' ' : null}
           <ContentView content={block.content} entryKey={entryKey} inline />
@@ -194,7 +194,7 @@ export function EntryView({ entry }: { entry: DictionaryEntry }) {
     <HoverLinks>
       <article>
         {entry.homographs.map((homograph, i) => (
-          <section key={i} className="mb-8">
+          <section key={i} id={homograph.id} className="mb-8">
             <HeaderView parts={homograph.header} />
             <ContentView content={homograph.content} entryKey={entry.key} />
           </section>

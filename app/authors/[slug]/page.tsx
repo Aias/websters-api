@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { Fragment } from 'react';
 import { QuotationView } from '~/components/entry';
 import { HoverLinks } from '~/components/hover-links';
 import { Masonry } from '~/components/masonry';
@@ -40,13 +41,18 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
                   {word.key}
                 </Link>
               </h2>
-              {word.quotations.map((quotation, i) => (
-                <QuotationView
-                  key={i}
-                  quotation={quotation}
-                  entryKey={word.key}
-                  linkAuthors={false}
-                />
+              {word.quotations.map(({ owner, ...quotation }, i) => (
+                <Fragment key={i}>
+                  {owner && owner.id !== word.quotations[i - 1]?.owner?.id && (
+                    <Link
+                      href={`/entry/${word.slug}#${owner.id}`}
+                      className="text-sm font-bold text-muted-foreground hover:underline"
+                    >
+                      {owner.label}
+                    </Link>
+                  )}
+                  <QuotationView quotation={quotation} entryKey={word.key} linkAuthors={false} />
+                </Fragment>
               ))}
             </article>
           ))}
