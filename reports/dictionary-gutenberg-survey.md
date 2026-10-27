@@ -34,10 +34,10 @@ A vote alone would make roughly one wrong edit in ten, so every hunk goes throug
 - **Pilot wording.** Seven pilot corrections restore the print's wording, including Fabulous, Vise, Viable, Hospodar and Pathogene.
 - **Headwords.** 1,662 lowercase headwords whose 1913 headword is capitalized now take the capital.
 - **Short rewordings.** A batch took 48 short substitutions with a strong print vote. Of these, 36 sat in sentences that GCIDE had also rewritten elsewhere, so changing the hunk alone would leave a sentence that matches neither text. Those stay held. The 12 whose sentences otherwise match the print are restored: "want" for "lack", "Mohammedans" for "Muslims", "occluding" for "absorbing", "albumen" for "protein" and similar.
+- **Whole definitions.** A batch of 48 definitions that GCIDE rewrote, chosen where one record sense pairs with one printed sense, was replaced with the printed definition read twice blind. 45 are restored. Three wait on a convention: Clock's part tag, Kumquat's abbreviated binomial, and Key's spacing before a closing tag. The final check also noted defects already in the source outside these definitions. Journalist lacks the attribution "Addison.", Take reads "quantity or copy" for "quantity of copy", and Omnibus carries a stray "‖".
+- **Split entries.** Eleven entries that sat in the wrong records are merged back where the print places them. A stray "Bold eagle" record held Bold's compounds, and Bark's tree-bark noun sat in Bard. Four more proposals wait on judgment: Cretaceous, Hostility, Dormant and Critical.
 
-## Open decisions
+## Next steps
 
-- **Text only ours has, where the print lacks it.** This covers 4,185 hunks with a Gutenberg vote, and about half of the sample was post-1913 additions. The options are to keep it, mark it as a later addition, or remove it.
-- **The 7,019 entries only ours has.** These are later GCIDE additions with no 1913 print. The same question applies.
-- **Substitutions with a Gutenberg vote.** There are 2,920, and most are parts of definitions GCIDE rewrote whole, Keratin and Malaria among them. Reconciling these means restoring the 1913 definition or sense as a unit, read twice from the print, rather than word by word. Deciding whether to do that also decides what happens to the modern wording it replaces.
-- **Entry-splitting defects.** The compound triage found several. A stray key "Bold eagle" holds Bold's compounds and synonym paragraph. Cretaceous compounds sit in Cretacic, a Chateaubriand record carries Chateau en Espagne, and others are similar. They need structural repair, not text edits.
+- **Text and entries only ours has.** These stay, and `reports/dictionary-later-additions.jsonl` classifies each by source so a build can filter them.
+- **Rewritten definitions.** The ruling restores each printed definition whole. The first batch shows the method holds where a record sense pairs with one printed sense. Senses that ours splits, merges or renumbers differently from the print need a structural pass first.
