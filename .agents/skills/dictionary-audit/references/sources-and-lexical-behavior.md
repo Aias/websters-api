@@ -38,6 +38,12 @@ Use OCR to locate pages, then inspect the actual image for letters, stress, and 
 
 The dictionary aims to be correct as of its 1913 publication. Correct a reading when the evidence shows it is wrong, including an error that GCIDE and Gutenberg share and an error in the printed original, as long as the corrected reading would also have been correct in 1913. Leave spelling, taxonomy, pronunciation, and science as they stood then. When print leaves a character ambiguous, choose the character the text means: an etymology that names a Greek letter takes the Greek letter, even where the typeface draws it like a Latin one.
 
+Definitions follow the print to the fullest extent possible. Where GCIDE rewrote a definition or sense after 1913, the 1913 definition replaces the modern wording as a unit, read twice from the print. Apply the same whole-unit restoration to a rewritten printed note or compound definition, including later clauses inside that unit. A separate note absent from the print stays as a later addition. Text and entries that only GCIDE has, such as later senses, WordNet definitions and PJC additions, stay in the record. `reports/dictionary-later-additions.jsonl` classifies each one by source, so it can be filtered or removed later. An entry split across records, such as compounds stranded in a stray key, is merged back into the entry the print places it in.
+
+After source restorations, revalidate later-addition owner pointers from the retained registry. Confirm lexical context before relocating a span, and clear its pointer when the fragment or location remains unresolved. A pointer locates a containing node, which may include printed text outside the classified span. Filtering requires the exact reviewed span and its original-value hash. Leave unresolved rows unchanged until their text and context are settled. The registry's report describes the checks and remaining location questions.
+
+Faithfulness to the print decides structure as well as text. The application's routing, lookup and layout never weigh against a restoration, and a restoration that the application cannot yet show calls for an application change rather than a compromise in the data. A compound the print runs in under its head word belongs in that entry even where the record files it under its own key. Every entry of the 1913 edition gets a record. When an entry has no record and no heading inside another record, a reader transcribes the whole printed entry into a new record in the corpus markup. Senses follow the print's division and numbering, so a batch merges, splits or renumbers record senses to match it, and a sense that only GCIDE has follows the printed senses, numbered on. A missing or partial pronunciation is restored from the print whenever a batch already reviews that entry, and only then. `reports/dictionary-audit-decisions.md` lists the judgment calls made under these rulings.
+
 Evidence still decides each correction. Two certain readings settle what the print shows. A reference current in 1913 can settle which of two readings is right, for example Liddell–Scott–Jones (LSJ) for a Greek word or the Authorized Version for a Bible citation, and the edit records that reference.
 
 | Difference                                                          | Rule                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
@@ -83,6 +89,62 @@ When a conversion defect recurs across the corpus, fix it once instead of in eac
 Keep the transforms with the evidence. Re-running them after a rebase resolves conflicts. Before patching a recurring pattern in a batch, check `git log -- src/dict.jsonl` for a pass that already covers it. Batch reviewers record further occurrences rather than patching them.
 
 Classify the population before choosing a transform. The same character may encode a stress mark in a heading and an angular measurement in a definition. An abbreviation expansion may lose sentence punctuation while an identical interior expansion is correct. Require witnessed context and negative cases for each rule. Keep source conversion, shared notation normalization, and uncertain readings separate.
+
+## Restoring compounds
+
+GCIDE's editors and our import dropped some 1913 compounds, and the Gutenberg survey (`reports/dictionary-gutenberg-survey.md`) lists them. Before restoring one, search the corpus for its heading, because many already sit under their own key or another entry. A reader writes the restored compound in the record's markup, and both readers place spaces by the corpus majority so that agreement depends only on what the print shows:
+
+- A new block after a line break starts `<br/>  <div class="cs">`.
+- A heading the print follows with a comma is `<b>Name</b></div>, `. One followed directly by a label is `<b>Name </b></div><div class="fld">`.
+- A label the print follows with a comma is `(Med.)</div>, <div class="cd">`, and one with no comma is `(Med.) </div><div class="cd">`.
+- A definition followed by another compound ends `text. </div>&#x2014; <div class="col">`, and the last definition in a block ends `text.</div></div><br/>`.
+- A compound that follows a quotation or author starts a new block, with no em dash (1,695 cases against 3).
+- A bracketed mark before an em dash is written `[Slang] </div>&#x2014;`.
+- A quotation inside a definition is its own `q` block.
+- An "as …" example takes the `as` wrapper, with or without a comma.
+- A ‖ goes inside `<b>` at the start of a compound heading.
+- A binomial is one `spn` element, `<div class="spn">Citrus Japonica</div>` (5,720 cases against 0 split pairs), with a genus the print abbreviates spelled out. A genus after the word "genus" is a `gen` element (1,652 to 0).
+- A `part` element keeps its space inside the tag, `face </div>or` (19 to 0).
+- A definition followed by an element that renders inline after it, such as an author line, an alternate-spelling bracket or a label, ends with a space before its closing tag: `text. </div><div class="rj">` (13,534 to 1), `text. </div><div class="altsp">` (1,758 to 1), and a sense closes `text.</div></div>` (77,395 to 1,050). A record that ends in a line break ends `<br/> `, with the space (99,483 to 2); 1,281 records end without one, so keep a record's own ending. An author line followed by an em dash ends `Name. </div></div>&#x2014;` (25 to 1).
+- A note follows an author line on its own line, `Name.</div></div><br/>  <div class="note">` (188 to 2).
+- An apostrophe is `&#x2019;` (5,577 to 3,317 for `&apos;`).
+- A pronunciation in a `pr` element writes each mark as a combining hex reference after its base letter, `(se&#x306;r&#x2032;i&#x306;n <i class="it">or</i> -e&#x304;n)` (37,813 combining references to 198 precomposed).
+- Restored Greek goes in a `grk` element as hex references (8,124 to 4,597 raw), with the space inside the closing tag before the next word, `Gr. <div class="grk">&#x3B2;&#x3BB;&#x3B1;&#x3C3;&#x3C4;&#x3CC;&#x3C2; </div>sprout` (6,050 to 2,439).
+- A cross-reference is an `er` element. Punctuation comes from the print, and every character of `old` stays unchanged, which takes precedence over these rules.
+
+GCIDE's editors often rewrote a whole clause, and the survey splits a rewrite into separate word hunks. Restore a rewording only when the rest of its sentence already matches the print, or widen the span to cover the whole rewritten clause. Replacing one hunk alone can leave a sentence that matches neither text, as with Feast's "when they occurs". The rule covers a one-word spelling change too: Amadou's printed "which grows" agrees with the print's "fungus", so it cannot follow our "fungi".
+
+When a reader rewrites a whole definition to the print, both readers keep `old`'s spaces around the tags that stay, such as the trailing space in `nightmare. </div>` or in `<div class="altname">stellerine </div>`. The trailing space also stays when the reader drops an element the print lacks, so `habitually; <div class="as">…</div>. </div>` becomes `habitually. </div>`, because a following quotation or author renders against the definition without it ("habitually.Spectator."). The corpus splits about 69,000 to 48,000 on that space, so the readers take it from `old` rather than from a corpus majority.
+
+Before rewriting a definition, check whether the record splits the printed sense across several elements, as in `lights a lamp; </div><div class="specif">esp., </div><div class="def">a person who…`. The reader then writes only the part of the print that this element covers, since rewriting it to the whole printed definition repeats the opening on the page. Two names joined by "or" in a compound heading sit in one `mcol`. After a comma the "or" is bare text, `</b></div>, or <div class="col">`, and without one it is `<b>Louver boards </b></div><i class="it">or </i><div class="col">`. Before a label the `mcol` closes `</b> </div></div><div class="fld">`.
+
+## Restructuring senses
+
+A sense-structure batch rewrites a homograph's run of senses to the print. Readers keep the record's markup around printed words and use these corpus forms where they write new markup:
+
+- An example that ends a definition keeps the record's own period placement, because both forms are common (11,564 inside the `as` element, 12,615 outside). A new one closes `…</div>.</div><br/>` at the end of a sense (12,615 to 46) and `…</div>. </div>` before an inline element such as an author line (1,428 to 215) or a quotation (798 to 196).
+- A definition before a subsense letter ends `text. </div><div class="sd">` (5,236 to 4).
+- A record sense that gives a fuller or modern definition of a printed sense is that sense, even where the print only cross-refers, as with Safety's football sense against the print's "Same as Safety touchdown". A record's examples, clauses and quotations inside a printed sense go with it, as with Torpedo's Farragut quotation.
+- A pronunciation target on a homograph checks the owner's own printed heading. Opposite's noun heading has no pronunciation, and the one above it belongs to the adjective.
+
+## Restoring missing entries
+
+An entry the print sets that no record holds, either as its own key or as a heading inside another record, gets a new record. Two readers transcribe the whole printed entry blind and independently, `z10/entry-build.py` accepts only an exact, certain agreement, and `z10/integrate-entries.py` inserts the record in key order. The key is the printed headword without notation, with a ligature spelled out (Haemodynamics) and the print's spelling where Gutenberg has a typo. The readers follow a model record of the same shape and these corpus forms:
+
+- The space after a headword goes inside `</h2>` when a pronunciation follows (22,929 to 2,955), and the part of speech is spelled out.
+- A long oo is `oo&#x35E;`, as in Boot (`boo&#x35E;t`), and a ticked macron is `&#x304;&#x30D;`, told from a plain macron or a dot by a pixel dump against a known mark on the same page.
+- A comma after an etymon sits outside the `ets` element (16,454 to 2), and where the print italicizes only the formative letters of a word, only those letters are in `ets` (410 cases such as "[Acetic + …]").
+- A quotation's italic word is `qex` (35,044 to 12), and a bracketed label keeps its inner space, `[Obs.] </div>` (13,947 to 0).
+- "See X, n." is `See <div class="er">X</div>, <div class="pos">noun</div>` (2,035 to 4).
+- "[Written also X.]" is `<div class="altsp">[Written also <div class="asp">X</div>.]</div>`, with no inner space (1,253 to 746).
+- "n. pl.; sing. X." is `plural noun</div>; <div class="sing"><i class="it">sing. </i><div class="singw">X</div>. </div>` (23 of 24).
+- A second part of speech after a dash is `&#x2014; <div class="def2"><div class="pos">noun </div><div class="def">…</div></div>`, as in every corpus case.
+- A hyphen at a line end inside a pronunciation is a line break, as in Generatrix's plural "(-trī′-" / "sēz)", so the record keeps `(-tri&#x304;&#x2032;se&#x304;z)`.
+- A bracket or other closing mark that the print drops at a line end, and Gutenberg prints, is a printer's error and is restored, as in Globard's "[OE. globerde, from glow.]".
+- A printed glyph that cannot belong to the word is kept as printed and held, when no witness shows the intended mark. Estacade's first vowel is a u under a ticked macron in the 1890, 1898 and 1913 printings.
+- A pair of headwords the print braces opens the record `<br/> <div class="mhw">{ <h2 …>A </h2>…, <h2 …>B </h2>…</div>, } </div><div class="pos">` (4,081 to 29 for the opening `<br/> `, 3,555 to 556 for the brace kept).
+- "called X" with X italic is `called <div class="altname">X</div>` (752 to 636 `xex`, none plain italic), and an italic "or" inside a pronunciation is `<i class="it">or </i>` (1,342 to 649).
+- Where readers disagree on whether a printed stress mark is primary or secondary, Gutenberg's headword notation decides it: `"` is the primary mark `&#x2032;` and a backtick the secondary `&#x2CA;`, as Generator (`Gen"er*a`tor`, Gen′er-aˊtor) and Mandarin confirm.
 
 ## Lexical structure and boundaries
 

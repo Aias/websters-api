@@ -21,7 +21,7 @@ describe('historical sense numbering', () => {
     expect($('.def').eq(1).text()).toBe('Presumptive; presumptively; without examination.');
   });
 
-  test.each(['Menu', 'Cocoanut', 'Flying fox', 'Starchy', 'Coverage'])(
+  test.each(['Menu', 'Cocoanut', 'Starchy', 'Coverage'])(
     '%s keeps its original unnumbered definitions',
     (key) => {
       const $ = entrySource(key);
@@ -39,14 +39,13 @@ describe('historical sense numbering', () => {
     ).toEqual(['1.', '2.']);
   });
 
-  test('keeps the shell and toy labels under Noah’s ark', () => {
-    const $ = entrySource("Noah's ark");
+  test('keeps the shell and toy labels under the Noah’s ark compound', () => {
+    const $ = entrySource('Noah');
     expect(
-      $('.sd')
+      $('.cs .sd')
         .map((_, element) => $(element).text().trim())
         .get()
     ).toEqual(['(a)', '(b)']);
-    expect($('.pos').text()).not.toContain('proper noun');
   });
 
   test('restores Mannite original first sense without renumbering the second', () => {

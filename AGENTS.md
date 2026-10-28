@@ -15,6 +15,10 @@ Agents auditing the dictionary at the same time work as one team and improve the
 5. When agents share a checkout, agree in the log on how each one writes `src/dict.jsonl` and stages commits before either edits it.
 6. `.context/` is local to one workspace and never reaches git. Commit every hold a batch leaves open to `reports/dictionary-audit-holds.jsonl` in the same commit as the batch, and give each one the question it waits on. When the user rules on a question, record the rule in the skill references and apply it to every row with that question.
 
+### Print-source reconciliation track
+
+Track restoration of later-rewritten definitions and missing printed content separately in [Print-source reconciliation](reports/dictionary-print-reconciliation.md). Read it before continuing that work and update it after each batch. Progress reports must distinguish completed restorations, remaining candidates, held readings, and unknown coverage. Keep its counts separate from character repair, pronunciation transcription, and complete-entry review. Report a completion percentage only for a defined, reconciled candidate pool.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 ## This is NOT the Next.js you know
