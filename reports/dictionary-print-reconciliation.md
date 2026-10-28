@@ -33,6 +33,8 @@ These rows use different units and overlap. A whole-sense restoration can resolv
 
 The whole-definition totals come from the survey's batch results and the fix-1 reruns for Clock, Key, and Kumquat. Sense totals include the senses-3 restoration in `38b54a9`. Definition-5 has an exact [acceptance ledger](dictionary-audit-definition-5.jsonl). The survey contains historical intermediate counts, so use this checkpoint and the corresponding batch records when reporting progress.
 
+The later-addition register has 6,771 located spans and 1,143 unresolved locations. Its ownership reconciliation confirms four moved spans and clears 148 stale pointers for further review. These location counts are separate from the classification categories above.
+
 ## Remaining work
 
 ### Reconcile the complete candidate inventory
@@ -59,6 +61,6 @@ This hold is absent from the global open and resolved registers at the checkpoin
 
 ## Updating progress
 
-After each batch, update this report's checkpoint, completed work, remaining candidates, and evidence dependencies. Keep exact accepted edits in the batch ledger and unresolved readings in the open-holds register. Report the units counted and the pool they belong to. Leave the overall percentage unmeasured until the full candidate inventory has been reconciled.
+After each batch, update this report's checkpoint, completed work, remaining candidates, and evidence dependencies. Revalidate later-addition locations against the restored source, confirming lexical context before moving a pointer and clearing unresolved pointers. Keep exact accepted edits in the batch ledger and unresolved readings in the open-holds register. Report the units counted and the pool they belong to. Leave the overall percentage unmeasured until the full candidate inventory has been reconciled.
 
 For project status and handoffs, name this track explicitly as **print-source reconciliation**. Give its results separately from the damaged-character queue, general parser work, pronunciation transcription, and illustrations. A targeted restoration closes its reviewed fields without granting complete-entry review credit.

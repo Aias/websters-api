@@ -15,14 +15,14 @@
 | `uncertain`          |   498 | 3,621 |  4,119 |
 | total                | 6,305 | 7,914 | 14,219 |
 
-Left out: 1,168 `ours-extra` hunks whose print vote supports ours, and 721 ours-only entries whose text mostly appears in the print OCR (Gutenberg dropped them; see `excluded-entries.jsonl`). Of the 7,914 span rows, 6,919 have an `owner` pointer. Rows for text that a print restoration later replaced are removed.
+Left out: 1,168 `ours-extra` hunks whose print vote supports ours, and 721 ours-only entries whose text mostly appears in the print OCR (Gutenberg dropped them; see `excluded-entries.jsonl`). Of the 7,914 span rows, 6,771 have an `owner` pointer and 1,143 await location or fragment reconciliation. Rows for text that a print restoration later replaced are removed once their complete disposition is established.
 
 ## Row fields
 
 - Entry: `key`, `scope` "entry", `category`, `gcideSource`, `evidence`.
 - Span: `key`, `scope` "span", `text`, `owner`, `category`, `gcideSource`, `printVote`, `surveyHunkId`, `evidence`.
 - `gcideSource` lists the GCIDE 0.53 `<source>` tags (`none` means a paragraph with no tag), or `null` when no GCIDE paragraph was found.
-- `owner` is a JSON Pointer into `parseEntry(key, html)` from `scripts/build-db.ts`. It names the deepest node whose text contains the span (with its two left-context words tried first). It may point at an array (a span that crosses blocks) and is `null` when the text could not be found in the parsed entry, as for whole sections, headword changes, or text that parsing rewrites.
+- `owner` is a JSON Pointer into `parseEntry(key, html)` from `scripts/build-db.ts`. It locates a containing node, sometimes an array when the span crosses blocks. An owner is `null` when the fragment or its lexical location needs reconciliation. Its container can include printed text outside the classified span.
 
 ## How categories were decided
 
@@ -45,13 +45,22 @@ Spans (`ours-extra` hunks):
 - GCIDE tags do not mark most additions: added text often sits in "1913 Webster" paragraphs, so `later-unattributed` is the default for anything absent from the print, and `wordnet` and `gcide-editor` are undercounts.
 - `uncertain` spans are mostly one-sided OCR windows. Rows with a high `score` in `evidence` are likely 1913 text.
 - Entry-level trigram checks suffer from OCR errors and from entries whose print wording differs from ours.
+- Source restorations can remove a fragment, move its owner, or leave the same words elsewhere in the entry. Revalidate the retained registry after source edits. A relocation needs matching lexical context. A unique bare-word match can point at unrelated text.
+
+## Owner verification
+
+`scripts/dictionary-later-additions.test.ts` checks every non-null span pointer against the current parsed entry using the registry's word normalization. This detects absent pointers and fragments missing from their recorded owners. Printed origin, lexical context, and removal boundaries still require review.
+
+The ownership reconciliation at source revision `452e7b9` relocates four spans in Cart, Corn, and Out after confirming their context. It clears 148 stale pointers whose locations remain unconfirmed, retaining their classification and original text for review. Those rows are included in the 1,143 unresolved locations above. For example, Dollar's removed sense-2 word "formerly" must not be reassigned to the same word in Trade dollar.
 
 ## Using the file
 
-Filter later additions out of a build by dropping rows by category, for example keeping `supplement-1913` and `uncertain`:
+Select whole-entry classifications for review by category, for example:
 
 ```sh
 jq -c 'select(.scope=="entry" and (.category=="wordnet" or .category=="gcide-editor" or .category=="later-unattributed")) | .key' reports/dictionary-later-additions.jsonl
 ```
 
-That lists whole entries to remove. For spans, group rows by `key` and apply the removal at the `owner` pointer of the parsed entry, falling back to matching `text` when `owner` is null. Take `wordnet` and `gcide-editor` first (the most reliable), then `later-unattributed`, and review `uncertain` by hand.
+That lists whole-entry candidates. Confirm each classification before filtering, starting with the more reliable `wordnet` and `gcide-editor` categories.
+
+For span rows, use `owner` to locate the recorded text, then verify its lexical context and exact boundaries against the current source. Remove only the reviewed span. Removing its containing node requires an independent classification of that entire node. Leave text unchanged when the owner is null, the fragment is absent, or its location is ambiguous. Resolve those rows before filtering. Retain original-value hashes for any applied removal.
