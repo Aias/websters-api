@@ -4,18 +4,18 @@
 
 ## Counts
 
-14,393 rows over 11,516 keys.
+14,370 rows over 11,512 keys.
 
 | category             | entry |  span |  total |
 | -------------------- | ----: | ----: | -----: |
 | `wordnet`            |   120 |    22 |    142 |
-| `gcide-editor`       |   195 |    95 |    290 |
-| `supplement-1913`    | 3,273 |   789 |  4,062 |
-| `later-unattributed` | 2,246 | 3,472 |  5,718 |
-| `uncertain`          |   502 | 3,679 |  4,181 |
-| total                | 6,336 | 8,057 | 14,393 |
+| `gcide-editor`       |   195 |    93 |    288 |
+| `supplement-1913`    | 3,273 |   788 |  4,061 |
+| `later-unattributed` | 2,246 | 3,461 |  5,707 |
+| `uncertain`          |   502 | 3,670 |  4,172 |
+| total                | 6,336 | 8,034 | 14,370 |
 
-Left out: 1,168 `ours-extra` hunks whose print vote supports ours, and 721 ours-only entries whose text mostly appears in the print OCR (Gutenberg dropped them; see `excluded-entries.jsonl`). Of the 8,057 span rows, 7,034 have an `owner` pointer. Rows for text that a print restoration later replaced are removed.
+Left out: 1,168 `ours-extra` hunks whose print vote supports ours, and 721 ours-only entries whose text mostly appears in the print OCR (Gutenberg dropped them; see `excluded-entries.jsonl`). Of the 8,034 span rows, 7,011 have an `owner` pointer. Rows for text that a print restoration later replaced are removed.
 
 ## Row fields
 
