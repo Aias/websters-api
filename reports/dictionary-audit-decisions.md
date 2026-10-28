@@ -41,6 +41,10 @@ The merge goes in two steps. Where the head entry already prints the compound an
 
 A note the print lacks entirely moves after the printed senses, so it no longer interrupts them, as Fermentation's industrial-microbiology note does. A record sense whose words the print already sets inside one of its senses is dropped rather than kept as a later addition, as with Canteen's "The sutler's shop in a garrison."
 
+### Reworded senses
+
+A record sense that rewords a printed sense, such as Galaxy's "splendid or impressive" sense against the print's "A splendid assemblage of persons or things", counts as that printed sense, so the printed wording replaces it rather than standing beside it as a later addition. Only a sense whose meaning the print lacks entirely is kept after the printed senses.
+
 ### Which pronunciations a batch restores
 
 A batch restores the headword's own pronunciation when the print has one and the record's is missing or partial. Pronunciations inside inflection lists ("Occurred", "Smacked") and plural placeholders such as `(#)` stay for a later pass over those lists, because each needs its own target and crop.
