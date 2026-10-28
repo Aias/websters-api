@@ -12,6 +12,8 @@ src/dict.jsonl + scripts/dictionary-source.ts
 
 Read `scripts/PARSING.md` and the corresponding current functions and tests. Use source patches for corrupt source, shared changes for valid source handled incorrectly, and harness fixes for misleading captures. Keep the original HTML notation and historical wording unless a witness supports a correction.
 
+For abbreviated compound headings with a shared printed word, preserve the printed text and use the existing `data-headword` annotation for the complete lexical names. For example, Audience displays "In general, or open, audience" while its annotations identify "In general audience" and "In open audience". Compare full alias destinations and newly ambiguous names after restoration. Record metadata-only annotations separately from native transcription decisions.
+
 ## Primary witnesses
 
 | Source                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Use and limitations                                                                                                                                                               |
@@ -29,6 +31,8 @@ Download needed sources once and preserve edition, URL, printed page, scan image
 For extracted witnesses, label offsets by their encoding and newline representation. Keep native file byte ranges separate from character or UTF-8 ranges computed after newline normalization. Verify that decoding the native range and applying the recorded normalization reproduces the frozen excerpt.
 
 Search grouped headings, aliases, and cross-letter source files before declaring an electronic witness absent. A canonical application key may differ from the source article's other heading. Bind recovered candidates to the complete matching article and retain disagreements instead of inferring ownership from a name match alone.
+
+Before using a corpus comparison to classify absence, verify every source volume and its parsed boundaries. Record the main-alphabet and supplement scopes separately, including omitted files and unparsed headings. Treat a missing comparison match as an unresolved candidate until coverage and lexical identity are established. A matching headword establishes presence only; its text and senses still need reconciliation.
 
 The International print is a related edition, not the exact electronic 1913 source. State the volume and printing accurately when citing it. Use print to resolve identifiable corruption without replacing legitimate electronic-edition differences. Do not add every print-only headword or delete every electronic-only sense. For a substantial omission, seek an electronic witness or surviving source context as well as print.
 

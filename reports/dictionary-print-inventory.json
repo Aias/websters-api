@@ -1,0 +1,413 @@
+{
+  "sourceRevision": "fb9cd9484f69b6e163c64453d3d15c0aecdc36f9",
+  "sourceSha256": "19ec7e5841c63fd98c77956757e68fca490c37784d8fe2366745634f5fc8d7fd",
+  "sourceRecords": 100803,
+  "survey": {
+    "scope": "mainAlphabetAtoZ",
+    "totalHunks": 36797,
+    "byClassTotal": {
+      "ours-extra": 9103,
+      "punctuation": 2951,
+      "notation": 9311,
+      "spelling": 7670,
+      "ours-missing": 2029,
+      "substitution": 5733
+    },
+    "byClassAndPrintVote": {
+      "notation": {
+        "unvoted": 9311
+      },
+      "ours-extra": {
+        "unclear": 3674,
+        "gutenberg": 3715,
+        "ours": 1146,
+        "unvoted": 568
+      },
+      "ours-missing": {
+        "unclear": 542,
+        "gutenberg": 1078,
+        "ours": 333,
+        "unvoted": 76
+      },
+      "punctuation": {
+        "unvoted": 2951
+      },
+      "spelling": {
+        "ours": 4374,
+        "unclear": 2025,
+        "gutenberg": 535,
+        "both": 396,
+        "unvoted": 340
+      },
+      "substitution": {
+        "ours": 1047,
+        "both": 134,
+        "gutenberg": 2567,
+        "unclear": 1776,
+        "unvoted": 209
+      }
+    },
+    "voteProvenance": {
+      "inherited-exact-hunk": 23342,
+      "unvoted": 13455
+    },
+    "keysWithHunks": 19129,
+    "keysOnlyInOurs": 6265,
+    "gutenbergEntriesWithoutKey": 457,
+    "gutenbergHeadwordsWithoutKey": 467,
+    "gutenbergDistinctHeadwordsWithoutKey": 464,
+    "frozenHunksWithoutExactMatch": 3602,
+    "frozenExactMatches": 35162,
+    "freshHunksWithoutExactMatch": 1635
+  },
+  "sourcePartition": {
+    "withDifferences": 19129,
+    "withoutMainMatch": 6265,
+    "matchedWithoutDifferences": 75409
+  },
+  "inventoryRowsByScope": {
+    "source-record-differences": 19129,
+    "source-record-without-main-match": 6265,
+    "unmatched-electronic-entry": 637
+  },
+  "historicalReview": {
+    "catalogTargets": 740,
+    "uniqueKeys": 496,
+    "statuses": {
+      "held": 94,
+      "final-applied": 601,
+      "no-recorded-second-decision": 11,
+      "accepted-but-reverted": 9,
+      "historically-applied-current-form-unconfirmed": 6,
+      "final-applied-after-recorded-correction": 12,
+      "accepted-application-uncertain": 7
+    },
+    "explicitLineageGroups": 678,
+    "uniqueLinkedSurveyHunks": 509
+  },
+  "surveyInputs": [
+    {
+      "file": "src/dict.jsonl",
+      "sha256": "19ec7e5841c63fd98c77956757e68fca490c37784d8fe2366745634f5fc8d7fd"
+    },
+    {
+      "file": ".context/dictionary-audit/survey-gutenberg/hunks.jsonl",
+      "sha256": "aa68642de6641ad6da5467f42b284682d16ffdef1b5069e27abc35784f9dddc1"
+    },
+    {
+      "file": ".context/dictionary-audit/survey-gutenberg/work/gutenberg_entries.jsonl",
+      "sha256": "4a386b1ce48578e1f5b4fc01f85216ed354a395cff6549d751cab2a51541ade5"
+    },
+    {
+      "file": ".context/dictionary-audit/survey-gutenberg/tools/parse_gutenberg.py",
+      "sha256": "c0987f63c9818b467f9d03fd3ac36658e88f8a6a9665291e82f56d7ad6d5d67e"
+    },
+    {
+      "file": ".context/dictionary-audit/survey-gutenberg/tools/diff_entries.py",
+      "sha256": "ce4462dbcebf585d590d20119310a38806b984b5e1af6d7b9f03b37403eb00af"
+    },
+    {
+      "file": ".context/dictionary-audit/survey-gutenberg/tools/survey_text.py",
+      "sha256": "21a92ab01814d87f37dd4ed6b634dd87f957e20064d542a9e97b35ee49dd7e7d"
+    },
+    {
+      "file": ".context/dictionary-audit/survey-gutenberg/tools/tag_gcide.py",
+      "sha256": "0aabaa2af1cd4a014cc021f712383e1dd82e76e6385f84b657ae1ffa0473c527"
+    },
+    {
+      "file": ".context/dictionary-audit/print-reconciliation-inventory/fresh-survey/full-alphabet/tools/diff_entries.py",
+      "sha256": "695d90caa5684e1e960c323703212dd8fddfc3188778a26a22b88b19ec552246"
+    },
+    {
+      "file": ".context/dictionary-audit/print-reconciliation-inventory/fresh-survey/full-alphabet/tools/survey_text.py",
+      "sha256": "21a92ab01814d87f37dd4ed6b634dd87f957e20064d542a9e97b35ee49dd7e7d"
+    },
+    {
+      "file": ".context/dictionary-audit/print-reconciliation-inventory/fresh-survey/full-alphabet/tools/tag_gcide.py",
+      "sha256": "bd319cb481e9aff4385d7a5b6195491635b250aeb9787211bc563621a7358bb8"
+    },
+    {
+      "file": ".context/dictionary-audit/print-reconciliation-inventory/fresh-survey/full-alphabet/tools/finalize.py",
+      "sha256": "d522195df43a43609febeafe01bae04b052d6ff58d948116e297654db8eef646"
+    },
+    {
+      "file": ".context/dictionary-audit/print-reconciliation-inventory/fresh-survey/full-alphabet/tools/parse_670_main.py",
+      "sha256": "650c295462ec184c85d272ceccf0a4c720cfd70dd74690d62900634168308d4a"
+    },
+    {
+      "file": ".context/dictionary-audit/print-reconciliation-inventory/fresh-survey/full-alphabet/tools/index_670_supplement.py",
+      "sha256": "f224892c454c34165fe06b1d8bc05e8759a1308885093be7aef48519a6031532"
+    },
+    {
+      "file": ".context/dictionary-audit/print-reconciliation-inventory/fresh-survey/full-alphabet/work/gutenberg_entries.jsonl",
+      "sha256": "66e3d961762ac50018aa7ca4d3435d492ae3174c6c30ffb1525096cc6ecc4532"
+    },
+    {
+      "file": ".context/dictionary-audit/print-reconciliation-inventory/fresh-survey/full-alphabet/pg670-partition.json",
+      "sha256": "0febb5869bef00386ea7add8c9014ce2bfc87d8a37946d20fd0d03988f15e49c"
+    },
+    {
+      "file": "pg660-images.html",
+      "sha256": "9e447faeda14b1e973db8b7ca9ee8ce8ea41e4942d16deca1ee21347526744bc"
+    },
+    {
+      "file": "pg661-images.html",
+      "sha256": "0507a650ad5b3b99dadc37ec71ad0c9c69bce494a8db1d3994e73e97da257a96"
+    },
+    {
+      "file": "pg662-images.html",
+      "sha256": "2f5d80cf52c721ea205a4f8935ed7dcfd42e813f2063d6bfe50112338a62a9c8"
+    },
+    {
+      "file": "pg663-images.html",
+      "sha256": "b31ade030298c743392bec7e1ab26852a56191fdb8bd36881cd7a21c5ad8bffc"
+    },
+    {
+      "file": "pg664-images.html",
+      "sha256": "1bffcde36bc6bd9d2141c46e59a11eac9a99f1b885975a58a7c6ba1b59c3eee6"
+    },
+    {
+      "file": "pg665-images.html",
+      "sha256": "409f2cbd0503332531cb95d8aeda80dab7a8122d266133965983e042c7718ed7"
+    },
+    {
+      "file": "pg666-images.html",
+      "sha256": "7583b56839a8d20043ffd1278f25bfd2b1cc46e1b59198236b5820135cd3d0ae"
+    },
+    {
+      "file": "pg667-images.html",
+      "sha256": "5313967a25fb4e5ae5fe536171a405360f9dd2420299dca27864282cd0d2457f"
+    },
+    {
+      "file": "pg668-images.html",
+      "sha256": "eec863b2520a51fb230e1f3f7ede84407d584d0181ac676f0eb3f2c6a447722c"
+    },
+    {
+      "file": "pg669-images.html",
+      "sha256": "9b38d33533ddab54b1716a737577f9cca2a0204cef189eda507b442789892256"
+    },
+    {
+      "file": "pg670-images.html",
+      "sha256": "0d91f44e305b39a85369a93be10c6da39d2f0bae130e04279e88605928d44356"
+    },
+    {
+      "file": "gcide_a.xml",
+      "sha256": "2b1d026f3c0f572bd1934326c957ec41fc0c49dc7129c9adebc932ee70c6fe9b"
+    },
+    {
+      "file": "gcide_b.xml",
+      "sha256": "597345f2a9323dca3becc33edc336b08f3a3c6ae93308cd51e007013b27ebd9e"
+    },
+    {
+      "file": "gcide_c.xml",
+      "sha256": "184a323c08e2dbe91cc3856e5b21b5da98c71c0d98fcc27c7b73e62a875782a0"
+    },
+    {
+      "file": "gcide_d.xml",
+      "sha256": "dd84d913e7d89f85b013509fa0e7bc8a9df867203c4810f8180ac8ab17745d91"
+    },
+    {
+      "file": "gcide_e.xml",
+      "sha256": "45ce0e18e3fae92eff02eae148b0f6ba83ccd37de64d3f382821d5ddeb53d167"
+    },
+    {
+      "file": "gcide_f.xml",
+      "sha256": "f6eba894ddb97312667ea3a422655cb2d914b2d22450b9017aa1cf0ba90dd5f2"
+    },
+    {
+      "file": "gcide_g.xml",
+      "sha256": "1f161c50132424caa416858a0136c90492cbcf6974e68c06b4a21e0ed08f7fc7"
+    },
+    {
+      "file": "gcide_h.xml",
+      "sha256": "994a70e030f0661efaf6c546c321614e145a1cb9fa31cba185c4f489bfd98d4d"
+    },
+    {
+      "file": "gcide_i.xml",
+      "sha256": "4c3929e3ce34675368b669cc8995dffaf4f6c00369fcfd4f98c44fdd844f6dd8"
+    },
+    {
+      "file": "gcide_j.xml",
+      "sha256": "4462ea7b620f67e0bec41c5bba7e6dd259f64fc906162be39eea41c1632eb30c"
+    },
+    {
+      "file": "gcide_k.xml",
+      "sha256": "68570f1d1131275ade1f90f22df69678a90a20e9c8ca9445b25ea0c19447291f"
+    },
+    {
+      "file": "gcide_l.xml",
+      "sha256": "772ea4f939edbe94bf06f6d9f92e11a435e80dd7215aa829da24426ec7c89305"
+    },
+    {
+      "file": "gcide_m.xml",
+      "sha256": "fdd58c2e54cd17192a270c748f18bdc34b282d62a38fee5b997043ac2238dc6d"
+    },
+    {
+      "file": "gcide_n.xml",
+      "sha256": "50a0b61b6cf153897249c4e2bb469496abd38fe1a77229ede0fd463e45b48d33"
+    },
+    {
+      "file": "gcide_o.xml",
+      "sha256": "28a4aed1b8871e5eda4c0707b1cbefe2fa6368c52673120d51d604bdd7a7fb19"
+    },
+    {
+      "file": "gcide_p.xml",
+      "sha256": "0ef4f4f191731129a3118bed7eb2f82a4f9dd1f80ad49cfd50cfd9fd38bce5f6"
+    },
+    {
+      "file": "gcide_q.xml",
+      "sha256": "51445938f191fb470563c81e72aef489771887d231569fa646f610a9581b0ed8"
+    },
+    {
+      "file": "gcide_r.xml",
+      "sha256": "7a5b1aa69dde270af9033bc0074fb1e3661f1a4ec9b3b9c8d33f71aa172ccbcc"
+    },
+    {
+      "file": "gcide_s.xml",
+      "sha256": "9f0e446b99aaac4530807ece1565693ebbfb1bf78c3fc8416a5aae56888faab1"
+    },
+    {
+      "file": "gcide_t.xml",
+      "sha256": "74dd5661738c6e5d445b07bba1888df2f76982b57c938dca831dcb4ffa0c516b"
+    },
+    {
+      "file": "gcide_u.xml",
+      "sha256": "dd6e5d01349458928fd2bcc6eaaac1ce78bfd8d2fae0cb9370eb32934cbfcdfb"
+    },
+    {
+      "file": "gcide_v.xml",
+      "sha256": "668cd506fc4ef6dcf4c31cca946fa5a9937db5b34767306967ce625f78c14a1e"
+    },
+    {
+      "file": "gcide_w.xml",
+      "sha256": "931a1d47f96f27b698e95bcf3f69d898ae3b28260ef27bb9c84ef6be7f9be049"
+    },
+    {
+      "file": "gcide_x.xml",
+      "sha256": "101df3f3269ebe9a7589d81625280477be2128d35e8eefcf18038b780e348d65"
+    },
+    {
+      "file": "gcide_y.xml",
+      "sha256": "f76f38b1b7834c1d35055acb3c3bad840da8512dae0381ddb528b5b3f3c05311"
+    },
+    {
+      "file": "gcide_z.xml",
+      "sha256": "508b2afaf797062317ea8970c4f46bc92edd39af2fd19dd5e4ac8b6bc8ea535c"
+    }
+  ],
+  "applicationStatuses": {
+    "held": 94,
+    "final-applied": 602,
+    "no-recorded-second-decision": 11,
+    "accepted-but-reverted": 9,
+    "final-applied-after-recorded-correction": 22,
+    "final-applied-with-later-supplement": 2
+  },
+  "worksets": {
+    "remainingSenses": 58,
+    "ownRecordCompounds": 188,
+    "compoundRecordedResolutions": 64,
+    "compoundRemainingCandidatesOrEvidence": 124,
+    "classificationReview": 497
+  },
+  "missingRecordAccounting": {
+    "sourceSha256": "19ec7e5841c63fd98c77956757e68fca490c37784d8fe2366745634f5fc8d7fd",
+    "historicalPool": 515,
+    "historicalClasses": {
+      "present-heading": 335,
+      "present-wordform": 12,
+      "present-variant": 70,
+      "artifact": 26,
+      "missing": 72
+    },
+    "historicalDispositions": {
+      "historical-present-heading": 335,
+      "historical-present-wordform": 12,
+      "historical-present-variant": 70,
+      "historical-artifact": 26,
+      "existing-record-variant-false-missing": 1,
+      "historically-restored-record": 68,
+      "held-supplement-evidence": 3
+    },
+    "actualMissingStandalonePool": 71,
+    "historicalRestorations": 68,
+    "knownStandaloneHolds": 3,
+    "restorationCatalogStatuses": {
+      "final-applied": 66,
+      "final-applied-after-recorded-correction": 1,
+      "accepted-application-uncertain": 1
+    },
+    "mainUnmatchedEntries": 457,
+    "mainDispositionCounts": {
+      "historical-present-heading": 335,
+      "historical-present-wordform": 12,
+      "historical-present-variant": 70,
+      "historical-artifact": 26,
+      "existing-record-variant-false-missing": 1,
+      "held-supplement-evidence": 3,
+      "historically-restored-record": 1,
+      "new-candidate-with-current-name-match": 5,
+      "new-unmatched-candidate": 4
+    },
+    "mainRowsLinkedToHistorical": 448,
+    "historicalRowsNoLongerUnmatched": 67,
+    "supplementUnmatchedEntries": 180,
+    "supplementDispositionCounts": {
+      "supplement-unmatched-candidate": 44,
+      "supplement-candidate-with-current-name-match": 133,
+      "held-supplement-evidence": 3
+    },
+    "supplementRowsWithMainNameLinks": 10,
+    "candidateRows": 637,
+    "specialHeldUnits": 4,
+    "limits": [
+      "Presence or historical classification does not establish complete printed content, correct ownership, or full-entry closure.",
+      "Historical classes are inherited candidate dispositions, including artifacts and fuzzy variants; this inventory makes no new print judgments.",
+      "Main-alphabet book scope still contains three entries explicitly attributed to the supplement in historical evidence.",
+      "Supplement has presence-only coverage. Name-linked main and supplement rows are retained separately because matching names alone do not prove identical lexical units.",
+      "The three named supplement holds have explicit shared-unit links; other name overlap does not deduplicate the lexical inventory.",
+      "Raw-element matches use decoded hw, wf, asp, and col text with the survey fold; they are locator evidence only and are not application lookup or parsed ownership verification.",
+      "Historical restoration count uses added-record git transitions plus target-key presence. It does not override acceptance catalog uncertainty or certify every current fragment.",
+      "Gutenberg parse and headword matching coverage remain limited. Unmatched entries are candidates, not automatic defects. No overall completion percentage is supported."
+    ]
+  },
+  "outputFiles": [
+    {
+      "file": "dictionary-print-inventory.jsonl",
+      "rows": 26031,
+      "sha256": "2d514c26fc30137cc89afc8745aa0f14653f7b4e8ec0362ee184fc5312b2566d",
+      "bytes": 7244478
+    },
+    {
+      "file": "dictionary-print-fragments.jsonl",
+      "rows": 36797,
+      "sha256": "89316853530af024e18c4fc89659c33b6746b0625719f4505bca56dbce79a166",
+      "bytes": 18150329
+    },
+    {
+      "file": "dictionary-print-review-history.jsonl",
+      "rows": 740,
+      "sha256": "d9e04fe56546adf16dfb878575c1843c7175462e7c24a497f9cfc15e3d6d2ed2",
+      "bytes": 3704688
+    },
+    {
+      "file": "dictionary-print-worksets.jsonl",
+      "rows": 743,
+      "sha256": "77681c9cd204818eded0323135e22c08b624bfb2573a5690bc0488c1cc91c90d",
+      "bytes": 354588
+    }
+  ],
+  "sourceEdits": 0,
+  "newAcceptedRepairs": 0,
+  "completeEntryReviewCredit": 0,
+  "overallCompletion": null,
+  "limits": [
+    "Current fragments are grouped by source record until complete lexical units are reconciled.",
+    "Historical target links by key do not establish ownership or closure of current fragments.",
+    "Historical acceptance and application evidence are separate; duplicate derived readings do not establish independent agreement.",
+    "Unmatched main and supplement names remain separate except for explicitly identified shared held units.",
+    "The supplement index checks key presence only; it does not compare supplemental text.",
+    "Matched records without differences remain unreviewed against print.",
+    "Hunk IDs belong to this frozen mainAlphabetAtoZ output; historical hunk IDs remain in the original A-W namespace."
+  ]
+}

@@ -42,6 +42,8 @@ Build a deterministic text projection from both rendered trees, with deliberate 
 
 Expand changed ranges to grapheme boundaries so combining accents and multi-code-unit characters are not split. Map ranges to DOM `Range` objects and native CSS highlights. Highlight decoration must preserve text, wrapping, spacing, semantic structure, and dimensions. If neutral spans are needed for dimming, verify those properties after insertion.
 
+Check individual glyph positions as well as block dimensions. Inline-block neutral spans can change word wrapping while preserving total height. Keep contiguous neutral text inline. When a partial-word boundary changes ligature or kerning geometry, expand the rendered highlight to the word boundary and verify its positions again. Text and JSON comparisons retain their exact character ranges.
+
 Dim unchanged subtrees once. Where a text node mixes changed and unchanged characters, separate only the necessary runs. Do not dim an ancestor of changed content or nest dimming elements, which compounds the opacity. Keep link hover and typography behavior intact.
 
 Clear previous highlights and dimming state when changing entries or modes. Rebuild ranges against the current DOM rather than keeping references to detached text nodes. Fail the comparison if its text projection or range mapping does not match, instead of quietly displaying plausible highlights.
