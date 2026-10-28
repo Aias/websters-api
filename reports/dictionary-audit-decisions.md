@@ -65,6 +65,16 @@ Where two readers of a new entry differ on a headword stress mark, Gutenberg's h
 
 Semeiotics and Sloo are printed main entries ("Semeiotics, or Semiotics, n. Semeiology"; "Sloo, or Slue, n. A slough"). The records Semiotics and Slue hold the print's separate cross-reference entries for the variant spellings. Each main entry gets its own record, and the cross-reference records stay.
 
+### Fuller definitions of printed senses
+
+Safety's record sense 4 defines the American-football safety at length. The print's sense 4 is "(Football) Same as Safety touchdown, below." The record sense counts as the printed one under the reworded-senses decision, so the printed cross-reference replaces it. Mortification's "Deep humiliation or shame" rewords the printed 1 (d), and Sterilize's microbiology sense rewords the printed 2 (b), so both give way to the printed wording. Installation's air-conditioner sense and Kill's noun sense have no printed counterpart and follow the printed senses.
+
+### Additions inside printed senses
+
+A record's quotation, example or clause inside a printed sense goes when the sense takes the printed wording, as Smack's "used with of" example did. Torpedo loses the Farragut quotation and the "marine mine" and "land mine" remarks, and Installation loses its Baton Rouge example. A quotation the record sets after the printed senses with no printed sense of its own, such as Kill's Kipling lines, stays with the later sense it precedes.
+
+Invagination's later sense on the inward movement of a blastula wall restates the print's note on embolic invagination, so it is dropped although both readers kept it. Installation's later sense on installing equipment stays, because the print's first sense covers only installing a person in an office. Safety touchdown's GCIDE tail "Same as safety" pointed at the replaced football definition, so it goes with that definition.
+
 ### Corn
 
 The print sets the kinds of Indian corn (yellow, white or southern, sweet, pop) in its note after sense 2, and its senses run 1 to 4. The record had moved that list into a GCIDE sense 3, "a tall cereal plant (Zea mays)", and pointed the note at it. The note and printed senses 1 to 4 now follow the print, including sense 4's "Corns of sand". The GCIDE sense follows as sense 5 without the list, because the print already sets the list in the note. Its other text, on the cob and on cooking and decoration, is kept as a later addition.

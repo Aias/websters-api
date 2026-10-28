@@ -116,6 +116,15 @@ When a reader rewrites a whole definition to the print, both readers keep `old`'
 
 Before rewriting a definition, check whether the record splits the printed sense across several elements, as in `lights a lamp; </div><div class="specif">esp., </div><div class="def">a person who…`. The reader then writes only the part of the print that this element covers, since rewriting it to the whole printed definition repeats the opening on the page. Two names joined by "or" in a compound heading sit in one `mcol`. After a comma the "or" is bare text, `</b></div>, or <div class="col">`, and without one it is `<b>Louver boards </b></div><i class="it">or </i><div class="col">`. Before a label the `mcol` closes `</b> </div></div><div class="fld">`.
 
+## Restructuring senses
+
+A sense-structure batch rewrites a homograph's run of senses to the print. Readers keep the record's markup around printed words and use these corpus forms where they write new markup:
+
+- An example that ends a definition keeps the record's own period placement, because both forms are common (11,564 inside the `as` element, 12,615 outside). A new one closes `…</div>.</div><br/>` at the end of a sense (12,615 to 46) and `…</div>. </div>` before an inline element such as an author line (1,428 to 215) or a quotation (798 to 196).
+- A definition before a subsense letter ends `text. </div><div class="sd">` (5,236 to 4).
+- A record sense that gives a fuller or modern definition of a printed sense is that sense, even where the print only cross-refers, as with Safety's football sense against the print's "Same as Safety touchdown". A record's examples, clauses and quotations inside a printed sense go with it, as with Torpedo's Farragut quotation.
+- A pronunciation target on a homograph checks the owner's own printed heading. Opposite's noun heading has no pronunciation, and the one above it belongs to the adjective.
+
 ## Restoring missing entries
 
 An entry the print sets that no record holds, either as its own key or as a heading inside another record, gets a new record. Two readers transcribe the whole printed entry blind and independently, `z10/entry-build.py` accepts only an exact, certain agreement, and `z10/integrate-entries.py` inserts the record in key order. The key is the printed headword without notation, with a ligature spelled out (Haemodynamics) and the print's spelling where Gutenberg has a typo. The readers follow a model record of the same shape and these corpus forms:
