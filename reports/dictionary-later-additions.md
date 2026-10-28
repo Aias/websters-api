@@ -1,21 +1,21 @@
 # Later additions to the dictionary text
 
-`dictionary-later-additions.jsonl` lists material in `src/dict.jsonl` that is probably not in the 1913 printed dictionary. It is sorted by `key` (entry row first, then span rows by `surveyHunkId`). Nothing in `src/` was changed. Tools and work files are in `.context/dictionary-audit/later-additions/` (`build.py`, `owner.ts`, `finalize.py`, `excluded-entries.jsonl`).
+`dictionary-later-additions.jsonl` lists material in `src/dict.jsonl` that is probably not in the 1913 printed dictionary. It is sorted by `key` (entry row first, then span rows by `surveyHunkId`). Tools and work files are in `.context/dictionary-audit/later-additions/` (`build.py`, `owner.ts`, `finalize.py`, `excluded-entries.jsonl`).
 
 ## Counts
 
-14,258 rows over 11,447 keys.
+14,219 rows over 11,431 keys.
 
 | category             | entry |  span |  total |
 | -------------------- | ----: | ----: | -----: |
 | `wordnet`            |   111 |    22 |    133 |
 | `gcide-editor`       |   189 |    88 |    277 |
-| `supplement-1913`    | 3,261 |   786 |  4,047 |
-| `later-unattributed` | 2,246 | 3,424 |  5,670 |
-| `uncertain`          |   498 | 3,633 |  4,131 |
-| total                | 6,305 | 7,953 | 14,258 |
+| `supplement-1913`    | 3,261 |   784 |  4,045 |
+| `later-unattributed` | 2,246 | 3,399 |  5,645 |
+| `uncertain`          |   498 | 3,621 |  4,119 |
+| total                | 6,305 | 7,914 | 14,219 |
 
-Left out: 1,168 `ours-extra` hunks whose print vote supports ours, and 721 ours-only entries whose text mostly appears in the print OCR (Gutenberg dropped them; see `excluded-entries.jsonl`). Of the 7,953 span rows, 6,957 have an `owner` pointer. Rows for text that a print restoration later replaced are removed.
+Left out: 1,168 `ours-extra` hunks whose print vote supports ours, and 721 ours-only entries whose text mostly appears in the print OCR (Gutenberg dropped them; see `excluded-entries.jsonl`). Of the 7,914 span rows, 6,919 have an `owner` pointer. Rows for text that a print restoration later replaced are removed.
 
 ## Row fields
 

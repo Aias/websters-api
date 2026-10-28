@@ -78,3 +78,19 @@ Invagination's later sense on the inward movement of a blastula wall restates th
 ### Corn
 
 The print sets the kinds of Indian corn (yellow, white or southern, sweet, pop) in its note after sense 2, and its senses run 1 to 4. The record had moved that list into a GCIDE sense 3, "a tall cereal plant (Zea mays)", and pointed the note at it. The note and printed senses 1 to 4 now follow the print, including sense 4's "Corns of sand". The GCIDE sense follows as sense 5 without the list, because the print already sets the list in the note. Its other text, on the cob and on cooking and decoration, is kept as a later addition.
+
+### Rewritten printed notes
+
+Ferment's explanatory note carries both the printed discussion of two kinds of ferments and a later account beginning "Before 1960". The whole note takes the printed wording through "diastase of malt" under the same rule as a rewritten definition. The later continuation belongs inside that printed unit and is removed with the rewording. A separately tagged note absent from the print stays, as with Mizzenmast's PJC discussion and Teache's commentary on its earlier etymology.
+
+Developer's photographic definition and following explanation restate one printed sense. They take that sense's single definition. The separate Dyeing sense stays.
+
+### Compound and synonym ownership
+
+Kill's "To kill time" compound precedes the verb's synonym list and the comparison of kill, murder and assassinate. The list and comparison belong beside the compound, outside its definition. The later Kipling quotation and numbered sense remain after these printed paragraphs.
+
+Fleshpot's "hence (pl.)" clause belongs in its single unnumbered definition. Its existing inline labels stay, and the Exodus quotation follows the definition.
+
+### Disputed words in complete definitions
+
+Nascent's compound definition reads "one compound acid" in the available print. Undulatory's compound heading supplies "of light", and its definition begins "its various phenomena". Each disputed span has a native-page adjudication and two fresh independent confirmations. The source keeps these readings without silently substituting a more familiar phrase.
