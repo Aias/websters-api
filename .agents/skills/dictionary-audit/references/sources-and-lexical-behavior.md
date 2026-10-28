@@ -94,9 +94,22 @@ GCIDE's editors and our import dropped some 1913 compounds, and the Gutenberg su
 - A heading the print follows with a comma is `<b>Name</b></div>, `. One followed directly by a label is `<b>Name </b></div><div class="fld">`.
 - A label the print follows with a comma is `(Med.)</div>, <div class="cd">`, and one with no comma is `(Med.) </div><div class="cd">`.
 - A definition followed by another compound ends `text. </div>&#x2014; <div class="col">`, and the last definition in a block ends `text.</div></div><br/>`.
+- A compound that follows a quotation or author starts a new block, with no em dash (1,695 cases against 3).
+- A bracketed mark before an em dash is written `[Slang] </div>&#x2014;`.
+- A quotation inside a definition is its own `q` block.
+- An "as …" example takes the `as` wrapper, with or without a comma.
+- A ‖ goes inside `<b>` at the start of a compound heading.
+- A binomial is one `spn` element, `<div class="spn">Citrus Japonica</div>` (5,720 cases against 0 split pairs), with a genus the print abbreviates spelled out. A genus after the word "genus" is a `gen` element (1,652 to 0).
+- A `part` element keeps its space inside the tag, `face </div>or` (19 to 0).
+- A definition followed by an author line ends `text. </div><div class="rj">` (13,534 to 1), and a sense closes `text.</div></div>` (77,395 to 1,050). A record ends `<br/> ` (99,483 to 2).
+- An apostrophe is `&#x2019;` (5,577 to 3,317 for `&apos;`).
 - A cross-reference is an `er` element. Punctuation comes from the print, and every character of `old` stays unchanged, which takes precedence over these rules.
 
 GCIDE's editors often rewrote a whole clause, and the survey splits a rewrite into separate word hunks. Restore a rewording only when the rest of its sentence already matches the print, or widen the span to cover the whole rewritten clause. Replacing one hunk alone can leave a sentence that matches neither text, as with Feast's "when they occurs".
+
+When a reader rewrites a whole definition to the print, both readers keep `old`'s spaces around the tags that stay, such as the trailing space in `nightmare. </div>` or in `<div class="altname">stellerine </div>`. The trailing space also stays when the reader drops an element the print lacks, so `habitually; <div class="as">…</div>. </div>` becomes `habitually. </div>`, because a following quotation or author renders against the definition without it ("habitually.Spectator."). The corpus splits about 69,000 to 48,000 on that space, so the readers take it from `old` rather than from a corpus majority.
+
+Before rewriting a definition, check whether the record splits the printed sense across several elements, as in `lights a lamp; </div><div class="specif">esp., </div><div class="def">a person who…`. The reader then writes only the part of the print that this element covers, since rewriting it to the whole printed definition repeats the opening on the page. Two names joined by "or" in a compound heading sit in one `mcol`. After a comma the "or" is bare text, `</b></div>, or <div class="col">`, and without one it is `<b>Louver boards </b></div><i class="it">or </i><div class="col">`. Before a label the `mcol` closes `</b> </div></div><div class="fld">`.
 
 ## Lexical structure and boundaries
 
