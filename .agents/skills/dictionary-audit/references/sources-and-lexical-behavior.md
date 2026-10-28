@@ -101,7 +101,7 @@ GCIDE's editors and our import dropped some 1913 compounds, and the Gutenberg su
 - A ‖ goes inside `<b>` at the start of a compound heading.
 - A binomial is one `spn` element, `<div class="spn">Citrus Japonica</div>` (5,720 cases against 0 split pairs), with a genus the print abbreviates spelled out. A genus after the word "genus" is a `gen` element (1,652 to 0).
 - A `part` element keeps its space inside the tag, `face </div>or` (19 to 0).
-- A definition followed by an author line ends `text. </div><div class="rj">` (13,534 to 1), and a sense closes `text.</div></div>` (77,395 to 1,050). A record ends `<br/> ` (99,483 to 2).
+- A definition followed by an author line ends `text. </div><div class="rj">` (13,534 to 1), and a sense closes `text.</div></div>` (77,395 to 1,050). A record ends `<br/> ` (99,483 to 2). An author line followed by an em dash ends `Name. </div></div>&#x2014;` (25 to 1).
 - An apostrophe is `&#x2019;` (5,577 to 3,317 for `&apos;`).
 - A pronunciation in a `pr` element writes each mark as a combining hex reference after its base letter, `(se&#x306;r&#x2032;i&#x306;n <i class="it">or</i> -e&#x304;n)` (37,813 combining references to 198 precomposed).
 - Restored Greek goes in a `grk` element as hex references (8,124 to 4,597 raw), with the space inside the closing tag before the next word, `Gr. <div class="grk">&#x3B2;&#x3BB;&#x3B1;&#x3C3;&#x3C4;&#x3CC;&#x3C2; </div>sprout` (6,050 to 2,439).
