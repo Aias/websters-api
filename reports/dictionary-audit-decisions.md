@@ -55,8 +55,12 @@ When the print divides or numbers senses differently, the record follows the pri
 
 ### Printed errors in new records
 
-Globard's etymology loses its closing bracket at a line end in the print, and Gutenberg prints it, so the record restores it. Estacade's pronunciation opens with a u under a ticked macron in every printing checked, which cannot be the French "es". The record keeps the printed glyph and a hold asks for a witness to the intended mark.
+Globard's etymology loses its closing bracket at a line end in the print, and Gutenberg prints it, so the record restores it. Estacade's pronunciation opens with a u under a ticked macron in every printing checked, which cannot be the French "es", and Calamary's "-mū̍-ry̆" has the same glyph where the word has an a. Both records keep the printed glyph, and holds ask for a witness to the intended mark.
 
 ### Stress where entry readers split
 
 Where two readers of a new entry differ on a headword stress mark, Gutenberg's headword notation decides it. Generatrix takes `Genˊer-a′trix` from Gutenberg's ``Gen`er*a"trix``, and Hiphalt takes a secondary final mark. A stress mark that both readers agree on stands even where Gutenberg differs, as with Gunsmith and Jailer.
+
+### Main entries beside cross-reference records
+
+Semeiotics and Sloo are printed main entries ("Semeiotics, or Semiotics, n. Semeiology"; "Sloo, or Slue, n. A slough"). The records Semiotics and Slue hold the print's separate cross-reference entries for the variant spellings. Each main entry gets its own record, and the cross-reference records stay.

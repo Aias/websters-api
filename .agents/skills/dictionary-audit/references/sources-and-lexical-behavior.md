@@ -131,6 +131,8 @@ An entry the print sets that no record holds, either as its own key or as a head
 - A hyphen at a line end inside a pronunciation is a line break, as in Generatrix's plural "(-trī′-" / "sēz)", so the record keeps `(-tri&#x304;&#x2032;se&#x304;z)`.
 - A bracket or other closing mark that the print drops at a line end, and Gutenberg prints, is a printer's error and is restored, as in Globard's "[OE. globerde, from glow.]".
 - A printed glyph that cannot belong to the word is kept as printed and held, when no witness shows the intended mark. Estacade's first vowel is a u under a ticked macron in the 1890, 1898 and 1913 printings.
+- A pair of headwords the print braces opens the record `<br/> <div class="mhw">{ <h2 …>A </h2>…, <h2 …>B </h2>…</div>, } </div><div class="pos">` (4,081 to 29 for the opening `<br/> `, 3,555 to 556 for the brace kept).
+- "called X" with X italic is `called <div class="altname">X</div>` (752 to 636 `xex`, none plain italic), and an italic "or" inside a pronunciation is `<i class="it">or </i>` (1,342 to 649).
 - Where readers disagree on whether a printed stress mark is primary or secondary, Gutenberg's headword notation decides it: `"` is the primary mark `&#x2032;` and a backtick the secondary `&#x2CA;`, as Generator (`Gen"er*a`tor`, Gen′er-aˊtor) and Mandarin confirm.
 
 ## Lexical structure and boundaries
