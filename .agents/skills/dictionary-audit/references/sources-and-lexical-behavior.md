@@ -103,6 +103,7 @@ GCIDE's editors and our import dropped some 1913 compounds, and the Gutenberg su
 - A `part` element keeps its space inside the tag, `face </div>or` (19 to 0).
 - A definition followed by an author line ends `text. </div><div class="rj">` (13,534 to 1), and a sense closes `text.</div></div>` (77,395 to 1,050). A record ends `<br/> ` (99,483 to 2).
 - An apostrophe is `&#x2019;` (5,577 to 3,317 for `&apos;`).
+- A pronunciation in a `pr` element writes each mark as a combining hex reference after its base letter, `(se&#x306;r&#x2032;i&#x306;n <i class="it">or</i> -e&#x304;n)` (37,813 combining references to 198 precomposed).
 - Restored Greek goes in a `grk` element as hex references (8,124 to 4,597 raw), with the space inside the closing tag before the next word, `Gr. <div class="grk">&#x3B2;&#x3BB;&#x3B1;&#x3C3;&#x3C4;&#x3CC;&#x3C2; </div>sprout` (6,050 to 2,439).
 - A cross-reference is an `er` element. Punctuation comes from the print, and every character of `old` stays unchanged, which takes precedence over these rules.
 
