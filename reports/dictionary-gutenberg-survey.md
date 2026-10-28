@@ -1,5 +1,7 @@
 # Survey of our text against Gutenberg's 1913 transcription
 
+This survey supplies candidates for the [print-source reconciliation track](dictionary-print-reconciliation.md). Its progress report records completed restorations, remaining candidate pools, and coverage limits. The batch descriptions below retain intermediate results.
+
 Our source descends from GCIDE, which began as the same volunteer transcription of the 1913 _Webster's Revised Unabridged_ that Project Gutenberg distributes (etexts 660–669). GCIDE's editors later reworded definitions, added senses, and fixed transcription typos. Our macOS-bundle import then dropped some of the added material and, with it, some 1913 text that sat next to it. Fabulous shows both kinds of drift: sense 2 reads "Beyond belief" where the print and Gutenberg read "Passing belief", and the compound "Fabulous age" is missing.
 
 The survey compares every entry three ways: our text, Gutenberg's, and the OCR of the scanned print (vol. 1 of the 1907 printing and vol. 2 of the 1895 printing). It normalizes notation, Greek, and markup, diffs the words, and classifies each changed hunk. For each hunk, it scores which reading the OCR supports. The data and tools are in `.context/dictionary-audit/survey-gutenberg/`, which is local to a workspace.
