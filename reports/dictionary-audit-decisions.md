@@ -52,3 +52,11 @@ A batch restores the headword's own pronunciation when the print has one and the
 ### Later senses after printed ones
 
 When the print divides or numbers senses differently, the record follows the print. A sense that only GCIDE has follows the printed senses and takes the next number. The later-additions registry keeps classifying it.
+
+### Printed errors in new records
+
+Globard's etymology loses its closing bracket at a line end in the print, and Gutenberg prints it, so the record restores it. Estacade's pronunciation opens with a u under a ticked macron in every printing checked, which cannot be the French "es". The record keeps the printed glyph and a hold asks for a witness to the intended mark.
+
+### Stress where entry readers split
+
+Where two readers of a new entry differ on a headword stress mark, Gutenberg's headword notation decides it. Generatrix takes `Genˊer-a′trix` from Gutenberg's ``Gen`er*a"trix``, and Hiphalt takes a secondary final mark. A stress mark that both readers agree on stands even where Gutenberg differs, as with Gunsmith and Jailer.

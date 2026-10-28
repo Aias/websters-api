@@ -116,6 +116,23 @@ When a reader rewrites a whole definition to the print, both readers keep `old`'
 
 Before rewriting a definition, check whether the record splits the printed sense across several elements, as in `lights a lamp; </div><div class="specif">esp., </div><div class="def">a person who…`. The reader then writes only the part of the print that this element covers, since rewriting it to the whole printed definition repeats the opening on the page. Two names joined by "or" in a compound heading sit in one `mcol`. After a comma the "or" is bare text, `</b></div>, or <div class="col">`, and without one it is `<b>Louver boards </b></div><i class="it">or </i><div class="col">`. Before a label the `mcol` closes `</b> </div></div><div class="fld">`.
 
+## Restoring missing entries
+
+An entry the print sets that no record holds, either as its own key or as a heading inside another record, gets a new record. Two readers transcribe the whole printed entry blind and independently, `z10/entry-build.py` accepts only an exact, certain agreement, and `z10/integrate-entries.py` inserts the record in key order. The key is the printed headword without notation, with a ligature spelled out (Haemodynamics) and the print's spelling where Gutenberg has a typo. The readers follow a model record of the same shape and these corpus forms:
+
+- The space after a headword goes inside `</h2>` when a pronunciation follows (22,929 to 2,955), and the part of speech is spelled out.
+- A long oo is `oo&#x35E;`, as in Boot (`boo&#x35E;t`), and a ticked macron is `&#x304;&#x30D;`, told from a plain macron or a dot by a pixel dump against a known mark on the same page.
+- A comma after an etymon sits outside the `ets` element (16,454 to 2), and where the print italicizes only the formative letters of a word, only those letters are in `ets` (410 cases such as "[Acetic + …]").
+- A quotation's italic word is `qex` (35,044 to 12), and a bracketed label keeps its inner space, `[Obs.] </div>` (13,947 to 0).
+- "See X, n." is `See <div class="er">X</div>, <div class="pos">noun</div>` (2,035 to 4).
+- "[Written also X.]" is `<div class="altsp">[Written also <div class="asp">X</div>.]</div>`, with no inner space (1,253 to 746).
+- "n. pl.; sing. X." is `plural noun</div>; <div class="sing"><i class="it">sing. </i><div class="singw">X</div>. </div>` (23 of 24).
+- A second part of speech after a dash is `&#x2014; <div class="def2"><div class="pos">noun </div><div class="def">…</div></div>`, as in every corpus case.
+- A hyphen at a line end inside a pronunciation is a line break, as in Generatrix's plural "(-trī′-" / "sēz)", so the record keeps `(-tri&#x304;&#x2032;se&#x304;z)`.
+- A bracket or other closing mark that the print drops at a line end, and Gutenberg prints, is a printer's error and is restored, as in Globard's "[OE. globerde, from glow.]".
+- A printed glyph that cannot belong to the word is kept as printed and held, when no witness shows the intended mark. Estacade's first vowel is a u under a ticked macron in the 1890, 1898 and 1913 printings.
+- Where readers disagree on whether a printed stress mark is primary or secondary, Gutenberg's headword notation decides it: `"` is the primary mark `&#x2032;` and a backtick the secondary `&#x2CA;`, as Generator (`Gen"er*a`tor`, Gen′er-aˊtor) and Mandarin confirm.
+
 ## Lexical structure and boundaries
 
 Preserve source order and association across homographs, header fragments, forms, senses, compounds, notes, usage, and quotations. A repeated-looking passage may carry a distinct lexical function. Remove a duplicate only after proving it is an empty transcription error.
