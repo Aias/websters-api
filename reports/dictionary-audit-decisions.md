@@ -35,6 +35,8 @@ The print has the compound "Critical point (Physics)" under Critical and no "Cri
 
 188 keys, such as Cabbage butterfly, Humming bird and Sodium bicarbonate, hold a compound that the print runs in under its head word. Each merges into its head entry in the printed position, read from the page. These keys were left alone earlier because of how our records are organized, a reason the faithfulness ruling removes.
 
+The merge goes in two steps. Where the head entry already prints the compound and the own record adds no word to it, the own record is a duplicate and is removed (16 records, such as Anchor watch, Blueprint and Trustee process, none of which Gutenberg prints as a separate entry). Where the own record carries text the print lacks, the head entry receives the printed compound and the own record stays as a later-addition entry, because the rulings keep text only GCIDE has; 109 of these 122 records are classified in the later-additions registry, and the other 13 consist mostly of printed text. A pilot of 10 compounds missing from their head entries is read twice blind before its own records are removed.
+
 ### Notes and repeated senses in a rewritten run
 
 A note the print lacks entirely moves after the printed senses, so it no longer interrupts them, as Fermentation's industrial-microbiology note does. A record sense whose words the print already sets inside one of its senses is dropped rather than kept as a later addition, as with Canteen's "The sutler's shop in a garrison."
