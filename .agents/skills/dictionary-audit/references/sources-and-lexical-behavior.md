@@ -103,6 +103,7 @@ GCIDE's editors and our import dropped some 1913 compounds, and the Gutenberg su
 - A `part` element keeps its space inside the tag, `face </div>or` (19 to 0).
 - A definition followed by an author line ends `text. </div><div class="rj">` (13,534 to 1), and a sense closes `text.</div></div>` (77,395 to 1,050). A record ends `<br/> ` (99,483 to 2).
 - An apostrophe is `&#x2019;` (5,577 to 3,317 for `&apos;`).
+- Restored Greek goes in a `grk` element as hex references (8,124 to 4,597 raw), with the space inside the closing tag before the next word, `Gr. <div class="grk">&#x3B2;&#x3BB;&#x3B1;&#x3C3;&#x3C4;&#x3CC;&#x3C2; </div>sprout` (6,050 to 2,439).
 - A cross-reference is an `er` element. Punctuation comes from the print, and every character of `old` stays unchanged, which takes precedence over these rules.
 
 GCIDE's editors often rewrote a whole clause, and the survey splits a rewrite into separate word hunks. Restore a rewording only when the rest of its sentence already matches the print, or widen the span to cover the whole rewritten clause. Replacing one hunk alone can leave a sentence that matches neither text, as with Feast's "when they occurs".
