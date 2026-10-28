@@ -64,3 +64,7 @@ Where two readers of a new entry differ on a headword stress mark, Gutenberg's h
 ### Main entries beside cross-reference records
 
 Semeiotics and Sloo are printed main entries ("Semeiotics, or Semiotics, n. Semeiology"; "Sloo, or Slue, n. A slough"). The records Semiotics and Slue hold the print's separate cross-reference entries for the variant spellings. Each main entry gets its own record, and the cross-reference records stay.
+
+### Corn
+
+The print sets the kinds of Indian corn (yellow, white or southern, sweet, pop) in its note after sense 2, and its senses run 1 to 4. The record had moved that list into a GCIDE sense 3, "a tall cereal plant (Zea mays)", and pointed the note at it. The note and printed senses 1 to 4 now follow the print, including sense 4's "Corns of sand". The GCIDE sense follows as sense 5 without the list, because the print already sets the list in the note. Its other text, on the cob and on cooking and decoration, is kept as a later addition.
