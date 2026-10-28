@@ -2,9 +2,9 @@
 
 This survey supplies candidates for the [print-source reconciliation track](dictionary-print-reconciliation.md). Its progress report records completed restorations, remaining candidate pools, and coverage limits. The batch descriptions below retain intermediate results.
 
-Our source descends from GCIDE, which began as the same volunteer transcription of the 1913 _Webster's Revised Unabridged_ that Project Gutenberg distributes (etexts 660–669). GCIDE's editors later reworded definitions, added senses, and fixed transcription typos. Our macOS-bundle import then dropped some of the added material and, with it, some 1913 text that sat next to it. Fabulous shows both kinds of drift: sense 2 reads "Beyond belief" where the print and Gutenberg read "Passing belief", and the compound "Fabulous age" is missing.
+Our source descends from GCIDE, which began as the same volunteer transcription of the 1913 _Webster's Revised Unabridged_ that Project Gutenberg distributes (etexts 660–670). GCIDE's editors later reworded definitions, added senses, and fixed transcription typos. Our macOS-bundle import then dropped some of the added material and, with it, some 1913 text that sat next to it. Fabulous illustrated both kinds of drift: sense 2 read "Beyond belief" where the print and Gutenberg read "Passing belief", and the compound "Fabulous age" was missing. Both are restored.
 
-The survey compares every entry three ways: our text, Gutenberg's, and the OCR of the scanned print (vol. 1 of the 1907 printing and vol. 2 of the 1895 printing). It normalizes notation, Greek, and markup, diffs the words, and classifies each changed hunk. For each hunk, it scores which reading the OCR supports. The data and tools are in `.context/dictionary-audit/survey-gutenberg/`, which is local to a workspace.
+The original survey compares entries parsed from Gutenberg etexts 660–669, covering A through W, with our text and the OCR of the scanned print (vol. 1 of the 1907 printing and vol. 2 of the 1895 printing). It omits etext 670, containing X through Z and the supplement. It normalizes notation, Greek, and markup, diffs the words, and classifies each changed fragment. For each fragment, it scores which reading the OCR supports. The data and tools are in `.context/dictionary-audit/survey-gutenberg/`, which is local to a workspace. The [print-source reconciliation report](dictionary-print-reconciliation.md) records the expanded comparison and its coverage limits.
 
 | Class                            | Print supports Gutenberg | Print supports ours | Both | Unclear | Total |
 | -------------------------------- | -----------------------: | ------------------: | ---: | ------: | ----: |
@@ -15,7 +15,7 @@ The survey compares every entry three ways: our text, Gutenberg's, and the OCR o
 | Notation (Greek, Latin-1 losses) |                          |                     |      |         | 9,135 |
 | Punctuation only                 |                          |                     |      |         | 2,882 |
 
-There are also 7,019 keys that only our text has, mostly later GCIDE additions, and 515 Gutenberg entries with no key in ours.
+The six classes total 38,764 fragments in the frozen survey. The earlier 38,842 figure in the track report was a transcription error. There are also 7,019 source keys without a match in that comparison and 515 parsed Gutenberg entries with no key in ours. These unmatched pools include omitted-volume content, variants, parser artifacts, and later additions.
 
 ## How far the vote can be trusted
 

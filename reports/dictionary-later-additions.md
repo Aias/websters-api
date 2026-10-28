@@ -47,6 +47,8 @@ Spans (`ours-extra` hunks):
 - Entry-level trigram checks suffer from OCR errors and from entries whose print wording differs from ours.
 - Source restorations can remove a fragment, move its owner, or leave the same words elsewhere in the entry. Revalidate the retained registry after source edits. A relocation needs matching lexical context. A unique bare-word match can point at unrelated text.
 
+The original comparison covered A through W and omitted Gutenberg book 670. The expanded [print-source inventory](dictionary-print-reconciliation.md#re-examine-later-addition-classifications) records 497 entry classifications for priority re-examination against X through Z and the supplement. These are presence-based candidates. The inventory preserves the existing categories pending complete-content review. Yang also has a confirmed tag-provenance error: a separate lowercase GCIDE homograph supplied the editor tag, although the current record contains only the historical goose senses.
+
 ## Owner verification
 
 `scripts/dictionary-later-additions.test.ts` checks every non-null span pointer against the current parsed entry using the registry's word normalization. This detects absent pointers and fragments missing from their recorded owners. Printed origin, lexical context, and removal boundaries still require review.
