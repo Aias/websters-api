@@ -25,7 +25,7 @@ The Atterbury quotation that sits in a Hostilities record moves into Hostility o
 
 ### Dormant (merge P14)
 
-Dormant lacks its adjective heading, etymology and sense 1, and the rest of that adjective sits under a duplicate heading in the Dormancy record. The missing-entry work transcribes the whole printed adjective entry into Dormant, and the stranded tail and the duplicate heading leave Dormancy. Open: the two readings of the adjective entry disagree on the "called also" names, so it waits on a third reading.
+Dormant lacks its adjective heading, etymology and sense 1, and the rest of that adjective sits under a duplicate heading in the Dormancy record. The missing-entry work transcribes the whole printed adjective entry into Dormant, and the stranded tail and the duplicate heading leave Dormancy. Applied: two further readings agreed on the whole printed adjective entry, so Dormant carries it and the duplicate heading and stranded tail leave Dormancy.
 
 ### Critical temperature (merge P15)
 
