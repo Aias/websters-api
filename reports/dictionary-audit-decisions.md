@@ -35,6 +35,10 @@ The print has the compound "Critical point (Physics)" under Critical and no "Cri
 
 188 keys, such as Cabbage butterfly, Humming bird and Sodium bicarbonate, hold a compound that the print runs in under its head word. Each merges into its head entry in the printed position, read from the page. These keys were left alone earlier because of how our records are organized, a reason the faithfulness ruling removes.
 
+### Notes and repeated senses in a rewritten run
+
+A note the print lacks entirely moves after the printed senses, so it no longer interrupts them, as Fermentation's industrial-microbiology note does. A record sense whose words the print already sets inside one of its senses is dropped rather than kept as a later addition, as with Canteen's "The sutler's shop in a garrison."
+
 ### Which pronunciations a batch restores
 
 A batch restores the headword's own pronunciation when the print has one and the record's is missing or partial. Pronunciations inside inflection lists ("Occurred", "Smacked") and plural placeholders such as `(#)` stay for a later pass over those lists, because each needs its own target and crop.
