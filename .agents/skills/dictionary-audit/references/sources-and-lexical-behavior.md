@@ -12,6 +12,8 @@ src/dict.jsonl + scripts/dictionary-source.ts
 
 Read `scripts/PARSING.md` and the corresponding current functions and tests. Use source patches for corrupt source, shared changes for valid source handled incorrectly, and harness fixes for misleading captures. Keep the original HTML notation and historical wording unless a witness supports a correction.
 
+For abbreviated compound headings with a shared printed word, preserve the printed text and use the existing `data-headword` annotation for the complete lexical names. For example, Audience displays "In general, or open, audience" while its annotations identify "In general audience" and "In open audience". Compare full alias destinations and newly ambiguous names after restoration. Record metadata-only annotations separately from native transcription decisions.
+
 ## Primary witnesses
 
 | Source                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Use and limitations                                                                                                                                                               |

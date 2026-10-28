@@ -1,0 +1,642 @@
+{
+  "batch": "senses-4",
+  "baselineSourceSha256": "19ec7e5841c63fd98c77956757e68fca490c37784d8fe2366745634f5fc8d7fd",
+  "printedStageSourceSha256": "6b03cbfaf88c645601097693edfbb21e4232f8fd91e807db06098699ce498027",
+  "finalSourceSha256": "7c2a9d6dc9b06b64a99cd1252c9edd526cabc9229cad6645c346249f5669a2c0",
+  "wholeEntryCredit": 0,
+  "nativeReadingCreditForMetadata": 0,
+  "keys": 58,
+  "targets": 119,
+  "accepted": 111,
+  "metadataAttributeEdits": 2,
+  "unchangedRuledNotApplied": 6,
+  "byPath": {
+    "independent-agreement": 93,
+    "source-adjudication": 18,
+    "hold": 6,
+    "existing-representation-convention": 2
+  },
+  "byKind": {
+    "senses": 58,
+    "pronunciation": 38,
+    "etymology": 11,
+    "punctuation": 1,
+    "typography": 1,
+    "scientific-name": 1,
+    "sense-reference-dependency": 1,
+    "compound": 3,
+    "quotation": 1,
+    "structural": 1,
+    "attribution": 1,
+    "lookup-metadata": 2
+  },
+  "byPacket": {
+    "ss01": {
+      "acceptedPrinted": 4,
+      "unchanged": 0,
+      "metadataAttributes": 0
+    },
+    "ss02": {
+      "acceptedPrinted": 5,
+      "unchanged": 0,
+      "metadataAttributes": 0
+    },
+    "ss03": {
+      "acceptedPrinted": 4,
+      "unchanged": 0,
+      "metadataAttributes": 0
+    },
+    "ss04": {
+      "acceptedPrinted": 4,
+      "unchanged": 0,
+      "metadataAttributes": 0
+    },
+    "ss05": {
+      "acceptedPrinted": 4,
+      "unchanged": 0,
+      "metadataAttributes": 0
+    },
+    "ss06": {
+      "acceptedPrinted": 6,
+      "unchanged": 1,
+      "metadataAttributes": 0
+    },
+    "ss07": {
+      "acceptedPrinted": 6,
+      "unchanged": 0,
+      "metadataAttributes": 0
+    },
+    "ss08": {
+      "acceptedPrinted": 6,
+      "unchanged": 0,
+      "metadataAttributes": 0
+    },
+    "ss09": {
+      "acceptedPrinted": 4,
+      "unchanged": 0,
+      "metadataAttributes": 0
+    },
+    "ss10": {
+      "acceptedPrinted": 4,
+      "unchanged": 0,
+      "metadataAttributes": 0
+    },
+    "ss11": {
+      "acceptedPrinted": 4,
+      "unchanged": 1,
+      "metadataAttributes": 0
+    },
+    "ss12": {
+      "acceptedPrinted": 4,
+      "unchanged": 0,
+      "metadataAttributes": 0
+    },
+    "ss13": {
+      "acceptedPrinted": 4,
+      "unchanged": 1,
+      "metadataAttributes": 0
+    },
+    "ss14": {
+      "acceptedPrinted": 5,
+      "unchanged": 0,
+      "metadataAttributes": 0
+    },
+    "ss15": {
+      "acceptedPrinted": 4,
+      "unchanged": 1,
+      "metadataAttributes": 0
+    },
+    "ss16": {
+      "acceptedPrinted": 5,
+      "unchanged": 0,
+      "metadataAttributes": 0
+    },
+    "ss17": {
+      "acceptedPrinted": 5,
+      "unchanged": 0,
+      "metadataAttributes": 0
+    },
+    "ss18": {
+      "acceptedPrinted": 3,
+      "unchanged": 1,
+      "metadataAttributes": 0
+    },
+    "ss19": {
+      "acceptedPrinted": 3,
+      "unchanged": 1,
+      "metadataAttributes": 0
+    },
+    "ss20": {
+      "acceptedPrinted": 2,
+      "unchanged": 0,
+      "metadataAttributes": 0
+    },
+    "sf01": {
+      "acceptedPrinted": 3,
+      "unchanged": 0,
+      "metadataAttributes": 0
+    },
+    "sf02": {
+      "acceptedPrinted": 3,
+      "unchanged": 0,
+      "metadataAttributes": 0
+    },
+    "sf04": {
+      "acceptedPrinted": 3,
+      "unchanged": 0,
+      "metadataAttributes": 0
+    },
+    "sf05": {
+      "acceptedPrinted": 7,
+      "unchanged": 0,
+      "metadataAttributes": 0
+    },
+    "sf06": {
+      "acceptedPrinted": 3,
+      "unchanged": 0,
+      "metadataAttributes": 0
+    },
+    "sf07": {
+      "acceptedPrinted": 3,
+      "unchanged": 0,
+      "metadataAttributes": 0
+    },
+    "sf08": {
+      "acceptedPrinted": 3,
+      "unchanged": 0,
+      "metadataAttributes": 0
+    },
+    "metadata": {
+      "acceptedPrinted": 0,
+      "unchanged": 0,
+      "metadataAttributes": 2
+    }
+  },
+  "unappliedDecisions": [
+    {
+      "id": "ss06-t4",
+      "key": "Malignant",
+      "kind": "senses",
+      "reason": "the printed unit is unchanged"
+    },
+    {
+      "id": "ss11-t5",
+      "key": "Fin",
+      "kind": "senses",
+      "reason": "the printed unit is unchanged"
+    },
+    {
+      "id": "ss13-t1",
+      "key": "Magnitude",
+      "kind": "senses",
+      "reason": "the printed unit is unchanged"
+    },
+    {
+      "id": "ss15-t5",
+      "key": "Pace",
+      "kind": "senses",
+      "reason": "the printed unit is unchanged"
+    },
+    {
+      "id": "ss18-t3",
+      "key": "Spindle",
+      "kind": "senses",
+      "reason": "the printed unit is unchanged"
+    },
+    {
+      "id": "ss19-t3",
+      "key": "Vigil",
+      "kind": "senses",
+      "reason": "the printed unit is unchanged"
+    }
+  ],
+  "remainingHolds": [
+    {
+      "id": "senses-4-ss09-Dolphin-note-owner",
+      "key": "Dolphin",
+      "target": "ss09-t4",
+      "status": "held",
+      "kind": "structural",
+      "reviewer": "/root/s4_final_09",
+      "rawFragment": "<div class=\"note\">&#x261E; The dolphin of the ancients (<div class=\"spn\">Delphinus delphis</div>) is common in the Mediterranean and Atlantic, and attains a length of from six to eight feet.</div>",
+      "rawFragmentSha256": "a7520eccc0aa1a96a987247c6ae0045a066b0dd47f0b0a3fac436595f6c99b6f",
+      "candidateRawSha256": "2b17a077e0a4b56447458aebd17de6ccad881ae3dde1b21a3ee4b454168b8b4b",
+      "parsedPath": "/homographs/0/content/2/content/3/content/2",
+      "actualOwner": {
+        "sense": "1(b)",
+        "id": "1-b"
+      },
+      "expectedNamedOwner": {
+        "sense": "1(a)",
+        "id": "1-a",
+        "basis": "The note names Delphinus delphis, the true dolphin defined in 1(a), rather than Coryphæna hippuris in 1(b)."
+      },
+      "preservedOrder": "The printed note follows the full zoological sense 1(b), before numbered sense 2. That order is verified and must remain.",
+      "synonyms": {
+        "parsedPath": "/homographs/0/content/2/content/3/content/4",
+        "owner": "1(b)",
+        "status": "pass",
+        "reason": "The separate later synonyms dolphinfish and mahimahi name the fish in 1(b)."
+      },
+      "question": "What precise owner annotation should associate the note with earlier nested sense 1(a), while preserving its printed position after 1(b) and keeping the following separate synonyms owned by 1(b)?",
+      "parserEvidence": {
+        "path": "scripts/build-db.ts",
+        "lines": "454–479",
+        "sha256": "9c2523b88498ef3373404877703ca472e11e83d2d1992caa192d7d25933577ff",
+        "finding": "data-scope supports homograph, sense, and sense:N for top-level numbered senses. It cannot name the earlier nested 1(a) owner while retaining this order."
+      },
+      "lexicalSourceAcceptance": "pass",
+      "printedOrder": "pass",
+      "sourceEditsMade": false,
+      "wholeEntryCredit": 0,
+      "finalIntegratedIdentityRequired": true
+    }
+  ],
+  "inputs": {
+    ".context/dictionary-audit/exhaustive/senses-4/baseline.json": "c52326bc8ffc612629360832b4b3a018a3634f8e58e069d8de67547860692a0e",
+    ".context/dictionary-audit/exhaustive/senses-4/plan.json": "06caf3606e205562da5f86a45f3cf34b0cab4f2ce7066a5b43123f6d2be54fd2",
+    ".context/dictionary-audit/exhaustive/senses-4/integrated-decisions/frozen-edits.json": "b743cbabe2039e9b277320823d201a85b366e397e039bb7156a22b2579c62b4a",
+    ".context/dictionary-audit/exhaustive/senses-4/integrated-decisions/decisions.json": "f041bc840c8c00029bffe7295aa0100a0886f0acf17fc86a8d74d0c27600d027",
+    ".context/dictionary-audit/exhaustive/senses-4/integrated-decisions/readings.json": "df1f6cc7cd67be598576e436a126d6ee78795f63869424ca930d27ed8e2ead07",
+    ".context/dictionary-audit/exhaustive/senses-4/integrated-decisions/accepted-manifest.json": "8abc6c48f9878d3e8b88450a437d9ec4ae19becd2d75ba68f951ddbb2252be15",
+    ".context/dictionary-audit/exhaustive/senses-4/integrated-decisions/integration.json": "4172614d7dab51178fb80619a79e1625870f99d5a55009d2c3b3930a1026b8f1",
+    ".context/dictionary-audit/exhaustive/senses-4/after-ss09/structural-issue.json": "a8948f0b2d8c6382386c5ef4a746eac5e2ff7938bc0ed93efc07905bf2f4a8ce",
+    "reports/dictionary-print-worksets.jsonl": "77681c9cd204818eded0323135e22c08b624bfb2573a5690bc0488c1cc91c90d",
+    ".context/dictionary-audit/senses-4-metadata/receipt.json": "9d8620a1d43e1eaee445b60c70e056ecc321f7f5e7d94cc19ecc9a7c2c3de937",
+    ".context/dictionary-audit/senses-4-semantics/final-metadata-verification.json": "618de9884fec507094a28ea36fde7c8bcee988673df355e3a47919e5827ceff3",
+    "src/dict.jsonl": "7c2a9d6dc9b06b64a99cd1252c9edd526cabc9229cad6645c346249f5669a2c0"
+  },
+  "outputs": {
+    "acceptance.jsonl": "137655f99691f34c5885575a440bac6f69c40e8b91aa7302db1feca1cb3f6c08",
+    "worksets.jsonl": "43f7bc32ddd338e187229381cfa65134bd72e326ecd3aa12786ee5da9c06ac4a"
+  },
+  "trackedOutputs": [
+    {
+      "path": "reports/dictionary-audit-senses-4.jsonl",
+      "sha256": "a5853f234d53551fce00ce2778b8800f33e8c77dc9775d625bf2b2834b0d9be8"
+    },
+    {
+      "path": "reports/dictionary-print-workset-outcomes.jsonl",
+      "sha256": "843d41cb4c967014d272c69776425fda0890f01e482487c9df0313c43442695e"
+    }
+  ],
+  "frozenInventoryPreserved": true,
+  "remainingOpenHoldRows": 155,
+  "checks": {
+    "semantics": {
+      "path": ".context/dictionary-audit/senses-4-semantics/final-metadata-verification.json",
+      "sha256": "618de9884fec507094a28ea36fde7c8bcee988673df355e3a47919e5827ceff3",
+      "result": {
+        "status": "passed-with-existing-Dolphin-ownership-hold",
+        "inputs": {
+          "originalSourceSha256": "19ec7e5841c63fd98c77956757e68fca490c37784d8fe2366745634f5fc8d7fd",
+          "integratedBeforeMetadataSha256": "6b03cbfaf88c645601097693edfbb21e4232f8fd91e807db06098699ce498027",
+          "finalSourceSha256": "7c2a9d6dc9b06b64a99cd1252c9edd526cabc9229cad6645c346249f5669a2c0",
+          "priorVerificationSha256": "c840d71deed7034a03b9286c3097e0d909ebe7fe2d908914e46f946b67963381",
+          "metadataReceiptSha256": "9d8620a1d43e1eaee445b60c70e056ecc321f7f5e7d94cc19ecc9a7c2c3de937",
+          "lookupClassificationSha256": "8f4d781025711adeccdc5c00586bc5bd6dff8054652e20811620ed3f4724c8e6"
+        },
+        "layeredReplay": {
+          "entries": 100803,
+          "acceptedPrintedDecisions": 111,
+          "metadataAttributeEdits": 2,
+          "primaryReplayMatches": true,
+          "exactFinalSerializedBytesMatch": true,
+          "changedKeysFromMetadata": ["Electricity"],
+          "changedKeysFromOriginal": 58,
+          "errors": []
+        },
+        "semantic": {
+          "rawOnlyExactAttributes": true,
+          "rawDecodedTextEqual": true,
+          "preprocessedOnlyExactAttributes": true,
+          "preprocessedTextEqual": true,
+          "semanticProjectionEqual": true,
+          "parsedEqualAfterRemovingExactAttributes": true
+        },
+        "display": {
+          "beforeHtmlSha256": "c3979d7c0058447da8b4cbf18fc9aab77c5daa6332c042dcc3de4f6dfad888c7",
+          "afterHtmlSha256": "2450d49cb5c2ea6bf773b0f6dc940622ad599ad287d456c6c06eb066f6149cc5",
+          "onlyExactMetadataAttributesDiffer": true,
+          "oldAttributeCounts": [0, 0],
+          "newAttributeCounts": [1, 1]
+        },
+        "unchangedSemanticImplementation": true,
+        "implementationHashes": [
+          {
+            "path": "app/lib/slug.ts",
+            "frozenSha256": "dd4cbfc56b43456418ce4ef9419faf7d4830b91caca412f8af01ab953e6bcab1",
+            "currentSha256": "dd4cbfc56b43456418ce4ef9419faf7d4830b91caca412f8af01ab953e6bcab1",
+            "finalSha256": "dd4cbfc56b43456418ce4ef9419faf7d4830b91caca412f8af01ab953e6bcab1"
+          },
+          {
+            "path": "app/lib/types.ts",
+            "frozenSha256": "331727eada7c1658464ef842304a6970ade62b661cc8ee1893d7a609784cc1cb",
+            "currentSha256": "331727eada7c1658464ef842304a6970ade62b661cc8ee1893d7a609784cc1cb",
+            "finalSha256": "331727eada7c1658464ef842304a6970ade62b661cc8ee1893d7a609784cc1cb"
+          },
+          {
+            "path": "app/lib/lookup.ts",
+            "frozenSha256": "c7ba6670515058150cd8f007b362589f6c81e5dbf2f27832ea9862d479e4a698",
+            "currentSha256": "c7ba6670515058150cd8f007b362589f6c81e5dbf2f27832ea9862d479e4a698",
+            "finalSha256": "c7ba6670515058150cd8f007b362589f6c81e5dbf2f27832ea9862d479e4a698"
+          },
+          {
+            "path": "scripts/build-db.ts",
+            "frozenSha256": "9c2523b88498ef3373404877703ca472e11e83d2d1992caa192d7d25933577ff",
+            "currentSha256": "9c2523b88498ef3373404877703ca472e11e83d2d1992caa192d7d25933577ff",
+            "finalSha256": "9c2523b88498ef3373404877703ca472e11e83d2d1992caa192d7d25933577ff"
+          },
+          {
+            "path": "scripts/source-typography.ts",
+            "frozenSha256": "5f1163b546c78455e1c027868bd5d94cfad64597ebe37f386aee227f4d9c9ad5",
+            "currentSha256": "5f1163b546c78455e1c027868bd5d94cfad64597ebe37f386aee227f4d9c9ad5",
+            "finalSha256": "5f1163b546c78455e1c027868bd5d94cfad64597ebe37f386aee227f4d9c9ad5"
+          },
+          {
+            "path": "scripts/source-dom.ts",
+            "frozenSha256": "4aef743fe13309bc73099b3892addcdd61efb8f9b3e38024db9ab4d393878fb1",
+            "currentSha256": "4aef743fe13309bc73099b3892addcdd61efb8f9b3e38024db9ab4d393878fb1",
+            "finalSha256": "4aef743fe13309bc73099b3892addcdd61efb8f9b3e38024db9ab4d393878fb1"
+          },
+          {
+            "path": "scripts/dictionary-audit/conservation.ts",
+            "frozenSha256": "06942f574858587cc5339c3032b9134ed542f2425a0731bdeb1a3e65aaa46a48",
+            "currentSha256": "06942f574858587cc5339c3032b9134ed542f2425a0731bdeb1a3e65aaa46a48",
+            "finalSha256": "06942f574858587cc5339c3032b9134ed542f2425a0731bdeb1a3e65aaa46a48"
+          },
+          {
+            "path": "scripts/entry-references.ts",
+            "frozenSha256": "e8c0d7de329c9133892c9503f0282c6416fffc7893b41231d139c25d1e925759",
+            "currentSha256": "e8c0d7de329c9133892c9503f0282c6416fffc7893b41231d139c25d1e925759",
+            "finalSha256": "e8c0d7de329c9133892c9503f0282c6416fffc7893b41231d139c25d1e925759"
+          },
+          {
+            "path": "scripts/entry-aliases.ts",
+            "frozenSha256": "897b545a08b9b5683c793d3b5a235a2962cd69edcc488765a62df70c144e0a64",
+            "currentSha256": "897b545a08b9b5683c793d3b5a235a2962cd69edcc488765a62df70c144e0a64",
+            "finalSha256": "897b545a08b9b5683c793d3b5a235a2962cd69edcc488765a62df70c144e0a64"
+          },
+          {
+            "path": "scripts/source-preprocessing.ts",
+            "frozenSha256": "1e8a31b009be2efe043a23119032d974b39f2159cbff491e4a4e0b18b749d1e7",
+            "currentSha256": "1e8a31b009be2efe043a23119032d974b39f2159cbff491e4a4e0b18b749d1e7",
+            "finalSha256": "1e8a31b009be2efe043a23119032d974b39f2159cbff491e4a4e0b18b749d1e7"
+          }
+        ],
+        "conservationInherited": {
+          "orderedLexicalParts": 2754,
+          "senseLabels": 390,
+          "basis": "All other raw entries and semantic implementation bytes are unchanged; Electricity raw, preprocessed, parsed semantics and display were separately compared above.",
+          "DolphinOwnershipHoldRetained": true
+        },
+        "lookup": "Metadata probe restores Common electricity and Frictional electricity full names and removes bare Common/Frictional claims. Root owns the final whole-corpus lookup check.",
+        "tokens": "unavailable"
+      }
+    },
+    "lookup": {
+      "path": ".context/dictionary-audit/senses-4-control/lookup-differences.json",
+      "sha256": "27ed70671bc0aa118a4a180f41c4dff8bd7d843e6c62d9c29cde99df03c5bc8b",
+      "result": {
+        "beforeSourceSha256": "19ec7e5841c63fd98c77956757e68fca490c37784d8fe2366745634f5fc8d7fd",
+        "sourceSha256": "7c2a9d6dc9b06b64a99cd1252c9edd526cabc9229cad6645c346249f5669a2c0",
+        "beforeEntries": 100803,
+        "entries": 100803,
+        "canonical": [],
+        "aliases": [
+          {
+            "name": "apidose fin",
+            "before": "Fin"
+          },
+          {
+            "name": "dickie",
+            "before": "Dicky"
+          }
+        ],
+        "routes": [
+          {
+            "name": "apidose_fin",
+            "before": "Fin"
+          },
+          {
+            "name": "dickie",
+            "before": "Dicky"
+          }
+        ],
+        "newAmbiguity": []
+      }
+    },
+    "runtime": {
+      "path": ".context/dictionary-audit/senses-4-runtime/final-receipt.json",
+      "sha256": "9ef41a05da2dbf9c369e30ef506f318e134c509e21d484fe7931fe49b3b459b9",
+      "result": {
+        "sourceSha256": "7c2a9d6dc9b06b64a99cd1252c9edd526cabc9229cad6645c346249f5669a2c0",
+        "comparisonSourceSha256": "7c2a9d6dc9b06b64a99cd1252c9edd526cabc9229cad6645c346249f5669a2c0",
+        "count": 58,
+        "parsedEqual": 58,
+        "lookupEqual": 58,
+        "geometry": {
+          "desktop": {
+            "panes": 116,
+            "keys": 58,
+            "failures": []
+          },
+          "narrow": {
+            "panes": 116,
+            "keys": 58,
+            "failures": []
+          }
+        },
+        "controls": {
+          "checks": [
+            {
+              "mode": "text",
+              "panesPopulated": true,
+              "pressed": "true",
+              "selected": "Clinic"
+            },
+            {
+              "mode": "json",
+              "panesPopulated": true,
+              "pressed": "true",
+              "selected": "Clinic"
+            },
+            {
+              "mode": "rendered",
+              "panesPopulated": true,
+              "pressed": "true",
+              "selected": "Clinic"
+            },
+            {
+              "control": "filter",
+              "count": 58
+            },
+            {
+              "control": "right",
+              "selected": "Mire"
+            },
+            {
+              "control": "previous",
+              "selected": "Clinic"
+            },
+            {
+              "control": "select",
+              "selected": "Map"
+            },
+            {
+              "control": "hash",
+              "selected": "Mire"
+            }
+          ],
+          "columns": "366px",
+          "font": "Webster, Cardo, \"Iowan Old Style\", \"Palatino Linotype\", Palatino, Georgia, serif",
+          "loaded": true,
+          "scrollWidth": 390,
+          "viewport": 390
+        },
+        "aliases": {
+          "Frictional electricity": {
+            "exists": true,
+            "key": "Electricity",
+            "slug": "electricity"
+          },
+          "Common electricity": {
+            "exists": true,
+            "key": "Electricity",
+            "slug": "electricity"
+          }
+        },
+        "routes": [
+          {
+            "key": "Clinic",
+            "h1": "Clinic",
+            "url": "http://127.0.0.1:56523/entry/clinic",
+            "horizontalOverflow": false
+          },
+          {
+            "key": "Dolphin",
+            "h1": "Dolphin",
+            "url": "http://127.0.0.1:56523/entry/dolphin",
+            "horizontalOverflow": false
+          },
+          {
+            "key": "Electricity",
+            "h1": "Electricity",
+            "url": "http://127.0.0.1:56523/entry/electricity",
+            "horizontalOverflow": false
+          }
+        ],
+        "screenshots": [
+          "comparison-final-word-desktop.png",
+          "comparison-final-word-narrow.png",
+          "entry-clinic.png",
+          "entry-dolphin.png",
+          "entry-electricity.png"
+        ]
+      }
+    }
+  },
+  "registry": {
+    "integration": ".context/dictionary-audit/exhaustive/senses-4/integrated-decisions",
+    "selectedKeys": 58,
+    "selectedRows": 72,
+    "counts": {
+      "retain-clear-pointer": 3,
+      "remove": 35,
+      "retain": 32,
+      "retain-relocate-pointer": 2
+    },
+    "totalRows": 14184,
+    "spanRows": 7879,
+    "nonNullPointers": 6733,
+    "nullPointers": 1146,
+    "frozenSourceSha256": "19ec7e5841c63fd98c77956757e68fca490c37784d8fe2366745634f5fc8d7fd",
+    "candidateSourceSha256": "6b03cbfaf88c645601097693edfbb21e4232f8fd91e807db06098699ce498027",
+    "proposedRegistrySha256": "e4fbf325a29c2443c3e5251161ea83cc44539f28c7be406d4a3bd8dbd803d936",
+    "canonicalTest": {
+      "path": "scripts/dictionary-later-additions.test.ts",
+      "sha256": "58d1379009075af094a4981cdddceb10420941918f7f7443c806a25b3fa4a860"
+    },
+    "testAdaptation": "Only imports and input paths are changed; the repository canonical normalization, text traversal, pointer resolution and assertion are unchanged.",
+    "categories": {
+      "gcide-editor": {
+        "entry": 189,
+        "span": 86
+      },
+      "later-unattributed": {
+        "entry": 2246,
+        "span": 3377
+      },
+      "supplement-1913": {
+        "entry": 3261,
+        "span": 784
+      },
+      "uncertain": {
+        "entry": 498,
+        "span": 3611
+      },
+      "wordnet": {
+        "entry": 111,
+        "span": 21
+      }
+    },
+    "canonicalOwnerCheck": {
+      "pass": true,
+      "checkedNonNullPointers": 6733
+    }
+  },
+  "measurement": {
+    "startedAt": "2026-10-28T15:51:00.293955+00:00",
+    "validationRecordedAt": "2026-10-28T17:02:49.457129+00:00",
+    "elapsedSeconds": 4309.2,
+    "sourceReaderTokens": null,
+    "tokenReason": "Source reader token telemetry unavailable",
+    "weeklyUsageInitialPercent": 41,
+    "weeklyUsageAtValidationPercent": 94.0,
+    "admissionThresholdPercent": 90,
+    "wholeEntryCredit": 0
+  },
+  "finalStructuralIssue": {
+    "id": "senses-4-ss09-Dolphin-note-owner",
+    "key": "Dolphin",
+    "target": "ss09-t4",
+    "status": "open",
+    "kind": "structural",
+    "reviewer": "/root/s4_final_09",
+    "rawFragment": "<div class=\"note\">&#x261E; The dolphin of the ancients (<div class=\"spn\">Delphinus delphis</div>) is common in the Mediterranean and Atlantic, and attains a length of from six to eight feet.</div>",
+    "rawFragmentSha256": "a7520eccc0aa1a96a987247c6ae0045a066b0dd47f0b0a3fac436595f6c99b6f",
+    "candidateRawSha256": "2b17a077e0a4b56447458aebd17de6ccad881ae3dde1b21a3ee4b454168b8b4b",
+    "parsedPath": "/homographs/0/content/2/content/3/content/2",
+    "actualOwner": {
+      "sense": "1(b)",
+      "id": "1-b"
+    },
+    "expectedNamedOwner": {
+      "sense": "1(a)",
+      "id": "1-a",
+      "basis": "The note names Delphinus delphis, the true dolphin defined in 1(a), rather than Coryphæna hippuris in 1(b)."
+    },
+    "preservedOrder": "The printed note follows the full zoological sense 1(b), before numbered sense 2. That order is verified and must remain.",
+    "synonyms": {
+      "parsedPath": "/homographs/0/content/2/content/3/content/4",
+      "owner": "1(b)",
+      "status": "pass",
+      "reason": "The separate later synonyms dolphinfish and mahimahi name the fish in 1(b)."
+    },
+    "question": "What precise owner annotation should associate the note with earlier nested sense 1(a), while preserving its printed position after 1(b) and keeping the following separate synonyms owned by 1(b)?",
+    "parserEvidence": {
+      "path": "scripts/build-db.ts",
+      "lines": "454–479",
+      "sha256": "9c2523b88498ef3373404877703ca472e11e83d2d1992caa192d7d25933577ff",
+      "finding": "data-scope supports homograph, sense, and sense:N for top-level numbered senses. It cannot name the earlier nested 1(a) owner while retaining this order."
+    },
+    "lexicalSourceAcceptance": "pass",
+    "printedOrder": "pass",
+    "sourceEditsMade": false,
+    "wholeEntryCredit": 0,
+    "layer": "parser",
+    "completeEntryReviewCredit": false,
+    "finalIntegratedIdentityVerified": true,
+    "finalSourceSha256": "7c2a9d6dc9b06b64a99cd1252c9edd526cabc9229cad6645c346249f5669a2c0"
+  }
+}
