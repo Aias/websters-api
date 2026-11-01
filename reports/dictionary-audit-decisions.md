@@ -99,3 +99,7 @@ Nascent's compound definition reads "one compound acid" in the available print. 
 ### New International witnesses
 
 Flatware and Rossel current are absent from the only scanned printing of the 1900 supplement, so Webster's New International Dictionary witnesses them. Its house style differs from the 1913 supplement's: it lowercases headwords, gives each word of an open compound a primary accent, and abbreviates field labels without parentheses. The records take their headword notation and field label from Gutenberg's transcription of the 1913 supplement, and their pronunciations from the New International print. Rossel current is therefore `Ros′sel curˊrent` with the label "(Oceanography)", where the New International prints two primary accents and "Oceanog.".
+
+### Ambiguous ligatures
+
+Lizard fish's species epithet prints a ligature that the scan cannot resolve as œ or æ, because the two differ only in a stroke the e absorbs. Under the ruling that an ambiguous printed character takes the character the text means, the record has œ, as in the epithet foetens. Gutenberg and both readers have œ as well.

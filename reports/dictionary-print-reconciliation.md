@@ -15,7 +15,7 @@ Gutenberg and GCIDE provide comparison text and candidate locations. Accepted co
 
 ## Recorded progress
 
-Checkpoint: classification-1, following own-compounds-2 (`1e86796`). Source SHA-256 `dfcd4921e041df511ebe1817d62871db1392310e419b7012544b6581d982203a`. The frozen inventory retains its original source hashes. Current workset dispositions are recorded separately in [`dictionary-print-workset-outcomes.jsonl`](dictionary-print-workset-outcomes.jsonl).
+Checkpoint: lizard-fish, following classification-1 (`9dfd901`). Source SHA-256 `cc118217656564b50c8a1868d7ce6f0fa5e5b1dfb25b7c6a08413ab40003890a`. The frozen inventory retains its original source hashes. Current workset dispositions are recorded separately in [`dictionary-print-workset-outcomes.jsonl`](dictionary-print-workset-outcomes.jsonl).
 
 | Work                            | Completed                                                                                                                                                       | Remaining or measurement limit                                                                                                                                                          |
 | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -24,7 +24,7 @@ Checkpoint: classification-1, following own-compounds-2 (`1e86796`). Source SHA-
 | Sense structure                 | Senses-1, senses-2, and senses-3 restructure 69 distinct entries: 19, 24, and 26. Corn receives a separate restoration.                                         | Senses-4 reviews all 58 remaining candidates: 52 restored sense units and six unchanged rulings. Dolphin retains a parser ownership hold. Broader differences remain outside this pool. |
 | Definition-5                    | [58 accepted corrections across 30 entries](dictionary-audit-definition-5.md), resolving 33 held fields.                                                        | Its targets have no remaining holds. The total includes 18 pronunciation targets and other accompanying repairs. It adds no complete-entry review credit.                               |
 | Missing standalone records      | All 71 missing records identified by the survey are restored. Entries-4 adds Flatware, Retroussé, and Rossel current.                                           | This pool does not establish that every possible omission has been discovered.                                                                                                          |
-| Original missing-compound pool  | 43 of 44 targets are restored.                                                                                                                                  | Lizard fish remains held, as described below.                                                                                                                                           |
+| Original missing-compound pool  | All 44 targets are restored. Lizard fish was the last.                                                                                                          | None remain in this pool.                                                                                                                                                               |
 | Compounds in separate records   | Historical work has 46 restoration targets and 26 removed records. Own-compounds-2 restores five further compounds and retains all five additional own records. | The 188-key pool has 73 recorded resolutions and 115 remaining candidates. Counts overlap with split-record work.                                                                       |
 | Original split-record proposals | All 15 proposals have recorded source dispositions.                                                                                                             | Bold eagle has fresh independent native confirmation. Its original acceptance record remains unrecovered.                                                                               |
 | Later-addition classification   | [13,915 classifications across 11,147 entries](dictionary-later-additions.md).                                                                                  | 3,924 classifications are uncertain. Of the 497 entries flagged for re-examination, classification-1 settles 365 and defers 125. Seven are in the own-record compound pool.             |
@@ -95,11 +95,9 @@ The 188-key pool has 73 recorded resolutions and 115 unreviewed candidates. Hist
 
 Seventy remaining candidates were historically marked as already having a compound under the head entry. Native disposition review remains necessary before insertion or removal. Preparation for later packets grants no completed review credit.
 
-### Resolve the Lizard fish hold
+### Open holds
 
-The original `compound-restore` target `cr03-t7` remains unresolved. Current Lizard has Lizard snake and Lizard stone but lacks Lizard fish. The first reader held the botanical ligature and a damaged letter in the vernacular synonym. Fresh independent readings must settle both before restoration.
-
-The open register includes this recovered hold. It contains 152 unresolved fields: 85 evidence holds, 65 reading holds, and two structure holds, including Dolphin. The original discovery evidence is `.context/dictionary-audit/exhaustive/compound-restore/initial-cr03/holds.json`.
+The open register contains 151 unresolved fields: 85 evidence holds, 64 reading holds, and two structure holds, including Dolphin.
 
 ## Updating progress
 
