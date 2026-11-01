@@ -224,7 +224,7 @@ const targetSource = new Map([
   ],
   [
     'Beam',
-    '<h2 class="hw">Beam</h2><div class="pos">noun</div><div class="def">A timber.</div><div class="cs"><div class="col"><b>Abaft the beam</b></div>. <div class="cd">Behind.</div></div>',
+    '<h2 class="hw">Beam</h2><div class="pos">noun</div><div class="def">A timber.</div><div class="cs"><div class="col"><b>Abaft the beam</b></div>. <div class="cd">Behind.</div> &#x2014; <div class="col"><b>Beam compass</b></div>. <div class="sd">(a) </div><div class="cd">A drawing tool.</div><div class="sd">(b) </div><div class="cd">A surveying tool.</div></div>',
   ],
 ]);
 const targetReferences = createEntryReferences(targetSource, parseEntry);
@@ -261,6 +261,18 @@ describe('sense and compound reference targets', () => {
       '/entry/beam',
     ],
     ['See the Note under 1st <div class="er">Beam</div>.', '/entry/beam'],
+    [
+      'See <div class="cref">Beam compass </div><div class="sd">(b)</div>, under <div class="er">Beam</div>.',
+      '/entry/beam#beam_compass-b',
+    ],
+    [
+      'See <i class="xex">Abaft the beam</i>, under <div class="er">Beam</div>.',
+      '/entry/beam#abaft_the_beam',
+    ],
+    [
+      '<div class="cs"><div class="col"><b>Beam compass</b></div>. <div class="cd">See <i class="xex">Illust. </i>under <div class="er">Beam</div>.</div></div>',
+      '/entry/beam#beam_compass',
+    ],
     [
       'See under 2d <div class="er" data-target="abaft_the_beam">Beam</div>.',
       '/entry/beam#abaft_the_beam',

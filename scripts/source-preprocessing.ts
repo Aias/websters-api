@@ -85,13 +85,22 @@ export function loadPreprocessedDocument(
           const referenceLead = before?.type === 'text' ? before.data : '';
           const ordinal = /\bunder\s+(\d+)(?:st|nd|rd|th|d)\s*$/i.exec(referenceLead);
           const lead = ordinal ? referenceLead.slice(0, ordinal.index) + 'under ' : referenceLead;
-          const cref = before?.previousSibling;
+          const letter = before?.previousSibling;
+          const lettered = letter && hasClass(letter, 'sd');
+          const cref = lettered ? letter.previousSibling : letter;
+          const named = /^\s*,?\s*under\s*$/i.test(lead) ? cref : undefined;
           const phrases =
             !/\bunder\s*$/i.test(lead) || /\bnote\s+under\s*$/i.test(lead)
               ? []
-              : /^\s*,?\s*under\s*$/i.test(lead) && cref && hasClass(cref, 'cref')
-                ? [getText($, cref)]
-                : ownerHeadwords($, el);
+              : named && hasClass(named, 'cref')
+                ? [getText($, named)]
+                : [
+                    ...(named && hasClass(named, 'xex') ? [getText($, named)] : []),
+                    ...ownerHeadwords($, el),
+                  ];
+          const compoundSense = lettered
+            ? /^\(([a-z])\)$/.exec(getText($, letter).trim())?.[1]
+            : undefined;
           const fragment = resolve?.fragment?.(slug, {
             recorded: el.attribs['data-target'],
             ...senseReference(
@@ -100,6 +109,7 @@ export function loadPreprocessedDocument(
               Boolean(partOfSpeech)
             ),
             partOfSpeech,
+            compoundSense,
             homographNumber: ordinal ? Number(ordinal[1]) : undefined,
             phrases: [...phrases, text.replace(/,\s*\d+\.?\s*$/, '')],
           });
