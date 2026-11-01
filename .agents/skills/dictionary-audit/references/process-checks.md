@@ -15,6 +15,8 @@ The exported types in `packet.ts` describe the packet JSON. Record exact ordered
 
 Preparation checks the stored inputs and prepared image coverage without requiring future reviewer delivery or inspection. Review mode checks actual text delivery and image inspection receipts. Each result names its phase. A preparation-ready row has usable inputs, not completed review. The default dossier checks describe a complete-entry packet. A targeted recheck can remain held for unrelated absent dimensions while its named fields are reviewed, without receiving complete-entry credit.
 
+Keep preparation writers separate from admission verifiers. Admission verification reads frozen inputs without rewriting them. Bind supplements to immutable dossiers, rules, and native/text proofs rather than regenerable readiness reports. When a status receipt changes, preserve the failed binding and issue a named revision after proving which source inputs remain identical.
+
 Before combining electronic witness paragraphs, confirm their exact lexical identities. Preserve significant spaces and hyphens in headings, using folded names only to locate candidates. Keep source tags separate for distinct entries such as "black bird" and "blackbird" until their complete paragraphs establish the same identity.
 
 For text delivery, record zero-based, end-exclusive byte windows and their hashes from actual successful results. Check gap-free coverage of complete raw, decoded, parsed, browser-text, and witness text. A prepared file does not prove delivery, and delivery does not prove inspection. Store reviewer and trace references separately for actual inspection. An electronic witness absent from an edition remains a named field hold.
@@ -72,6 +74,8 @@ The exported `FrozenEdit` and `Decision` types describe these files. Each frozen
 For **independent agreement**, distinct source readers confirm the same eligible replacement from actually inspected native evidence. Normalize only explicitly equivalent encoding, such as NFC. Keep punctuation boundaries explicit rather than silently stripping them.
 
 For **source adjudication**, retain the original disagreement or validator failure. Read the relevant native region, define the exact adjusted replacement, and obtain a fresh independent confirmation of the disputed characters and owner. Replay mechanical eligibility, uniqueness, structural, and hash checks on the adjusted edit. A ruling never substitutes for these checks. Mark this path separately from initial agreement.
+
+When a final check changes an inserted unit, freeze the final replacement and independently confirm that complete fragment. Preserve earlier answers under their original hashes rather than assigning them the adjusted replacement's hash.
 
 For **mask-boundary disagreement**, inspect the full source fragment and print context. Prove which punctuation lies inside the replacement and which remains outside it, then independently verify the resulting exact fragment. A conventional spelling, neighboring word, or unreadable mark supplies no missing pixel evidence. Hold the affected characters when the source cannot settle them.
 

@@ -161,6 +161,26 @@ describe('dictionary reference lookup', () => {
     expect(result.get('arrow-head')).toBe('Arrow-head');
   });
 
+  test('retains a spaced spelling claimed by its closed canonical entry', () => {
+    const result = unambiguousAliases(
+      new Map([
+        ['Arrowhead', ['Arrowhead', 'Arrow head']],
+        ['Arrow', ['Arrow', 'Arrow head']],
+      ])
+    );
+    expect(result.get('arrow head')).toBe('Arrowhead');
+  });
+
+  test('leaves competing closed and hyphenated canonical spellings unresolved', () => {
+    const result = unambiguousAliases(
+      new Map([
+        ['Arrowhead', ['Arrowhead', 'Arrow head']],
+        ['Arrow-head', ['Arrow-head', 'Arrow head']],
+      ])
+    );
+    expect(result.has('arrow head')).toBe(false);
+  });
+
   test('preserves an exact spaced canonical entry over a hyphenated variant', () => {
     const result = unambiguousAliases(
       new Map([

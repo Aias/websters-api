@@ -4,16 +4,16 @@
 
 ## Counts
 
-13,915 rows over 11,147 keys.
+13,916 rows over 11,148 keys.
 
 | category             | entry |  span |  total |
 | -------------------- | ----: | ----: | -----: |
-| `wordnet`            |    87 |    21 |    108 |
+| `wordnet`            |    94 |    21 |    115 |
 | `gcide-editor`       |   122 |    86 |    208 |
 | `supplement-1913`    | 3,358 |   784 |  4,142 |
-| `later-unattributed` | 2,156 | 3,377 |  5,533 |
-| `uncertain`          |   313 | 3,611 |  3,924 |
-| total                | 6,036 | 7,879 | 13,915 |
+| `later-unattributed` | 2,155 | 3,377 |  5,532 |
+| `uncertain`          |   308 | 3,611 |  3,919 |
+| total                | 6,037 | 7,879 | 13,916 |
 
 Left out: 1,168 `ours-extra` hunks whose print vote supports ours, and 721 ours-only entries whose text mostly appears in the print OCR (Gutenberg dropped them; see `excluded-entries.jsonl`). Of the 7,879 span rows, 6,733 have an `owner` pointer and 1,146 await location or fragment reconciliation. Rows for text that a print restoration later replaced are removed once their complete disposition is established.
 
@@ -39,7 +39,7 @@ Spans (`ours-extra` hunks):
 3. A WordNet or editor source gives `wordnet` or `gcide-editor` whatever the vote, because the source is independent of the print. "Webster 1913 Suppl." gives `supplement-1913` (1913 text, kept and marked).
 4. Otherwise a `gutenberg` vote gives `later-unattributed`, and an `unclear` vote gives `uncertain`. The `evidence` field carries the vote anchor, the score, and the OCR window.
 
-Reviewed entry rows bind source tags to the exact paragraphs supplying the current text. Separate normalized headings and absent GCIDE senses retain their own provenance. A mixed paragraph does not establish that every word came from its latest contributor. [Own-compounds-1/2](dictionary-audit-own-compounds-2.md) corrects six rows under this distinction.
+Reviewed entry rows bind source tags to the exact paragraphs supplying the current text. Separate normalized headings and absent GCIDE senses retain their own provenance. A mixed paragraph does not establish that every word came from its latest contributor. [Own-compounds-1/2](dictionary-audit-own-compounds-2.md) corrects six rows under this distinction. [Own-compounds-3-6](dictionary-audit-own-compounds-3-6.md) corrects seven more entry rows and adds Humming bird, whose additional text has no identified contributor. The sole span pointer on its changed owner keys, Lancet's knife-like fragment, retains its matching lexical context.
 
 ## Known limits
 
@@ -56,7 +56,7 @@ The original comparison covered A through W and omitted Gutenberg book 670. The 
 
 `scripts/dictionary-later-additions.test.ts` checks every non-null span pointer against the current parsed entry using the registry's word normalization. This detects absent pointers and fragments missing from their recorded owners. Printed origin, lexical context, and removal boundaries still require review.
 
-The ownership reconciliation at source revision `452e7b9` relocates four spans in Cart, Corn, and Out after confirming their context. It clears 148 stale pointers whose locations remain unconfirmed, retaining their classification and original text for review. Those rows are included in the 1,143 unresolved locations above. For example, Dollar's removed sense-2 word "formerly" must not be reassigned to the same word in Trade dollar.
+The ownership reconciliation at source revision `452e7b9` relocates four spans in Cart, Corn, and Out after confirming their context. It clears 148 stale pointers whose locations remain unconfirmed, retaining their classification and original text for review. Those rows are included in the 1,146 unresolved locations above. For example, Dollar's removed sense-2 word "formerly" must not be reassigned to the same word in Trade dollar.
 
 ## Using the file
 

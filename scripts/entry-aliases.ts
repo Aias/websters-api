@@ -79,16 +79,20 @@ function resolveClaims(
     add(folded, fold(normalizeLookup(key)), key);
     canonicalKeys.add(normalizeLookup(key));
   }
-  const spacedCanonical = new Map<string, string | null>();
+  const closedSpelling = (name: string) => name.replace(/(?<=\p{L})[ -]+(?=\p{L})/gu, '');
+  const canonicalSpellings = new Map<string, string | null>();
   for (const [key, names] of entries) {
     const normalized = normalizeLookup(key);
-    const spaced = normalized.replace(/(?<=\p{L})-(?=\p{L})/gu, ' ');
-    if (
-      spaced !== normalized &&
-      !canonicalKeys.has(spaced) &&
-      names.some((name) => normalizeLookup(name) === spaced)
-    )
-      add(spacedCanonical, fold(spaced), key);
+    for (const alias of names) {
+      const name = normalizeLookup(alias);
+      if (
+        name.includes(' ') &&
+        name !== normalized &&
+        !canonicalKeys.has(name) &&
+        closedSpelling(name) === closedSpelling(normalized)
+      )
+        add(canonicalSpellings, fold(name), key);
+    }
   }
   for (const [key, names] of entries) {
     for (const name of new Set([key, ...names])) {
@@ -106,7 +110,7 @@ function resolveClaims(
     }
   }
   for (const [name, key] of [...equivalent, ...exact]) {
-    const resolved = key ?? folded.get(fold(name)) ?? spacedCanonical.get(fold(name));
+    const resolved = key ?? folded.get(fold(name)) ?? canonicalSpellings.get(fold(name));
     if (resolved) aliases.set(name, resolved);
     else aliases.delete(name);
   }

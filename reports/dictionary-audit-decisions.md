@@ -103,3 +103,9 @@ Flatware and Rossel current are absent from the only scanned printing of the 190
 ### Ambiguous ligatures
 
 Lizard fish's species epithet prints a ligature that the scan cannot resolve as œ or æ, because the two differ only in a stroke the e absorbs. Under the ruling that an ambiguous printed character takes the character the text means, the record has œ, as in the epithet foetens. Gutenberg and both readers have œ as well.
+
+### Complete restored units and retained notation
+
+A newly inserted compound or note takes the native unit's punctuation. Butcher bird's restored note includes the comma after L. Ludovicianus, confirmed for the complete final replacement by two fresh readers. The retained Butcherbird record keeps its own wording. The original no-comma agreement remains preserved as a superseded acceptance.
+
+Mortar's fourth noun is the same lexical unit as the printed Mor′ter lamp noun: complete etymology, definition, obsolete label and Chaucer attribution agree. Its missing pronunciation is restored from that unit's own heading while preserving the coherent electronic spelling Mortar. The ruling does not require a rename or permit copying a neighboring homograph's pronunciation.
