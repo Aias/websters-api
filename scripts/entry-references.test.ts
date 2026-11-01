@@ -282,6 +282,21 @@ describe('sense and compound reference targets', () => {
     expect(preprocess(html, targetReferences.resolve)).toContain(`href="${href}"`);
   });
 
+  test('carries "under" across a list of references', () => {
+    const html = preprocess(
+      '<div class="cs"><div class="mcol"><div class="col"><b>Ablative absolute</b></div>, <div class="col"><b>Abaft the beam</b></div></div>, <div class="cd">See under <div class="er">Ablative</div>, <div class="er">Beam</div>, etc.</div></div>',
+      targetReferences.resolve
+    );
+    expect(html).toContain('href="/entry/ablative#ablative_absolute"');
+    expect(html).toContain('href="/entry/beam#abaft_the_beam"');
+    expect(
+      preprocess(
+        'See <div class="er">Ablative</div>, <div class="er">Beam</div>.',
+        targetReferences.resolve
+      )
+    ).toContain('href="/entry/beam"');
+  });
+
   test('prefers a recorded target that exists in the destination', () => {
     expect(
       preprocess(

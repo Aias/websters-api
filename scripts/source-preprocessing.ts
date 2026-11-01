@@ -23,6 +23,21 @@ function ownerHeadwords($: cheerio.CheerioAPI, node: AnyNode): string[] {
   return [];
 }
 
+function listedReferenceLead(node: AnyNode): string | undefined {
+  let before = node.previousSibling;
+  let listed = false;
+  while (
+    before?.type === 'text' &&
+    /^\s*(?:,|,?\s*(?:and|or))\s*$/.test(before.data) &&
+    before.previousSibling &&
+    hasClass(before.previousSibling, 'er')
+  ) {
+    listed = true;
+    before = before.previousSibling.previousSibling;
+  }
+  return listed && before?.type === 'text' ? before.data : undefined;
+}
+
 export function loadPreprocessedDocument(
   html: string,
   resolve?: EntryResolver
@@ -89,8 +104,9 @@ export function loadPreprocessedDocument(
           const lettered = letter && hasClass(letter, 'sd');
           const cref = lettered ? letter.previousSibling : letter;
           const named = /^\s*,?\s*under\s*$/i.test(lead) ? cref : undefined;
+          const listLead = listedReferenceLead(el) ?? lead;
           const phrases =
-            !/\bunder\s*$/i.test(lead) || /\bnote\s+under\s*$/i.test(lead)
+            !/\bunder\s*$/i.test(listLead) || /\bnote\s+under\s*$/i.test(listLead)
               ? []
               : named && hasClass(named, 'cref')
                 ? [getText($, named)]
