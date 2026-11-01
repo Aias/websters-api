@@ -4,16 +4,16 @@
 
 ## Counts
 
-14,187 rows over 11,419 keys.
+13,915 rows over 11,147 keys.
 
 | category             | entry |  span |  total |
 | -------------------- | ----: | ----: | -----: |
-| `wordnet`            |   111 |    21 |    132 |
-| `gcide-editor`       |   186 |    86 |    272 |
-| `supplement-1913`    | 3,265 |   784 |  4,049 |
-| `later-unattributed` | 2,246 | 3,377 |  5,623 |
-| `uncertain`          |   500 | 3,611 |  4,111 |
-| total                | 6,308 | 7,879 | 14,187 |
+| `wordnet`            |    87 |    21 |    108 |
+| `gcide-editor`       |   122 |    86 |    208 |
+| `supplement-1913`    | 3,358 |   784 |  4,142 |
+| `later-unattributed` | 2,156 | 3,377 |  5,533 |
+| `uncertain`          |   313 | 3,611 |  3,924 |
+| total                | 6,036 | 7,879 | 13,915 |
 
 Left out: 1,168 `ours-extra` hunks whose print vote supports ours, and 721 ours-only entries whose text mostly appears in the print OCR (Gutenberg dropped them; see `excluded-entries.jsonl`). Of the 7,879 span rows, 6,733 have an `owner` pointer and 1,146 await location or fragment reconciliation. Rows for text that a print restoration later replaced are removed once their complete disposition is established.
 
@@ -30,6 +30,7 @@ Entries (keys only ours has, from `survey-gutenberg/only-ours.jsonl`):
 
 1. The key is folded and looked up among GCIDE entries. The category follows the strongest source tag among the entry's paragraphs, in the order WordNet, editor, supplement, 1913 Webster: WordNet gives `wordnet`, `PJC`, `+PJC`, `JG` or any other editor gives `gcide-editor`, "Webster 1913 Suppl." gives `supplement-1913`, "1913 Webster" or no tag gives `later-unattributed`. A key with no GCIDE entry is `later-unattributed`.
 2. Print check for `later-unattributed` only: the share of the entry text's word trigrams found in the print OCR (1907 volume A to M, 1895 volume N to Z). At 60% or more the entry is 1913 text that Gutenberg dropped and is omitted. From 25% to 60% it is `uncertain`. Below 25% it stays `later-unattributed`.
+3. X through Z entries and supplement entries are rechecked against their complete Gutenberg paragraphs ([classification batch 1](dictionary-audit-classification-1.md)). An entry whose text is a main-text paragraph has no entry row. An entry whose text is a supplement paragraph is `supplement-1913`, whatever other tags its GCIDE paragraphs carry. Entries with later material or poor agreement keep their earlier category until span rows or identity checks settle them.
 
 Spans (`ours-extra` hunks):
 
