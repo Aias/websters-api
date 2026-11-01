@@ -10,20 +10,28 @@ Restored Greek words are written as literal NFC text, each in its own `grk` elem
 
 The run covers 1,541 passages in 1,532 entries. It leaves out 67 passages in entries that Codex had claimed, which already have holds from the ascending review.
 
-## Checkpoint 1
+## Results
 
-The first 1,242 passages finished reading. The checkpoint applies every marker two readers agreed on in entries with no passage still being read.
+All 1,541 passages were read. Markers that two readers agreed on in the first 1,242 passages were committed as a first checkpoint, and the second checkpoint applies the full result.
 
-| Measure                                       | Count |
-| --------------------------------------------- | ----: |
-| Markers accepted                              | 1,864 |
-| Of which Greek                                | 1,789 |
-| Entries changed                               | 1,088 |
-| Markers in these passages still unresolved    |   180 |
-| Lost-character markers left in the dictionary | 1,342 |
+| Measure                                                                                                            | Count |
+| ------------------------------------------------------------------------------------------------------------------ | ----: |
+| Markers accepted                                                                                                   | 2,363 |
+| By two blind readers agreeing                                                                                      | 2,184 |
+| By two of three readers agreeing, after a tiebreak                                                                 |   174 |
+| By LSJ's single attested form, where two readers agreed on every letter and differed only in a breathing or accent |     5 |
+| Empty slots removed where the print sets no word (Tautomerism, Tautoousious, Tautozonal)                           |     3 |
+| Entries changed                                                                                                    | 1,389 |
+| Markers held for a reading                                                                                         |   106 |
+| Passages held because no reader found them in the crop                                                             |    92 |
+| Lost-character markers left in the dictionary                                                                      |   492 |
 
-The [ledger](dictionary-audit-glyphs-20261101.jsonl) gives each accepted marker with both readings, their statuses, the owner element and the page.
+The [ledger](dictionary-audit-glyphs-20261101.jsonl) gives each accepted marker with every reading, its status, the owner element, the page and the acceptance path.
 
-## Remaining
+## Breathings and earlier holds
 
-The other 299 passages are still being read. The 180 unresolved markers wait on the third reader, and then on LSJ for Greek words whose two readings agree on every letter and differ only in a breathing or accent. That follows the editorial ruling that breathings and accents come from LSJ when exactly one form is attested. Markers still unresolved after both steps join the open-holds register.
+The 1895 volume 2 scans don't show a breathing's direction, so every accepted Greek word with a breathing was checked against LSJ. Of 182 such words, 122 match LSJ's single attested form. The 48 words beginning with ρ or υ all carry the rough breathing the editorial rulings require. Inflected forms and compounds match their lemma or first element, and ὁδός takes the rough breathing its gloss "way" calls for.
+
+Two readings stay held because LSJ doesn't settle them: Spleenwort's ἀσπλήνιον, whose prefix LSJ attests with both breathings, and Woe's interjection, which both readers gave with no breathing or accent. Two more keep the holds an earlier review placed: Synallaxine's etymon is ink-filled at the column break, and Thyine wood's accent and diaeresis couldn't be separated from the pixels. Agreement between blind readers doesn't override an earlier finding that the print doesn't show the reading.
+
+Held markers are in the [open-holds register](dictionary-audit-holds.jsonl) under the questions `lost-character-reading` and `lost-character-location`.
