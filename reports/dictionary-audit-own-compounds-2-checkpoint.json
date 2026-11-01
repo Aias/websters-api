@@ -1,0 +1,72 @@
+{
+  "batch": "own-compounds-2",
+  "beforeRevision": "3328431",
+  "beforeSourceSha256": "7be77475796eb55490daf0f4130495279936e1a571f5a41e401d1f86ccf1631f",
+  "finalSourceSha256": "dfcd4921e041df511ebe1817d62871db1392310e419b7012544b6581d982203a",
+  "sourceEntries": 100806,
+  "changedOwnerKeys": ["Death", "Electrical", "Honey"],
+  "restoredCompoundUnits": 5,
+  "exactAcceptedSourceEdits": 3,
+  "byPath": {
+    "independent-agreement": 2,
+    "source-adjudication": 1
+  },
+  "retainedOwnRecords": 5,
+  "newRemovedRecords": 0,
+  "newPronunciations": 0,
+  "completeEntryCredit": 0,
+  "openTargetHolds": [],
+  "pool": {
+    "size": 188,
+    "resolved": 73,
+    "unreviewed": 115
+  },
+  "classificationRowsCorrected": 6,
+  "registryRows": 14187,
+  "registryKeys": 11419,
+  "registryUncertain": 4111,
+  "aliasCodeComparison": {
+    "gainedAliases": 9,
+    "gainedRoutes": 9,
+    "losses": 0,
+    "redirects": 0,
+    "canonicalChanges": 0
+  },
+  "finalCodeSourceComparison": {
+    "gainedAlias": "electric light -> Electrical",
+    "gainedRoute": "electric_light -> Electrical",
+    "losses": 0,
+    "redirects": 0
+  },
+  "tests": {
+    "pass": 359,
+    "fail": 0
+  },
+  "parserVersion": 35,
+  "weeklyUsage": {
+    "usedPercent": 24,
+    "reset": "2026-11-08T13:50:01Z",
+    "userConfirmedReset": true
+  },
+  "tokenUsage": null,
+  "frozenFiles": {
+    "reports/dictionary-print-inventory.json": "b322bcc4527188568c933f34ca9f0d31dd7b2b129fd6cf51741db8aacc530750",
+    "reports/dictionary-print-inventory.jsonl": "2d514c26fc30137cc89afc8745aa0f14653f7b4e8ec0362ee184fc5312b2566d",
+    "reports/dictionary-print-fragments.jsonl": "89316853530af024e18c4fc89659c33b6746b0625719f4505bca56dbce79a166",
+    "reports/dictionary-print-review-history.jsonl": "d9e04fe56546adf16dfb878575c1843c7175462e7c24a497f9cfc15e3d6d2ed2",
+    "reports/dictionary-print-worksets.jsonl": "77681c9cd204818eded0323135e22c08b624bfb2573a5690bc0488c1cc91c90d"
+  },
+  "evidenceRoot": ".context/dictionary-audit/exhaustive/own-compounds-2",
+  "comparison": "http://127.0.0.1:56523/",
+  "runtime": "http://127.0.0.1:56524/",
+  "elapsedSecondsAtValidation": 3434.6,
+  "measuredAt": "2026-11-01T14:50:59.537940+00:00",
+  "rejectedOrSupersededProposals": {
+    "honeyCommaBeforeApplication": 1,
+    "initialDonorRemovalInterpretation": "superseded by complete specific own-record ruling; all original donor records retained"
+  },
+  "scopeRechecks": {
+    "unchangedFirstPacketDispositions": 3,
+    "originalSupplementNativeHolds": "superseded for bounded disposition; standalone native coverage remains unclaimed"
+  }
+}

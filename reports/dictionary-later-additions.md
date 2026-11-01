@@ -9,10 +9,10 @@
 | category             | entry |  span |  total |
 | -------------------- | ----: | ----: | -----: |
 | `wordnet`            |   111 |    21 |    132 |
-| `gcide-editor`       |   189 |    86 |    275 |
-| `supplement-1913`    | 3,264 |   784 |  4,048 |
+| `gcide-editor`       |   186 |    86 |    272 |
+| `supplement-1913`    | 3,265 |   784 |  4,049 |
 | `later-unattributed` | 2,246 | 3,377 |  5,623 |
-| `uncertain`          |   498 | 3,611 |  4,109 |
+| `uncertain`          |   500 | 3,611 |  4,111 |
 | total                | 6,308 | 7,879 | 14,187 |
 
 Left out: 1,168 `ours-extra` hunks whose print vote supports ours, and 721 ours-only entries whose text mostly appears in the print OCR (Gutenberg dropped them; see `excluded-entries.jsonl`). Of the 7,879 span rows, 6,733 have an `owner` pointer and 1,146 await location or fragment reconciliation. Rows for text that a print restoration later replaced are removed once their complete disposition is established.
@@ -37,6 +37,8 @@ Spans (`ours-extra` hunks):
 2. The GCIDE paragraph holding the text is located (whole span, else span start with left context, else span start). If paragraphs of several kinds match, the priority is `wordnet`, `gcide-editor`, `supplement-1913`, then 1913 Webster, and `evidence` says so. When no paragraph is found, the survey's `gcideSource` tag is used.
 3. A WordNet or editor source gives `wordnet` or `gcide-editor` whatever the vote, because the source is independent of the print. "Webster 1913 Suppl." gives `supplement-1913` (1913 text, kept and marked).
 4. Otherwise a `gutenberg` vote gives `later-unattributed`, and an `unclear` vote gives `uncertain`. The `evidence` field carries the vote anchor, the score, and the OCR window.
+
+Reviewed entry rows bind source tags to the exact paragraphs supplying the current text. Separate normalized headings and absent GCIDE senses retain their own provenance. A mixed paragraph does not establish that every word came from its latest contributor. [Own-compounds-1/2](dictionary-audit-own-compounds-2.md) corrects six rows under this distinction.
 
 ## Known limits
 

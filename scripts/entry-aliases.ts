@@ -74,7 +74,22 @@ function resolveClaims(
     const previous = candidates.get(name);
     candidates.set(name, previous === undefined || previous === key ? key : null);
   }
-  for (const key of keys) add(folded, fold(normalizeLookup(key)), key);
+  const canonicalKeys = new Set<string>();
+  for (const key of keys) {
+    add(folded, fold(normalizeLookup(key)), key);
+    canonicalKeys.add(normalizeLookup(key));
+  }
+  const spacedCanonical = new Map<string, string | null>();
+  for (const [key, names] of entries) {
+    const normalized = normalizeLookup(key);
+    const spaced = normalized.replace(/(?<=\p{L})-(?=\p{L})/gu, ' ');
+    if (
+      spaced !== normalized &&
+      !canonicalKeys.has(spaced) &&
+      names.some((name) => normalizeLookup(name) === spaced)
+    )
+      add(spacedCanonical, fold(spaced), key);
+  }
   for (const [key, names] of entries) {
     for (const name of new Set([key, ...names])) {
       const normalized = normalizeLookup(name);
@@ -91,7 +106,7 @@ function resolveClaims(
     }
   }
   for (const [name, key] of [...equivalent, ...exact]) {
-    const resolved = key ?? folded.get(fold(name));
+    const resolved = key ?? folded.get(fold(name)) ?? spacedCanonical.get(fold(name));
     if (resolved) aliases.set(name, resolved);
     else aliases.delete(name);
   }

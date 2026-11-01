@@ -150,6 +150,49 @@ describe('dictionary reference lookup', () => {
     ]);
   });
 
+  test('retains a spaced spelling claimed by its hyphenated canonical entry', () => {
+    const result = unambiguousAliases(
+      new Map([
+        ['Arrow-head', ['Arrow-head', 'Arrow head']],
+        ['Arrow', ['Arrow', 'Arrow head']],
+      ])
+    );
+    expect(result.get('arrow head')).toBe('Arrow-head');
+    expect(result.get('arrow-head')).toBe('Arrow-head');
+  });
+
+  test('preserves an exact spaced canonical entry over a hyphenated variant', () => {
+    const result = unambiguousAliases(
+      new Map([
+        ['Arrow-head', ['Arrow-head', 'Arrow head']],
+        ['Arrow head', ['Arrow head']],
+        ['Arrow', ['Arrow', 'Arrow head']],
+      ])
+    );
+    expect(result.get('arrow head')).toBe('Arrow head');
+  });
+
+  test('requires the hyphenated entry to claim its spaced spelling', () => {
+    const result = unambiguousAliases(
+      new Map([
+        ['Arrow-head', ['Arrow-head']],
+        ['Arrow', ['Arrow', 'Arrow head']],
+        ['Head', ['Head', 'Arrow head']],
+      ])
+    );
+    expect(result.has('arrow head')).toBe(false);
+  });
+
+  test('leaves competing hyphenated canonical spellings unresolved', () => {
+    const result = unambiguousAliases(
+      new Map([
+        ['Alpha-beta gamma', ['Alpha-beta gamma', 'Alpha beta gamma']],
+        ['Alpha beta-gamma', ['Alpha beta-gamma', 'Alpha beta gamma']],
+      ])
+    );
+    expect(result.has('alpha beta gamma')).toBe(false);
+  });
+
   test('gives a compound defined only by See under to an entry that defines it', () => {
     const sore = entryAliases(
       'Sore',

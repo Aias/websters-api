@@ -3,8 +3,8 @@
   "scope": "Bold eagle retrospective compound disposition",
   "sourceSha256": "7c2a9d6dc9b06b64a99cd1252c9edd526cabc9229cad6645c346249f5669a2c0",
   "candidatePool": 188,
-  "resolvedDispositions": 65,
-  "remainingCandidates": 123,
+  "resolvedDispositions": 68,
+  "remainingCandidates": 120,
   "confirmedExistingMerges": 1,
   "newSourceEdits": 0,
   "wholeEntryCredit": 0,
@@ -28,5 +28,10 @@
     "usedPercent": 0,
     "reset": "2026-11-08T13:50:01Z",
     "discrepancy": "User supplied November 4; live session and fresh account query supplied November 8."
-  }
+  },
+  "unchangedRetainedOwnRecords": 3,
+  "reviewedWorksetKeys": ["Bold eagle", "Air line", "Ammoniacal fermentation", "Amyl nitrite"],
+  "supersededBy": "reports/dictionary-audit-own-compounds-2-checkpoint.json",
+  "standaloneSupplementNativeReview": "unclaimed for three retained records",
+  "usageResetConfirmedByUser": true
 }
