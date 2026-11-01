@@ -109,3 +109,7 @@ Lizard fish's species epithet prints a ligature that the scan cannot resolve as 
 A newly inserted compound or note takes the native unit's punctuation. Butcher bird's restored note includes the comma after L. Ludovicianus, confirmed for the complete final replacement by two fresh readers. The retained Butcherbird record keeps its own wording. The original no-comma agreement remains preserved as a superseded acceptance.
 
 Mortar's fourth noun is the same lexical unit as the printed Mor′ter lamp noun: complete etymology, definition, obsolete label and Chaucer attribution agree. Its missing pronunciation is restored from that unit's own heading while preserving the coherent electronic spelling Mortar. The ruling does not require a rename or permit copying a neighboring homograph's pronunciation.
+
+### Printed errors a 1913 reference corrects
+
+Soak cites "Isa. xxiv. 7." for "Their land shall be soaked with blood" in the print, GCIDE and Gutenberg alike. In the Authorized Version that line is Isaiah 34:7, and 24:7 is "The new wine mourneth", so the record reads "Isa. xxxiv. 7.". Solar's table of periodic comets prints Halley's last perihelion as 1885.9. The Encyclopaedia Britannica of 1910–11 gives 1835 Nov. 15.9, and the table's own period of 76 years leads from 1835 to the 1910 return, so the record reads 1835.9. Each correction names its reference in the batch evidence.

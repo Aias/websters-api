@@ -81,6 +81,8 @@ For **independent agreement**, distinct source readers confirm the same eligible
 
 For **source adjudication**, retain the original disagreement or validator failure. Read the relevant native region, define the exact adjusted replacement, and obtain a fresh independent confirmation of the disputed characters and owner. Replay mechanical eligibility, uniqueness, structural, and hash checks on the adjusted edit. A ruling never substitutes for these checks. Mark this path separately from initial agreement.
 
+An adjudicator's certain reading settles a target only when it matches a blind reader who was also certain. One that matches neither reader, or only an uncertain one, goes to a fresh blind reader, and the target is applied when that reading matches the adjudicator's. Send every target with an uncertain reader to adjudication, including one whose readers agree on the text and differ only in spacing or markup.
+
 When a final check changes an inserted unit, freeze the final replacement and independently confirm that complete fragment. Preserve earlier answers under their original hashes rather than assigning them the adjusted replacement's hash.
 
 For **mask-boundary disagreement**, inspect the full source fragment and print context. Prove which punctuation lies inside the replacement and which remains outside it, then independently verify the resulting exact fragment. A conventional spelling, neighboring word, or unreadable mark supplies no missing pixel evidence. Hold the affected characters when the source cannot settle them.
