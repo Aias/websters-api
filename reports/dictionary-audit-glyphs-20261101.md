@@ -8,7 +8,7 @@ The run reuses the pipeline from PR #24 and PR #25. Each damaged passage is loca
 
 Restored Greek words are written as literal NFC text, each in its own `grk` element, with a suffix hyphen kept inside the wrapper. Other restored characters follow the record's own encoding. The apply step checks each record's raw hash against the inventory, checks that the replaced run is exactly the lost-character markers, and refuses any edit that changes the parsed structure outside the lost characters.
 
-The run covers 1,541 passages in 1,523 entries. It leaves out 67 passages in entries that Codex had claimed, which already have holds from the ascending review.
+The run covers 1,541 passages in 1,532 entries. It leaves out 67 passages in entries that Codex had claimed, which already have holds from the ascending review.
 
 ## Checkpoint 1
 
