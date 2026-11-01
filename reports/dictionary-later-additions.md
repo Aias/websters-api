@@ -4,18 +4,18 @@
 
 ## Counts
 
-13,916 rows over 11,148 keys.
+13,912 rows over 11,144 keys.
 
 | category             | entry |  span |  total |
 | -------------------- | ----: | ----: | -----: |
-| `wordnet`            |    94 |    21 |    115 |
+| `wordnet`            |    95 |    21 |    116 |
 | `gcide-editor`       |   122 |    86 |    208 |
-| `supplement-1913`    | 3,358 |   784 |  4,142 |
-| `later-unattributed` | 2,155 | 3,377 |  5,532 |
-| `uncertain`          |   308 | 3,611 |  3,919 |
-| total                | 6,037 | 7,879 | 13,916 |
+| `supplement-1913`    | 3,358 |   785 |  4,143 |
+| `later-unattributed` | 2,155 | 3,375 |  5,530 |
+| `uncertain`          |   304 | 3,611 |  3,915 |
+| total                | 6,034 | 7,878 | 13,912 |
 
-Left out: 1,168 `ours-extra` hunks whose print vote supports ours, and 721 ours-only entries whose text mostly appears in the print OCR (Gutenberg dropped them; see `excluded-entries.jsonl`). Of the 7,879 span rows, 6,733 have an `owner` pointer and 1,146 await location or fragment reconciliation. Rows for text that a print restoration later replaced are removed once their complete disposition is established.
+Left out: 1,168 `ours-extra` hunks whose print vote supports ours, and 721 ours-only entries whose text mostly appears in the print OCR (Gutenberg dropped them; see `excluded-entries.jsonl`). Of the 7,878 span rows, 6,732 have an `owner` pointer and 1,146 await location or fragment reconciliation. Rows for text that a print restoration later replaced are removed once their complete disposition is established.
 
 ## Row fields
 
@@ -69,3 +69,7 @@ jq -c 'select(.scope=="entry" and (.category=="wordnet" or .category=="gcide-edi
 That lists whole-entry candidates. Confirm each classification before filtering, starting with the more reliable `wordnet` and `gcide-editor` categories.
 
 For span rows, use `owner` to locate the recorded text, then verify its lexical context and exact boundaries against the current source. Remove only the reviewed span. Removing its containing node requires an independent classification of that entire node. Leave text unchanged when the owner is null, the fragment is absent, or its location is ambiguous. Resolve those rows before filtering. Retain original-value hashes for any applied removal.
+
+[Own-compounds-7-14](dictionary-audit-own-compounds-7-14.md) removes three whole-entry rows for printed standalone content, corrects three retained-entry classifications, and classifies Earth's complete electrical span from consecutive Gutenberg supplement paragraphs. Its relocated owner contains the exact span plus additional material outside that classification.
+
+The Bench mark vocabulary-pointer span is retired with its complete-unit restoration. Christian Endeavor's unchanged supplement span moves one content index after adjective sense 2 is restored. Every retained non-null pointer is verified against its current lexical text.
