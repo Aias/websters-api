@@ -4,18 +4,18 @@
 
 ## Counts
 
-13,912 rows over 11,144 keys.
+13,909 rows over 11,145 keys.
 
 | category             | entry |  span |  total |
 | -------------------- | ----: | ----: | -----: |
-| `wordnet`            |    95 |    21 |    116 |
+| `wordnet`            |    94 |    21 |    115 |
 | `gcide-editor`       |   122 |    86 |    208 |
-| `supplement-1913`    | 3,358 |   785 |  4,143 |
-| `later-unattributed` | 2,155 | 3,375 |  5,530 |
-| `uncertain`          |   304 | 3,611 |  3,915 |
-| total                | 6,034 | 7,878 | 13,912 |
+| `supplement-1913`    | 3,359 |   785 |  4,144 |
+| `later-unattributed` | 2,158 | 3,371 |  5,529 |
+| `uncertain`          |   302 | 3,611 |  3,913 |
+| total                | 6,035 | 7,874 | 13,909 |
 
-Left out: 1,168 `ours-extra` hunks whose print vote supports ours, and 721 ours-only entries whose text mostly appears in the print OCR (Gutenberg dropped them; see `excluded-entries.jsonl`). Of the 7,878 span rows, 6,732 have an `owner` pointer and 1,146 await location or fragment reconciliation. Rows for text that a print restoration later replaced are removed once their complete disposition is established.
+Left out: 1,168 `ours-extra` hunks whose print vote supports ours, and 721 ours-only entries whose text mostly appears in the print OCR (Gutenberg dropped them; see `excluded-entries.jsonl`). Of the 7,874 span rows, 6,728 have an `owner` pointer and 1,146 await location or fragment reconciliation. Rows for text that a print restoration later replaced are removed once their complete disposition is established.
 
 ## Row fields
 
@@ -73,3 +73,7 @@ For span rows, use `owner` to locate the recorded text, then verify its lexical 
 [Own-compounds-7-14](dictionary-audit-own-compounds-7-14.md) removes three whole-entry rows for printed standalone content, corrects three retained-entry classifications, and classifies Earth's complete electrical span from consecutive Gutenberg supplement paragraphs. Its relocated owner contains the exact span plus additional material outside that classification.
 
 The Bench mark vocabulary-pointer span is retired with its complete-unit restoration. Christian Endeavor's unchanged supplement span moves one content index after adjective sense 2 is restored. Every retained non-null pointer is verified against its current lexical text.
+
+[Own-compounds-15-20](dictionary-audit-own-compounds-15-20.md) corrects nine retained-entry classifications and adds Mango tree. Guttersnipe excludes an absent editor paragraph, while exact retained editor and WordNet paragraphs remain classified. No current own record is removed.
+
+Four Gray whale span rows retire with the replaced modern compound text. The separate whole Gray whale record remains classified and unchanged.

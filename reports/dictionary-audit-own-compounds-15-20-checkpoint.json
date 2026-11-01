@@ -1,0 +1,221 @@
+{
+  "batch": "own-compounds-15-20",
+  "recordedAt": "2026-11-01T16:36:16.058073+00:00",
+  "source": {
+    "beforeRevision": "b21e23c32a7905980fb30b5c32c0bffdc6f9fd56",
+    "beforeSourceSha256": "76a7fc4ade0dd03bbbf0525d3cd8d5983a63b3bfef07310623788ee70bdd67c4",
+    "sourceSha256": "41b9f418eb95863f575635144e0a9f5336f18c3f0bf90cc3d5ef5f838fbb4394",
+    "entries": 100806,
+    "changedKeys": [
+      "Gray",
+      "Germ",
+      "Gutter",
+      "Patient",
+      "Leaf",
+      "Land",
+      "Mango",
+      "Manx",
+      "Match",
+      "Memorial",
+      "Milk",
+      "Mint"
+    ],
+    "acceptedTargets": 23,
+    "independentAgreement": 22,
+    "sourceAdjudication": 1,
+    "groups": [
+      "../own-compounds-15-18-integration/corrected-source-values/",
+      "../own-compounds-19-20-integration/final10/"
+    ],
+    "orderedManxApplication": [
+      "own-compounds-19-manx-cat-incidental",
+      "own-compounds-19-manx-own-pronunciation",
+      "own-compounds-19-manx-shearwater-compound"
+    ],
+    "appliedAt": "2026-11-01T16:30:07.159Z",
+    "lockHeld": true
+  },
+  "sourceEdits": 23,
+  "independentAgreement": 22,
+  "sourceAdjudication": 1,
+  "compoundDispositions": 18,
+  "sourceRestorations": {
+    "compoundUnits": 7,
+    "ownHeadPronunciations": 6,
+    "otherTranscriptionTargets": 10
+  },
+  "pool": {
+    "total": 188,
+    "resolved": 127,
+    "remaining": 61,
+    "thisSessionDispositions": 63
+  },
+  "registry": {
+    "rows": 13909,
+    "keys": 11145,
+    "retiredGraySpans": [14789, 14790, 14791, 14792]
+  },
+  "openHolds": {
+    "total": 158,
+    "new": ["own-compounds-15-20-Land-urchin"]
+  },
+  "figures": {
+    "sessionObligations": 34,
+    "metadataQuestions": 8,
+    "imageRestorations": 0
+  },
+  "verification": {
+    "testsPassed": 365,
+    "bunCheck": true,
+    "productionBuild": true,
+    "parserVersion": 37,
+    "wholeSourceEntries": 100806,
+    "unchangedSourceEntries": 100794,
+    "sameSourceHrefOnlyChanges": 50,
+    "preservedOrdinalMismatches": 8,
+    "browserViewports": [1440, 390],
+    "browserOwners": 12,
+    "retainedOwnRecords": 18,
+    "baselineLimitation": "Pepper original Before pane narrow overflow, unchanged",
+    "preservedSenseIdentities": 93,
+    "preservedQuotationOwners": 37
+  },
+  "comparison": {
+    "url": "http://127.0.0.1:56523/?stage=41b9f418eb95-a41c52c5b157-94af332fb232",
+    "selected": 265,
+    "stage": "41b9f418eb95-a41c52c5b157-94af332fb232",
+    "bundleSha256": "94af332fb2326169a1b744871c2a813c790d54e30a17b78da3ada6e300c00300"
+  },
+  "artifactProofs": [
+    {
+      "path": "reports/dictionary-audit-own-compounds-15-20.jsonl",
+      "byteLength": 123235,
+      "sha256": "c97f3d10331b505ddbee4fae5dc260d3223e3d03ea3aaf010225cc18d9bd1b3f"
+    },
+    {
+      "path": "reports/dictionary-print-workset-outcomes.jsonl",
+      "byteLength": 184737,
+      "sha256": "4b8a140694d522cadcea32bda7480b3516b375832136f5589b9fd51471cf3993"
+    },
+    {
+      "path": "reports/dictionary-later-additions.jsonl",
+      "byteLength": 5347418,
+      "sha256": "4b466f367cba75f7b3dd25b0e29bca2bfff3c2c032faf2d2dc2e0402ce450a90"
+    },
+    {
+      "path": "reports/dictionary-audit-holds.jsonl",
+      "byteLength": 92274,
+      "sha256": "f0466a61a8cd77a8be89d5fe4d22bda0a192d6e6b2d94bee6045f0f44d48353b"
+    },
+    {
+      "path": "reports/dictionary-audit-illustrations.jsonl",
+      "byteLength": 56504,
+      "sha256": "da4313071a9d461f9b49bcfbe21a3fc7bcb5f2d7f0245293917393fa8574dea6"
+    },
+    {
+      "path": ".context/dictionary-audit/exhaustive/own-compounds-15-20-integration/integration.json",
+      "byteLength": 899,
+      "sha256": "c78734b62a7f58b068fae776bd051a7f4709a26132eac3a61a68be6d4884525b"
+    },
+    {
+      "path": ".context/dictionary-audit/exhaustive/own-compounds-15-20-integration/verification/replay.json",
+      "byteLength": 17536,
+      "sha256": "6d437dd7dafcfbf7f56c5a40663e38256497071853f5834c2dbe9c04d43afd90"
+    },
+    {
+      "path": ".context/dictionary-audit/exhaustive/own-compounds-15-20-integration/verification/lookup.json",
+      "byteLength": 3047,
+      "sha256": "e3038ea05b3fdef898ad520b7fa11e7fabf198c0419a0d74fc252160da3d03bc"
+    },
+    {
+      "path": ".context/dictionary-audit/exhaustive/own-compounds-15-20-integration/verification/code-qualification.json",
+      "byteLength": 18393,
+      "sha256": "ff81f543af8e1b835dc207191cf754fd46b73642207110229a7b3e6992f9c266"
+    },
+    {
+      "path": ".context/dictionary-audit/exhaustive/own-compounds-15-20-integration/verification/native-bind.json",
+      "byteLength": 6922,
+      "sha256": "755436410c50db577c5c2f789a95dba154470d4cfbd55457d691cd9f55c4c3ca"
+    },
+    {
+      "path": ".context/dictionary-audit/exhaustive/own-compounds-15-20-integration/final-browser/receipt.json",
+      "byteLength": 29136,
+      "sha256": "95a9234cb10a646c47e56498c3aaedc943ad87b8425f696e1ccccfa6a44e4663"
+    },
+    {
+      "path": ".context/dictionary-audit/exhaustive/own-compounds-15-20-integration/verification/semantic-proof.json",
+      "byteLength": 5054,
+      "sha256": "883ac07276776fde0327556dd8059215e5d5d564a7fc820425fe1fe5ce34b322"
+    }
+  ],
+  "frozenInventorySha256": {
+    "reports/dictionary-print-inventory.json": "b322bcc4527188568c933f34ca9f0d31dd7b2b129fd6cf51741db8aacc530750",
+    "reports/dictionary-print-inventory.jsonl": "2d514c26fc30137cc89afc8745aa0f14653f7b4e8ec0362ee184fc5312b2566d",
+    "reports/dictionary-print-fragments.jsonl": "89316853530af024e18c4fc89659c33b6746b0625719f4505bca56dbce79a166",
+    "reports/dictionary-print-review-history.jsonl": "d9e04fe56546adf16dfb878575c1843c7175462e7c24a497f9cfc15e3d6d2ed2",
+    "reports/dictionary-print-worksets.jsonl": "77681c9cd204818eded0323135e22c08b624bfb2573a5690bc0488c1cc91c90d"
+  },
+  "packetTimings": [
+    {
+      "packet": 15,
+      "claimedAt": "2026-11-01T15:37:56.295142+00:00",
+      "checkpointAt": "2026-11-01T16:36:16.058073+00:00",
+      "claimToCheckpointSeconds": 3500,
+      "readerTokens": null,
+      "measurement": "overlapping claim-to-checkpoint interval; not active compute or controlled throughput"
+    },
+    {
+      "packet": 16,
+      "claimedAt": "2026-11-01T15:37:56.295142+00:00",
+      "checkpointAt": "2026-11-01T16:36:16.058073+00:00",
+      "claimToCheckpointSeconds": 3500,
+      "readerTokens": null,
+      "measurement": "overlapping claim-to-checkpoint interval; not active compute or controlled throughput"
+    },
+    {
+      "packet": 17,
+      "claimedAt": "2026-11-01T15:37:56.295142+00:00",
+      "checkpointAt": "2026-11-01T16:36:16.058073+00:00",
+      "claimToCheckpointSeconds": 3500,
+      "readerTokens": null,
+      "measurement": "overlapping claim-to-checkpoint interval; not active compute or controlled throughput"
+    },
+    {
+      "packet": 18,
+      "claimedAt": "2026-11-01T15:37:56.295142+00:00",
+      "checkpointAt": "2026-11-01T16:36:16.058073+00:00",
+      "claimToCheckpointSeconds": 3500,
+      "readerTokens": null,
+      "measurement": "overlapping claim-to-checkpoint interval; not active compute or controlled throughput"
+    },
+    {
+      "packet": 19,
+      "claimedAt": "2026-11-01T16:10:06.946294+00:00",
+      "checkpointAt": "2026-11-01T16:36:16.058073+00:00",
+      "claimToCheckpointSeconds": 1569,
+      "readerTokens": null,
+      "measurement": "overlapping claim-to-checkpoint interval; not active compute or controlled throughput"
+    },
+    {
+      "packet": 20,
+      "claimedAt": "2026-11-01T16:10:06.946294+00:00",
+      "checkpointAt": "2026-11-01T16:36:16.058073+00:00",
+      "claimToCheckpointSeconds": 1569,
+      "readerTokens": null,
+      "measurement": "overlapping claim-to-checkpoint interval; not active compute or controlled throughput"
+    }
+  ],
+  "usage": {
+    "checkedAt": "2026-11-01T16:34:15.839595+00:00",
+    "source": "account/rateLimits/read",
+    "ordinaryUsageAllowed": true,
+    "weekly": {
+      "usedPercent": 91,
+      "windowDurationMins": 10080,
+      "resetsAt": 1794145801
+    },
+    "rateLimitReachedType": null,
+    "newPacketAdmission": false
+  },
+  "completeEntryCredit": 0
+}

@@ -82,7 +82,9 @@ export function loadPreprocessedDocument(
         if (slug) {
           const after = (next && hasClass(next, 'pos') ? next : el).nextSibling;
           const before = el.previousSibling;
-          const lead = before?.type === 'text' ? before.data : '';
+          const referenceLead = before?.type === 'text' ? before.data : '';
+          const ordinal = /\bunder\s+(\d+)(?:st|nd|rd|th|d)\s*$/i.exec(referenceLead);
+          const lead = ordinal ? referenceLead.slice(0, ordinal.index) + 'under ' : referenceLead;
           const cref = before?.previousSibling;
           const phrases =
             !/\bunder\s*$/i.test(lead) || /\bnote\s+under\s*$/i.test(lead)
@@ -98,6 +100,7 @@ export function loadPreprocessedDocument(
               Boolean(partOfSpeech)
             ),
             partOfSpeech,
+            homographNumber: ordinal ? Number(ordinal[1]) : undefined,
             phrases: [...phrases, text.replace(/,\s*\d+\.?\s*$/, '')],
           });
           el.tagName = 'a';

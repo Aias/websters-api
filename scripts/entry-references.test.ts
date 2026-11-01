@@ -252,6 +252,19 @@ describe('sense and compound reference targets', () => {
       '/entry/beam',
     ],
     ['See <div class="er">Abaft the beam</div>.', '/entry/abaft_the_beam#abaft_the_beam'],
+    [
+      'See <div class="cref">Abaft the beam</div>, under 1st <div class="er">Beam</div>.',
+      '/entry/beam#abaft_the_beam',
+    ],
+    [
+      'See <div class="cref">Abaft the beam</div>, under 2d <div class="er">Beam</div>.',
+      '/entry/beam',
+    ],
+    ['See the Note under 1st <div class="er">Beam</div>.', '/entry/beam'],
+    [
+      'See under 2d <div class="er" data-target="abaft_the_beam">Beam</div>.',
+      '/entry/beam#abaft_the_beam',
+    ],
     ['See <div class="er">Beam</div>.', '/entry/beam'],
   ])('%s links to %s', (html, href) => {
     expect(preprocess(html, targetReferences.resolve)).toContain(`href="${href}"`);

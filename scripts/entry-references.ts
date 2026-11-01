@@ -8,6 +8,7 @@ export interface ReferenceTarget {
   sense?: string;
   subsense?: string;
   partOfSpeech?: string;
+  homographNumber?: number;
   phrases: ReadonlyArray<string>;
 }
 
@@ -19,7 +20,7 @@ export interface EntryResolver {
 
 interface EntryTargets {
   ids: Set<string>;
-  compounds: Map<string, string>;
+  compounds: Map<string, { id: string; homographNumber: number }>;
   homographs: { id?: string; partsOfSpeech: string[]; senses: Map<string, string> }[];
 }
 
@@ -37,6 +38,7 @@ export function phraseName(text: string): string {
 function collectTargets(
   content: ReadonlyArray<LexicalBlock>,
   targets: EntryTargets,
+  homographNumber: number,
   senses?: Map<string, string>
 ): void {
   for (const block of content) {
@@ -44,15 +46,15 @@ function collectTargets(
       targets.ids.add(block.id);
       const number = /^(\d+)\.?$/.exec(block.number)?.[1];
       if (number && senses && !senses.has(number)) senses.set(number, block.id);
-      collectTargets(block.content, targets, number ? undefined : senses);
+      collectTargets(block.content, targets, homographNumber, number ? undefined : senses);
     } else if (block.kind === 'compound' && block.id) {
       targets.ids.add(block.id);
       for (const headword of block.headwords) {
         if (!targets.compounds.has(phraseName(headword)))
-          targets.compounds.set(phraseName(headword), block.id);
+          targets.compounds.set(phraseName(headword), { id: block.id, homographNumber });
       }
-      collectTargets(block.content, targets);
-    } else if ('content' in block) collectTargets(block.content, targets);
+      collectTargets(block.content, targets, homographNumber);
+    } else if ('content' in block) collectTargets(block.content, targets, homographNumber);
   }
 }
 
@@ -95,7 +97,7 @@ export function createEntryReferences(
     for (const homograph of parse(key, html).homographs) {
       const senses = new Map<string, string>();
       if (homograph.id) targets.ids.add(homograph.id);
-      collectTargets(homograph.content, targets, senses);
+      collectTargets(homograph.content, targets, targets.homographs.length + 1, senses);
       targets.homographs.push({
         id: homograph.id,
         partsOfSpeech: homograph.header.flatMap((part) =>
@@ -130,7 +132,10 @@ export function createEntryReferences(
     const owner = owners.values().next().value;
     return owner ? slugify(owner) : undefined;
   };
-  resolve.fragment = (slug, { recorded, sense, subsense, partOfSpeech, phrases }) => {
+  resolve.fragment = (
+    slug,
+    { recorded, sense, subsense, partOfSpeech, homographNumber, phrases }
+  ) => {
     const key = resolve(slug) ?? '';
     const targets = targetsByEntry.get(key);
     if (!targets) return;
@@ -148,7 +153,8 @@ export function createEntryReferences(
     const name = phraseName(key);
     for (const phrase of phrases) {
       const compound = phraseName(phrase) !== name && targets.compounds.get(phraseName(phrase));
-      if (compound) return compound;
+      if (compound && (!homographNumber || compound.homographNumber === homographNumber))
+        return compound.id;
     }
     return labeled[0]?.id;
   };
