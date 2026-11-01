@@ -8,6 +8,7 @@ The user's rulings of 2026-10-28 left the following calls to the auditor. Each e
 - **Pronunciations** are restored from the print only inside entries a batch already reviews.
 - **Every 1913 entry gets a record.**
 - **Senses follow the print's division and numbering.**
+- **Supplement entries the 1907 printing lacks** take Webster's New International Dictionary as their print witness. Its text is accepted only where it matches Gutenberg word for word, and a pronunciation mark the corpus never uses is held.
 
 ## Decisions
 
@@ -94,3 +95,7 @@ Fleshpot's "hence (pl.)" clause belongs in its single unnumbered definition. Its
 ### Disputed words in complete definitions
 
 Nascent's compound definition reads "one compound acid" in the available print. Undulatory's compound heading supplies "of light", and its definition begins "its various phenomena". Each disputed span has a native-page adjudication and two fresh independent confirmations. The source keeps these readings without silently substituting a more familiar phrase.
+
+### New International witnesses
+
+Flatware and Rossel current are absent from the only scanned printing of the 1900 supplement, so Webster's New International Dictionary witnesses them. Its house style differs from the 1913 supplement's: it lowercases headwords, gives each word of an open compound a primary accent, and abbreviates field labels without parentheses. The records take their headword notation and field label from Gutenberg's transcription of the 1913 supplement, and their pronunciations from the New International print. Rossel current is therefore `Ros′sel curˊrent` with the label "(Oceanography)", where the New International prints two primary accents and "Oceanog.".

@@ -15,7 +15,7 @@ Gutenberg and GCIDE provide comparison text and candidate locations. Accepted co
 
 ## Recorded progress
 
-Checkpoint: senses-4, based on `1da044a` (Record print-source reconciliation inventory). Source SHA-256 `7c2a9d6dc9b06b64a99cd1252c9edd526cabc9229cad6645c346249f5669a2c0`. The frozen inventory retains its original source hashes. Current workset dispositions are recorded separately in [`dictionary-print-workset-outcomes.jsonl`](dictionary-print-workset-outcomes.jsonl).
+Checkpoint: entries-4, following senses-4 (`409b6f2`). Source SHA-256 `7be77475796eb55490daf0f4130495279936e1a571f5a41e401d1f86ccf1631f`. The frozen inventory retains its original source hashes. Current workset dispositions are recorded separately in [`dictionary-print-workset-outcomes.jsonl`](dictionary-print-workset-outcomes.jsonl).
 
 | Work                            | Completed                                                                                                                                   | Remaining or measurement limit                                                                                                                                                          |
 | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -23,11 +23,11 @@ Checkpoint: senses-4, based on `1da044a` (Record print-source reconciliation inv
 | Whole definitions               | Definition batches 1 through 4 restore 158 targets. Fix-1 resolves three additional definition targets, for 161.                            | These count definitions, not complete entries. No corpus-wide denominator is established.                                                                                               |
 | Sense structure                 | Senses-1, senses-2, and senses-3 restructure 69 distinct entries: 19, 24, and 26. Corn receives a separate restoration.                     | Senses-4 reviews all 58 remaining candidates: 52 restored sense units and six unchanged rulings. Dolphin retains a parser ownership hold. Broader differences remain outside this pool. |
 | Definition-5                    | [58 accepted corrections across 30 entries](dictionary-audit-definition-5.md), resolving 33 held fields.                                    | Its targets have no remaining holds. The total includes 18 pronunciation targets and other accompanying repairs. It adds no complete-entry review credit.                               |
-| Missing standalone records      | 68 of 71 missing records identified by the survey are restored.                                                                             | Flatware, Retroussé, and Rossel current require supplement pages. This pool does not establish that every possible omission has been discovered.                                        |
+| Missing standalone records      | All 71 missing records identified by the survey are restored. Entries-4 adds Flatware, Retroussé, and Rossel current.                       | This pool does not establish that every possible omission has been discovered.                                                                                                          |
 | Original missing-compound pool  | 43 of 44 targets are restored.                                                                                                              | Lizard fish remains held, as described below.                                                                                                                                           |
 | Compounds in separate records   | 46 restoration targets return printed compounds to their head entries. Duplicate or wholly merged material accounts for 26 removed records. | The 188-key pool has 65 recorded resolutions and 123 remaining candidates. Those counts include overlap with split-record work.                                                         |
 | Original split-record proposals | All 15 proposals have recorded source dispositions.                                                                                         | Bold eagle has fresh independent native confirmation. Its original acceptance record remains unrecovered.                                                                               |
-| Later-addition classification   | [14,184 classifications across 11,416 entries](dictionary-later-additions.md).                                                              | 4,109 classifications are uncertain. Expanded witness coverage identifies 497 entry classifications for priority re-examination.                                                        |
+| Later-addition classification   | [14,187 classifications across 11,419 entries](dictionary-later-additions.md).                                                              | 4,109 classifications are uncertain. Expanded witness coverage identifies 497 entry classifications for priority re-examination.                                                        |
 
 These rows use different units and overlap. A whole-sense restoration can resolve several survey fragments, and a later batch can revisit an entry. Keep batch edits, distinct entries, resolved holds, and survey fragments separate. The older 3,494-entry damaged-character review queue supplies no denominator for this track.
 
@@ -53,7 +53,7 @@ The original A through W dataset has 38,764 fragments. Its refreshed equivalent 
 
 The supplement index contains 3,960 parsed entries. Of these, 3,780 match a source key and 180 do not. This is a presence index. Supplemental text still needs comparison even when a key matches.
 
-The 457 unmatched main-text entries retain their individual dispositions: 448 link to historical accounting and nine are newly exposed X through Z candidates. The nine have current name or variant leads, but their complete text and ownership remain unreviewed. The supplement's 180 unmatched entries include 133 with raw heading or compound-name matches, 44 without those matches, and the three known missing-record holds. Main and supplement occurrences remain separate unless existing evidence identifies the same held unit.
+The 457 unmatched main-text entries retain their individual dispositions: 448 link to historical accounting and nine are newly exposed X through Z candidates. The nine have current name or variant leads, but their complete text and ownership remain unreviewed. The supplement's 180 unmatched entries include 133 with raw heading or compound-name matches, 44 without those matches, and the three missing records that entries-4 restores. Main and supplement occurrences remain separate unless existing evidence identifies the same held unit.
 
 Associate each difference with its complete definition, sense, note, compound, or entry before assigning an outcome. A restored sentence can cover several fragments, and one fragment can cross unit boundaries. Preserve the exact before/after text and acceptance evidence when resolving overlaps. Corpus-wide completion remains unmeasured until those units and outcomes are established.
 
@@ -89,15 +89,11 @@ The 58 worksets remain in the frozen inventory with their original spans and blo
 
 The 188-key pool has 47 keys covered by 46 accepted restoration targets, 16 explicit duplicate removals, and Hostilities resolved through split-record work. [Own-compounds-1](dictionary-audit-own-compounds-1.md) confirms Bold eagle's existing merge through two fresh native readings. The original acceptance record remains unrecovered and is retained as a provenance limitation. This closes the compound-pool question without another source edit. The pool has 65 recorded resolutions and 123 unreviewed candidates. Seventy-three remaining candidates were historically marked as already having a compound under the head entry. They require disposition review rather than automatic insertion.
 
-### Obtain supplement evidence
-
-Flatware, Retroussé, and Rossel current await matching pages from the 1900 supplement. The handoff identifies HathiTrust item `uiug.30112099825041`, scans 1121 through 1358. Follow the browser-access instructions when obtaining these witnesses.
-
 ### Resolve the Lizard fish hold
 
 The original `compound-restore` target `cr03-t7` remains unresolved. Current Lizard has Lizard snake and Lizard stone but lacks Lizard fish. The first reader held the botanical ligature and a damaged letter in the vernacular synonym. Fresh independent readings must settle both before restoration.
 
-The open register includes this recovered hold and the three missing supplement records. It contains 155 unresolved fields: 88 evidence holds, 65 reading holds, and two structure holds, including Dolphin. The original discovery evidence is `.context/dictionary-audit/exhaustive/compound-restore/initial-cr03/holds.json`.
+The open register includes this recovered hold. It contains 152 unresolved fields: 85 evidence holds, 65 reading holds, and two structure holds, including Dolphin. The original discovery evidence is `.context/dictionary-audit/exhaustive/compound-restore/initial-cr03/holds.json`.
 
 ## Updating progress
 
