@@ -24,10 +24,10 @@ OLD_STANDARD = 'https://mirrors.ctan.org/fonts/oldstandard.zip'
 BESLEY = 'https://github.com/google/fonts/raw/85c5cea9da66117723c05bf5d7a7143fd10a411b/ofl/besley/Besley%5Bwght%5D.ttf'
 GOOGLE_FONTS = 'https://raw.githubusercontent.com/google/fonts/85c5cea9da66117723c05bf5d7a7143fd10a411b/ofl/'
 DONORS = {
-    'notomusic/NotoMusic-Regular.ttf': (0x2669, 0x266A, 0x266D, 0x266E, 0x266F, 0x1D10B, 0x1D110, 0x1D135, 0x1D197, 0x1D19A),
+    'notomusic/NotoMusic-Regular.ttf': (0x2669, 0x266A, 0x266D, 0x266E, 0x266F, 0x1D10B, 0x1D110, 0x1D135, 0x1D197, 0x1D198, 0x1D19A),
     'notosanssymbols2/NotoSansSymbols2-Regular.ttf': (0x25B3, 0x261E, 0x2BC9),
     'notosanssymbols/NotoSansSymbols%5Bwght%5D.ttf': (0x2312, 0x26B9, 0x26E2),
-    'notosansmath/NotoSansMath-Regular.ttf': (0x221B, 0x23DC, 0x23DD),
+    'notosansmath/NotoSansMath-Regular.ttf': (0x221B, 0x223D, 0x23DC, 0x23DD),
     'notosansphoenician/NotoSansPhoenician-Regular.ttf': (0x10900,),
     'notoserif/NotoSerif-Regular.ttf': (0x1D7A,),
 }
