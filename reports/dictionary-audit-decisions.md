@@ -113,3 +113,7 @@ Mortar's fourth noun is the same lexical unit as the printed Mor′ter lamp noun
 ### Printed errors a 1913 reference corrects
 
 Soak cites "Isa. xxiv. 7." for "Their land shall be soaked with blood" in the print, GCIDE and Gutenberg alike. In the Authorized Version that line is Isaiah 34:7, and 24:7 is "The new wine mourneth", so the record reads "Isa. xxxiv. 7.". Solar's table of periodic comets prints Halley's last perihelion as 1885.9. The Encyclopaedia Britannica of 1910–11 gives 1835 Nov. 15.9, and the table's own period of 76 years leads from 1835 to the 1910 return, so the record reads 1835.9. Each correction names its reference in the batch evidence.
+
+### Eye-skips inside words
+
+An eye-skip can start and end inside words. Slime's etymology prints "MHG. slīm, OHG. slīmen", and the electronic "MHG. slīmen" lacks exactly the span between the two "slīm"s. Its second sense prints "mucilaginous or glutinous", and the electronic text lacks the span between the two "-inous" endings. A span that falls between two identical letter strings is lost the same way as one between repeated words, so both are restored as transcription loss.
