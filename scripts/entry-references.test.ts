@@ -111,6 +111,14 @@ const qualifiedSource = new Map([
     'Body',
     '<h2 class="hw">Body</h2><div class="pos">noun</div><div class="def">A <div class="pos">verb</div>.</div>',
   ],
+  [
+    'Metabole',
+    '<h2 class="hw">Me-tab′o-la</h2>, <h2 class="hw">Me-tab′o-le</h2><div class="pos">noun</div><div class="def">A change.</div>',
+  ],
+  [
+    'Metabolia',
+    '<h2 class="hw">Me-tab′o-la</h2>, <h2 class="hw">Met′a-bo′li-a</h2><div class="pos">plural noun</div><div class="def">Insects.</div>',
+  ],
 ]);
 const qualifiedReferences = createEntryReferences(qualifiedSource, parseEntry);
 
@@ -149,6 +157,18 @@ describe('explicit grammatical reference targets', () => {
       'bibbe'
     );
     expect(entryReferenceSlug('Bib', qualifiedReferences.resolve)).toBe('bib');
+  });
+
+  test('lets a part of speech pick between entries that share a headword', () => {
+    expect(qualifiedReferences.resolve('metabola')).toBeUndefined();
+    expect(entryReferenceSlug('Metabola', qualifiedReferences.resolve)).toBe('metabola');
+    expect(entryReferenceSlug('Metabola', qualifiedReferences.resolve, 'noun')).toBe('metabole');
+    expect(
+      preprocess(
+        'See <div class="er">Metabola</div>, <div class="pos">plural noun</div>.',
+        qualifiedReferences.resolve
+      )
+    ).toContain('href="/entry/metabolia"');
   });
 
   test('keeps multiple matching owners and body labels from changing targets', () => {

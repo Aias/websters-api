@@ -240,4 +240,69 @@ describe('dictionary reference lookup', () => {
     expect(aliases.has('sore throat')).toBe(false);
     expect(aliases.get('sorrow sore')).toBe('Sorrow');
   });
+
+  test('defers every heading in a group that See under defines', () => {
+    expect(
+      entryAliases(
+        'Star',
+        '<div class="cs"><div class="mcol"><div class="col"><b>Double star</b></div>, <div class="col"><b>Shooting star</b></div>, etc. </div><div class="cd">See under <div class="er">Double</div>, etc.</div></div>'
+      ).deferred
+    ).toEqual(['Double star', 'Shooting star']);
+    expect(
+      entryAliases(
+        'Fly',
+        '<div class="cs"><div class="mcol"><div class="col"><b>Cheese fly</b></div>. <div class="cd">See under <div class="er">Cheese</div>.</div></div>' +
+          '<div class="col"><b>Fly agaric</b></div>, <div class="cd">a fungus.</div></div>'
+      )
+    ).toMatchObject({ names: ['Fly', 'Fly agaric'], deferred: ['Cheese fly'] });
+  });
+
+  test('settles a contested name by definition, then by headword', () => {
+    const entries = new Map(
+      [
+        [
+          'Buttress',
+          '<div class="col"><b>Flying buttress</b></div>. <div class="cd">See <div class="er">Flying buttress</div>.</div>',
+        ],
+        [
+          'Flying',
+          '<div class="col"><b>Flying buttress</b></div>, <div class="cd">a contrivance.</div>',
+        ],
+        [
+          'Muscadelle',
+          '<h2 class="hw">Mus′ca-del</h2><div class="def">See <div class="er">Muscatel</div>.</div>',
+        ],
+        ['Muscatel', '<h2 class="hw">Mus′ca-tel</h2><div class="asp">muscadel</div>'],
+        ['Be', '<div class="pos">verb</div>'],
+        [
+          'All fours',
+          '<div class="mcol"><div class="col"><b>To be</b></div>, <div class="col"><b>go</b></div></div>, <div class="cd">to correspond.</div>',
+        ],
+        ['Metabole', '<h2 class="hw">Me-tab′o-la</h2>'],
+        ['Metabolia', '<h2 class="hw">Me-tab′o-la</h2>'],
+      ].map(([key, html]) => [key, entryAliases(key, html)])
+    );
+    const claims = (field: 'names' | 'headwords' | 'defined') =>
+      new Map([...entries].map(([key, aliases]) => [key, aliases[field]]));
+    const aliases = unambiguousAliases(claims('names'), new Map(), [
+      claims('headwords'),
+      claims('defined'),
+    ]);
+    expect(aliases.get('flying buttress')).toBe('Flying');
+    expect(aliases.get('muscadel')).toBe('Muscadelle');
+    expect(aliases.get('to be')).toBe('Be');
+    expect(aliases.has('metabola')).toBe(false);
+  });
+
+  test('keeps an existing resolution when a preferred claim disagrees', () => {
+    const aliases = unambiguousAliases(
+      new Map([
+        ['Leukaemia', ['Leukæmia']],
+        ['Leuchaemia', ['Leuchæmia', 'leukæmia']],
+      ]),
+      new Map(),
+      [new Map([['Leuchaemia', ['leukæmia']]])]
+    );
+    expect(aliases.get('leukæmia')).toBe('Leukaemia');
+  });
 });
