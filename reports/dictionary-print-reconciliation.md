@@ -86,6 +86,8 @@ Yang demonstrates an additional classification defect. The classifier combined t
 
 Dolphin's note is restored in printed order after sense 1(b), but its content refers to 1(a). The parser cannot express that earlier nested owner. Its tracked structural hold preserves the note, actual owner, intended owner, and missing annotation capability. This batch grants zero complete-entry review credit.
 
+Element's chemistry note takes back its printed sentence ("From certain evidence … some simpler body or bodies.") in place of GCIDE's later wording about subatomic particles and quarks. Two blind readers of the 1895 print agree with Gutenberg's 1913 text, and the restoration settles survey fragments 10277 through 10281.
+
 The 58 worksets remain in the frozen inventory with their original spans and blockers. Read their [current outcomes](dictionary-print-workset-outcomes.jsonl) before selecting new work. No unreviewed candidates remain in this bounded pool. Broader sense and definition differences still require complete-unit reconciliation.
 
 ### Finish the own-record compound pool
@@ -115,7 +117,7 @@ The 43 remaining candidates carry these preparation categories. Each still needs
 
 ### Open holds
 
-The [open register](dictionary-audit-holds.md) contains 252 unresolved fields: 150 evidence holds, 94 reading holds, four reference holds, two sequence holds, and two structure holds, including Dolphin.
+The [open register](dictionary-audit-holds.md) contains 226 unresolved fields: 151 evidence holds, 65 reading holds, four reference holds, four sequence holds, and two structure holds, including Dolphin.
 
 ## Updating progress
 
