@@ -94,7 +94,7 @@ The 188-key pool has 145 recorded resolutions and 43 unreviewed candidates. Hist
 
 [Own-compounds-2](dictionary-audit-own-compounds-2.md) restores Death knell, Electric light, Honey creeper, Honey eater, and Honey flower under their printed head entries. All five standalone records remain whole under the specific own-record ruling. The exact three-edit ledger separates two independent agreements from Honey's source adjudication. No records are removed. Bold eagle's original acceptance remains unrecovered, separately from its fresh confirmation.
 
-[Own-compounds-3-6](dictionary-audit-own-compounds-3-6.md) restores 12 complete printed compounds under 11 owners, seven own-head pronunciations, and the Humming ale word boundary. Its 20-target ledger separates 17 independent agreements from three source adjudications. All 12 standalone records remain byte-identical, with seven provenance corrections and one added classification. Lancet retains one print-only article evidence hold. The batch adds no complete-entry credit.
+[Own-compounds-3-6](dictionary-audit-own-compounds-3-6.md) restores 12 complete printed compounds under 11 owners, seven own-head pronunciations, and the Humming ale word boundary. Its 20-target ledger separates 17 independent agreements from three source adjudications. All 12 standalone records remain byte-identical, with seven provenance corrections and one added classification. Lancet's print-only article stays out by ruling. The batch adds no complete-entry credit.
 
 [Own-compounds-7-14](dictionary-audit-own-compounds-7-14.md) resolves 24 candidate dispositions, retaining every own record. Its 29-source-edit ledger includes four complete compounds, 16 pronunciation fields, eight transcription repairs, and Christian's separated adjective senses. Earth's electrical definition and note receive direct Gutenberg supplement classification. Five adjacent fields remain held; standalone supplement coverage and complete-entry review remain separate.
 
@@ -115,7 +115,7 @@ The 43 remaining candidates carry these preparation categories. Each still needs
 
 ### Open holds
 
-The [open register](dictionary-audit-holds.md) contains 233 unresolved fields: 153 evidence holds, 69 reading holds, five reference holds, four ruling holds, and two structure holds, including Dolphin.
+The [open register](dictionary-audit-holds.md) contains 223 unresolved fields: 150 evidence holds, 67 reading holds, four reference holds, and two structure holds, including Dolphin.
 
 ## Updating progress
 
