@@ -75,6 +75,10 @@ const spellingReferences = createEntryReferences(
     ['Saw', '<h2 class="hw">Saw</h2>'],
     ['Ward', '<h2 class="hw">Ward</h2>'],
     ['-ward', '<h2 class="hw">-ward</h2>'],
+    ['Breastwheel', '<h2 class="hw">Breast′wheel</h2>'],
+    ['V hook', '<h2 class="hw">V′ hook</h2>'],
+    ['Sometime', '<h2 class="hw">Some′time</h2>'],
+    ['Some time', '<h2 class="hw">Some time</h2>'],
   ]),
   parseEntry
 );
@@ -87,6 +91,9 @@ describe('references spelled differently from their entry', () => {
     ['Ward', '/entry/ward'],
     ['n-', '/entry/n-'],
     ['-saw', '/entry/-saw'],
+    ['Breast wheel', '/entry/breastwheel'],
+    ['V-hook', '/entry/v_hook'],
+    ['Some-time', '/entry/some-time'],
   ])('%s links to %s', (text, href) => {
     expect(preprocess(`See <div class="er">${text}</div>.`, spellingReferences.resolve)).toContain(
       `href="${href}"`

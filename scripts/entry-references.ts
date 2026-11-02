@@ -28,7 +28,7 @@ interface EntryTargets {
 }
 
 function spelling(name: string): string {
-  return name.replace(/^-+|-+$/g, '');
+  return name.replace(/(?<=\p{L})[ -]+(?=\p{L})/gu, '');
 }
 
 function headwordNames(text: string): string[] {
@@ -104,12 +104,13 @@ export function createEntryReferences(
   };
   const spellings = new Map<string, string | null>();
   for (const [name, key] of aliases) {
-    const previous = spellings.get(spelling(name));
-    spellings.set(spelling(name), previous === undefined || previous === key ? key : null);
+    const spelled = spelling(name.replace(/^-+|-+$/g, ''));
+    const previous = spellings.get(spelled);
+    spellings.set(spelled, previous === undefined || previous === key ? key : null);
   }
   resolve.spelled = (slug) => {
     const name = normalizeLookup(slug.replaceAll('_', ' ')).replace(/(?<=\p{L}\p{L})-+$/u, '');
-    const key = spellings.get(name);
+    const key = spellings.get(spelling(name));
     return key ? slugify(key) : undefined;
   };
   const qualified = new Map<string, Set<string>>();
