@@ -115,7 +115,7 @@ The 43 remaining candidates carry these preparation categories. Each still needs
 
 ### Open holds
 
-The [open register](dictionary-audit-holds.md) contains 223 unresolved fields: 150 evidence holds, 67 reading holds, four reference holds, and two structure holds, including Dolphin.
+The [open register](dictionary-audit-holds.md) contains 221 unresolved fields: 150 evidence holds, 65 reading holds, four reference holds, and two structure holds, including Dolphin.
 
 ## Updating progress
 

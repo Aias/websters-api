@@ -182,6 +182,7 @@ Both audits share a restoration rule for pronunciations:
 - A composite placeholder such as `(?; 277)` or `(# or #; 135)` is a damaged field, and so is a field GCIDE marks unreadable with `&unr_;`. Restore it from print when legible and keep the guide number, as in `(zīm; 277)`. When the conversion dropped such a field, insert it after its form word.
 - A bare `(?)` or `(#)`, or a pronunciation absent from both the source and GCIDE, is restored from print only by a batch that reviews the entry, as the [editorial rulings](#editorial-rulings) direct. Every other pass leaves it empty.
 - Repair damaged marks inside an existing field when print corroborates them.
+- Write the voiced (sonant) th as `t&#x35F;h`, with U+035F COMBINING DOUBLE MACRON BELOW between the letters. The print sets it as a tied th ligature, its key's "then" against the untied "thin", and GCIDE writes it `&thlig_;`. A voiceless th stays plain. A reader who restores a pronunciation compares each th with the key's two forms.
 
 Before integration, inventory newly inserted pronunciation fields against the frozen electronic record. Check each headword, homograph, inflection, and derivative separately. An aggregate count of explicit unreadable fields catches unsupported insertions but does not prove correct placement. Outside a batch that reviews the entry, a complete printed pronunciation with no corresponding electronic field remains ineligible.
 

@@ -87,13 +87,16 @@ def patch_old_standard(font):
     x = lambda y: ax + (y - ay) * slant
     tick = [(round(x(bottom) - width / 2), bottom), (round(x(bottom) + width / 2), bottom), (round(x(top) + width / 2), top), (round(x(top) - width / 2), top)]
 
-    def draw_tick(pen):
-        pen.moveTo(tick[0])
-        for point in tick[1:]:
-            pen.lineTo(point)
-        pen.closePath()
+    def polygon(points):
+        def draw(pen):
+            pen.moveTo(points[0])
+            for point in points[1:]:
+                pen.lineTo(point)
+            pen.closePath()
 
-    add_mark(font, 'uni030D', 0x030D, draw_tick)
+        return draw
+
+    add_mark(font, 'uni030D', 0x030D, polygon(tick))
     for st in subtables(4):
         if acute in st.MarkCoverage.glyphs:
             st.MarkCoverage.glyphs.append('uni030D')
@@ -152,6 +155,12 @@ def patch_old_standard(font):
             getattr(pen, operator)(*map(move, points))
 
     add_mark(font, 'uni035E', 0x035E, draw_double_macron)
+
+    t, h = cmap[0x74], cmap[0x68]
+    _, low, _, high = bounds(cmap[0x331])
+    left, right = bounds(t)[0] - font['hmtx'][t][0], bounds(h)[2]
+    under = [(round(x + y * slant), y) for x, y in ((left, low), (right, low), (right, high), (left, high))]
+    add_mark(font, 'uni035F', 0x035F, polygon(under))
 
 
 def copy_glyphs(font, donor, codepoints):
