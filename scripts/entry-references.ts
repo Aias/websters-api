@@ -28,7 +28,10 @@ interface EntryTargets {
 }
 
 function spelling(name: string): string {
-  return name.replace(/(?<=\p{L})[ -]+(?=\p{L})/gu, '');
+  return name
+    .normalize('NFD')
+    .replace(/\p{M}/gu, '')
+    .replace(/(?<=\p{L})[ -]+(?=\p{L})/gu, '');
 }
 
 function headwordNames(text: string): string[] {
