@@ -40,6 +40,14 @@ Packets stay within the reading tool's limits, about 1,600 lines or 80,000 chara
 
 Calibrate before scaling. Build a blinded gold set of about 16 entries with a known transcription slip and 16 correct controls, drawn from outside the range the spec's examples use, since examples taken from the gold set contaminate the measurement. Score exact usable repairs and unsupported control edits. The bar for this spec is 15 exact repairs of 16 and no control edits. The expected failure mode is repairing a real defect the wrong way, as in inserting a word where a letter was wrong; the insertion hold exists for that case.
 
+Recalibrate when the reviewer model changes, because `run.ts` asks for the `opus` alias. The October 2026 gold set no longer measures anything: REVIEWER.md now quotes two of its cases ("a group lizards", "one the foot"). A replacement can come from the source itself:
+
+- Slips: reintroduce single corrections that an earlier pass applied, one per entry, each changing at most eight characters and none matching an example in REVIEWER.md or this reference.
+- Controls: entries that an exhaustive batch closed without a hold or structural issue.
+- Scoring: an exact repair restores the entry's current text after the accepted items apply.
+
+Freeze the cases as one packet named `cal`, keep the answer key outside the worktree the reviewer can read, and move the run aside before freezing the real range. The November 2026 set built this way scored 16 of 16 with no control edits. Its slips are ones an earlier reviewer had already found, so it measures precision on findable defects rather than recall.
+
 ## Expectations
 
 A headless packet of about 290 entries takes one to four minutes and under a dollar of estimated usage, several times faster than the same packet through an in-session agent. Yield runs between four and seven accepted corrections per hundred entries, with about one finding in seven held. The quotation rule and the insertion hold target the two classes of wrong correction a reviewer produces: homophone swaps inside quotations and whole-word insertions.
