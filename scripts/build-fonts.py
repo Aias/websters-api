@@ -24,10 +24,10 @@ OLD_STANDARD = 'https://mirrors.ctan.org/fonts/oldstandard.zip'
 BESLEY = 'https://github.com/google/fonts/raw/85c5cea9da66117723c05bf5d7a7143fd10a411b/ofl/besley/Besley%5Bwght%5D.ttf'
 GOOGLE_FONTS = 'https://raw.githubusercontent.com/google/fonts/85c5cea9da66117723c05bf5d7a7143fd10a411b/ofl/'
 DONORS = {
-    'notomusic/NotoMusic-Regular.ttf': (0x2669, 0x266A, 0x266D, 0x266E, 0x266F, 0x1D10B, 0x1D110, 0x1D135, 0x1D197, 0x1D19A),
+    'notomusic/NotoMusic-Regular.ttf': (0x2669, 0x266A, 0x266D, 0x266E, 0x266F, 0x1D10B, 0x1D110, 0x1D135, 0x1D197, 0x1D198, 0x1D19A),
     'notosanssymbols2/NotoSansSymbols2-Regular.ttf': (0x25B3, 0x261E, 0x2BC9),
     'notosanssymbols/NotoSansSymbols%5Bwght%5D.ttf': (0x2312, 0x26B9, 0x26E2),
-    'notosansmath/NotoSansMath-Regular.ttf': (0x221B, 0x23DC, 0x23DD),
+    'notosansmath/NotoSansMath-Regular.ttf': (0x221B, 0x223D, 0x23DC, 0x23DD),
     'notosansphoenician/NotoSansPhoenician-Regular.ttf': (0x10900,),
     'notoserif/NotoSerif-Regular.ttf': (0x1D7A,),
 }
@@ -87,13 +87,16 @@ def patch_old_standard(font):
     x = lambda y: ax + (y - ay) * slant
     tick = [(round(x(bottom) - width / 2), bottom), (round(x(bottom) + width / 2), bottom), (round(x(top) + width / 2), top), (round(x(top) - width / 2), top)]
 
-    def draw_tick(pen):
-        pen.moveTo(tick[0])
-        for point in tick[1:]:
-            pen.lineTo(point)
-        pen.closePath()
+    def polygon(points):
+        def draw(pen):
+            pen.moveTo(points[0])
+            for point in points[1:]:
+                pen.lineTo(point)
+            pen.closePath()
 
-    add_mark(font, 'uni030D', 0x030D, draw_tick)
+        return draw
+
+    add_mark(font, 'uni030D', 0x030D, polygon(tick))
     for st in subtables(4):
         if acute in st.MarkCoverage.glyphs:
             st.MarkCoverage.glyphs.append('uni030D')
@@ -152,6 +155,12 @@ def patch_old_standard(font):
             getattr(pen, operator)(*map(move, points))
 
     add_mark(font, 'uni035E', 0x035E, draw_double_macron)
+
+    t, h = cmap[0x74], cmap[0x68]
+    _, low, _, high = bounds(cmap[0x331])
+    left, right = bounds(t)[0] - font['hmtx'][t][0], bounds(h)[2]
+    under = [(round(x + y * slant), y) for x, y in ((left, low), (right, low), (right, high), (left, high))]
+    add_mark(font, 'uni035F', 0x035F, polygon(under))
 
 
 def copy_glyphs(font, donor, codepoints):

@@ -9,6 +9,7 @@ The user's rulings of 2026-10-28 left the following calls to the auditor. Each e
 - **Every 1913 entry gets a record.**
 - **Senses follow the print's division and numbering.**
 - **Numbered homograph references** ("See 3d Sore") link to that homograph, and reviews confirm the record's homograph numbering against the print (2026-11-02).
+- **Held fields ruled on 2026-11-02.** An article only the print sets stays out when the sentence reads correctly without it. A shared word that differs from the clear print only in confusable letters is wrong when its context makes the printed word evident. A shared citation stays as printed when only an inference about the etymology contradicts it. A visible accent takes LSJ's form when LSJ attests one placement with a matching gloss. A heading whose primary stress falls on a syllable its own pronunciation marks secondary takes the printed stress. Two senses with the same number are renumbered. A printed sign with no exact Unicode character takes the nearest agreed character.
 - **Supplement entries the 1907 printing lacks** take Webster's New International Dictionary as their print witness. Its text is accepted only where it matches Gutenberg word for word, and a pronunciation mark the corpus never uses is held.
 
 ## Decisions
@@ -122,3 +123,11 @@ An eye-skip can start and end inside words. Slime's etymology prints "MHG. slīm
 ### Later homographs after printed ones
 
 Where a record carries homographs the print lacks, such as GCIDE-only or 1913 supplement homographs, they follow the printed homographs in the printed order, as later senses follow printed senses. Tout keeps its four printed homographs first and its later additions after them, so numbered references count the printed homographs.
+
+### Duplicate sense numbers
+
+Slip's noun ends its printed senses at 20. GCIDE adds a commented-out 21 for a slip dock and three later senses numbered 22, 23 and 23, and Gutenberg prints none of them, so no witness numbers them. The Marine Insurance sense becomes 24 and gains the id 3-24. Senses 22 and 23 keep their numbers and ids, because the excluded slip-dock sense explains the gap at 21 and the source rules keep an inherited number in that case. Its later-additions span follows the new number.
+
+### Voiced th
+
+The print sets a voiced th as a tied ligature, and GCIDE writes it `&thlig_;`, but the import flattened it to a plain th. Records now write it `t&#x35F;h`. A dictionary-wide pass compared each headword and inflected-form pronunciation with GCIDE's and marked 119 voiced th in 118 fields of 85 records, inserting the mark only where the letters, digits and count of th agreed exactly. Where homographs share their letters but differ in voicing, GCIDE's part of speech chose the field: Mouth, Path and Loathly keep a voiceless noun or adverb beside a voiced verb or adjective. Smeeth's second homograph is marked from the print, because GCIDE gives no pronunciation. Its crossbar runs unbroken into the h, unlike its first homograph's, and a blind reader saw the same. Pronunciations restored from print before this rule, and the 66,000 that remain untranscribed, keep a plain th until a batch reviews them.
