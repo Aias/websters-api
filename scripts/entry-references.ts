@@ -8,6 +8,7 @@ export interface ReferenceTarget {
   sense?: string;
   subsense?: string;
   compoundSense?: string;
+  subsenseLetter?: string;
   partOfSpeech?: string;
   homographNumber?: number;
   phrases: ReadonlyArray<string>;
@@ -135,7 +136,16 @@ export function createEntryReferences(
   };
   resolve.fragment = (
     slug,
-    { recorded, sense, subsense, compoundSense, partOfSpeech, homographNumber, phrases }
+    {
+      recorded,
+      sense,
+      subsense,
+      compoundSense,
+      subsenseLetter,
+      partOfSpeech,
+      homographNumber,
+      phrases,
+    }
   ) => {
     const key = resolve(slug) ?? '';
     const targets = targetsByEntry.get(key);
@@ -158,6 +168,12 @@ export function createEntryReferences(
           .find(Boolean)
       : undefined;
     if (id) return subsense && targets.ids.has(`${id}-${subsense}`) ? `${id}-${subsense}` : id;
+    const lettered = subsenseLetter
+      ? [...targets.ids].filter((candidate) =>
+          new RegExp(`^(?:\\d+-)*${subsenseLetter}$`).test(candidate)
+        )
+      : [];
+    if (lettered.length === 1) return lettered[0];
     const name = phraseName(key);
     for (const phrase of phrases) {
       const compound = phraseName(phrase) !== name && targets.compounds.get(phraseName(phrase));

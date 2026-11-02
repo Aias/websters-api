@@ -114,6 +114,16 @@ export function loadPreprocessedDocument(
                     ...(named && hasClass(named, 'xex') ? [getText($, named)] : []),
                     ...ownerHeadwords($, el),
                   ];
+          let marker = after;
+          while (marker?.type === 'text' && /^\s*$/.test(marker.data)) marker = marker.nextSibling;
+          const subsenseLetter =
+            marker &&
+            isElement(marker) &&
+            hasClass(marker, 'sd') &&
+            marker.attribs['data-role'] !== 'definition' &&
+            !/\bIllust/.test(`${letter ? getText($, letter) : ''}${referenceLead}`)
+              ? /^\(([a-z])\)$/.exec(getText($, marker).trim())?.[1]
+              : undefined;
           const compoundSense = lettered
             ? /^\(([a-z])\)$/.exec(getText($, letter).trim())?.[1]
             : undefined;
@@ -126,6 +136,7 @@ export function loadPreprocessedDocument(
             ),
             partOfSpeech,
             compoundSense,
+            subsenseLetter,
             homographNumber: ordinal ? Number(ordinal[1]) : undefined,
             phrases: [...phrases, text.replace(/,\s*\d+\.?\s*$/, '')],
           });

@@ -284,6 +284,15 @@ describe('sense and compound reference targets', () => {
       '/entry/advance#1',
     ],
     ['See 3d <div class="er">Advance</div>.', '/entry/advance'],
+    ['See <div class="er">Abatement </div><div class="sd">(b)</div>.', '/entry/abatement#2-b'],
+    [
+      'See <i class="xex">Illust. </i>of <div class="er">Abatement </div><div class="sd">(b)</div>.',
+      '/entry/abatement',
+    ],
+    [
+      'See <div class="er">Abatement</div> <div class="sd" data-role="definition">(b)</div>',
+      '/entry/abatement',
+    ],
   ])('%s links to %s', (html, href) => {
     expect(preprocess(html, targetReferences.resolve)).toContain(`href="${href}"`);
   });
