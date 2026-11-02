@@ -23,6 +23,21 @@ function ownerHeadwords($: cheerio.CheerioAPI, node: AnyNode): string[] {
   return [];
 }
 
+function listedReferenceLead(node: AnyNode): string | undefined {
+  let before = node.previousSibling;
+  let listed = false;
+  while (
+    before?.type === 'text' &&
+    /^\s*(?:,|,?\s*(?:and|or))\s*$/.test(before.data) &&
+    before.previousSibling &&
+    hasClass(before.previousSibling, 'er')
+  ) {
+    listed = true;
+    before = before.previousSibling.previousSibling;
+  }
+  return listed && before?.type === 'text' ? before.data : undefined;
+}
+
 export function loadPreprocessedDocument(
   html: string,
   resolve?: EntryResolver
@@ -78,18 +93,42 @@ export function loadPreprocessedDocument(
             partOfSpeech = getText($, nested);
           }
         }
-        const slug = entryReferenceSlug(text, resolve, partOfSpeech);
+        const printed = /^\s*(\d+)(?:st|nd|rd|th|d)\s+(?=\p{L})/iu.exec(text);
+        if (printed) text = text.slice(printed[0].length);
+        const slug = entryReferenceSlug(el.attribs['data-entry'] ?? text, resolve, partOfSpeech);
         if (slug) {
           const after = (next && hasClass(next, 'pos') ? next : el).nextSibling;
           const before = el.previousSibling;
-          const lead = before?.type === 'text' ? before.data : '';
-          const cref = before?.previousSibling;
+          const referenceLead = before?.type === 'text' ? before.data : '';
+          const ordinal = /(?<![\w.])(\d+)(?:st|nd|rd|th|d)\s*$/i.exec(referenceLead);
+          const lead = ordinal ? referenceLead.slice(0, ordinal.index) : referenceLead;
+          const letter = before?.previousSibling;
+          const lettered = letter && hasClass(letter, 'sd');
+          const cref = lettered ? letter.previousSibling : letter;
+          const named = /^\s*,?\s*under\s*$/i.test(lead) ? cref : undefined;
+          const listLead = listedReferenceLead(el) ?? lead;
           const phrases =
-            !/\bunder\s*$/i.test(lead) || /\bnote\s+under\s*$/i.test(lead)
+            !/\bunder\s*$/i.test(listLead) || /\bnote\s+under\s*$/i.test(listLead)
               ? []
-              : /^\s*,?\s*under\s*$/i.test(lead) && cref && hasClass(cref, 'cref')
-                ? [getText($, cref)]
-                : ownerHeadwords($, el);
+              : named && hasClass(named, 'cref')
+                ? [getText($, named)]
+                : [
+                    ...(named && hasClass(named, 'xex') ? [getText($, named)] : []),
+                    ...ownerHeadwords($, el),
+                  ];
+          let marker = after;
+          while (marker?.type === 'text' && /^\s*$/.test(marker.data)) marker = marker.nextSibling;
+          const subsenseLetter =
+            marker &&
+            isElement(marker) &&
+            hasClass(marker, 'sd') &&
+            marker.attribs['data-role'] !== 'definition' &&
+            !/\bIllust/.test(`${letter ? getText($, letter) : ''}${referenceLead}`)
+              ? /^\(([a-z])\)$/.exec(getText($, marker).trim())?.[1]
+              : undefined;
+          const compoundSense = lettered
+            ? /^\(([a-z])\)$/.exec(getText($, letter).trim())?.[1]
+            : undefined;
           const fragment = resolve?.fragment?.(slug, {
             recorded: el.attribs['data-target'],
             ...senseReference(
@@ -98,6 +137,9 @@ export function loadPreprocessedDocument(
               Boolean(partOfSpeech)
             ),
             partOfSpeech,
+            compoundSense,
+            subsenseLetter,
+            homographNumber: Number((ordinal ?? printed)?.[1]) || undefined,
             phrases: [...phrases, text.replace(/,\s*\d+\.?\s*$/, '')],
           });
           el.tagName = 'a';

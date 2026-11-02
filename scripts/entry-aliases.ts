@@ -1,15 +1,21 @@
 import * as cheerio from 'cheerio';
 import { normalizeLookup } from '../app/lib/lookup';
 
+export const headwordMarks = /[′ˊˋˈˌ‵`*\u00ad‖]/g;
+
 export interface EntryAliases {
   names: string[];
   deferred: string[];
+  defined: string[];
+  headwords: string[];
 }
 
 export function entryAliases(key: string, rawHtml: string): EntryAliases {
   const $ = cheerio.load(rawHtml, { xml: false }, false);
   const aliases = new Set([key]);
   const deferred = new Set<string>();
+  const defined = new Set([key]);
+  const headwords = new Set([key]);
   $('.hw, .asp, .col, .conjf, .adjf, .plw, .wf, .plu .er').each((_, element) => {
     const text = (
       $(element).hasClass('col')
@@ -17,15 +23,23 @@ export function entryAliases(key: string, rawHtml: string): EntryAliases {
         : $(element).text()
     )
       .normalize('NFC')
-      .replace(/[′ˊˋˈˌ`*\u00ad‖]/g, '')
+      .replace(headwordMarks, '')
       .trim();
-    if (!text || (text.startsWith('-') && !key.startsWith('-'))) return;
-    const pointer =
-      $(element).hasClass('col') &&
-      /^\s*See under\b/.test($(element).nextAll('.cd').first().text());
-    const names = pointer ? deferred : aliases;
-    names.add(text);
-    names.add(text.replace(/(?<=\p{L})-(?=\p{L})/gu, ''));
+    if (
+      !text ||
+      (text.startsWith('-') &&
+        !key.startsWith('-') &&
+        (!$(element).hasClass('hw') || $(element).prevAll('.hw, .def').first().hasClass('hw')))
+    )
+      return;
+    const definition = $(element).hasClass('col')
+      ? $(element).nextAll('.cd').add($(element).parent('.mcol').nextAll('.cd')).first().text()
+      : '';
+    for (const name of [text, text.replace(/(?<=\p{L})-(?=\p{L})/gu, '')]) {
+      (/^\s*See under\b/.test(definition) ? deferred : aliases).add(name);
+      if (!/^\s*See\b/.test(definition)) defined.add(name);
+      if ($(element).hasClass('hw')) headwords.add(name);
+    }
   });
   if (
     $.root()
@@ -33,20 +47,31 @@ export function entryAliases(key: string, rawHtml: string): EntryAliases {
       .toArray()
       .some((element) => /\bverb\b/.test($(element).text()))
   ) {
-    aliases.add(`To ${key}`);
+    for (const names of [aliases, defined, headwords]) names.add(`To ${key}`);
   }
-  return { names: [...aliases], deferred: [...deferred].filter((name) => !aliases.has(name)) };
+  return {
+    names: [...aliases],
+    deferred: [...deferred].filter((name) => !aliases.has(name)),
+    defined: [...defined],
+    headwords: [...headwords],
+  };
 }
 
 export function unambiguousAliases(
   entries: ReadonlyMap<string, ReadonlyArray<string>>,
-  deferred: ReadonlyMap<string, ReadonlyArray<string>> = new Map()
+  deferred: ReadonlyMap<string, ReadonlyArray<string>> = new Map(),
+  preferred: ReadonlyArray<ReadonlyMap<string, ReadonlyArray<string>>> = []
 ): Map<string, string> {
   const claimed = resolveClaims(entries);
   const pointers = resolveClaims(deferred, entries.keys());
   for (const name of claimed.names) pointers.aliases.delete(name);
   const canonical = new Map([...entries.keys()].map((key) => [normalizeLookup(key), key]));
-  return new Map([...pointers.aliases, ...claimed.aliases, ...canonical]);
+  return new Map([
+    ...pointers.aliases,
+    ...preferred.flatMap((names) => [...resolveClaims(names).aliases]),
+    ...claimed.aliases,
+    ...canonical,
+  ]);
 }
 
 function resolveClaims(
@@ -74,7 +99,26 @@ function resolveClaims(
     const previous = candidates.get(name);
     candidates.set(name, previous === undefined || previous === key ? key : null);
   }
-  for (const key of keys) add(folded, fold(normalizeLookup(key)), key);
+  const canonicalKeys = new Set<string>();
+  for (const key of keys) {
+    add(folded, fold(normalizeLookup(key)), key);
+    canonicalKeys.add(normalizeLookup(key));
+  }
+  const closedSpelling = (name: string) => name.replace(/(?<=\p{L})[ -]+(?=\p{L})/gu, '');
+  const canonicalSpellings = new Map<string, string | null>();
+  for (const [key, names] of entries) {
+    const normalized = normalizeLookup(key);
+    for (const alias of names) {
+      const name = normalizeLookup(alias);
+      if (
+        name.includes(' ') &&
+        name !== normalized &&
+        !canonicalKeys.has(name) &&
+        closedSpelling(name) === closedSpelling(normalized)
+      )
+        add(canonicalSpellings, fold(name), key);
+    }
+  }
   for (const [key, names] of entries) {
     for (const name of new Set([key, ...names])) {
       const normalized = normalizeLookup(name);
@@ -91,7 +135,7 @@ function resolveClaims(
     }
   }
   for (const [name, key] of [...equivalent, ...exact]) {
-    const resolved = key ?? folded.get(fold(name));
+    const resolved = key ?? folded.get(fold(name)) ?? canonicalSpellings.get(fold(name));
     if (resolved) aliases.set(name, resolved);
     else aliases.delete(name);
   }

@@ -66,6 +66,45 @@ describe('reference href punctuation', () => {
   });
 });
 
+const spellingReferences = createEntryReferences(
+  new Map([
+    ['Co-', '<h2 class="hw">Co-</h2>'],
+    ['-oid', '<h2 class="hw">-oid</h2>'],
+    ['Anti', '<h2 class="hw">An′ti</h2>'],
+    ['N', '<h2 class="hw">N</h2>'],
+    ['Saw', '<h2 class="hw">Saw</h2>'],
+    ['Ward', '<h2 class="hw">Ward</h2>'],
+    ['-ward', '<h2 class="hw">-ward</h2>'],
+    ['Breastwheel', '<h2 class="hw">Breast′wheel</h2>'],
+    ['V hook', '<h2 class="hw">V′ hook</h2>'],
+    ['Sometime', '<h2 class="hw">Some′time</h2>'],
+    ['Some time', '<h2 class="hw">Some time</h2>'],
+    ['Fete', '<h2 class="hw">Fete</h2>'],
+    ['Pin&#x303;on', '<h2 class="hw">Pi&#x303;n′on</h2>'],
+  ]),
+  parseEntry
+);
+
+describe('references spelled differently from their entry', () => {
+  test.each([
+    ['Co', '/entry/co-'],
+    ['oid', '/entry/-oid'],
+    ['Anti-', '/entry/anti'],
+    ['Ward', '/entry/ward'],
+    ['n-', '/entry/n-'],
+    ['-saw', '/entry/-saw'],
+    ['Breast wheel', '/entry/breastwheel'],
+    ['V-hook', '/entry/v_hook'],
+    ['Some-time', '/entry/some-time'],
+    ['Fête', '/entry/fete'],
+    ['Pinon', '/entry/piñon'],
+  ])('%s links to %s', (text, href) => {
+    expect(preprocess(`See <div class="er">${text}</div>.`, spellingReferences.resolve)).toContain(
+      `href="${href}"`
+    );
+  });
+});
+
 const qualifiedSource = new Map([
   ['Magic', '<h2 class="hw">Magic</h2><div class="pos">noun</div><div class="def">A noun.</div>'],
   [
@@ -111,6 +150,14 @@ const qualifiedSource = new Map([
     'Body',
     '<h2 class="hw">Body</h2><div class="pos">noun</div><div class="def">A <div class="pos">verb</div>.</div>',
   ],
+  [
+    'Metabole',
+    '<h2 class="hw">Me-tab′o-la</h2>, <h2 class="hw">Me-tab′o-le</h2><div class="pos">noun</div><div class="def">A change.</div>',
+  ],
+  [
+    'Metabolia',
+    '<h2 class="hw">Me-tab′o-la</h2>, <h2 class="hw">Met′a-bo′li-a</h2><div class="pos">plural noun</div><div class="def">Insects.</div>',
+  ],
 ]);
 const qualifiedReferences = createEntryReferences(qualifiedSource, parseEntry);
 
@@ -149,6 +196,18 @@ describe('explicit grammatical reference targets', () => {
       'bibbe'
     );
     expect(entryReferenceSlug('Bib', qualifiedReferences.resolve)).toBe('bib');
+  });
+
+  test('lets a part of speech pick between entries that share a headword', () => {
+    expect(qualifiedReferences.resolve('metabola')).toBeUndefined();
+    expect(entryReferenceSlug('Metabola', qualifiedReferences.resolve)).toBe('metabola');
+    expect(entryReferenceSlug('Metabola', qualifiedReferences.resolve, 'noun')).toBe('metabole');
+    expect(
+      preprocess(
+        'See <div class="er">Metabola</div>, <div class="pos">plural noun</div>.',
+        qualifiedReferences.resolve
+      )
+    ).toContain('href="/entry/metabolia"');
   });
 
   test('keeps multiple matching owners and body labels from changing targets', () => {
@@ -224,7 +283,7 @@ const targetSource = new Map([
   ],
   [
     'Beam',
-    '<h2 class="hw">Beam</h2><div class="pos">noun</div><div class="def">A timber.</div><div class="cs"><div class="col"><b>Abaft the beam</b></div>. <div class="cd">Behind.</div></div>',
+    '<h2 class="hw">Beam</h2><div class="pos">noun</div><div class="def">A timber.</div><div class="cs"><div class="col"><b>Abaft the beam</b></div>. <div class="cd">Behind.</div> &#x2014; <div class="col"><b>Beam compass</b></div>. <div class="sd">(a) </div><div class="cd">A drawing tool.</div><div class="sd">(b) </div><div class="cd">A surveying tool.</div></div>',
   ],
 ]);
 const targetReferences = createEntryReferences(targetSource, parseEntry);
@@ -252,9 +311,75 @@ describe('sense and compound reference targets', () => {
       '/entry/beam',
     ],
     ['See <div class="er">Abaft the beam</div>.', '/entry/abaft_the_beam#abaft_the_beam'],
+    [
+      'See <div class="cref">Abaft the beam</div>, under 1st <div class="er">Beam</div>.',
+      '/entry/beam#abaft_the_beam',
+    ],
+    [
+      'See <div class="cref">Abaft the beam</div>, under 2d <div class="er">Beam</div>.',
+      '/entry/beam',
+    ],
+    ['See the Note under 1st <div class="er">Beam</div>.', '/entry/beam'],
+    [
+      'See <div class="cref">Beam compass </div><div class="sd">(b)</div>, under <div class="er">Beam</div>.',
+      '/entry/beam#beam_compass-b',
+    ],
+    [
+      'See <i class="xex">Abaft the beam</i>, under <div class="er">Beam</div>.',
+      '/entry/beam#abaft_the_beam',
+    ],
+    [
+      '<div class="cs"><div class="col"><b>Beam compass</b></div>. <div class="cd">See <i class="xex">Illust. </i>under <div class="er">Beam</div>.</div></div>',
+      '/entry/beam#beam_compass',
+    ],
+    [
+      'See under 2d <div class="er" data-target="abaft_the_beam">Beam</div>.',
+      '/entry/beam#abaft_the_beam',
+    ],
     ['See <div class="er">Beam</div>.', '/entry/beam'],
+    ['See 2d <div class="er">Advance</div>.', '/entry/advance#2'],
+    [
+      'See 2d <div class="er">Advance</div>, <div class="pos">transitive verb</div>.',
+      '/entry/advance#1',
+    ],
+    ['See 3d <div class="er">Advance</div>.', '/entry/advance'],
+    ['See <div class="er">2d Advance</div>.', '/entry/advance#2'],
+    [
+      'See <div class="er">2d Advance</div>, <div class="pos">transitive verb</div>.',
+      '/entry/advance#1',
+    ],
+    ['See <div class="er">Abatement </div><div class="sd">(b)</div>.', '/entry/abatement#2-b'],
+    [
+      'See <i class="xex">Illust. </i>of <div class="er">Abatement </div><div class="sd">(b)</div>.',
+      '/entry/abatement',
+    ],
+    [
+      'See <div class="er">Abatement</div> <div class="sd" data-role="definition">(b)</div>',
+      '/entry/abatement',
+    ],
   ])('%s links to %s', (html, href) => {
     expect(preprocess(html, targetReferences.resolve)).toContain(`href="${href}"`);
+  });
+
+  test('carries "under" across a list of references', () => {
+    const html = preprocess(
+      '<div class="cs"><div class="mcol"><div class="col"><b>Ablative absolute</b></div>, <div class="col"><b>Abaft the beam</b></div></div>, <div class="cd">See under <div class="er">Ablative</div>, <div class="er">Beam</div>, etc.</div></div>',
+      targetReferences.resolve
+    );
+    expect(html).toContain('href="/entry/ablative#ablative_absolute"');
+    expect(html).toContain('href="/entry/beam#abaft_the_beam"');
+    expect(
+      preprocess(
+        'See <div class="er">Ablative</div>, <div class="er">Beam</div>.',
+        targetReferences.resolve
+      )
+    ).toContain('href="/entry/beam"');
+  });
+
+  test('opens a recorded entry in place of the printed name', () => {
+    expect(
+      preprocess('See <div class="er" data-entry="Two">Shared</div>.', references.resolve)
+    ).toBe('See <a class="er" href="/entry/two">Shared</a>.');
   });
 
   test('prefers a recorded target that exists in the destination', () => {

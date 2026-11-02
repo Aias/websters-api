@@ -1,35 +1,46 @@
 import { normalizeLookup } from '../app/lib/lookup';
 import { slugify } from '../app/lib/slug';
 import type { DictionaryEntry, LexicalBlock } from '../app/lib/types';
-import { entryAliases, unambiguousAliases } from './entry-aliases';
+import { entryAliases, headwordMarks, unambiguousAliases } from './entry-aliases';
 
 export interface ReferenceTarget {
   recorded?: string;
   sense?: string;
   subsense?: string;
+  compoundSense?: string;
+  subsenseLetter?: string;
   partOfSpeech?: string;
+  homographNumber?: number;
   phrases: ReadonlyArray<string>;
 }
 
 export interface EntryResolver {
   (slug: string): string | undefined;
+  spelled?: (slug: string) => string | undefined;
   qualified?: (text: string, partOfSpeech: string, currentSlug: string) => string | undefined;
   fragment?: (slug: string, target: ReferenceTarget) => string | undefined;
 }
 
 interface EntryTargets {
   ids: Set<string>;
-  compounds: Map<string, string>;
+  compounds: Map<string, { id: string; homographNumber: number }>;
   homographs: { id?: string; partsOfSpeech: string[]; senses: Map<string, string> }[];
 }
 
+function spelling(name: string): string {
+  return name
+    .normalize('NFD')
+    .replace(/\p{M}/gu, '')
+    .replace(/(?<=\p{L})[ -]+(?=\p{L})/gu, '');
+}
+
 function headwordNames(text: string): string[] {
-  const name = normalizeLookup(text.replace(/[′ˊˋˈˌ`*\u00ad‖]/g, ''));
+  const name = normalizeLookup(text.replace(headwordMarks, ''));
   return [name, name.replace(/(?<=\p{L})-(?=\p{L})/gu, '')];
 }
 
 export function phraseName(text: string): string {
-  return normalizeLookup(text.replace(/[′ˊˋˈˌ`*\u00ad‖]/g, ''))
+  return normalizeLookup(text.replace(headwordMarks, ''))
     .replace(/[^\p{L}\p{N}']+/gu, ' ')
     .trim();
 }
@@ -37,6 +48,7 @@ export function phraseName(text: string): string {
 function collectTargets(
   content: ReadonlyArray<LexicalBlock>,
   targets: EntryTargets,
+  homographNumber: number,
   senses?: Map<string, string>
 ): void {
   for (const block of content) {
@@ -44,15 +56,15 @@ function collectTargets(
       targets.ids.add(block.id);
       const number = /^(\d+)\.?$/.exec(block.number)?.[1];
       if (number && senses && !senses.has(number)) senses.set(number, block.id);
-      collectTargets(block.content, targets, number ? undefined : senses);
+      collectTargets(block.content, targets, homographNumber, number ? undefined : senses);
     } else if (block.kind === 'compound' && block.id) {
       targets.ids.add(block.id);
       for (const headword of block.headwords) {
         if (!targets.compounds.has(phraseName(headword)))
-          targets.compounds.set(phraseName(headword), block.id);
+          targets.compounds.set(phraseName(headword), { id: block.id, homographNumber });
       }
-      collectTargets(block.content, targets);
-    } else if ('content' in block) collectTargets(block.content, targets);
+      collectTargets(block.content, targets, homographNumber);
+    } else if ('content' in block) collectTargets(block.content, targets, homographNumber);
   }
 }
 
@@ -70,14 +82,21 @@ export function createEntryReferences(
   const canonical = new Map<string, string>();
   const aliasesByEntry = new Map<string, ReadonlyArray<string>>();
   const pointersByEntry = new Map<string, ReadonlyArray<string>>();
+  const headwordsByEntry = new Map<string, ReadonlyArray<string>>();
+  const definedByEntry = new Map<string, ReadonlyArray<string>>();
   for (const [rawKey, html] of source) {
     const key = decodeEntryKey(rawKey);
     canonical.set(slugify(key), key);
-    const { names, deferred } = entryAliases(key, html);
+    const { names, deferred, defined, headwords } = entryAliases(key, html);
     aliasesByEntry.set(key, names);
+    headwordsByEntry.set(key, headwords);
+    definedByEntry.set(key, defined);
     if (deferred.length) pointersByEntry.set(key, deferred);
   }
-  const aliases = unambiguousAliases(aliasesByEntry, pointersByEntry);
+  const aliases = unambiguousAliases(aliasesByEntry, pointersByEntry, [
+    headwordsByEntry,
+    definedByEntry,
+  ]);
   const resolve: EntryResolver = (slug) => {
     const name = normalizeLookup(slug.replaceAll('_', ' '));
     const folded = name
@@ -85,6 +104,17 @@ export function createEntryReferences(
       .replace(/\u0308/g, '')
       .normalize('NFC');
     return canonical.get(slug) ?? aliases.get(name) ?? aliases.get(folded);
+  };
+  const spellings = new Map<string, string | null>();
+  for (const [name, key] of aliases) {
+    const spelled = spelling(name.replace(/^-+|-+$/g, ''));
+    const previous = spellings.get(spelled);
+    spellings.set(spelled, previous === undefined || previous === key ? key : null);
+  }
+  resolve.spelled = (slug) => {
+    const name = normalizeLookup(slug.replaceAll('_', ' ')).replace(/(?<=\p{L}\p{L})-+$/u, '');
+    const key = spellings.get(spelling(name));
+    return key ? slugify(key) : undefined;
   };
   const qualified = new Map<string, Set<string>>();
   const targetsByEntry = new Map<string, EntryTargets>();
@@ -95,7 +125,7 @@ export function createEntryReferences(
     for (const homograph of parse(key, html).homographs) {
       const senses = new Map<string, string>();
       if (homograph.id) targets.ids.add(homograph.id);
-      collectTargets(homograph.content, targets, senses);
+      collectTargets(homograph.content, targets, targets.homographs.length + 1, senses);
       targets.homographs.push({
         id: homograph.id,
         partsOfSpeech: homograph.header.flatMap((part) =>
@@ -130,7 +160,19 @@ export function createEntryReferences(
     const owner = owners.values().next().value;
     return owner ? slugify(owner) : undefined;
   };
-  resolve.fragment = (slug, { recorded, sense, subsense, partOfSpeech, phrases }) => {
+  resolve.fragment = (
+    slug,
+    {
+      recorded,
+      sense,
+      subsense,
+      compoundSense,
+      subsenseLetter,
+      partOfSpeech,
+      homographNumber,
+      phrases,
+    }
+  ) => {
     const key = resolve(slug) ?? '';
     const targets = targetsByEntry.get(key);
     if (!targets) return;
@@ -141,16 +183,32 @@ export function createEntryReferences(
           partsOfSpeech.some((part) => ` ${part} `.includes(label))
         )
       : [];
+    const numbered = homographNumber ? targets.homographs[homographNumber - 1] : undefined;
+    const ordinal =
+      numbered && (!label || numbered.partsOfSpeech.some((part) => ` ${part} `.includes(label)))
+        ? numbered
+        : undefined;
     const id = sense
-      ? [...labeled, ...targets.homographs].map(({ senses }) => senses.get(sense)).find(Boolean)
+      ? (ordinal ? [ordinal] : [...labeled, ...targets.homographs])
+          .map(({ senses }) => senses.get(sense))
+          .find(Boolean)
       : undefined;
     if (id) return subsense && targets.ids.has(`${id}-${subsense}`) ? `${id}-${subsense}` : id;
+    const lettered = subsenseLetter
+      ? [...targets.ids].filter((candidate) =>
+          new RegExp(`^(?:\\d+-)*${subsenseLetter}$`).test(candidate)
+        )
+      : [];
+    if (lettered.length === 1) return lettered[0];
     const name = phraseName(key);
     for (const phrase of phrases) {
       const compound = phraseName(phrase) !== name && targets.compounds.get(phraseName(phrase));
-      if (compound) return compound;
+      if (compound && (!homographNumber || compound.homographNumber === homographNumber))
+        return compoundSense && targets.ids.has(`${compound.id}-${compoundSense}`)
+          ? `${compound.id}-${compoundSense}`
+          : compound.id;
     }
-    return labeled[0]?.id;
+    return (ordinal ?? labeled[0])?.id;
   };
   return { aliases, resolve };
 }
@@ -164,5 +222,6 @@ export function entryReferenceSlug(
   const undotted = slug.replace(/\.$/, '');
   const current =
     slug.endsWith('.') && resolve && !resolve(slug) && resolve(undotted) ? undotted : slug;
-  return (partOfSpeech && resolve?.qualified?.(text, partOfSpeech, current)) || current;
+  const target = (partOfSpeech && resolve?.qualified?.(text, partOfSpeech, current)) || current;
+  return (resolve && !resolve(target) && resolve.spelled?.(target)) || target;
 }

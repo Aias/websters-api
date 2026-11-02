@@ -84,12 +84,26 @@ describe('dictionary reference lookup', () => {
     expect(aliases).toContain('Aaron’s rod');
   });
 
+  test('removes every stress mark from headwords', () => {
+    expect(entryAliases('Falcon-gentle', '<h2 class="hw">fal′con-gen‵til</h2>').names).toEqual([
+      'Falcon-gentle',
+      'falcon-gentil',
+      'falcongentil',
+    ]);
+  });
+
   test('preserves affix hyphens', () => {
     expect(entryAliases('Ad-', '<h2 class="hw">Ad-</h2>').names).toEqual(['Ad-']);
     expect(entryAliases('-ward', '<h2 class="hw">-ward</h2>').names).toEqual(['-ward']);
     expect(
       entryAliases('Argentamine', '<h2 class="hw">Argentamine</h2><h2 class="hw">-min</h2>').names
     ).toEqual(['Argentamine']);
+    expect(
+      entryAliases(
+        'Archy',
+        '<h2 class="hw">Arch′y</h2><div class="def">Arched.</div><br/><h2 class="hw">-ar′chy</h2><div class="def">A suffix.</div>'
+      ).names
+    ).toEqual(['Archy', '-archy']);
   });
 
   test('resolves infinitive references only for verb entries', () => {
@@ -150,6 +164,69 @@ describe('dictionary reference lookup', () => {
     ]);
   });
 
+  test('retains a spaced spelling claimed by its hyphenated canonical entry', () => {
+    const result = unambiguousAliases(
+      new Map([
+        ['Arrow-head', ['Arrow-head', 'Arrow head']],
+        ['Arrow', ['Arrow', 'Arrow head']],
+      ])
+    );
+    expect(result.get('arrow head')).toBe('Arrow-head');
+    expect(result.get('arrow-head')).toBe('Arrow-head');
+  });
+
+  test('retains a spaced spelling claimed by its closed canonical entry', () => {
+    const result = unambiguousAliases(
+      new Map([
+        ['Arrowhead', ['Arrowhead', 'Arrow head']],
+        ['Arrow', ['Arrow', 'Arrow head']],
+      ])
+    );
+    expect(result.get('arrow head')).toBe('Arrowhead');
+  });
+
+  test('leaves competing closed and hyphenated canonical spellings unresolved', () => {
+    const result = unambiguousAliases(
+      new Map([
+        ['Arrowhead', ['Arrowhead', 'Arrow head']],
+        ['Arrow-head', ['Arrow-head', 'Arrow head']],
+      ])
+    );
+    expect(result.has('arrow head')).toBe(false);
+  });
+
+  test('preserves an exact spaced canonical entry over a hyphenated variant', () => {
+    const result = unambiguousAliases(
+      new Map([
+        ['Arrow-head', ['Arrow-head', 'Arrow head']],
+        ['Arrow head', ['Arrow head']],
+        ['Arrow', ['Arrow', 'Arrow head']],
+      ])
+    );
+    expect(result.get('arrow head')).toBe('Arrow head');
+  });
+
+  test('requires the hyphenated entry to claim its spaced spelling', () => {
+    const result = unambiguousAliases(
+      new Map([
+        ['Arrow-head', ['Arrow-head']],
+        ['Arrow', ['Arrow', 'Arrow head']],
+        ['Head', ['Head', 'Arrow head']],
+      ])
+    );
+    expect(result.has('arrow head')).toBe(false);
+  });
+
+  test('leaves competing hyphenated canonical spellings unresolved', () => {
+    const result = unambiguousAliases(
+      new Map([
+        ['Alpha-beta gamma', ['Alpha-beta gamma', 'Alpha beta gamma']],
+        ['Alpha beta-gamma', ['Alpha beta-gamma', 'Alpha beta gamma']],
+      ])
+    );
+    expect(result.has('alpha beta gamma')).toBe(false);
+  });
+
   test('gives a compound defined only by See under to an entry that defines it', () => {
     const sore = entryAliases(
       'Sore',
@@ -176,5 +253,70 @@ describe('dictionary reference lookup', () => {
     expect(aliases.get('cold sore')).toBe('Cold');
     expect(aliases.has('sore throat')).toBe(false);
     expect(aliases.get('sorrow sore')).toBe('Sorrow');
+  });
+
+  test('defers every heading in a group that See under defines', () => {
+    expect(
+      entryAliases(
+        'Star',
+        '<div class="cs"><div class="mcol"><div class="col"><b>Double star</b></div>, <div class="col"><b>Shooting star</b></div>, etc. </div><div class="cd">See under <div class="er">Double</div>, etc.</div></div>'
+      ).deferred
+    ).toEqual(['Double star', 'Shooting star']);
+    expect(
+      entryAliases(
+        'Fly',
+        '<div class="cs"><div class="mcol"><div class="col"><b>Cheese fly</b></div>. <div class="cd">See under <div class="er">Cheese</div>.</div></div>' +
+          '<div class="col"><b>Fly agaric</b></div>, <div class="cd">a fungus.</div></div>'
+      )
+    ).toMatchObject({ names: ['Fly', 'Fly agaric'], deferred: ['Cheese fly'] });
+  });
+
+  test('settles a contested name by definition, then by headword', () => {
+    const entries = new Map(
+      [
+        [
+          'Buttress',
+          '<div class="col"><b>Flying buttress</b></div>. <div class="cd">See <div class="er">Flying buttress</div>.</div>',
+        ],
+        [
+          'Flying',
+          '<div class="col"><b>Flying buttress</b></div>, <div class="cd">a contrivance.</div>',
+        ],
+        [
+          'Muscadelle',
+          '<h2 class="hw">Mus′ca-del</h2><div class="def">See <div class="er">Muscatel</div>.</div>',
+        ],
+        ['Muscatel', '<h2 class="hw">Mus′ca-tel</h2><div class="asp">muscadel</div>'],
+        ['Be', '<div class="pos">verb</div>'],
+        [
+          'All fours',
+          '<div class="mcol"><div class="col"><b>To be</b></div>, <div class="col"><b>go</b></div></div>, <div class="cd">to correspond.</div>',
+        ],
+        ['Metabole', '<h2 class="hw">Me-tab′o-la</h2>'],
+        ['Metabolia', '<h2 class="hw">Me-tab′o-la</h2>'],
+      ].map(([key, html]) => [key, entryAliases(key, html)])
+    );
+    const claims = (field: 'names' | 'headwords' | 'defined') =>
+      new Map([...entries].map(([key, aliases]) => [key, aliases[field]]));
+    const aliases = unambiguousAliases(claims('names'), new Map(), [
+      claims('headwords'),
+      claims('defined'),
+    ]);
+    expect(aliases.get('flying buttress')).toBe('Flying');
+    expect(aliases.get('muscadel')).toBe('Muscadelle');
+    expect(aliases.get('to be')).toBe('Be');
+    expect(aliases.has('metabola')).toBe(false);
+  });
+
+  test('keeps an existing resolution when a preferred claim disagrees', () => {
+    const aliases = unambiguousAliases(
+      new Map([
+        ['Leukaemia', ['Leukæmia']],
+        ['Leuchaemia', ['Leuchæmia', 'leukæmia']],
+      ]),
+      new Map(),
+      [new Map([['Leuchaemia', ['leukæmia']]])]
+    );
+    expect(aliases.get('leukæmia')).toBe('Leukaemia');
   });
 });

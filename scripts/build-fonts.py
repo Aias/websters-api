@@ -22,7 +22,15 @@ from fontTools.varLib.instancer import instantiateVariableFont
 
 OLD_STANDARD = 'https://mirrors.ctan.org/fonts/oldstandard.zip'
 BESLEY = 'https://github.com/google/fonts/raw/85c5cea9da66117723c05bf5d7a7143fd10a411b/ofl/besley/Besley%5Bwght%5D.ttf'
-NOTO_MUSIC = 'https://raw.githubusercontent.com/google/fonts/85c5cea9da66117723c05bf5d7a7143fd10a411b/ofl/notomusic/NotoMusic-Regular.ttf'
+GOOGLE_FONTS = 'https://raw.githubusercontent.com/google/fonts/85c5cea9da66117723c05bf5d7a7143fd10a411b/ofl/'
+DONORS = {
+    'notomusic/NotoMusic-Regular.ttf': (0x2669, 0x266A, 0x266D, 0x266E, 0x266F, 0x1D10B, 0x1D110, 0x1D135, 0x1D197, 0x1D19A),
+    'notosanssymbols2/NotoSansSymbols2-Regular.ttf': (0x25B3, 0x261E, 0x2BC9),
+    'notosanssymbols/NotoSansSymbols%5Bwght%5D.ttf': (0x2312, 0x26B9, 0x26E2),
+    'notosansmath/NotoSansMath-Regular.ttf': (0x221B, 0x23DC, 0x23DD),
+    'notosansphoenician/NotoSansPhoenician-Regular.ttf': (0x10900,),
+    'notoserif/NotoSerif-Regular.ttf': (0x1D7A,),
+}
 OUT = Path(__file__).resolve().parents[1] / 'app' / 'fonts'
 DOTLESS = {0x69: 0x131, 0x6A: 0x237}
 
@@ -146,12 +154,13 @@ def patch_old_standard(font):
     add_mark(font, 'uni035E', 0x035E, draw_double_macron)
 
 
-def patch_music(font, donor):
+def copy_glyphs(font, donor, codepoints):
     cff = font['CFF '].cff
     top, glyphs, cmap = cff.topDictIndex[0], donor.getGlyphSet(), donor.getBestCmap()
     scale = font['OS/2'].sCapHeight / donor['OS/2'].sCapHeight
-    for codepoint in (0x1D10B, 0x1D110, 0x1D135, 0x1D197, 0x1D19A):
-        name, source = f'u{codepoint:05X}', cmap[codepoint]
+    for codepoint in codepoints:
+        name, source = f'uni{codepoint:04X}' if codepoint <= 0xFFFF else f'u{codepoint:05X}', cmap[codepoint]
+        assert name not in top.CharStrings.charStrings, name
         advance = round(donor['hmtx'][source][0] * scale)
         pen, box = T2CharStringPen(advance, None), BoundsPen(None)
         for target in (pen, box):
@@ -175,6 +184,12 @@ def patch_besley(font, donor):
         glyph.recalcBounds(glyf)
         font['hmtx'][name] = (round(donor['hmtx'][donor_cmap[codepoint]][0] * scale), glyph.xMin)
         map_codepoint(font, codepoint, name)
+    tabular, advance = font['hmtx']['uniFF11'][0], font['hmtx']['zero'][0]
+    pen = TTGlyphPen(font.getGlyphSet())
+    pen.addComponent('zero', (1, 0, 0, 1, round((tabular - advance) / 2), 0))
+    glyf['uniFF10'] = zero = pen.glyph()
+    zero.recalcBounds(glyf)
+    font['hmtx']['uniFF10'] = (tabular, zero.xMin)
     font.setGlyphOrder(glyf.glyphOrder)
 
 
@@ -186,12 +201,12 @@ def save(font, name):
 
 archive = zipfile.ZipFile(io.BytesIO(fetch(OLD_STANDARD)))
 old_standard = lambda style: TTFont(io.BytesIO(archive.read(f'oldstandard/opentype/OldStandard-{style}.otf')))
-music = TTFont(io.BytesIO(fetch(NOTO_MUSIC)))
+donors = {path: TTFont(io.BytesIO(fetch(GOOGLE_FONTS + path))) for path in DONORS}
 for style in ('Regular', 'Italic', 'BoldItalic'):
     font = old_standard(style)
     patch_old_standard(font)
-    if style == 'Regular':
-        patch_music(font, music)
+    for path, codepoints in DONORS.items():
+        copy_glyphs(font, donors[path], codepoints)
     save(font, f'OldStandard-{style}')
 besley = instantiateVariableFont(TTFont(io.BytesIO(fetch(BESLEY))), {'wght': 800})
 patch_besley(besley, old_standard('Bold'))

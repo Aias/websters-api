@@ -8,6 +8,8 @@ The user's rulings of 2026-10-28 left the following calls to the auditor. Each e
 - **Pronunciations** are restored from the print only inside entries a batch already reviews.
 - **Every 1913 entry gets a record.**
 - **Senses follow the print's division and numbering.**
+- **Numbered homograph references** ("See 3d Sore") link to that homograph, and reviews confirm the record's homograph numbering against the print (2026-11-02).
+- **Supplement entries the 1907 printing lacks** take Webster's New International Dictionary as their print witness. Its text is accepted only where it matches Gutenberg word for word, and a pronunciation mark the corpus never uses is held.
 
 ## Decisions
 
@@ -94,3 +96,29 @@ Fleshpot's "hence (pl.)" clause belongs in its single unnumbered definition. Its
 ### Disputed words in complete definitions
 
 Nascent's compound definition reads "one compound acid" in the available print. Undulatory's compound heading supplies "of light", and its definition begins "its various phenomena". Each disputed span has a native-page adjudication and two fresh independent confirmations. The source keeps these readings without silently substituting a more familiar phrase.
+
+### New International witnesses
+
+Flatware and Rossel current are absent from the only scanned printing of the 1900 supplement, so Webster's New International Dictionary witnesses them. Its house style differs from the 1913 supplement's: it lowercases headwords, gives each word of an open compound a primary accent, and abbreviates field labels without parentheses. The records take their headword notation and field label from Gutenberg's transcription of the 1913 supplement, and their pronunciations from the New International print. Rossel current is therefore `Ros′sel curˊrent` with the label "(Oceanography)", where the New International prints two primary accents and "Oceanog.".
+
+### Ambiguous ligatures
+
+Lizard fish's species epithet prints a ligature that the scan cannot resolve as œ or æ, because the two differ only in a stroke the e absorbs. Under the ruling that an ambiguous printed character takes the character the text means, the record has œ, as in the epithet foetens. Gutenberg and both readers have œ as well.
+
+### Complete restored units and retained notation
+
+A newly inserted compound or note takes the native unit's punctuation. Butcher bird's restored note includes the comma after L. Ludovicianus, confirmed for the complete final replacement by two fresh readers. The retained Butcherbird record keeps its own wording. The original no-comma agreement remains preserved as a superseded acceptance.
+
+Mortar's fourth noun is the same lexical unit as the printed Mor′ter lamp noun: complete etymology, definition, obsolete label and Chaucer attribution agree. Its missing pronunciation is restored from that unit's own heading while preserving the coherent electronic spelling Mortar. The ruling does not require a rename or permit copying a neighboring homograph's pronunciation.
+
+### Printed errors a 1913 reference corrects
+
+Soak cites "Isa. xxiv. 7." for "Their land shall be soaked with blood" in the print, GCIDE and Gutenberg alike. In the Authorized Version that line is Isaiah 34:7, and 24:7 is "The new wine mourneth", so the record reads "Isa. xxxiv. 7.". Solar's table of periodic comets prints Halley's last perihelion as 1885.9. The Encyclopaedia Britannica of 1910–11 gives 1835 Nov. 15.9, and the table's own period of 76 years leads from 1835 to the 1910 return, so the record reads 1835.9. Each correction names its reference in the batch evidence.
+
+### Eye-skips inside words
+
+An eye-skip can start and end inside words. Slime's etymology prints "MHG. slīm, OHG. slīmen", and the electronic "MHG. slīmen" lacks exactly the span between the two "slīm"s. Its second sense prints "mucilaginous or glutinous", and the electronic text lacks the span between the two "-inous" endings. A span that falls between two identical letter strings is lost the same way as one between repeated words, so both are restored as transcription loss.
+
+### Later homographs after printed ones
+
+Where a record carries homographs the print lacks, such as GCIDE-only or 1913 supplement homographs, they follow the printed homographs in the printed order, as later senses follow printed senses. Tout keeps its four printed homographs first and its later additions after them, so numbered references count the printed homographs.

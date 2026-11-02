@@ -1,0 +1,84 @@
+{
+  "batch": "own-compounds-21-26",
+  "sourceBeforeApplication": "759f170de69b13c9990591fcdbfbca21a682cdab7343922dd8de8bd886fe0327",
+  "sourceAfter": "1a6ae340a27475bc87c293f2946a8a684b7468e79fb47ed5da0bdb30f32627ba",
+  "sourceApplicationRevision": "6cd7adb19e6039c8858c0d775f85e7fcf0e58d44",
+  "originalFrozenBeforeSourceSha256": "13ef4b4e985ee1f390839bf40f3a7b16d3047feee362f9286247e6aa91eefd81",
+  "acceptedSourceEdits": 30,
+  "independentAgreement": 28,
+  "sourceAdjudication": 2,
+  "metadataSupplements": 1,
+  "changedOwnerKeys": [
+    "Music",
+    "Nut",
+    "Old",
+    "Oyster",
+    "Parcel",
+    "Pepper",
+    "Per",
+    "Pilot",
+    "Place",
+    "Red",
+    "Roar",
+    "Ship",
+    "Snap",
+    "Solomon"
+  ],
+  "retainedOwnRecords": 18,
+  "candidatePool": {
+    "size": 188,
+    "priorResolved": 127,
+    "newResolutions": 18,
+    "resolved": 145,
+    "remaining": 43,
+    "basis": "Prior reconciled checkpoint plus eighteen distinct keys from the frozen remaining-61 manifest. Historical resolutions retain their original pools."
+  },
+  "completeEntryCredit": 0,
+  "sourceHoldsAdded": 7,
+  "openHolds": 223,
+  "illustrationObligationsAdded": 15,
+  "frozenInventories": {
+    "reports/dictionary-print-inventory.json": "b322bcc4527188568c933f34ca9f0d31dd7b2b129fd6cf51741db8aacc530750",
+    "reports/dictionary-print-inventory.jsonl": "2d514c26fc30137cc89afc8745aa0f14653f7b4e8ec0362ee184fc5312b2566d",
+    "reports/dictionary-print-fragments.jsonl": "89316853530af024e18c4fc89659c33b6746b0625719f4505bca56dbce79a166",
+    "reports/dictionary-print-review-history.jsonl": "d9e04fe56546adf16dfb878575c1843c7175462e7c24a497f9cfc15e3d6d2ed2",
+    "reports/dictionary-print-worksets.jsonl": "77681c9cd204818eded0323135e22c08b624bfb2573a5690bc0488c1cc91c90d"
+  },
+  "nativeFinal": {
+    "final-native-21-22/report.json": "9e9cd80816180b2afe3363e8c7b44b82307e2a23f05663771ee253dbc33c9f4e",
+    "final-native-23-24/report.json": "b636f18f35418c0198f4f2c57a5e3df978a19493ff4d3874cd95d3d75aa919ad",
+    "final-native-25-26/results.json": "6ed15a17765be8dd58c53d00a118982a8bc86a628d6092066f323f14d8f94e03"
+  },
+  "browserFinal": {
+    "final-browser-a/report.json": "642ed91004394238abdbad869d28eaf01dc33bc43f6b90b352318a4196a99e21",
+    "final-browser-b/report.json": "b117cae0e8b71a6b8a2f5ecb450413f44cd457084802e4551ae58d07fa2fd363"
+  },
+  "sourceReaderTokenTelemetry": null,
+  "claimedAt": "2026-11-02T14:17:47.757287+00:00",
+  "recordedAt": "2026-11-02T15:24:26.982319+00:00",
+  "comparison": "http://127.0.0.1:56526/?stage=8dc78e316d2a483c28d8b1c1f9b8e0a093e7b1994351240a24a036d13c5d6008",
+  "stageIdentity": "8dc78e316d2a483c28d8b1c1f9b8e0a093e7b1994351240a24a036d13c5d6008",
+  "verification": {
+    "bunCheck": "passed",
+    "bunTest": {
+      "passed": 375,
+      "failed": 0
+    },
+    "productionBuild": "passed",
+    "databaseEntries": 100806,
+    "runtimeRoutesVerified": 36,
+    "nativeSourceEditsVerified": 30,
+    "browserScreenshots": 79,
+    "viewports": [1440, 390],
+    "newLookupAliases": 1,
+    "newLookupRoutes": 1,
+    "newAmbiguities": 0,
+    "codeSnapshotSha256": "cd93e62f663a2fa70259f9d6088965674d4e80ffc8d745876b92f5fb3fca9155",
+    "collaboratorWorkingChangesExcluded": [
+      "scripts/PARSING.md",
+      "scripts/entry-references.ts",
+      "scripts/entry-references.test.ts",
+      "scripts/source-preprocessing.ts"
+    ]
+  }
+}
