@@ -118,3 +118,7 @@ Soak cites "Isa. xxiv. 7." for "Their land shall be soaked with blood" in the pr
 ### Eye-skips inside words
 
 An eye-skip can start and end inside words. Slime's etymology prints "MHG. slīm, OHG. slīmen", and the electronic "MHG. slīmen" lacks exactly the span between the two "slīm"s. Its second sense prints "mucilaginous or glutinous", and the electronic text lacks the span between the two "-inous" endings. A span that falls between two identical letter strings is lost the same way as one between repeated words, so both are restored as transcription loss.
+
+### Later homographs after printed ones
+
+Where a record carries homographs the print lacks, such as GCIDE-only or 1913 supplement homographs, they follow the printed homographs in the printed order, as later senses follow printed senses. Tout keeps its four printed homographs first and its later additions after them, so numbered references count the printed homographs.
