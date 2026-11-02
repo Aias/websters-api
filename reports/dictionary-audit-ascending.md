@@ -11,10 +11,13 @@ The remaining complete-entry queue contains 3,494 entries, ordered by JavaScript
 | Stage                                                                       | Entries |
 | --------------------------------------------------------------------------- | ------: |
 | Earlier pilot inspections reconciled with current source and browser output |      24 |
-| Additional entries examined, Arthrodesis through Kynurenic                  |     754 |
-| Source, parser, browser text, and visual review closed                      |     343 |
-| Examined entries with unresolved source readings or lookup defects          |     435 |
-| Entries outside the ascending review checkpoint                             |   2,716 |
+| Additional entries examined, Arthrodesis through Metaleptic                 |     988 |
+| Source, parser, browser text, and visual review closed                      |     925 |
+| Examined entries with unresolved source readings or lookup defects          |      87 |
+| Entries the descending audit examined, Scomm through Xanthomelanous         |   1,179 |
+| Entries neither audit has examined, Metallochromy through Scolopendra       |   1,303 |
+
+The 87 unresolved entries comprise 85 with a row in the [open holds register](dictionary-audit-holds.md) and Make and Metabolic, whose open questions sit in the [structural issues register](dictionary-structural-issues.jsonl). Later rulings and cleanup rounds resolved most of the fields held at Metaleptic's checkpoint. Sections below describe the batches through Kynurenic. [PR #29 (Restore print-witnessed dictionary text and apply editorial rulings)](https://github.com/Aias/websters-api/pull/29) carries Kyriology through Metaleptic, batches a97 through a170.
 
 The pilot's closed entries are -ite, -yl, Algometer, Aliphatic, Amylopsin, Anaseismic, Anoetic, Anthracnose, Aplotomy, Apneumatic, Aristotype, Arm, and Arnaout. Additional closed entries are Auxometer, Arthrodesis, Arthrospore, Ascariasis, Bacteriolysis, Baresthesiometer, Barothermograph, Blepharitis, Brontograph, Brontometer, Cachemia, Cacostomia, Capsulotomy, Cataclasm, and Catelectrotonus. Closed entries from Celiac through Crenelate are listed below. The pilot's earlier initial inspections are preserved. Reconciliation and post-integration verification are separate from new source review.
 
@@ -687,7 +690,7 @@ Lookup comparison preserves each branch's intended corrections. Corrected forms 
 
 The ascending review owns the early-alphabet batches. Concurrent descending review owns separate late-alphabet claims on `chengdu-v4/full-entry-z`. Exact keys are recorded before review, and each branch has its own index and services. The combined changes are published in [draft PR #26 (Restore dictionary characters from print and continue entry reviews)](https://github.com/Aias/websters-api/pull/26), which includes the complete descending branch from [PR #27 (Restore lost characters and print-witnessed slips from the end of the alphabet)](https://github.com/Aias/websters-api/pull/27). Shared print scans remain read-only.
 
-The next untouched ascending key is Kyriology. No later ascending packet has review credit. The frozen queue skips entries excluded by the character-only checkpoint, so these are selected-entry boundaries rather than continuous alphabetic coverage. The separate three-entry form-role repair grants no complete-entry review credit to Greasy or Showy. The descending work is integrated into this branch. Its released claims remain unreviewed. Released, unreviewed descending claims receive no coverage credit.
+The next untouched ascending key is Metallochromy. No later ascending packet has review credit. The frozen queue skips entries excluded by the character-only checkpoint, so these are selected-entry boundaries rather than continuous alphabetic coverage. The separate three-entry form-role repair grants no complete-entry review credit to Greasy or Showy. The descending work is integrated into this branch. Its released claims remain unreviewed. Released, unreviewed descending claims receive no coverage credit.
 
 Every counted inspection includes the complete raw entry, decoded text, parsed model, available electronic witnesses, actual browser text, and full native-width rendered images. Printed owners and explicit component references were read individually. Full intervening print columns were not reviewed, so these counts do not establish an exhaustive review of the surrounding alphabetic ranges.
 

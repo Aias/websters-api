@@ -26,7 +26,7 @@ Checkpoint: own-compounds-21-26. Source SHA-256 `1a6ae340a27475bc87c293f2946a8a6
 | Missing standalone records      | All 71 missing records identified by the survey are restored. Entries-4 adds Flatware, Retroussé, and Rossel current.                                                                                                                                                                                                                                                                | This pool does not establish that every possible omission has been discovered.                                                                                                                              |
 | Original missing-compound pool  | All 44 targets are restored. Lizard fish was the last.                                                                                                                                                                                                                                                                                                                               | None remain in this pool.                                                                                                                                                                                   |
 | Compounds in separate records   | Historical work has 46 restoration targets and 26 removed records. Own-compounds-2 restores five further compounds; own-compounds-3-6 restores 12. Own-compounds-7-14 restores four more compounds. Own-compounds-15-20 restores seven more printed units. Own-compounds-21-26 restores seven compound units, headings, subdivisions or boundaries. All reviewed own records remain. | The 188-key pool has 145 recorded resolutions and 43 remaining candidates. Counts overlap with split-record work.                                                                                           |
-| Homograph order                 | Twelve entries follow the printed homograph order: As, Coordinate, Fell and Minor reordered, Butt, Char, Hock and Stem take printed homographs that sat in another record, Tout's later homographs follow its printed ones, and Fray, Main and Molar gain a printed homograph no record had.                                                                                         |
+| Homograph order                 | Twelve entries follow the printed homograph order: As, Coordinate, Fell and Minor reordered, Butt, Char, Hock and Stem take printed homographs that sat in another record, Tout's later homographs follow its printed ones, and Fray, Main and Molar gain a printed homograph no record had.                                                                                         | All 22 targets in the numbered-reference triage are resolved. The other ten already followed the print.                                                                                                     |
 | Original split-record proposals | All 15 proposals have recorded source dispositions.                                                                                                                                                                                                                                                                                                                                  | Bold eagle has fresh independent native confirmation. Its original acceptance record remains unrecovered.                                                                                                   |
 | Later-addition classification   | [13,908 classifications across 11,145 entries](dictionary-later-additions.md).                                                                                                                                                                                                                                                                                                       | 3,912 classifications are uncertain. Of the 497 entries flagged for re-examination, classification-1 settles 365 and defers 125. Guttersnipe settles one more, leaving six in the own-record compound pool. |
 
@@ -90,7 +90,7 @@ The 58 worksets remain in the frozen inventory with their original spans and blo
 
 ### Finish the own-record compound pool
 
-The 188-key pool has 127 recorded resolutions and 61 unreviewed candidates. Historical work covers 47 keys through 46 restoration targets, 16 duplicate removals, and Hostilities through split-record work. [Own-compounds-1](dictionary-audit-own-compounds-1.md) confirms Bold eagle's existing merge with fresh native evidence and retains Air line, Ammoniacal fermentation, and Amyl nitrite unchanged. Their existing main compounds are correct, and their separate records carry additional electronic content. Matching standalone supplement natives remain unreviewed, without blocking those no-change dispositions.
+The 188-key pool has 145 recorded resolutions and 43 unreviewed candidates. Historical work covers 47 keys through 46 restoration targets, 16 duplicate removals, and Hostilities through split-record work. [Own-compounds-1](dictionary-audit-own-compounds-1.md) confirms Bold eagle's existing merge with fresh native evidence and retains Air line, Ammoniacal fermentation, and Amyl nitrite unchanged. Their existing main compounds are correct, and their separate records carry additional electronic content. Matching standalone supplement natives remain unreviewed, without blocking those no-change dispositions.
 
 [Own-compounds-2](dictionary-audit-own-compounds-2.md) restores Death knell, Electric light, Honey creeper, Honey eater, and Honey flower under their printed head entries. All five standalone records remain whole under the specific own-record ruling. The exact three-edit ledger separates two independent agreements from Honey's source adjudication. No records are removed. Bold eagle's original acceptance remains unrecovered, separately from its fresh confirmation.
 
@@ -100,11 +100,22 @@ The 188-key pool has 127 recorded resolutions and 61 unreviewed candidates. Hist
 
 [Own-compounds-15-20](dictionary-audit-own-compounds-15-20.md) resolves 18 more dispositions, retains all own records, and accepts 23 source edits. Seven complete compound units and six pronunciations are restored. Land urchin retains one eligibility hold. Shared ordinal-under resolution corrects 50 links while preserving eight unresolved ordinal mismatches.
 
-28 remaining candidates were historically marked as already having a compound under the head entry. Native disposition review remains necessary before insertion or removal. Preparation for later packets grants no completed review credit.
+[Own-compounds-21-26](dictionary-audit-own-compounds-21-26.md) resolves 18 more dispositions and leaves every standalone record byte-identical. Its 30 source repairs across 14 owners restore seven compound units, headings, subdivisions or boundaries, 12 own-head pronunciations, and 11 transcription fields. Seven source questions join the holds register, and 14 printed figures join the illustration register. The batch adds no complete-entry credit.
+
+The 43 remaining candidates carry these preparation categories. Each still needs a native disposition review before any insertion or removal. Preparing a packet grants no completed review credit.
+
+| Preparation category                                      | Candidates |
+| --------------------------------------------------------- | ---------: |
+| The print runs the compound under more than one head word |         19 |
+| The head record already has the compound                  |         10 |
+| The own record has material the print lacks               |          5 |
+| The head word is not a key in the dictionary              |          4 |
+| The printed heading is missing from the head entry        |          4 |
+| A neighbouring printed compound is absent from the head   |          1 |
 
 ### Open holds
 
-The open register contains 158 unresolved fields: 90 evidence holds, 66 reading holds, and two structure holds, including Dolphin.
+The [open register](dictionary-audit-holds.md) contains 233 unresolved fields: 153 evidence holds, 69 reading holds, five reference holds, four ruling holds, and two structure holds, including Dolphin.
 
 ## Updating progress
 
