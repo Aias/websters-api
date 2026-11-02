@@ -93,6 +93,8 @@ export function loadPreprocessedDocument(
             partOfSpeech = getText($, nested);
           }
         }
+        const printed = /^\s*(\d+)(?:st|nd|rd|th|d)\s+(?=\p{L})/iu.exec(text);
+        if (printed) text = text.slice(printed[0].length);
         const slug = entryReferenceSlug(text, resolve, partOfSpeech);
         if (slug) {
           const after = (next && hasClass(next, 'pos') ? next : el).nextSibling;
@@ -137,7 +139,7 @@ export function loadPreprocessedDocument(
             partOfSpeech,
             compoundSense,
             subsenseLetter,
-            homographNumber: ordinal ? Number(ordinal[1]) : undefined,
+            homographNumber: Number((ordinal ?? printed)?.[1]) || undefined,
             phrases: [...phrases, text.replace(/,\s*\d+\.?\s*$/, '')],
           });
           el.tagName = 'a';

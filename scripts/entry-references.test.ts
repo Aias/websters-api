@@ -339,6 +339,11 @@ describe('sense and compound reference targets', () => {
       '/entry/advance#1',
     ],
     ['See 3d <div class="er">Advance</div>.', '/entry/advance'],
+    ['See <div class="er">2d Advance</div>.', '/entry/advance#2'],
+    [
+      'See <div class="er">2d Advance</div>, <div class="pos">transitive verb</div>.',
+      '/entry/advance#1',
+    ],
     ['See <div class="er">Abatement </div><div class="sd">(b)</div>.', '/entry/abatement#2-b'],
     [
       'See <i class="xex">Illust. </i>of <div class="er">Abatement </div><div class="sd">(b)</div>.',
