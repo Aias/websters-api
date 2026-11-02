@@ -4,18 +4,18 @@
 
 ## Counts
 
-13,909 rows over 11,145 keys.
+13,908 rows over 11,145 keys.
 
 | category             | entry |  span |  total |
 | -------------------- | ----: | ----: | -----: |
 | `wordnet`            |    94 |    21 |    115 |
-| `gcide-editor`       |   122 |    86 |    208 |
-| `supplement-1913`    | 3,359 |   785 |  4,144 |
-| `later-unattributed` | 2,158 | 3,371 |  5,529 |
-| `uncertain`          |   302 | 3,611 |  3,913 |
-| total                | 6,035 | 7,874 | 13,909 |
+| `gcide-editor`       |   125 |    86 |    211 |
+| `supplement-1913`    | 3,356 |   786 |  4,142 |
+| `later-unattributed` | 2,158 | 3,370 |  5,528 |
+| `uncertain`          |   302 | 3,610 |  3,912 |
+| total                | 6,035 | 7,873 | 13,908 |
 
-Left out: 1,168 `ours-extra` hunks whose print vote supports ours, and 721 ours-only entries whose text mostly appears in the print OCR (Gutenberg dropped them; see `excluded-entries.jsonl`). Of the 7,874 span rows, 6,728 have an `owner` pointer and 1,146 await location or fragment reconciliation. Rows for text that a print restoration later replaced are removed once their complete disposition is established.
+Left out: 1,168 `ours-extra` hunks whose print vote supports ours, and 721 ours-only entries whose text mostly appears in the print OCR (Gutenberg dropped them; see `excluded-entries.jsonl`). Of the 7,873 span rows, 6,728 have an `owner` pointer and 1,145 await location or fragment reconciliation. Rows for text that a print restoration later replaced are removed once their complete disposition is established.
 
 ## Row fields
 
@@ -56,7 +56,7 @@ The original comparison covered A through W and omitted Gutenberg book 670. The 
 
 `scripts/dictionary-later-additions.test.ts` checks every non-null span pointer against the current parsed entry using the registry's word normalization. This detects absent pointers and fragments missing from their recorded owners. Printed origin, lexical context, and removal boundaries still require review.
 
-The ownership reconciliation at source revision `452e7b9` relocates four spans in Cart, Corn, and Out after confirming their context. It clears 148 stale pointers whose locations remain unconfirmed, retaining their classification and original text for review. Those rows are included in the 1,146 unresolved locations above. For example, Dollar's removed sense-2 word "formerly" must not be reassigned to the same word in Trade dollar.
+The ownership reconciliation at source revision `452e7b9` relocates four spans in Cart, Corn, and Out after confirming their context. It clears 148 stale pointers whose locations remain unconfirmed, retaining their classification and original text for review. Those rows are included in the 1,145 unresolved locations above. For example, Dollar's removed sense-2 word "formerly" must not be reassigned to the same word in Trade dollar.
 
 ## Using the file
 
@@ -77,3 +77,5 @@ The Bench mark vocabulary-pointer span is retired with its complete-unit restora
 [Own-compounds-15-20](dictionary-audit-own-compounds-15-20.md) corrects nine retained-entry classifications and adds Mango tree. Guttersnipe excludes an absent editor paragraph, while exact retained editor and WordNet paragraphs remain classified. No current own record is removed.
 
 Four Gray whale span rows retire with the replaced modern compound text. The separate whole Gray whale record remains classified and unchanged.
+
+[Own-compounds-21-26](dictionary-audit-own-compounds-21-26.md) corrects seven retained-entry classifications, replaces Snap’s adjective survey fragment with its exact contiguous definition and supplement provenance, retires Parcel post’s replaced modern span, and moves three Red tape pointers to the same lexical containers after Red lead becomes a separate compound. Pack horse is printed main vocabulary and receives no later-addition entry row. All retained non-null pointers pass verification.

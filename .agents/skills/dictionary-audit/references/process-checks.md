@@ -17,6 +17,8 @@ Preparation checks the stored inputs and prepared image coverage without requiri
 
 Keep preparation writers separate from admission verifiers. Admission verification reads frozen inputs without rewriting them. Bind supplements to immutable dossiers, rules, and native/text proofs rather than regenerable readiness reports. When a status receipt changes, preserve the failed binding and issue a named revision after proving which source inputs remain identical. Verify each proposed final HTML value against exact edit replay over the decoded dictionary value. Hash that value separately from a file containing its JSON serialization.
 
+Before calling a printed headword missing, search the complete parsed headwords, alternate headings and canonical aliases. An absent canonical key alone does not establish an absent entry.
+
 Before combining electronic witness paragraphs, confirm their exact lexical identities. Preserve significant spaces and hyphens in headings, using folded names only to locate candidates. Keep source tags separate for distinct entries such as "black bird" and "blackbird" until their complete paragraphs establish the same identity. Do not extend a paragraph source tag to adjacent untagged text. A separate dated witness can establish the complete span's provenance when its boundary and full text match directly.
 
 For text delivery, record zero-based, end-exclusive byte windows and their hashes from actual successful results. Check gap-free coverage of complete raw, decoded, parsed, browser-text, and witness text. A prepared file does not prove delivery, and delivery does not prove inspection. Store reviewer and trace references separately for actual inspection. An electronic witness absent from an edition remains a named field hold.
