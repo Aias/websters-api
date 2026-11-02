@@ -84,6 +84,14 @@ describe('dictionary reference lookup', () => {
     expect(aliases).toContain('Aaron’s rod');
   });
 
+  test('removes every stress mark from headwords', () => {
+    expect(entryAliases('Falcon-gentle', '<h2 class="hw">fal′con-gen‵til</h2>').names).toEqual([
+      'Falcon-gentle',
+      'falcon-gentil',
+      'falcongentil',
+    ]);
+  });
+
   test('preserves affix hyphens', () => {
     expect(entryAliases('Ad-', '<h2 class="hw">Ad-</h2>').names).toEqual(['Ad-']);
     expect(entryAliases('-ward', '<h2 class="hw">-ward</h2>').names).toEqual(['-ward']);

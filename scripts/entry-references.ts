@@ -1,7 +1,7 @@
 import { normalizeLookup } from '../app/lib/lookup';
 import { slugify } from '../app/lib/slug';
 import type { DictionaryEntry, LexicalBlock } from '../app/lib/types';
-import { entryAliases, unambiguousAliases } from './entry-aliases';
+import { entryAliases, headwordMarks, unambiguousAliases } from './entry-aliases';
 
 export interface ReferenceTarget {
   recorded?: string;
@@ -35,12 +35,12 @@ function spelling(name: string): string {
 }
 
 function headwordNames(text: string): string[] {
-  const name = normalizeLookup(text.replace(/[′ˊˋˈˌ`*\u00ad‖]/g, ''));
+  const name = normalizeLookup(text.replace(headwordMarks, ''));
   return [name, name.replace(/(?<=\p{L})-(?=\p{L})/gu, '')];
 }
 
 export function phraseName(text: string): string {
-  return normalizeLookup(text.replace(/[′ˊˋˈˌ`*\u00ad‖]/g, ''))
+  return normalizeLookup(text.replace(headwordMarks, ''))
     .replace(/[^\p{L}\p{N}']+/gu, ' ')
     .trim();
 }

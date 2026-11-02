@@ -1,6 +1,8 @@
 import * as cheerio from 'cheerio';
 import { normalizeLookup } from '../app/lib/lookup';
 
+export const headwordMarks = /[′ˊˋˈˌ‵`*\u00ad‖]/g;
+
 export interface EntryAliases {
   names: string[];
   deferred: string[];
@@ -21,7 +23,7 @@ export function entryAliases(key: string, rawHtml: string): EntryAliases {
         : $(element).text()
     )
       .normalize('NFC')
-      .replace(/[′ˊˋˈˌ`*\u00ad‖]/g, '')
+      .replace(headwordMarks, '')
       .trim();
     if (
       !text ||
