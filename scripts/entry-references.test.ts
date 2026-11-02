@@ -278,6 +278,12 @@ describe('sense and compound reference targets', () => {
       '/entry/beam#abaft_the_beam',
     ],
     ['See <div class="er">Beam</div>.', '/entry/beam'],
+    ['See 2d <div class="er">Advance</div>.', '/entry/advance#2'],
+    [
+      'See 2d <div class="er">Advance</div>, <div class="pos">transitive verb</div>.',
+      '/entry/advance#1',
+    ],
+    ['See 3d <div class="er">Advance</div>.', '/entry/advance'],
   ])('%s links to %s', (html, href) => {
     expect(preprocess(html, targetReferences.resolve)).toContain(`href="${href}"`);
   });

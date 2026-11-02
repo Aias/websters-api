@@ -147,8 +147,15 @@ export function createEntryReferences(
           partsOfSpeech.some((part) => ` ${part} `.includes(label))
         )
       : [];
+    const numbered = homographNumber ? targets.homographs[homographNumber - 1] : undefined;
+    const ordinal =
+      numbered && (!label || numbered.partsOfSpeech.some((part) => ` ${part} `.includes(label)))
+        ? numbered
+        : undefined;
     const id = sense
-      ? [...labeled, ...targets.homographs].map(({ senses }) => senses.get(sense)).find(Boolean)
+      ? (ordinal ? [ordinal] : [...labeled, ...targets.homographs])
+          .map(({ senses }) => senses.get(sense))
+          .find(Boolean)
       : undefined;
     if (id) return subsense && targets.ids.has(`${id}-${subsense}`) ? `${id}-${subsense}` : id;
     const name = phraseName(key);
@@ -159,7 +166,7 @@ export function createEntryReferences(
           ? `${compound.id}-${compoundSense}`
           : compound.id;
     }
-    return labeled[0]?.id;
+    return (ordinal ?? labeled[0])?.id;
   };
   return { aliases, resolve };
 }

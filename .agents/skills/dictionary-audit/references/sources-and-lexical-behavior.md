@@ -113,7 +113,7 @@ GCIDE's editors and our import dropped some 1913 compounds, and the Gutenberg su
 - A definition followed by an element that renders inline after it, such as an author line, an alternate-spelling bracket or a label, ends with a space before its closing tag: `text. </div><div class="rj">` (13,534 to 1), `text. </div><div class="altsp">` (1,758 to 1), and a sense closes `text.</div></div>` (77,395 to 1,050). A record that ends in a line break ends `<br/> `, with the space (99,483 to 2); 1,281 records end without one, so keep a record's own ending. An author line followed by an em dash ends `Name. </div></div>&#x2014;` (25 to 1).
 - A note follows an author line on its own line, `Name.</div></div><br/>  <div class="note">` (188 to 2).
 - An apostrophe is `&#x2019;` (5,577 to 3,317 for `&apos;`).
-- A pronunciation in a `pr` element writes each mark as a combining hex reference after its base letter, `(se&#x306;r&#x2032;i&#x306;n <i class="it">or</i> -e&#x304;n)` (37,813 combining references to 198 precomposed).
+- A pronunciation in a `pr` element writes each mark as a combining hex reference after its base letter, `(se&#x306;r&#x2032;i&#x306;n <i class="it">or</i> -e&#x304;n)` (37,813 combining references to 198 precomposed). This holds even in a record that writes precomposed references elsewhere, so the `pr` form wins over the record's own encoding.
 - Restored Greek goes in a `grk` element as hex references (8,124 to 4,597 raw), with the space inside the closing tag before the next word, `Gr. <div class="grk">&#x3B2;&#x3BB;&#x3B1;&#x3C3;&#x3C4;&#x3CC;&#x3C2; </div>sprout` (6,050 to 2,439).
 - A cross-reference is an `er` element. Punctuation comes from the print, and every character of `old` stays unchanged, which takes precedence over these rules.
 
@@ -213,6 +213,8 @@ An astronomical sign takes its Unicode symbol, even where the print draws a vari
 Use existing application treatments for lexical italics, quotation attribution, and other presentation. Do not change fonts, colors, or design tokens to compensate for a damaged character or a failed font load in the review harness. Verify the computed style before claiming a typography defect.
 
 ## Lookup and reference preservation
+
+A numbered homograph reference, such as "See 3d Sore" or "See 2d Smack, n.", links to that homograph, by the user's ruling of 2026-11-02. The parser links it only where the record's homograph of that number exists and agrees with any part-of-speech label. A batch that reviews either entry confirms the record's homograph numbering against the print, and corrects the record when they differ.
 
 Check actual reference targets, not just the visible label or a guessed canonical key. Source links can name compounds, alternate spellings, plurals, or an infinitive. Read `entry-aliases.ts`, `lookup.ts`, `slug.ts`, and `db.server.ts` to reproduce current behavior.
 

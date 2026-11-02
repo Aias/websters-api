@@ -98,8 +98,8 @@ export function loadPreprocessedDocument(
           const after = (next && hasClass(next, 'pos') ? next : el).nextSibling;
           const before = el.previousSibling;
           const referenceLead = before?.type === 'text' ? before.data : '';
-          const ordinal = /\bunder\s+(\d+)(?:st|nd|rd|th|d)\s*$/i.exec(referenceLead);
-          const lead = ordinal ? referenceLead.slice(0, ordinal.index) + 'under ' : referenceLead;
+          const ordinal = /(?<![\w.])(\d+)(?:st|nd|rd|th|d)\s*$/i.exec(referenceLead);
+          const lead = ordinal ? referenceLead.slice(0, ordinal.index) : referenceLead;
           const letter = before?.previousSibling;
           const lettered = letter && hasClass(letter, 'sd');
           const cref = lettered ? letter.previousSibling : letter;

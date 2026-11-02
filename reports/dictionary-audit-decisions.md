@@ -8,6 +8,7 @@ The user's rulings of 2026-10-28 left the following calls to the auditor. Each e
 - **Pronunciations** are restored from the print only inside entries a batch already reviews.
 - **Every 1913 entry gets a record.**
 - **Senses follow the print's division and numbering.**
+- **Numbered homograph references** ("See 3d Sore") link to that homograph, and reviews confirm the record's homograph numbering against the print (2026-11-02).
 - **Supplement entries the 1907 printing lacks** take Webster's New International Dictionary as their print witness. Its text is accepted only where it matches Gutenberg word for word, and a pronunciation mark the corpus never uses is held.
 
 ## Decisions
