@@ -376,6 +376,12 @@ describe('sense and compound reference targets', () => {
     ).toContain('href="/entry/beam"');
   });
 
+  test('opens a recorded entry in place of the printed name', () => {
+    expect(
+      preprocess('See <div class="er" data-entry="Two">Shared</div>.', references.resolve)
+    ).toBe('See <a class="er" href="/entry/two">Shared</a>.');
+  });
+
   test('prefers a recorded target that exists in the destination', () => {
     expect(
       preprocess(

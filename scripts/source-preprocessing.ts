@@ -95,7 +95,7 @@ export function loadPreprocessedDocument(
         }
         const printed = /^\s*(\d+)(?:st|nd|rd|th|d)\s+(?=\p{L})/iu.exec(text);
         if (printed) text = text.slice(printed[0].length);
-        const slug = entryReferenceSlug(text, resolve, partOfSpeech);
+        const slug = entryReferenceSlug(el.attribs['data-entry'] ?? text, resolve, partOfSpeech);
         if (slug) {
           const after = (next && hasClass(next, 'pos') ? next : el).nextSibling;
           const before = el.previousSibling;
