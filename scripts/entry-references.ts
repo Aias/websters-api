@@ -16,6 +16,7 @@ export interface ReferenceTarget {
 
 export interface EntryResolver {
   (slug: string): string | undefined;
+  spelled?: (slug: string) => string | undefined;
   qualified?: (text: string, partOfSpeech: string, currentSlug: string) => string | undefined;
   fragment?: (slug: string, target: ReferenceTarget) => string | undefined;
 }
@@ -24,6 +25,10 @@ interface EntryTargets {
   ids: Set<string>;
   compounds: Map<string, { id: string; homographNumber: number }>;
   homographs: { id?: string; partsOfSpeech: string[]; senses: Map<string, string> }[];
+}
+
+function spelling(name: string): string {
+  return name.replace(/^-+|-+$/g, '');
 }
 
 function headwordNames(text: string): string[] {
@@ -96,6 +101,16 @@ export function createEntryReferences(
       .replace(/\u0308/g, '')
       .normalize('NFC');
     return canonical.get(slug) ?? aliases.get(name) ?? aliases.get(folded);
+  };
+  const spellings = new Map<string, string | null>();
+  for (const [name, key] of aliases) {
+    const previous = spellings.get(spelling(name));
+    spellings.set(spelling(name), previous === undefined || previous === key ? key : null);
+  }
+  resolve.spelled = (slug) => {
+    const name = normalizeLookup(slug.replaceAll('_', ' ')).replace(/(?<=\p{L}\p{L})-+$/u, '');
+    const key = spellings.get(name);
+    return key ? slugify(key) : undefined;
   };
   const qualified = new Map<string, Set<string>>();
   const targetsByEntry = new Map<string, EntryTargets>();
@@ -203,5 +218,6 @@ export function entryReferenceSlug(
   const undotted = slug.replace(/\.$/, '');
   const current =
     slug.endsWith('.') && resolve && !resolve(slug) && resolve(undotted) ? undotted : slug;
-  return (partOfSpeech && resolve?.qualified?.(text, partOfSpeech, current)) || current;
+  const target = (partOfSpeech && resolve?.qualified?.(text, partOfSpeech, current)) || current;
+  return (resolve && !resolve(target) && resolve.spelled?.(target)) || target;
 }

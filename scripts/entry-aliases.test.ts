@@ -90,6 +90,12 @@ describe('dictionary reference lookup', () => {
     expect(
       entryAliases('Argentamine', '<h2 class="hw">Argentamine</h2><h2 class="hw">-min</h2>').names
     ).toEqual(['Argentamine']);
+    expect(
+      entryAliases(
+        'Archy',
+        '<h2 class="hw">Arch′y</h2><div class="def">Arched.</div><br/><h2 class="hw">-ar′chy</h2><div class="def">A suffix.</div>'
+      ).names
+    ).toEqual(['Archy', '-archy']);
   });
 
   test('resolves infinitive references only for verb entries', () => {

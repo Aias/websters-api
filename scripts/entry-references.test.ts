@@ -66,6 +66,34 @@ describe('reference href punctuation', () => {
   });
 });
 
+const spellingReferences = createEntryReferences(
+  new Map([
+    ['Co-', '<h2 class="hw">Co-</h2>'],
+    ['-oid', '<h2 class="hw">-oid</h2>'],
+    ['Anti', '<h2 class="hw">An′ti</h2>'],
+    ['N', '<h2 class="hw">N</h2>'],
+    ['Saw', '<h2 class="hw">Saw</h2>'],
+    ['Ward', '<h2 class="hw">Ward</h2>'],
+    ['-ward', '<h2 class="hw">-ward</h2>'],
+  ]),
+  parseEntry
+);
+
+describe('references spelled differently from their entry', () => {
+  test.each([
+    ['Co', '/entry/co-'],
+    ['oid', '/entry/-oid'],
+    ['Anti-', '/entry/anti'],
+    ['Ward', '/entry/ward'],
+    ['n-', '/entry/n-'],
+    ['-saw', '/entry/-saw'],
+  ])('%s links to %s', (text, href) => {
+    expect(preprocess(`See <div class="er">${text}</div>.`, spellingReferences.resolve)).toContain(
+      `href="${href}"`
+    );
+  });
+});
+
 const qualifiedSource = new Map([
   ['Magic', '<h2 class="hw">Magic</h2><div class="pos">noun</div><div class="def">A noun.</div>'],
   [

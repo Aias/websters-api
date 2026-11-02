@@ -23,7 +23,13 @@ export function entryAliases(key: string, rawHtml: string): EntryAliases {
       .normalize('NFC')
       .replace(/[′ˊˋˈˌ`*\u00ad‖]/g, '')
       .trim();
-    if (!text || (text.startsWith('-') && !key.startsWith('-'))) return;
+    if (
+      !text ||
+      (text.startsWith('-') &&
+        !key.startsWith('-') &&
+        (!$(element).hasClass('hw') || $(element).prevAll('.hw, .def').first().hasClass('hw')))
+    )
+      return;
     const definition = $(element).hasClass('col')
       ? $(element).nextAll('.cd').add($(element).parent('.mcol').nextAll('.cd')).first().text()
       : '';
