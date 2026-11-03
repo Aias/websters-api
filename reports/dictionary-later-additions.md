@@ -4,18 +4,18 @@
 
 ## Counts
 
-13,908 rows over 11,145 keys.
+13,827 rows over 11,074 keys.
 
 | category             | entry |  span |  total |
 | -------------------- | ----: | ----: | -----: |
 | `wordnet`            |    94 |    21 |    115 |
 | `gcide-editor`       |   125 |    86 |    211 |
-| `supplement-1913`    | 3,356 |   786 |  4,142 |
-| `later-unattributed` | 2,158 | 3,370 |  5,528 |
-| `uncertain`          |   302 | 3,610 |  3,912 |
-| total                | 6,035 | 7,873 | 13,908 |
+| `supplement-1913`    | 3,356 |   794 |  4,150 |
+| `later-unattributed` | 2,158 | 3,361 |  5,519 |
+| `uncertain`          |   302 | 3,530 |  3,832 |
+| total                | 6,035 | 7,792 | 13,827 |
 
-Left out: 1,168 `ours-extra` hunks whose print vote supports ours, and 721 ours-only entries whose text mostly appears in the print OCR (Gutenberg dropped them; see `excluded-entries.jsonl`). Of the 7,873 span rows, 6,728 have an `owner` pointer and 1,145 await location or fragment reconciliation. Rows for text that a print restoration later replaced are removed once their complete disposition is established.
+Left out: 1,168 `ours-extra` hunks whose print vote supports ours, and 721 ours-only entries whose text mostly appears in the print OCR (Gutenberg dropped them; see `excluded-entries.jsonl`). Of the 7,792 span rows, 6,724 have an `owner` pointer and 1,068 await location or fragment reconciliation. Rows for text that a print restoration later replaced are removed once their complete disposition is established.
 
 ## Row fields
 
@@ -44,6 +44,7 @@ Reviewed entry rows bind source tags to the exact paragraphs supplying the curre
 ## Known limits
 
 - The print vote agreed with the page on 90% of 60 hand-checked rows (`survey-gutenberg/verify/REPORT.md`). Votes of `gutenberg` were right 94% of the time; about half of the sampled ours-extra rows were words Gutenberg dropped, so some `later-unattributed` spans are 1913 text.
+- The survey's normalizer deleted any short lowercase Gutenberg parenthetical containing "?" as a pronunciation, and Gutenberg marks lost Greek as `&?;`. Parentheticals such as `(sc. &?;)` therefore vanished from the Gutenberg side only, and the print vote scores Greek as absent, so spans like "Ω (sc." were flagged although the print and Gutenberg set them. A November 2026 audit of the 95 rows containing Ω retired 77 (66 of this kind, 11 other printed text, Sard's with batch z33) and kept 18, moving the 8 supplement rows among them that carried another category to `supplement-1913` (`.context/dictionary-audit/omega-rows/`).
 - Spans are word-level fragments, often one word or a sense number, and several adjacent spans can belong to one added sentence.
 - GCIDE tags do not mark most additions: added text often sits in "1913 Webster" paragraphs, so `later-unattributed` is the default for anything absent from the print, and `wordnet` and `gcide-editor` are undercounts.
 - `uncertain` spans are mostly one-sided OCR windows. Rows with a high `score` in `evidence` are likely 1913 text.
