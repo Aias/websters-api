@@ -15,7 +15,7 @@ Gutenberg and GCIDE provide comparison text and candidate locations. Accepted co
 
 ## Recorded progress
 
-Checkpoint: page-reading-1. Source SHA-256 `d861a47b7f9c11bff20b19f940ee59cf5b8a98eaec254404be0311e4d34b3670`. The frozen inventory retains its original source hashes. Current workset dispositions are recorded separately in [`dictionary-print-workset-outcomes.jsonl`](dictionary-print-workset-outcomes.jsonl).
+Checkpoint: page-reading-1. Source SHA-256 `f22560301db223858bcc47cd8e0688ecab5487298afacd8403f2f2c65ca2247e`. The frozen inventory retains its original source hashes. Current workset dispositions are recorded separately in [`dictionary-print-workset-outcomes.jsonl`](dictionary-print-workset-outcomes.jsonl).
 
 | Work                            | Completed                                                                                                                                                                                                                                                                                                                                                                            | Remaining or measurement limit                                                                                                                                                                              |
 | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -92,7 +92,7 @@ Sciaenoid takes back its printed definition, "a family of marine fishes which in
 
 The audit of later-addition rows containing Ω found printed text that both electronic texts lost, which waits on two print readings: the whole entry Analogize (v. t.), which GCIDE and Gutenberg run into Analogist; Pelican's "fr. πέλεκυς an ax", lost by an eye-skip; and words beside Greek in Anatreptic, Archaeological, Boustrophedon, Didelphia, Ecumenical and Chlorite. Pi's sense 2 and Semiology's first definition are later rewrites inside otherwise printed spans.
 
-[Page-reading batch 1](dictionary-audit-page-reading-1.md) compares two blind model readings of ten whole pages with the record. It restores Chutnee's printed definition, "compounded of various vegetable substances, sweets, acids, etc.", in place of GCIDE's longer wording, and corrects 23 other words under the settled rulings. Six print-only words join the holds register. Twenty-nine differences stay unchanged under the rulings that keep the electronic reading, and thirteen more are later additions. The ten pages are a sample, so this adds no corpus-wide denominator.
+[Page-reading batch 1](dictionary-audit-page-reading-1.md) compares two blind model readings of ten whole pages with the record. It restores Chutnee's printed definition, "compounded of various vegetable substances, sweets, acids, etc.", in place of GCIDE's longer wording, and makes 56 other word-level corrections. Thirty-three of them follow the ruling of November 10, under which the printed word replaces the electronic one when two certain readings and the 1898 printing agree. That ruling also restores Scheme's "design" and Salt's "exactly", closes School committee's and Salt's other held words, and reopens 33 fields that earlier batches had kept. Thirteen differences are later additions and stay. The ten pages are a sample, so this adds no corpus-wide denominator.
 
 The 58 worksets remain in the frozen inventory with their original spans and blockers. Read their [current outcomes](dictionary-print-workset-outcomes.jsonl) before selecting new work. No unreviewed candidates remain in this bounded pool. Broader sense and definition differences still require complete-unit reconciliation.
 
@@ -123,7 +123,7 @@ The 43 remaining candidates carry these preparation categories. Each still needs
 
 ### Open holds
 
-The [open register](dictionary-audit-holds.md) contains 234 unresolved fields: 154 evidence holds, 64 reading holds, ten ruling holds, four sequence holds, and two structure holds, including Dolphin.
+The [open register](dictionary-audit-holds.md) contains 259 unresolved fields: 154 evidence holds, 97 reading holds, four sequence holds, and four structure holds, including Dolphin.
 
 ## Updating progress
 

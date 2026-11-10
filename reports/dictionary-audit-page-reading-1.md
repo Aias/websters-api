@@ -1,6 +1,6 @@
 # Page-reading batch 1
 
-Two models read ten whole pages of the print without seeing the record, and their agreed reading is compared with the record word by word. This batch applies the 24 corrections that the settled editorial rulings call for, holds six on an open ruling, and leaves 29 unchanged under rulings that keep the electronic reading. It grants no complete-entry review credit.
+Two models read ten whole pages of the print without seeing the record, and their agreed reading is compared with the record word by word. This batch makes 57 corrections in 44 entries. Twenty-four fall under earlier rulings. Thirty-three follow the ruling of 10 November 2026, under which a printed word replaces the electronic one when two certain readings and the 1898 printing agree. The batch grants no complete-entry review credit.
 
 ## Method
 
@@ -8,27 +8,29 @@ Two models read ten whole pages of the print without seeing the record, and thei
 - **Readers:** each column is cut into four pieces at line gaps and enlarged twice. Opus and Fable each transcribe every piece at high effort with no access to the record.
 - **Comparison:** the words both models read identically are aligned with each record on the page. Case, punctuation, diacritics and type style are ignored, so this batch judges words only.
 - **Third reading:** each candidate line is located on the 1898 printing by registering the two scans, and a third blind reader transcribes that strip.
-- **Acceptance:** an edit is applied when the two blind readings agree and a settled ruling calls for the correction. The third reading guards against damage in one scan.
+- **Acceptance:** an edit is applied when the two blind readings agree and a ruling calls for the correction. Under the November 10 ruling the 1898 reading must agree as well.
 
 ## Results
 
 The ten pages hold 26,732 words and 611 printed entries. The two models differ in 25 places, 18 of them in the pronunciation key at the foot of a page or in pronunciation letters. Both models differ from the record in 125 places.
 
-| Disposition                                |                    Candidates |
-| ------------------------------------------ | ----------------------------: |
-| Applied                                    | 25, as 24 edits in 22 entries |
-| Held for a ruling                          |                             6 |
-| Kept because both readings make sense      |                            22 |
-| Kept because only an article is missing    |                             7 |
-| Later additions, unchanged                 |                            13 |
-| Genus spelled out by convention, unchanged |                             4 |
-| Record corrects a printed citation (Soak)  |                             1 |
-| Letter damaged in both scans (Relinquish)  |                             1 |
-| Not adjudicated                            |                            46 |
+| Disposition                                  | Candidates |
+| -------------------------------------------- | ---------: |
+| Applied under earlier rulings                |         25 |
+| Applied under the ruling of November 10      |         32 |
+| Held: a name the print elides (Soap, Church) |          2 |
+| Later additions, unchanged                   |         13 |
+| Genus spelled out by convention, unchanged   |          4 |
+| Record corrects a printed citation (Soak)    |          1 |
+| Letter damaged in both scans (Relinquish)    |          1 |
+| Print not certain (Rose-pink)                |          1 |
+| Not adjudicated                              |         46 |
 
 The 46 not adjudicated are pronunciations the print has and the record lacks, pronunciation key lines, and places where a missing pronunciation misaligned the comparison. The [ledger](dictionary-audit-page-reading-1.jsonl) lists every adjudicated candidate with its readings and rule.
 
-## Applied
+## Applied under earlier rulings
+
+Twenty-five candidates, as 24 edits.
 
 | Entry       | Record                         | Print                                                             | Rule                                     |
 | ----------- | ------------------------------ | ----------------------------------------------------------------- | ---------------------------------------- |
@@ -57,39 +59,67 @@ The 46 not adjudicated are pronunciations the print has and the record lacks, pr
 | Chutnee     | Hind. chatnī                   | chaṭnī                                                            | Diacritic two readers see                |
 | Chutnee     | GCIDE's longer definition      | "compounded of various vegetable substances, sweets, acids, etc." | Rewritten definition restored as a unit  |
 
-The 1898 reading agrees with the print for 21 of the 25 candidates. Stomachous and Didascalic break across a line and were not located there, and Chutnee's two were not checked. Chutnee's later-addition row now covers only "Syn. — Indian relish."
+Chutnee's later-addition row now covers only "Syn. — Indian relish."
 
-## Held
+## Applied under the ruling of November 10
 
-Six words the print sets and the record lacks, where the sentence still reads without the word. They wait on the same question as Scheme's "design" and Salt's "exactly".
+Thirty-two candidates from the ten pages, as 29 edits, and four fields earlier batches had held. Two blind readings and a blind reading of the 1898 printing agree on every one.
 
-- Spelding: "cf. G. spalten to split."
-- Spell: "OE. spellen, spellien, to tell, relate"
-- Spell: "Might I that holy legend find" (T. Warton)
-- Stone: "Symbol of hardness and of insensibility"
-- Relief: "low relief, or bas-relief (basso-rilievo)"
-- Relinquish: "to renounce a claim to"
+| Entry          | Record                                      | Print                                          |
+| -------------- | ------------------------------------------- | ---------------------------------------------- |
+| Sessile        | never became detached                       | never become detached                          |
+| Speed          | gales that speed                            | gales that sped                                |
+| Stone          | under Pine, and Piñon                       | under Pine, also Piñon                         |
+| Snuffle        | The act of snuffing                         | The act of snuffling                           |
+| Soap           | cleaning agent                              | cleansing agent                                |
+| Soap           | jellylike consistence                       | jellylike consistency                          |
+| Sphenethmoidal | sphenoethmoid, twice                        | sphenethmoid                                   |
+| Sphere         | social positions                            | social position                                |
+| Sphere         | Crystalline sphere                          | Crystalline spheres                            |
+| Sphere         | applications of the principles              | the application of the principles              |
+| Sphere         | distance and bearing                        | distances and bearings                         |
+| Spherometer    | surface, telescope                          | surfaces, telescopes                           |
+| Reliable       | dependance                                  | dependence                                     |
+| Religion       | Strictness of fidelity                      | Strictness or fidelity                         |
+| Religious      | secular concern                             | secular concerns                               |
+| Roselite       | arsenite                                    | arseniate                                      |
+| Set            | to assume specified place                   | to assume a specified place                    |
+| Spell          | Spill splinter                              | Spill a splinter                               |
+| Spell          | proper order letters of                     | proper order the letters of                    |
+| Spelter        | commerce and arts                           | commerce and the arts                          |
+| Stone          | called also flint age                       | called also the flint age                      |
+| Dietary        | as in workhouse                             | as in a workhouse                              |
+| Cicatrisive    | good for healing                            | good for the healing                           |
+| Spelding       | to split. spread open; cf. G. spalten split | to split, spread open; cf. G. spalten to split |
+| Spell          | spellien, tell, relate                      | spellien, to tell, relate                      |
+| Spell          | Might I that legend find                    | Might I that holy legend find                  |
+| Stone          | hardness and insensibility                  | hardness and of insensibility                  |
+| Relief         | low relief, (basso-rilievo)                 | low relief, or bas-relief (basso-rilievo)      |
+| Relinquish     | a claim to; resign                          | a claim to; to resign                          |
+| Scheme         | Plan; project; contrivance                  | Plan; project; design; contrivance             |
+| Salt           | (in theory) neutralize                      | (in theory) exactly neutralize                 |
+| Salt           | invest sagely                               | invest safely                                  |
+| School         | responsible for control                     | responsible control                            |
 
-## Kept under the current rulings
+## Held and reopened
 
-Both blind readings, and the 1898 reading where it was located, agree on the print in each case. The rulings keep the electronic reading because the scans are a related edition.
-
-- **Both readings make sense (22):** Sessile "never become" (record "became"). Speed "gales that sped" ("speed"). Snuffle "The act of snuffling" ("snuffing"). Soap "cleansing agent" ("cleaning"), "jellylike consistency" ("consistence"), "Marseilles, or Venetian, soap" (record repeats "soap"). Sphenethmoidal "sphenethmoid" twice ("sphenoethmoid"). Sphere "social position" ("positions"), "Crystalline spheres" ("sphere"), "the application" ("applications"), "distances and bearings" ("distance and bearing"). Spherometer "surfaces" and "telescopes" (singular). Stone "also Piñon" ("and"). Reliable "dependence" ("dependance"). Religion "strictness or fidelity" ("of"). Religious "secular concerns" ("concern"). Roselite "arseniate" ("arsenite"). Church "Catholic or Universal church" (record repeats "church"). Rose-pink "Having pink color" (record adds "a").
-- **Only an article is missing (7):** Set "to assume a specified place". Spell "Spill a splinter" and "proper order the letters". Spelter "commerce and the arts". Stone "the flint age". Dietary "as in a workhouse". Cicatrisive "the healing of a wound".
+- **Held:** the print reads "Marseilles, or Venetian, soap" and "Catholic or Universal church". The record repeats the shared word in each name. Both wait on whether the record keeps the repeated word, as it keeps a genus the print abbreviates.
+- **Reopened:** 33 fields in 29 entries that earlier batches kept under the rules the November 10 ruling replaces, among them Synartesis "closely joined", Lancet "the 13th century" and Spheroid's "Ellipsoid of revolution, under Ellipsoid". Each waits on two certain readings and a reading of the 1898 printing.
 
 ## Cost and comparison
 
-| Batch                       |     Entries |                                  Tokens per entry |             Print-read proposals |    Applied or accepted |
-| --------------------------- | ----------: | ------------------------------------------------: | -------------------------------: | ---------------------: |
-| z31 to z34, complete review |         121 | about 125,000, estimated from October packet logs | 166, of which 133 pronunciations | 143 on first agreement |
-| Page-reading 1              | 611 printed |                                       about 5,500 |        125 word-level candidates |                     24 |
+| Batch                       | Entries     | Tokens per entry                                  | Candidates                       | Applied or accepted    |
+| --------------------------- | ----------- | ------------------------------------------------- | -------------------------------- | ---------------------- |
+| z31 to z34, complete review | 121         | about 125,000, estimated from October packet logs | 166, of which 133 pronunciations | 143 on first agreement |
+| Page-reading 1              | 611 printed | about 5,500                                       | 125 word-level                   | 57                     |
 
-Reading took 1.46 million tokens for Opus and 1.72 million for Fable, about 56 minutes of model time in all. The third reading took 0.16 million tokens. The integrating session's own usage was not measured.
+Reading took 1.46 million tokens for Opus and 1.72 million for Fable, about 56 minutes of model time in all. The third readings took about 0.3 million tokens. The integrating session's own usage was not measured.
 
-The two methods find different things. Complete review restores pronunciations and structure, which this comparison does not judge. Page reading covers every word on the page and found word-level differences in entries that had passed complete review.
+The two methods find different things. Complete review restores pronunciations and structure, which this comparison does not judge. Page reading covers every word on the page.
 
 ## Limits
 
 - Pronunciation marks, punctuation, capitals and italics are not compared.
 - A printed entry whose second headword lives inside another record is not matched to it. Eighteen of 611 were unmatched.
 - One model skipped a whole line twice in ten pages. Only the second reader exposed it.
+- The 1913 printing itself was not read. The only scan found is access-restricted.
