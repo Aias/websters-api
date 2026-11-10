@@ -93,6 +93,19 @@ For **mask-boundary disagreement**, inspect the full source fragment and print c
 
 For a recheck, freeze the exception inventory and retained evidence before judgment. Give fresh readers answer-free context where practical, keeping proposed readings and prior rationales separate. Reconcile every exception as retained, corrected, reversed, or unresolved. Reverse an unsupported applied edit only through an exact guarded fragment or a replay of its frozen per-key manifest, preserving all other accepted edits. The exception recheck grants no new complete-entry coverage.
 
+## Whole-page reading
+
+Whole-page reading finds differences that entry-by-entry review does not reach, at a small fraction of its cost per entry. Two models transcribe every column of a page without seeing the record, and the words they read identically are aligned with the records on that page. It judges words only. Pronunciation marks, punctuation, capitals and italics need their own review.
+
+- **Cutting:** cut each column into pieces of about 27 lines and enlarge them twice. Take the column edges from the scan's OCR word boxes as well as from the printed rules, because a skewed page clips the first or last letter of every line under a vertical cut. Leave the pronunciation key at the foot of the page out of the crop.
+- **Matching:** match a printed entry to a record's key or to a secondary headword inside a record. Headwords joined by a brace share one definition. A printed entry that matches neither is a missing record: confirm it on the second printing and transcribe it into a new record in its neighbours' markup.
+- **Sorting:** set aside a difference that lies inside a registered later addition, a source mark, an abbreviated genus, or print both readers mark unreadable. Compare every other difference with the Gutenberg text. Where Gutenberg reads as the print, GCIDE changed the wording and the 1913 wording returns. Where the record has words that Gutenberg and the print both lack, GCIDE added them and they stay.
+- **Third reading:** read each remaining difference blind on the second printing before applying it. Worn or broken type in one impression produces confident wrong readings, and only the second printing exposes them.
+- **Print errors:** read each proposed correction for sense before applying it. Both printings can share a misprint, such as a wrong chapter in a citation or a misspelled author, and the record's corrected reading then stands.
+- **Edits:** draft a plain-word correction from the reading and keep the record's punctuation around it. Draft anything that touches markup by hand from the same record's conventions. Apply all of a record's changes in one pass against a hash of the original record.
+
+[Page-reading batch 2](../../../../reports/dictionary-audit-page-reading-2.md) gives measured costs and yields.
+
 ## Resumable progress and admission
 
 Use `deriveProgress` from `packet.ts` to derive counts and the first unstarted key within the supplied frozen ordered keys and unique per-entry records. This is not a next-unclaimed cursor. Select the ascending or descending unclaimed range separately against the shared claims and preserve its exact review order. Bind source and complete-review credit to the actual source and implementation hashes. Glyph-only credit remains separate. Keep the detailed source, parser, browser-text, visual, field-hold, and issue records with their evidence rather than reducing them to a single completion boolean.
