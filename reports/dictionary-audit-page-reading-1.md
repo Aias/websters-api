@@ -1,6 +1,6 @@
 # Page-reading batch 1
 
-Two models read ten whole pages of the print without seeing the record, and their agreed reading is compared with the record word by word. This batch makes 57 corrections in 44 entries. Twenty-four fall under earlier rulings. Thirty-three follow the ruling of 10 November 2026, under which a printed word replaces the electronic one when two certain readings and the 1898 printing agree. The batch grants no complete-entry review credit.
+Two models read ten whole pages of the print without seeing the record, and their agreed reading is compared with the record word by word. This batch makes 59 corrections in 45 entries. Twenty-four fall under earlier rulings. Thirty-three follow the ruling of 10 November 2026, under which a printed word replaces the electronic one when two certain readings and the 1898 printing agree. Two follow a person's review of the page crops. The batch grants no complete-entry review credit.
 
 ## Method
 
@@ -14,17 +14,17 @@ Two models read ten whole pages of the print without seeing the record, and thei
 
 The ten pages hold 26,732 words and 611 printed entries. The two models differ in 25 places, 18 of them in the pronunciation key at the foot of a page or in pronunciation letters. Both models differ from the record in 125 places.
 
-| Disposition                                  | Candidates |
-| -------------------------------------------- | ---------: |
-| Applied under earlier rulings                |         25 |
-| Applied under the ruling of November 10      |         32 |
-| Held: a name the print elides (Soap, Church) |          2 |
-| Later additions, unchanged                   |         13 |
-| Genus spelled out by convention, unchanged   |          4 |
-| Record corrects a printed citation (Soak)    |          1 |
-| Letter damaged in both scans (Relinquish)    |          1 |
-| Print not certain (Rose-pink)                |          1 |
-| Not adjudicated                              |         46 |
+| Disposition                                               | Candidates |
+| --------------------------------------------------------- | ---------: |
+| Applied under earlier rulings                             |         25 |
+| Applied under the ruling of November 10                   |         32 |
+| Applied on review: a name the print elides (Soap, Church) |          2 |
+| Later additions, unchanged                                |         13 |
+| Genus spelled out by convention, unchanged                |          4 |
+| Record corrects a printed citation (Soak)                 |          1 |
+| Letter damaged in both scans (Relinquish)                 |          1 |
+| Print not certain, record kept on review (Rose-pink)      |          1 |
+| Not adjudicated                                           |         46 |
 
 The 46 not adjudicated are pronunciations the print has and the record lacks, pronunciation key lines, and places where a missing pronunciation misaligned the comparison. The [ledger](dictionary-audit-page-reading-1.jsonl) lists every adjudicated candidate with its readings and rule.
 
@@ -101,17 +101,26 @@ Thirty-two candidates from the ten pages, as 29 edits, and four fields earlier b
 | Salt           | invest sagely                               | invest safely                                  |
 | School         | responsible for control                     | responsible control                            |
 
-## Held and reopened
+## Decided on review
 
-- **Held:** the print reads "Marseilles, or Venetian, soap" and "Catholic or Universal church". The record repeats the shared word in each name. Both wait on whether the record keeps the repeated word, as it keeps a genus the print abbreviates.
-- **Reopened:** 33 fields in 29 entries that earlier batches kept under the rules the November 10 ruling replaces, among them Synartesis "closely joined", Lancet "the 13th century" and Spheroid's "Ellipsoid of revolution, under Ellipsoid". Each waits on two certain readings and a reading of the 1898 printing.
+The readings left three candidates open. A person compared both blind readings with crops of the 1895 or 1907 scan and the 1898 scan and decided each.
+
+| Entry     | Record                                       | Print                                            | Decision                                                                                           |
+| --------- | -------------------------------------------- | ------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| Soap      | called also Marseilles soap or Venetian soap | called also Marseilles, or Venetian, soap        | Print                                                                                              |
+| Church    | Catholic church or Universal church          | Catholic or Universal church                     | Print. The first heading's `data-headword` annotation keeps "Catholic church" as a name of Church. |
+| Rose-pink | Having a pink color                          | One reader could not read the word before "pink" | Record                                                                                             |
+
+## Reopened
+
+The November 10 ruling reopens 33 fields in 29 entries that earlier batches kept under the rules it replaces, among them Synartesis "closely joined", Lancet "the 13th century" and Spheroid's "Ellipsoid of revolution, under Ellipsoid". Each waits on two certain readings and a reading of the 1898 printing.
 
 ## Cost and comparison
 
 | Batch                       | Entries     | Tokens per entry                                  | Candidates                       | Applied or accepted    |
 | --------------------------- | ----------- | ------------------------------------------------- | -------------------------------- | ---------------------- |
 | z31 to z34, complete review | 121         | about 125,000, estimated from October packet logs | 166, of which 133 pronunciations | 143 on first agreement |
-| Page-reading 1              | 611 printed | about 5,500                                       | 125 word-level                   | 57                     |
+| Page-reading 1              | 611 printed | about 5,500                                       | 125 word-level                   | 59                     |
 
 Reading took 1.46 million tokens for Opus and 1.72 million for Fable, about 56 minutes of model time in all. The third readings took about 0.3 million tokens. The integrating session's own usage was not measured.
 
