@@ -4,8 +4,8 @@ import { notFound } from 'next/navigation';
 import { Fragment } from 'react';
 import { EntryView } from '~/components/entry';
 import { getEntryBySlug } from '~/lib/db.server';
-import { appliedReviewIds, reviewDecisions, reviewItems } from '~/lib/review-queue';
-import { changeBetween, decodeFragment } from '~/lib/review-text';
+import { appliedReviewIds, reviewDecisions, reviewItems, sourceHtml } from '~/lib/review-queue';
+import { changeBetween, decodeFragment, passageAround } from '~/lib/review-text';
 import { slugify } from '~/lib/slug';
 import { decide } from './actions';
 
@@ -29,6 +29,7 @@ export default async function ReviewPage({ searchParams }: ReviewPageProps) {
   const decision = decisions.get(item.id);
   const target = decision?.new ?? item.proposed ?? item.old;
   const change = changeBetween(item.old, target);
+  const passage = passageAround(sourceHtml(item.key), applied.has(item.id) ? target : item.old);
   const entry = getEntryBySlug(slugify(item.key));
 
   return (
@@ -79,51 +80,60 @@ export default async function ReviewPage({ searchParams }: ReviewPageProps) {
           ))}
           <dt className="text-sm text-muted-foreground">Ours</dt>
           <dd>
+            <span className="text-muted-foreground">{passage.before}</span>
             {change.prefix}
             <del className="bg-destructive/20 no-underline">{change.removed}</del>
             {change.suffix}
+            <span className="text-muted-foreground">{passage.after}</span>
           </dd>
           {target !== item.old && (
             <>
               <dt className="text-sm text-muted-foreground">{decision ? 'Decided' : 'Proposed'}</dt>
               <dd>
+                <span className="text-muted-foreground">{passage.before}</span>
                 {change.prefix}
                 <ins className="bg-chart-2/30 no-underline">{change.added}</ins>
                 {change.suffix}
+                <span className="text-muted-foreground">{passage.after}</span>
               </dd>
             </>
           )}
+          <dt className="text-sm text-muted-foreground">
+            <label htmlFor="correction">Correction</label>
+          </dt>
+          <dd>
+            <form action={decide} className="space-y-3">
+              <input type="hidden" name="id" value={item.id} />
+              <textarea
+                key={item.id}
+                name="text"
+                id="correction"
+                defaultValue={decodeFragment(target)}
+                rows={4}
+                disabled={applied.has(item.id)}
+                className="w-full rounded-sm border border-input bg-card p-2 font-mono text-sm"
+              />
+              <div className="flex gap-3">
+                <button
+                  name="choice"
+                  value="save"
+                  disabled={applied.has(item.id)}
+                  className="rounded-sm bg-primary px-3 py-1 text-primary-foreground disabled:opacity-50"
+                >
+                  Accept
+                </button>
+                <button
+                  name="choice"
+                  value="keep"
+                  disabled={applied.has(item.id)}
+                  className="rounded-sm bg-secondary px-3 py-1 text-secondary-foreground disabled:opacity-50"
+                >
+                  Keep ours
+                </button>
+              </div>
+            </form>
+          </dd>
         </dl>
-        <form action={decide} className="space-y-3">
-          <input type="hidden" name="id" value={item.id} />
-          <textarea
-            key={item.id}
-            name="text"
-            aria-label="Corrected text"
-            defaultValue={decodeFragment(target)}
-            rows={4}
-            disabled={applied.has(item.id)}
-            className="w-full rounded-sm border border-input bg-card p-2 font-mono text-sm"
-          />
-          <div className="flex gap-3">
-            <button
-              name="choice"
-              value="save"
-              disabled={applied.has(item.id)}
-              className="rounded-sm bg-primary px-3 py-1 text-primary-foreground disabled:opacity-50"
-            >
-              Accept
-            </button>
-            <button
-              name="choice"
-              value="keep"
-              disabled={applied.has(item.id)}
-              className="rounded-sm bg-secondary px-3 py-1 text-secondary-foreground disabled:opacity-50"
-            >
-              Keep ours
-            </button>
-          </div>
-        </form>
         {entry && (
           <details>
             <summary className="cursor-pointer text-sm text-muted-foreground">{entry.key}</summary>

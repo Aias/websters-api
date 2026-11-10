@@ -1,5 +1,5 @@
 import { expect, test } from 'bun:test';
-import { changeBetween, decodeFragment, encodeEdit, tagsOf } from './review-text';
+import { changeBetween, decodeFragment, encodeEdit, passageAround, tagsOf } from './review-text';
 
 test('decodes entities and keeps tags', () => {
   expect(decodeFragment('<div class="ets">spe&#x304;dig</div> &#x2014; a')).toBe(
@@ -31,4 +31,14 @@ test('a change is the differing middle of the visible text', () => {
     added: 'o',
     suffix: 'me detached',
   });
+});
+
+test('a passage is the visible text on either side of a fragment', () => {
+  const html =
+    '<div class="cd">made of olive oil and soda; &#x2014; called also <div class="altname">Venetian soap</div>. </div>&#x2014; <div class="col"><b>Hard soap</b></div>';
+  expect(passageAround(html, '<div class="altname">Venetian soap</div>')).toEqual({
+    before: 'made of olive oil and soda; — called also ',
+    after: '. — Hard soap',
+  });
+  expect(passageAround(html, 'Castile')).toEqual({ before: '', after: '' });
 });

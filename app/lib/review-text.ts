@@ -81,17 +81,41 @@ export function encodeEdit(base: string, edited: string): string {
   );
 }
 
+function plainText(fragment: string): string {
+  return decodeFragment(fragment.replace(/<[^>]*>/g, ''));
+}
+
 export type Change = { prefix: string; removed: string; added: string; suffix: string };
 
 export function changeBetween(ours: string, theirs: string): Change {
-  const text = (fragment: string) => Array.from(decodeFragment(fragment).replace(/<[^>]*>/g, ''));
-  const before = text(ours);
-  const after = text(theirs);
+  const before = Array.from(plainText(ours));
+  const after = Array.from(plainText(theirs));
   const { prefix, suffix } = sharedEnds(before, after);
   return {
     prefix: before.slice(0, prefix).join(''),
     removed: before.slice(prefix, before.length - suffix).join(''),
     added: after.slice(prefix, after.length - suffix).join(''),
     suffix: before.slice(before.length - suffix).join(''),
+  };
+}
+
+export type Passage = { before: string; after: string };
+
+const PASSAGE_REACH = 200;
+
+export function passageAround(html: string, fragment: string): Passage {
+  const index = html.indexOf(fragment);
+  if (index < 0) return { before: '', after: '' };
+  const before = plainText(html.slice(0, index)).replace(/\s+/g, ' ');
+  const after = plainText(html.slice(index + fragment.length)).replace(/\s+/g, ' ');
+  return {
+    before:
+      before.length > PASSAGE_REACH
+        ? `…${before.slice(before.indexOf(' ', before.length - PASSAGE_REACH))}`
+        : before,
+    after:
+      after.length > PASSAGE_REACH
+        ? `${after.slice(0, after.lastIndexOf(' ', PASSAGE_REACH))}…`
+        : after,
   };
 }

@@ -21,6 +21,7 @@ export const REVIEW_IMAGES = join(DIRECTORY, 'images');
 const ITEMS = join(DIRECTORY, 'items.jsonl');
 const DECISIONS = join(DIRECTORY, 'decisions.jsonl');
 const RECEIPTS = join(DIRECTORY, 'applied.jsonl');
+const SOURCE = join(process.cwd(), 'src', 'dict.jsonl');
 
 function lines(file: string): string[] {
   return existsSync(file) ? readFileSync(file, 'utf8').split('\n').filter(Boolean) : [];
@@ -28,6 +29,14 @@ function lines(file: string): string[] {
 
 export function reviewItems(): ReviewItem[] {
   return lines(ITEMS).map((line): ReviewItem => JSON.parse(line));
+}
+
+export function sourceHtml(key: string): string {
+  const start = `{"key":${JSON.stringify(key)},"html":`;
+  const line = lines(SOURCE).find((candidate) => candidate.startsWith(start));
+  if (!line) return '';
+  const record: { html: string } = JSON.parse(line);
+  return record.html;
 }
 
 export function reviewDecisions(): Map<string, ReviewDecision> {
