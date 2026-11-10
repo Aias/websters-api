@@ -127,6 +127,14 @@ Whole-page reading finds differences that entry-by-entry review does not reach, 
 
 [Page-reading batch 2](../../../../reports/dictionary-audit-page-reading-2.md) gives measured costs and yields.
 
+## Readings the readers leave open
+
+When the readers do not settle a field, hand it to the person through the review queue instead of holding it for a later reading. This covers a character every reader marks unreadable, readers who still differ after a second printing, and a question about how the record represents what the print shows.
+
+Append one JSON line per field to `.cache/review/items.jsonl`, in the `ReviewItem` shape from `app/lib/review-queue.ts`: an `id`, the entry `key`, a one-sentence `question`, the exact raw fragment `old` (it must occur once in the entry), the best-guess raw fragment `proposed` or `null`, each reader's `readings`, and `images`. Save the crops as PNG files under `.cache/review/images/`, one per printing, cut wide enough to show the line above and below.
+
+The person decides each item at `/review` in the development server, by accepting the proposal, editing it, or keeping the record. `bun scripts/review/apply.ts --dry-run` lists the decided items, and without the flag it writes them to the source under the one-anchor guard. Commit applied decisions with the batch that raised them, and run the usual checks first.
+
 ## Resumable progress and admission
 
 Use `deriveProgress` from `packet.ts` to derive counts and the first unstarted key within the supplied frozen ordered keys and unique per-entry records. This is not a next-unclaimed cursor. Select the ascending or descending unclaimed range separately against the shared claims and preserve its exact review order. Bind source and complete-review credit to the actual source and implementation hashes. Glyph-only credit remains separate. Keep the detailed source, parser, browser-text, visual, field-hold, and issue records with their evidence rather than reducing them to a single completion boolean.
