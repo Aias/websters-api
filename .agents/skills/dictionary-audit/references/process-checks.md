@@ -114,6 +114,8 @@ Whole-page reading finds differences that entry-by-entry review does not reach, 
 - **Special letters:** draft by hand any correction where the printed word touches a letter outside the plain alphabet, such as a thorn.
 - **Proofreading:** have a reader who did not draft them read every rule-drafted correction for sense before it is applied.
 - **Questions for the person:** put every judgment call in the review queue with crops of both printings, and record a hold for it.
+- **Third reader:** two blind readers with a tiebreak and a confirming printing already find the word differences. A third model that read 34 corrected pages blind found none they had missed, so do not add a third reader for words.
+- **Blended corrections:** when a proofreader finds that a correction would mix the printed wording with a later rewrite, ask the person about the whole passage. Do not keep the record without a question.
 
 [Page-reading batch 2](../../../../reports/dictionary-audit-page-reading-2.md) gives measured costs and yields.
 
