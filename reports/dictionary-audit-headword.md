@@ -1,6 +1,6 @@
 # Headword pass
 
-The print sets each headword in bold, with a hyphen between its syllables and an accent after each stressed one. A heavy accent marks the main stress and a light accent a lesser one. This pass compares the record's headwords with the print in their letters, syllable breaks, hyphens, spaces and accents, and corrects 1,481 of them. The [ledger](dictionary-audit-headword.jsonl) has a row for each headword that was questioned, with the three readings and the reason it changed or stayed. In the examples below ″ stands for a heavy accent and ′ for a light one.
+The print sets each headword in bold, with a hyphen between its syllables and an accent after each stressed one. A heavy accent marks the main stress and a light accent a lesser one. This pass compares the record's headwords with the print in their letters, syllable breaks, hyphens, spaces and accents, and corrects 1,584 of them. The [ledger](dictionary-audit-headword.jsonl) has a row for each headword that was questioned, with the three readings and the reason it changed or stayed. In the examples below ″ stands for a heavy accent and ′ for a light one.
 
 ## Finding the headwords to question
 
@@ -8,13 +8,13 @@ Both blind page readings give each headword as the page shows it. 105,088 record
 
 | What the readings question                                                | Headwords | Changed |
 | ------------------------------------------------------------------------- | --------: | ------: |
-| The record's accents cannot be right: no heavy accent, or two in one word |       758 |     608 |
-| The print has more accents                                                |       350 |     315 |
-| Syllable breaks and accents both differ                                   |       181 |     170 |
-| Syllable breaks, hyphens or spaces                                        |       154 |     136 |
+| The record's accents cannot be right: no heavy accent, or two in one word |       758 |     664 |
+| The print has more accents                                                |       350 |     339 |
+| Syllable breaks and accents both differ                                   |       181 |     177 |
+| Syllable breaks, hyphens or spaces                                        |       154 |     143 |
 | An accent stands on another syllable                                      |       121 |     117 |
 | A capital letter                                                          |        63 |      62 |
-| Letters, ligatures or marks over letters                                  |        59 |      41 |
+| Letters, ligatures or marks over letters                                  |        59 |      50 |
 | The print has fewer accents                                               |        35 |      32 |
 | The readers differ from each other and from the record                    |        13 |       0 |
 
@@ -28,7 +28,7 @@ A headword changes only when both page readings and the reading of the 1898 prin
 
 | Where the weights come from                     | Headwords |
 | ----------------------------------------------- | --------: |
-| Two closer readings give each accent its weight |       755 |
+| Two closer readings give each accent its weight |       858 |
 | The weights of the accents are the record's own |       393 |
 | A word with one accent has the heavy one        |       324 |
 | A word of one syllable has no accent            |         9 |
@@ -47,7 +47,7 @@ Two other ways to weigh an accent were tried and dropped. Measuring the ink of e
 - **Capitals, ligatures and marks over letters.** "æg″i-lops" to "Æg″i-lops", "æ-ol″ic" to "Æ-ol″ic", "æ′ti-ol″o-gy" to "Æ′ti-ol″o-gy"; "ae″gis" to "Æ″gis", "an′aes-the″sis" to "An′æs-the″sis", "Beau′se′ant″" to "Beau′sé′ant″", "cae-su″ra" to "Cæ-su″ra".
 - **Accents the print does not have.** "Black″guard′" to "Black″guard", "Bow″sprit′" to "Bow″sprit", "Cel″lu-loid′" to "Cel″lu-loid", "Chank″" to "Chank".
 
-45 of the changes touch the spelling itself: a hyphen, a space or a letter, as "Aard″-vark′" under the key Aardvark and "All′ fours″" under Allfours. The keys are unchanged. Whether a key should follow its headword is a question in the review queue.
+51 of the changes touch the spelling itself: a hyphen, a space or a letter, as "Aard″-vark′" under the key Aardvark and "All′ fours″" under Allfours. The keys are unchanged. Whether a key should follow its headword is a question in the review queue.
 
 ## The comma after the headword
 
@@ -64,13 +64,12 @@ The print sets a comma after the headword, or after its pronunciation, before th
 
 | Reason                                                                       | Headwords |
 | ---------------------------------------------------------------------------- | --------: |
-| The weight of an accent is hard to judge on the page                         |       134 |
-| Two readings give an accent different weights                                |        40 |
-| The weight of an accent waits for a second reading                           |        22 |
+| The weight of an accent is hard to judge on the page                         |        51 |
+| The readings give accents that cannot be right                               |        47 |
 | The closer reading of the 1898 printing has the headword as the record does  |        14 |
 | The closer reading has a third form                                          |        12 |
-| The readings give accents that cannot be right                               |        12 |
 | One page reading and the closer reading agree against the other page reading |         9 |
+| Two readings give an accent different weights                                |         7 |
 | The print shows no accent on a word of several syllables                     |         5 |
 | The entry has several headwords or has changed since it was read             |         4 |
 | The accents and their weights do not line up                                 |         1 |
