@@ -108,6 +108,8 @@ Whole-page reading finds differences that entry-by-entry review does not reach, 
 - **Inflected forms:** read the differences inside the bracket of inflected forms by hand. Most are the record's written-out labels, and a few are misspelled forms.
 - **Misfiled entries:** a printed entry with no record may sit under a misspelled key or inside a neighbour under the neighbour's headword. Search by definition text before writing a new record, and restore the neighbour in the same change.
 - **Rewritten passages:** where GCIDE rewrote a sentence around a registered later addition, do not correct it word by word, because the result is neither text. Ask the person one question for the whole passage. Before applying a batch, list every passage where some differences are corrected and others are left, and read each one whole.
+- **Supplement text:** set aside every difference that lies in text GCIDE sources to the 1913 Supplement. The Supplement revised some main-vocabulary definitions, the record carries the revision, and the main page then differs without the record being wrong. `reports/dictionary-print-fragments.jsonl` gives the source of each differing passage. The tags are not always right, so a rewritten passage that reads like early-1900s text goes to the person as well.
+- **Special letters:** draft by hand any correction where the printed word touches a letter outside the plain alphabet, such as a thorn.
 - **Proofreading:** have a reader who did not draft them read every rule-drafted correction for sense before it is applied.
 - **Questions for the person:** put every judgment call in the review queue with crops of both printings, and record a hold for it.
 
