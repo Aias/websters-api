@@ -123,16 +123,22 @@ The second pass adds 6,753 pronunciations and replaces 453 damaged ones.
 
 | Settled by                                                                                          | Entries |
 | --------------------------------------------------------------------------------------------------- | ------: |
-| Both page readings and one closer reading                                                           |   4,352 |
-| Two closer readings that agree                                                                      |   2,652 |
+| Both page readings and one closer reading                                                           |   4,276 |
+| Two closer readings that agree                                                                      |   2,726 |
 | One page reading and one closer reading, where the other page reading has other letters or stresses |     104 |
-| Two closer readings, one of which shows a mark the other missed                                     |      54 |
-| Two closer readings, and both page readings on the mark where they differ                           |      43 |
+| Two closer readings, one of which shows a mark the other missed                                     |      55 |
+| Two closer readings, and both page readings on the mark where they differ                           |      44 |
 | Two closer readings that agree, where the page readings have other hyphens or stresses              |       1 |
 
 ### Entries beside a same-spelled entry
 
 The reader is told only the headword. Where two entries with the same headword stand within two lines of each other, it can transcribe the wrong one. Of the pronunciations the first closer reading wrote, 447 have such a neighbour, and twelve of those neighbours have a pronunciation of the same shape with other marks. All twelve were read by eye on the 1898 page. Eleven were right. River, one who rives, had taken the short i of the river, and is corrected to (rīv′ẽr). The second pass holds such entries back until a reading that tells the reader which entry to take.
+
+## Later readings
+
+**Readings made for the headwords.** The [headword pass](dictionary-audit-headword.md) read the first lines of about 2,900 entries again, to check a headword or because a pronunciation waited on one, and each reading also wrote out the pronunciation. Fused with the earlier readings, and with the headwords corrected, they settle 987 more pronunciations.
+
+**A second closer reading for what rested on one.** A pronunciation that keeps a plain long vowel without stress, a plain th, an n before k or g, or dots below stood on one closer reading having seen nothing more there. 6,673 of them have now been read a second time. The second reading confirms 6,485 and corrects 118, most of them by adding the tick on a long vowel that the first reading missed. In 70 the two closer readings differ in a way the page readings do not settle, and the record stays as it is. Entries that stand beside a same-spelled entry were read with the reader told which entry to take, which adds 20 pronunciations that had been held back for that reason.
 
 ## Limits and remaining work
 
