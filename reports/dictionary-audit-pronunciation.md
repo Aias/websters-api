@@ -1,13 +1,13 @@
 # Headword pronunciation pass
 
-The print gives a pronunciation in parentheses after most headwords. The record had one for about 23,000 of its 120,705 headwords. This pass adds 59,455 printed pronunciations and replaces 3,189 damaged ones. 36,431 of the additions and 1,499 of the replacements come from the two blind readings that the [page-reading batches](dictionary-audit-page-reading-2.md) already made. The other 23,024 additions and 1,690 replacements needed a closer reading of an enlarged crop. 85,777 headwords now carry a whole pronunciation.
+The print gives a pronunciation in parentheses after most headwords. The record had one for about 23,000 of its 120,705 headwords. This pass adds 59,488 printed pronunciations and replaces 3,189 damaged ones. 36,431 of the additions and 1,499 of the replacements come from the two blind readings that the [page-reading batches](dictionary-audit-page-reading-2.md) already made. The other 23,057 additions and 1,690 replacements needed a closer reading of an enlarged crop. 85,810 headwords now carry a whole pronunciation.
 
-A pronunciation is added from the page readings only where both readers give the same marks and the reading falls outside the cases where readers are known to miss a mark. 3,359 printed pronunciations stay out for now. Each has a row in its ledger that says why.
+A pronunciation is added from the page readings only where both readers give the same marks and the reading falls outside the cases where readers are known to miss a mark. 3,326 printed pronunciations stay out for now. Each has a row in its ledger that says why.
 
 | Pages     | Record lacked |  Added | Replaced | After a closer reading | Could hide a missed mark | Readers differ | Other held | Ledger                                           |
 | --------- | ------------: | -----: | -------: | ---------------------: | -----------------------: | -------------: | ---------: | ------------------------------------------------ |
 | 1–50      |           915 |    598 |        3 |                    282 |                        3 |             15 |         14 | [jsonl](dictionary-audit-pronunciation-2.jsonl)  |
-| 51–150    |           323 |    161 |        0 |                     95 |                       27 |             28 |         12 | [jsonl](dictionary-audit-pronunciation-3.jsonl)  |
+| 51–150    |           323 |    161 |        0 |                    128 |                       12 |             10 |         12 | [jsonl](dictionary-audit-pronunciation-3.jsonl)  |
 | 151–250   |         2,400 |  1,340 |        6 |                    908 |                       24 |             65 |         57 | [jsonl](dictionary-audit-pronunciation-4.jsonl)  |
 | 251–350   |         3,807 |  1,687 |      572 |                  1,293 |                       42 |            118 |         95 | [jsonl](dictionary-audit-pronunciation-5.jsonl)  |
 | 351–450   |         4,561 |  2,167 |      249 |                  1,907 |                       58 |            108 |         72 | [jsonl](dictionary-audit-pronunciation-6.jsonl)  |
@@ -23,7 +23,7 @@ A pronunciation is added from the page readings only where both readers give the
 | 1361–1460 |         3,758 |  2,299 |       10 |                  1,313 |                       28 |             67 |         41 | [jsonl](dictionary-audit-pronunciation-16.jsonl) |
 | 1461–1560 |         4,389 |  2,450 |        2 |                  1,788 |                       37 |             80 |         32 | [jsonl](dictionary-audit-pronunciation-17.jsonl) |
 | 1561–1681 |         5,808 |  3,741 |       18 |                  1,872 |                       31 |             66 |         80 | [jsonl](dictionary-audit-pronunciation-18.jsonl) |
-| Total     |        66,003 | 36,431 |    1,499 |                 24,714 |                      719 |          1,416 |      1,224 |                                                  |
+| Total     |        66,003 | 36,431 |    1,499 |                 24,747 |                      704 |          1,398 |      1,224 |                                                  |
 
 "Record lacked" counts entries that both readers pair with a printed entry, where the print has a pronunciation and the record had none or a damaged one.
 
@@ -58,13 +58,13 @@ Of the 1,499 pronunciations that the page readings replace, 241 were bare placeh
 
 | Case                                                        | Held back |
 | ----------------------------------------------------------- | --------: |
-| A plain long vowel in a syllable without stress             |       571 |
-| A plain long vowel in a word the print marks as foreign     |       106 |
-| "th", which may be the barred th of "then"                  |        70 |
-| A vowel with dots below, where one dot and two are confused |        44 |
+| A plain long vowel in a syllable without stress             |       561 |
+| A plain long vowel in a word the print marks as foreign     |       105 |
+| "th", which may be the barred th of "then"                  |        68 |
+| A vowel with dots below, where one dot and two are confused |        41 |
 | An n before k or g, which may carry the line under it       |         8 |
 
-A pronunciation can fall under more than one case. 719 are held back in all.
+A pronunciation can fall under more than one case. 704 are held back in all.
 
 The first case is the largest. The print sets a small tick on the macron of the vowels of "senate", "event", "idea", "obey" and "unite". Of 4,077 such vowels in the record's pronunciations, both readers saw the tick on 15%, one reader on 44%, and neither on 40%. A tick that either reader saw is almost always real: readers put one on under 1% of the record's 7,621 plain long vowels. A plain long vowel in an unstressed syllable therefore proves nothing, and those pronunciations wait for a closer reading.
 
@@ -83,24 +83,24 @@ The three errors were checked by eye on the crops. Déblai has ticked vowels und
 
 ## Closer reading
 
-The pronunciations held back above need marks that a reader of the whole column misses. For each, the entry's first lines were cut from the 1898 printing, enlarged three times, and read blind by Opus. The closer reading covers printed pages 1 to 1681. It adds 23,024 pronunciations and replaces 1,690 damaged ones.
+The pronunciations held back above need marks that a reader of the whole column misses. For each, the entry's first lines were cut from the 1898 printing, enlarged three times, and read blind by Opus. The closer reading covers printed pages 1 to 1681. It adds 23,057 pronunciations and replaces 1,690 damaged ones.
 
 The three readings are then fused letter by letter. All three must have the same letters, hyphens and stresses. A mark stands when the closer reading gives it and a page reader agrees, or when the closer reading shows one of the marks page readers miss: the tick, the line under n, the bar through th, or the other count of dots below. A mark that a page reader saw and the closer reading did not is left open.
 
 Before the pass ran, the closer reading was tried on 200 entries whose existing pronunciation has one of those marks. It saw 144 of 147 ticks and added none to 71 plain long vowels. The two page readers had both seen six of those ticks. A second closer reading of the same crops missed different ticks: only one was missed by both. Fused with the page readings, the result equals the record in 129 of 133 entries where the record and the print give the same form.
 
-| Outcome of 26,743 closer readings                                                           | Entries |
+| Outcome of 26,769 closer readings                                                           | Entries |
 | ------------------------------------------------------------------------------------------- | ------: |
-| Added                                                                                       |  23,024 |
+| Added                                                                                       |  23,057 |
 | Replaced a damaged pronunciation                                                            |   1,690 |
-| Its syllables or stresses do not line up with the headword                                  |     763 |
+| Its syllables or stresses do not line up with the headword                                  |     765 |
 | The headword's own stress marks are unsound                                                 |     281 |
-| It holds something other than a respelling                                                  |     257 |
-| The three readings give three marks                                                         |     197 |
-| A page reader saw a mark that the closer reading did not                                    |     195 |
-| The readings give different marks                                                           |     154 |
-| The closer reading has other letters or stresses                                            |      83 |
-| The crop did not show the entry                                                             |      48 |
+| It holds something other than a respelling                                                  |     260 |
+| A page reader saw a mark that the closer reading did not                                    |     196 |
+| The three readings give three marks                                                         |     195 |
+| The readings give different marks                                                           |     157 |
+| The closer reading has other letters or stresses                                            |      78 |
+| The crop did not show the entry                                                             |      39 |
 | An entry with the same headword stands beside it, and the reader was not told which to take |      31 |
 | Its alternatives differ only in the weight of a stress                                      |       7 |
 | The two closer readings have different letters or stresses                                  |       6 |
@@ -112,7 +112,7 @@ A reading that keeps a plain long vowel in an unstressed syllable rests on one c
 
 ## Limits and remaining work
 
-- 3,359 printed pronunciations are not yet in the record: 1,943 that could hide a missed mark or do not line up with the headword, and 1,416 where the readers differ. The closer reading settles about four in five of those it reaches. 106 have had no closer reading, because their place on the 1898 page was not found.
+- 3,326 printed pronunciations are not yet in the record: 1,928 that could hide a missed mark or do not line up with the headword, and 1,398 where the readers differ. The closer reading settles about four in five of those it reaches. 80 have had no closer reading, because their place on the 1898 page was not found.
 - The pronunciations added from the page readings rest on two readings of one scan. A closer reading of each would find the remaining wrong marks.
 - The pass covers the pronunciation after a headword. Pronunciations after inflected forms and plurals, and the 674 headword pronunciations that still hold a lost character, are not covered.
 - 409 headwords have stress marks that cannot be right, such as Eventration with no heavy mark. Their pronunciations are held back, and the headwords need a pass of their own.
