@@ -123,7 +123,7 @@ test('Ablation keeps consecutive senses and Ablative keeps its noun homograph', 
 
 test('keeps the Abominator definition and attribution separate from Abomination', () => {
   const $ = cheerio.load(entrySource('Abominator'));
-  expect($('.hw').text()).toBe('A-bom′i-naˊtor');
+  expect($('.hw').text().trim()).toBe('A-bom′i-naˊtor');
   expect($('.pos').text().trim()).toBe('noun');
   expect($('.def').text().trim()).toBe('One who abominates.');
   expect($('.au').text()).toBe('Sir W. Scott.');
