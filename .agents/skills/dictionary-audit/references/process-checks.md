@@ -117,6 +117,13 @@ Whole-page reading finds differences that entry-by-entry review does not reach, 
 - **Third reader:** two blind readers with a tiebreak and a confirming printing already find the word differences. A third model that read 34 corrected pages blind found none they had missed, so do not add a third reader for words.
 - **Blended corrections:** when a proofreader finds that a correction would mix the printed wording with a later rewrite, ask the person about the whole passage. Do not keep the record without a question.
 - **Punctuation and capitals:** compare the marks between words and initial capitals from the same blind readings, in a pass of their own. Leave out later additions, headings, forms, names and small capitals. Confirm each difference with a strip of the second printing, draft the simple shapes by rule, and have every change proofread. [The pass report](../../../../reports/dictionary-audit-punctuation.md) gives the method.
+- **Punctuation shapes no rule drafts:** have one agent write the exact replacement by hand, with a stated reason wherever the record should stay, and a different agent proofread it. A reported change stays out unless its text changes after the review.
+- **Lists set in several columns:** the line comparison cannot follow a list the print sets two or three across, such as the word lists under Un-. Set its differences aside before any drafting, and compare the list's words as a set against both readers.
+- **Registered text before a repair:** check the later-additions register before turning a reported blend into a hand correction. If the correction would remove registered text, ask the person.
+- **Entries under X, Y and Z:** the register lists only whole entries there. Check every correction to those entries by hand, and judge later additions from the typists' text and the two printings.
+- **A correction whose result is already in the record:** a hand correction that only removes a repeated phrase leaves text that the record already contains, so a check for "already applied" skips it. Give it enough context that the result is new.
+- **Page numbers:** take a printed page number from the scan leaf it was read from, never from memory.
+- **Tests that pin record text:** some tests assert a record's exact words. When a correction legitimately changes them, update the expected text, and run the tests after every plan.
 
 [Page-reading batch 2](../../../../reports/dictionary-audit-page-reading-2.md) gives measured costs and yields.
 

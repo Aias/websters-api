@@ -19,8 +19,9 @@ The [page-reading batches](dictionary-audit-page-reading-2.md) compare words. Th
 | 1161–1260 |         421 |               368 |     368 |             28 |         340 |         231 |      109 |     272 | [jsonl](dictionary-audit-punctuation-14.jsonl) |
 | 1261–1360 |         327 |               295 |     295 |             12 |         283 |         251 |       32 |     229 | [jsonl](dictionary-audit-punctuation-15.jsonl) |
 | 1361–1460 |         284 |               255 |     255 |             18 |         237 |         196 |       41 |     179 | [jsonl](dictionary-audit-punctuation-16.jsonl) |
-| 1461–1560 |         296 |               261 |     235 |             20 |         215 |         181 |       34 |     189 | [jsonl](dictionary-audit-punctuation-17.jsonl) |
-| Total     |       6,326 |             5,501 |   5,462 |            384 |       5,078 |       4,101 |      977 |   4,036 |                                                |
+| 1461–1560 |         296 |               261 |     261 |             29 |         232 |         198 |       34 |     203 | [jsonl](dictionary-audit-punctuation-17.jsonl) |
+| 1561–1681 |         305 |               270 |     270 |             30 |         240 |         211 |       29 |     202 | [jsonl](dictionary-audit-punctuation-18.jsonl) |
+| Total     |       6,631 |             5,771 |   5,758 |            423 |       5,335 |       4,329 |    1,006 |   4,252 |                                                |
 
 ## Method
 
@@ -77,24 +78,24 @@ The proofreaders' reasons for keeping the record fall into the same groups as on
 - **A confirmation from the wrong entry.** A strip sometimes shows a neighbouring entry with the same words. The proofreaders then check the change against the first scan, and it is applied only if that scan supports it, as under Primate and Prosimiae. Under Pneumatic it did not, and the record stays.
 - **Printed figures.** Under Figurate the print shows triangles of dots, which the record writes as periods. The readers pass over the figure, so the record stays.
 
-The proofreaders also found that the rule had put a closing period outside a definition's or an author's tag. The rule was changed, as step 4 now says. Where a proofreader found a change right but its drafted markup wrong, the change was redrafted by the rule or corrected by hand and then applied: 68 changes so far. Eighteen further marks that the changed rule could draft, all at the end of a definition or an etymology or after an author's name or a citation, were checked by hand against the printed context and applied. One comma that the print sets between the two names of a phrase heading, under Soul, was withheld, because phrase headings keep the record's form. One hand correction also removes a stray word beside the mark: Corselet read "as, the body breastplate" where the print has "as the breastplate".
+The proofreaders also found that the rule had put a closing period outside a definition's or an author's tag. The rule was changed, as step 4 now says. Where a proofreader found a change right but its drafted markup wrong, the change was redrafted by the rule or corrected by hand and then applied: 72 changes in all. Eighteen further marks that the changed rule could draft, all at the end of a definition or an etymology or after an author's name or a citation, were checked by hand against the printed context and applied. One comma that the print sets between the two names of a phrase heading, under Soul, was withheld, because phrase headings keep the record's form. One hand correction also removes a stray word beside the mark: Corselet read "as, the body breastplate" where the print has "as the breastplate".
 
 **Second pass.** At first the rule drafted only simple marks added, removed or exchanged in a gap that held nothing else. It was then extended to the other shapes step 4 lists. A second pass over pages 751 to 1160 drafted 72 more changes from the confirmed differences the first pass had left. A proofreader read all 72 and kept one, under Nightmare, where a later editor rewrote the sentence. The other pages were drafted once, with the extended rule.
 
-**Hand pass.** The confirmed differences that the rule still could not draft were then drafted by hand: 447 places on pages 1 to 1460. They are ellipses, possessive apostrophes, parentheses and brackets, quotation marks, and marks beside a Greek word. Agents wrote the exact replacement for 313 and kept the record at 134. Of those 134, 55 are the record's own conventions, such as its parenthesized "Fig." labels, 34 lie in text a later editor rewrote, 33 are places where the print is wrong, 11 are not differences once the markup is set aside, and one has no support in the readings. Proofreaders who had not drafted the changes read every one and held four. The hand pass applied 310 corrections, among them plural possessives that the record had as singular, such as "Brokers' Cant" under Spot and "kings' houses" under Soft.
+**Hand pass.** The confirmed differences that the rule still could not draft were then drafted by hand: 499 places. They are ellipses, possessive apostrophes, parentheses and brackets, quotation marks, and marks beside a Greek word. Agents wrote the exact replacement for 350 and kept the record at 149. Of those 149, 61 are the record's own conventions, such as its parenthesized "Fig." labels, 35 lie in text a later editor rewrote, 41 are places where the print is wrong, 11 are not differences once the markup is set aside, and one has no support in the readings. Proofreaders who had not drafted the changes read every one and held four. The hand pass applied 347 corrections, among them plural possessives that the record had as singular, such as "Brokers' Cant" under Spot and "kings' houses" under Soft.
 
 ## Cost
 
 | Step                                      | Tokens       | Model time |
 | ----------------------------------------- | ------------ | ---------- |
-| Readings of 6,326 strips of 1898 (Opus)   | 28.3 million | 6.3 hours  |
-| Hand drafting and proofreading, 52 agents | 9.7 million  | 9.2 hours  |
+| Readings of 6,631 strips of 1898 (Opus)   | 29.6 million | 6.5 hours  |
+| Hand drafting and proofreading, 56 agents | 10.4 million | 9.7 hours  |
 
 No page was read again. The integrating session's own usage was not measured.
 
 ## Limits
 
 - Dashes, italics and pronunciation marks are not compared.
-- 39 confirmed differences wait for a later pass. No rule drafts their shape, and they have not yet been drafted by hand.
+- 13 confirmed differences are not applied by this pass. Twelve are capitals on words that begin with a ligature, such as "Æons" under Aeon, which the rule does not draft. One is a comma under Mistletoe that a word correction had already supplied.
 - A mark that the 1913 printing changed cannot be told from a typist's slip without the 1913 page. The ruling of 10 November 2026 treats it as a slip.
 - The comparison needs both neighbouring words to agree in all three texts, so a mark beside a word difference is not compared.
