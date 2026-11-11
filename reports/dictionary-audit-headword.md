@@ -33,7 +33,7 @@ A headword changes only when both page readings and the reading of the 1898 prin
 | A word with one accent has the heavy one        |       324 |
 | A word of one syllable has no accent            |         9 |
 
-The record's own weights are kept wherever the number of accents is unchanged and the weights can be right. A word with a single accent has the heavy one. Every other weight needs two readings that agree: the reading of the entry's first lines, and a second reading that is asked only how thick each accent is, on a crop of the headword's line enlarged six times, beside a reference image whose weights are stated.
+The record's own weights are kept wherever the number of accents is unchanged and the weights can be right. A word with a single accent has the heavy one. Every other weight needs two readings that agree: the reading of the entry's first lines, and a second reading that is asked only how thick each accent is, on a crop of the headword's line enlarged six times, beside a reference image whose weights are stated. Where those two differed, the thickness reading was made a second time, and the weights stand where two of the three readings agree.
 
 Both readings were tried first on headwords whose weights the record has. The first-lines reading gave both weights right in 127 of 130 words with a heavy and a light accent. The thickness reading gave them right in 107 of 110, and in all 101 where it called itself certain. Fourteen of the decisions that rest on the two readings were then checked by eye on the page, and all fourteen were right.
 
