@@ -103,6 +103,13 @@ Whole-page reading finds differences that entry-by-entry review does not reach, 
 - **Third reading:** read each remaining difference blind on the second printing before applying it. Worn or broken type in one impression produces confident wrong readings, and only the second printing exposes them.
 - **Print errors:** read each proposed correction for sense before applying it. Both printings can share a misprint, such as a wrong chapter in a citation or a misspelled author, and the record's corrected reading then stands.
 - **Edits:** draft a plain-word correction from the reading and keep the record's punctuation around it. Draft anything that touches markup by hand from the same record's conventions. Apply all of a record's changes in one pass against a hash of the original record.
+- **Weaker second reader:** when the second reader misreads more often than the first, also compare the first reader alone with the record. Where it finds a difference the pair missed, have a third model read a strip of the same scan blind, and count its agreement as the second reading.
+- **Unsettled strips:** when a strip of the second printing does not settle a difference, cut a taller one from the place the first reader found the line and read it again before giving up.
+- **Inflected forms:** read the differences inside the bracket of inflected forms by hand. Most are the record's written-out labels, and a few are misspelled forms.
+- **Misfiled entries:** a printed entry with no record may sit under a misspelled key or inside a neighbour under the neighbour's headword. Search by definition text before writing a new record, and restore the neighbour in the same change.
+- **Rewritten passages:** where GCIDE rewrote a sentence around a registered later addition, do not correct it word by word, because the result is neither text. Ask the person one question for the whole passage. Before applying a batch, list every passage where some differences are corrected and others are left, and read each one whole.
+- **Proofreading:** have a reader who did not draft them read every rule-drafted correction for sense before it is applied.
+- **Questions for the person:** put every judgment call in the review queue with crops of both printings, and record a hold for it.
 
 [Page-reading batch 2](../../../../reports/dictionary-audit-page-reading-2.md) gives measured costs and yields.
 
