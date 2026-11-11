@@ -86,7 +86,7 @@ describe('dictionary extraction recovery', () => {
       'intransitive verb',
     ]);
     expect(entry.homographs[0]?.content).toContainEqual(
-      expect.objectContaining({ kind: 'synonyms', html: expect.stringContaining('regulation') })
+      expect.objectContaining({ kind: 'synonyms', html: expect.stringContaining('Regulation') })
     );
     expect(JSON.stringify(entry.homographs[1]?.content)).toContain(
       'To control the will and actions'

@@ -14,7 +14,7 @@ function entrySource(key: string): string {
 describe('dictionary source restoration', () => {
   test.each([
     ['Carpenter', 'An artificer who works in timber'],
-    ['Carping', 'Fault-finding; censorious caviling'],
+    ['Carping', 'Fault-finding; censorious; caviling'],
     ['Genre', 'Kind; genus; class; form; style'],
     ['Hardened', 'Made hard, or harder, or compact'],
     ['Highway', 'A road or way open to the use of the public; a main road or thoroughfare'],
