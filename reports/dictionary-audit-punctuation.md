@@ -5,23 +5,23 @@ The [page-reading batches](dictionary-audit-page-reading-2.md) compare words. Th
 | Pages     | Differences | Confirmed by 1898 | Drafted | Kept on review | Corrections | Punctuation | Capitals | Entries | Ledger                                         |
 | --------- | ----------: | ----------------: | ------: | -------------: | ----------: | ----------: | -------: | ------: | ---------------------------------------------- |
 | 1–50      |         126 |               111 |     111 |             13 |          98 |          91 |        7 |      78 | [jsonl](dictionary-audit-punctuation-2.jsonl)  |
-| 51–150    |         238 |               194 |     193 |             18 |         175 |         155 |       20 |     155 | [jsonl](dictionary-audit-punctuation-3.jsonl)  |
+| 51–150    |         238 |               194 |     194 |             18 |         176 |         155 |       21 |     156 | [jsonl](dictionary-audit-punctuation-3.jsonl)  |
 | 151–250   |         865 |               805 |     805 |             16 |         789 |         608 |      181 |     561 | [jsonl](dictionary-audit-punctuation-4.jsonl)  |
 | 251–350   |         591 |               518 |     518 |              7 |         511 |         418 |       93 |     401 | [jsonl](dictionary-audit-punctuation-5.jsonl)  |
 | 351–450   |         351 |               277 |     277 |             17 |         260 |         210 |       50 |     223 | [jsonl](dictionary-audit-punctuation-6.jsonl)  |
-| 451–550   |         437 |               373 |     366 |             11 |         355 |         281 |       74 |     275 | [jsonl](dictionary-audit-punctuation-7.jsonl)  |
+| 451–550   |         437 |               373 |     372 |             11 |         361 |         281 |       80 |     280 | [jsonl](dictionary-audit-punctuation-7.jsonl)  |
 | 551–650   |         589 |               529 |     529 |             22 |         507 |         425 |       82 |     366 | [jsonl](dictionary-audit-punctuation-8.jsonl)  |
 | 651–750   |         339 |               288 |     288 |             13 |         275 |         242 |       33 |     217 | [jsonl](dictionary-audit-punctuation-9.jsonl)  |
 | 751–850   |         340 |               278 |     278 |             40 |         238 |         192 |       46 |     211 | [jsonl](dictionary-audit-punctuation-10.jsonl) |
 | 851–960   |         359 |               304 |     303 |             48 |         255 |         203 |       52 |     216 | [jsonl](dictionary-audit-punctuation-11.jsonl) |
-| 961–1060  |         429 |               349 |     346 |             62 |         284 |         204 |       80 |     241 | [jsonl](dictionary-audit-punctuation-12.jsonl) |
-| 1061–1160 |         334 |               296 |     295 |             39 |         256 |         213 |       43 |     223 | [jsonl](dictionary-audit-punctuation-13.jsonl) |
+| 961–1060  |         429 |               349 |     349 |             62 |         287 |         204 |       83 |     243 | [jsonl](dictionary-audit-punctuation-12.jsonl) |
+| 1061–1160 |         334 |               296 |     296 |             39 |         257 |         213 |       44 |     224 | [jsonl](dictionary-audit-punctuation-13.jsonl) |
 | 1161–1260 |         421 |               368 |     368 |             28 |         340 |         231 |      109 |     272 | [jsonl](dictionary-audit-punctuation-14.jsonl) |
 | 1261–1360 |         327 |               295 |     295 |             12 |         283 |         251 |       32 |     229 | [jsonl](dictionary-audit-punctuation-15.jsonl) |
 | 1361–1460 |         284 |               255 |     255 |             18 |         237 |         196 |       41 |     179 | [jsonl](dictionary-audit-punctuation-16.jsonl) |
 | 1461–1560 |         296 |               261 |     261 |             29 |         232 |         198 |       34 |     203 | [jsonl](dictionary-audit-punctuation-17.jsonl) |
 | 1561–1681 |         305 |               270 |     270 |             30 |         240 |         211 |       29 |     202 | [jsonl](dictionary-audit-punctuation-18.jsonl) |
-| Total     |       6,631 |             5,771 |   5,758 |            423 |       5,335 |       4,329 |    1,006 |   4,252 |                                                |
+| Total     |       6,631 |             5,771 |   5,769 |            423 |       5,346 |       4,329 |    1,017 |   4,261 |                                                |
 
 ## Method
 
@@ -84,6 +84,8 @@ The proofreaders also found that the rule had put a closing period outside a def
 
 **Hand pass.** The confirmed differences that the rule still could not draft were then drafted by hand: 499 places. They are ellipses, possessive apostrophes, parentheses and brackets, quotation marks, and marks beside a Greek word. Agents wrote the exact replacement for 350 and kept the record at 149. Of those 149, 61 are the record's own conventions, such as its parenthesized "Fig." labels, 35 lie in text a later editor rewrote, 41 are places where the print is wrong, 11 are not differences once the markup is set aside, and one has no support in the readings. Proofreaders who had not drafted the changes read every one and held four. The hand pass applied 347 corrections, among them plural possessives that the record had as singular, such as "Brokers' Cant" under Spot and "kings' houses" under Soft.
 
+**Ligature capitals.** Eleven confirmed capitals stood on shapes the rule could not draft: ten on words that begin with a ligature, which the record writes as an entity, and one on a word that markup divides, the "Pinus" in Pimaric's etymology. The rule now exchanges a ligature's case, and the divided word was drafted by hand. The changes are "Æons" under Aeon, the references "Ædile" under Edile, "Æruginous" under Eruginous, "Æsthetics" under Anaesthesia, "Œnanthylic" under Oenanthic and "Œstrus" under Oestrual, the four references under Esthetics, and the lower-case "ægilops" under Egilopical and "œnanthic" under Oil.
+
 ## Cost
 
 | Step                                      | Tokens       | Model time |
@@ -96,6 +98,6 @@ No page was read again. The integrating session's own usage was not measured.
 ## Limits
 
 - Dashes, italics and pronunciation marks are not compared.
-- 13 confirmed differences are not applied by this pass. Twelve are capitals on words that begin with a ligature, such as "Æons" under Aeon, which the rule does not draft. One is a comma under Mistletoe that a word correction had already supplied.
+- 2 confirmed differences are not applied by this pass. One is a comma under Mistletoe that a word correction had already supplied. The other is the capital of "’Change" under Exchange, which stands in a sentence a later editor reworded and waits on a review question.
 - A mark that the 1913 printing changed cannot be told from a typist's slip without the 1913 page. The ruling of 10 November 2026 treats it as a slip.
 - The comparison needs both neighbouring words to agree in all three texts, so a mark beside a word difference is not compared.
