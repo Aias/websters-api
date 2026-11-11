@@ -2,13 +2,13 @@
 
 The [page-reading batches](dictionary-audit-page-reading-2.md) compare words. This pass compares what they leave out: the marks between words and the initial capital of each word. It uses the same blind readings, so no page is read again. A correction is made where both readers agree against the record and a reading of the 1898 printing confirms them.
 
-| Pages    | Differences | Confirmed by 1898 | Drafted by rule | Kept by proofreaders | Corrections | Entries | Ledger                                         |
-| -------- | ----------: | ----------------: | --------------: | -------------------: | ----------: | ------: | ---------------------------------------------- |
-| 751–850  |         340 |               278 |             228 |                   19 |         209 |     189 | [jsonl](dictionary-audit-punctuation-10.jsonl) |
-| 851–960  |         359 |               304 |             248 |                   28 |         220 |     190 | [jsonl](dictionary-audit-punctuation-11.jsonl) |
-| 961–1060 |         429 |               349 |             282 |                   34 |         248 |     212 | [jsonl](dictionary-audit-punctuation-12.jsonl) |
-
-Of the 677 corrections so far, 499 are punctuation and 178 are capitals.
+| Pages     | Differences | Confirmed by 1898 | Drafted by rule | Kept by proofreaders | Corrections | Punctuation | Capitals | Entries | Ledger                                         |
+| --------- | ----------: | ----------------: | --------------: | -------------------: | ----------: | ----------: | -------: | ------: | ---------------------------------------------- |
+| 751–850   |         340 |               278 |             228 |                   19 |         209 |         163 |       46 |     189 | [jsonl](dictionary-audit-punctuation-10.jsonl) |
+| 851–960   |         359 |               304 |             248 |                   28 |         220 |         168 |       52 |     190 | [jsonl](dictionary-audit-punctuation-11.jsonl) |
+| 961–1060  |         429 |               349 |             282 |                   34 |         248 |         168 |       80 |     212 | [jsonl](dictionary-audit-punctuation-12.jsonl) |
+| 1061–1160 |         334 |               296 |             264 |                   33 |         231 |         188 |       43 |     204 | [jsonl](dictionary-audit-punctuation-13.jsonl) |
+| Total     |       1,462 |             1,227 |           1,022 |                  114 |         908 |         687 |      221 |     795 |                                                |
 
 ## Method
 
@@ -51,29 +51,31 @@ The typists' text reads as the record at 182 of the 209 places, as the print at 
 - **The print is wrong:** a sense number without its period under Infancy and Knop, a comma before a new sentence under King, and "as" without its comma under Lean.
 - **The rule's output was wrong:** two ellipsis changes under Indifference, one of a pair of commas under Kamichi, and a period set outside the author's tag under Lacunar.
 
-## Pages 851 to 1060
+## Later pages
 
-The same pass over pages 851 to 960 makes 220 corrections in 190 entries, 168 in punctuation and 52 in capitals. Over pages 961 to 1060 it makes 248 in 212 entries, 168 in punctuation and 80 in capitals. Added commas and periods lead again, followed by commas that the print sets as semicolons.
+The same pass over later pages finds the same kinds of change in about the same proportions. Added commas and periods lead, followed by commas that the print sets as semicolons. The table at the top gives the counts for each run of pages.
 
-The proofreaders kept 62 changes on these pages. Their reasons fall into the same groups as before, and two are worth noting.
+The proofreaders' reasons for keeping the record fall into the same groups as on pages 751 to 850. Four recurring cases are worth noting.
 
-- **The printing lost a mark.** Where a period or the upper dot of a colon failed to print in both printings, the record's mark stays. Examples: "(Naut )" under Mainstay and "[Obs ]" under Pen.
-- **"Hence:" and "Specifically:" labels.** Where a later editor split a printed sentence into a new numbered sense, the record's label and capital stay, as under Matrix, Member, Overlook and Pabulum.
+- **The printing lost a mark.** Where a period, the dot of a semicolon or the upper dot of a colon failed to print in both printings, the record's mark stays. Examples: "(Naut )" under Mainstay, "[Obs ]" under Pen and "E Darwin" under Preclude.
+- **"Hence:" and "Specifically:" labels.** Where a later editor split a printed sentence into a new numbered sense, the record's label and capital stay, as under Matrix, Member, Overlook, Pabulum and Petition.
+- **Phrase names the record spells out.** The print's "narrow, or long, pennant" is two full names in the record, so the printed commas have no place there. Pennant and Poachard are examples.
+- **A confirmation from the wrong entry.** A strip sometimes shows a neighbouring entry with the same words. The proofreaders then check the change against the first scan, and it is applied only if that scan supports it, as under Primate and Prosimiae. Under Pneumatic it did not, and the record stays.
 
-The proofreaders also found that the rule had put a closing period outside a definition's or an author's tag. The rule was changed, as step 4 now says, and the nine changes it redrafted were applied. Twelve further periods that the changed rule could draft, all after an author's name or a citation, were checked by hand against the printed context and applied.
+The proofreaders also found that the rule had put a closing period outside a definition's or an author's tag. The rule was changed, as step 4 now says. Where a proofreader found a change right but its drafted markup wrong, the change was redrafted by the rule or corrected by hand and then applied: 15 changes so far. Seventeen further periods that the changed rule could draft, all at the end of a definition or after an author's name or a citation, were checked by hand against the printed context and applied.
 
 ## Cost
 
-| Step                                    | Tokens      | Model time |
-| --------------------------------------- | ----------- | ---------- |
-| Readings of 1,128 strips of 1898 (Opus) | 5.1 million | 70 minutes |
-| Proofreading of 758 changes, six agents | 0.9 million | 36 minutes |
+| Step                                        | Tokens      | Model time |
+| ------------------------------------------- | ----------- | ---------- |
+| Readings of 1,462 strips of 1898 (Opus)     | 6.6 million | 90 minutes |
+| Proofreading of 1,022 changes, eight agents | 1.4 million | 53 minutes |
 
 No page was read again. The integrating session's own usage was not measured.
 
 ## Limits
 
 - Dashes, italics and pronunciation marks are not compared.
-- 173 confirmed differences on these pages wait for a later pass, because no rule drafts their shape. Most involve parentheses, brackets or quotation marks.
+- 205 confirmed differences on these pages wait for a later pass, because no rule drafts their shape. Most involve parentheses, brackets or quotation marks.
 - A mark that the 1913 printing changed cannot be told from a typist's slip without the 1913 page. The ruling of 10 November 2026 treats it as a slip.
 - The comparison needs both neighbouring words to agree in all three texts, so a mark beside a word difference is not compared.
