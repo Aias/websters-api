@@ -15,7 +15,7 @@ Gutenberg and GCIDE provide comparison text and candidate locations. Accepted co
 
 ## Recorded progress
 
-Checkpoint: pronunciation-1. Source SHA-256 `5dd173a5d3d95e23dfd9f98ba5006093ba3f1da2e5688c0ac0592b3e9964680d`. The frozen inventory retains its original source hashes. Current workset dispositions are recorded separately in [`dictionary-print-workset-outcomes.jsonl`](dictionary-print-workset-outcomes.jsonl).
+Checkpoint: pronunciation-2. Source SHA-256 `ece7596162de347c81d507622e36aa87532f29839263fb0bc83c7f8b69647907`. The frozen inventory retains its original source hashes. Current workset dispositions are recorded separately in [`dictionary-print-workset-outcomes.jsonl`](dictionary-print-workset-outcomes.jsonl).
 
 | Work                            | Completed                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Remaining or measurement limit                                                                                                                                                                              |
 | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -134,7 +134,7 @@ The [punctuation and capitals pass](dictionary-audit-punctuation.md) compares th
 
 The [homograph order pass](dictionary-audit-homograph-order.md) compares every record that holds several entries with both blind readings of its page. It changes 146 records: 100 take the printed order of their same-spelled entries, and 131 lose a ‖ that the source had left before a native entry. It closes the 42 homograph-order holds and Exchange's four corrections, and puts ten questions to the person about a ‖ before a later-added entry.
 
-The [headword pronunciation pass](dictionary-audit-pronunciation.md) adds 35,638 printed pronunciations that the record lacked and replaces 1,469 damaged ones, from the same blind readings. Each is given by both readers mark for mark and lies outside the cases where readers miss a mark. A blind reading of 200 of them against the 1898 printing found three wrong, two of them in cases that are now held back. 28,896 printed pronunciations wait for a closer reading.
+The [headword pronunciation pass](dictionary-audit-pronunciation.md) adds 36,431 printed pronunciations that the record lacked and replaces 1,499 damaged ones, from the same blind readings. Each is given by both readers mark for mark and lies outside the cases where readers miss a mark. A blind reading of 200 of them against the 1898 printing found three wrong, two of them in cases that are now held back. 28,073 printed pronunciations wait for a closer reading.
 
 The 58 worksets remain in the frozen inventory with their original spans and blockers. Read their [current outcomes](dictionary-print-workset-outcomes.jsonl) before selecting new work. No unreviewed candidates remain in this bounded pool. Broader sense and definition differences still require complete-unit reconciliation.
 
@@ -165,7 +165,7 @@ The 43 remaining candidates carry these preparation categories. Each still needs
 
 ### Finish the headword pronunciations
 
-The [pronunciation pass](dictionary-audit-pronunciation.md) holds back 28,896 printed pronunciations: 13,930 where two agreeing readers could both have missed a mark or the syllables do not line up with the headword, and 14,966 where the readers differ. Its ledgers name each one. A reading of an enlarged crop settles most of them. The same reading can confirm the 37,107 pronunciations already added and the 421 existing ones that differ from both readers. Pronunciations after inflected forms are not yet compared, and 403 headwords carry stress marks that cannot be right.
+The [pronunciation pass](dictionary-audit-pronunciation.md) holds back 28,073 printed pronunciations: 14,290 where two agreeing readers could both have missed a mark or the syllables do not line up with the headword, and 13,783 where the readers differ. Its ledgers name each one. A reading of an enlarged crop settles most of them. The same reading can confirm the 37,930 pronunciations already added and the 395 existing ones that differ from both readers. Pronunciations after inflected forms are not yet compared, and 409 headwords carry stress marks that cannot be right.
 
 ### Compare type styles
 
@@ -173,7 +173,7 @@ The page readings record each printed line as plain text. They do not mark itali
 
 ### Open holds
 
-The [open register](dictionary-audit-holds.md) contains 597 unresolved fields: 153 evidence holds, 65 reading holds, and 379 structure holds, including Dolphin.
+The [open register](dictionary-audit-holds.md) contains 598 unresolved fields: 153 evidence holds, 65 reading holds, and 380 structure holds, including Dolphin.
 
 ## Updating progress
 
