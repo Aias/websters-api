@@ -1,6 +1,6 @@
 # Headword pronunciation pass
 
-The print gives a pronunciation in parentheses after most headwords. The record had one for about 23,000 of its 120,705 headwords. This pass adds 53,972 printed pronunciations and replaces 1,499 damaged ones. 36,431 of the additions and all the replacements come from the two blind readings that the [page-reading batches](dictionary-audit-page-reading-2.md) already made. The other 17,541 needed a closer reading of an enlarged crop. 78,607 headwords now carry a whole pronunciation.
+The print gives a pronunciation in parentheses after most headwords. The record had one for about 23,000 of its 120,705 headwords. This pass adds 52,735 printed pronunciations and replaces 2,736 damaged ones. 36,431 of the additions and 1,499 of the replacements come from the two blind readings that the [page-reading batches](dictionary-audit-page-reading-2.md) already made. The other 16,304 additions and 1,237 replacements needed a closer reading of an enlarged crop. 78,607 headwords now carry a whole pronunciation.
 
 A pronunciation is added from the page readings only where both readers give the same marks and the reading falls outside the cases where readers are known to miss a mark. 10,532 printed pronunciations stay out for now. Each has a row in its ledger that says why.
 
@@ -83,7 +83,7 @@ The three errors were checked by eye on the crops. Déblai has ticked vowels und
 
 ## Closer reading
 
-The pronunciations held back above need marks that a reader of the whole column misses. For each, the entry's first lines were cut from the 1898 printing, enlarged three times, and read blind by Opus. The closer reading covers printed pages 1 to 1681. It adds 17,541 pronunciations.
+The pronunciations held back above need marks that a reader of the whole column misses. For each, the entry's first lines were cut from the 1898 printing, enlarged three times, and read blind by Opus. The closer reading covers printed pages 1 to 1681. It adds 16,304 pronunciations and replaces 1,237 damaged ones.
 
 The three readings are then fused letter by letter. All three must have the same letters, hyphens and stresses. A mark stands when the closer reading gives it and a page reader agrees, or when the closer reading shows one of the marks page readers miss: the tick, the line under n, the bar through th, or the other count of dots below. A mark that a page reader saw and the closer reading did not is left open.
 
@@ -91,7 +91,8 @@ Before the pass ran, the closer reading was tried on 200 entries whose existing 
 
 | Outcome of 22,149 closer readings                          | Entries |
 | ---------------------------------------------------------- | ------: |
-| Added                                                      |  17,541 |
+| Added                                                      |  16,304 |
+| Replaced a damaged pronunciation                           |   1,237 |
 | The crop did not show the entry                            |   1,856 |
 | The closer reading has other letters or stresses           |   1,192 |
 | The three readings give three marks                        |     539 |
@@ -106,7 +107,7 @@ A reading that keeps a plain long vowel in an unstressed syllable rests on one c
 
 ## Limits and remaining work
 
-- 10,532 printed pronunciations are not yet in the record: 4,910 that could hide a missed mark or do not line up with the headword, and 5,622 where the readers differ. The closer reading settles about four in five of those it reaches.
+- 10,532 printed pronunciations are not yet in the record: 4,910 that could hide a missed mark or do not line up with the headword, and 5,622 where the readers differ. The closer reading settles about four in five of those it reaches. 4,700 have had no closer reading, because their place on the 1898 page was not found.
 - The pronunciations added from the page readings rest on two readings of one scan. A closer reading of each would find the remaining wrong marks.
 - The pass covers the pronunciation after a headword. Pronunciations after inflected forms and plurals, and the 1,124 headword pronunciations that still hold a lost character, are not covered.
 - 409 headwords have stress marks that cannot be right, such as Eventration with no heavy mark. Their pronunciations are held back, and the headwords need a pass of their own.
