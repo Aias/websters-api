@@ -1,6 +1,6 @@
 # Pronunciations after inflected forms
 
-The print gives a pronunciation after many plurals, verb forms and derived words inside an entry, as in "pl. Abaci (-sī)" and "Adulterated (-ā′tĕd)". The record had many of these as an empty placeholder and lacked many more. This pass adds 1,481 of them and replaces 1,233 placeholders. The [ledger](dictionary-audit-pronunciation-forms.jsonl) has a row for each form that both readers pair with a printed pronunciation, added or not.
+The print gives a pronunciation after many plurals, verb forms and derived words inside an entry, as in "pl. Abaci (-sī)" and "Adulterated (-ā′tĕd)". The record had many of these as an empty placeholder and lacked many more. This pass adds 2,391 of them and replaces 1,886 placeholders. 1,563 of them needed a closer reading of an enlarged crop of the 1898 printing, cut around the line the form stands on and fused with the page readings as in the [headword pronunciation pass](dictionary-audit-pronunciation.md). The [ledger](dictionary-audit-pronunciation-forms.jsonl) has a row for each form that both readers pair with a printed pronunciation, added or not.
 
 ## Method
 
@@ -16,10 +16,17 @@ Before anything was written, the same steps were run on 1,143 forms whose pronun
 | Reason                                                                               | Forms |
 | ------------------------------------------------------------------------------------ | ----: |
 | The weight of its accent is not known                                                | 1,561 |
-| Both readers agree, but the reading could hide a mark that readers are known to miss | 1,375 |
-| The two readers give different marks                                                 |   346 |
 | Only one reader has it                                                               |   174 |
+| The weight of an accent is not known                                                 |    94 |
+| The closer reading has other letters or stresses                                     |    24 |
 | It could not be built                                                                |    17 |
+| A page reader saw a mark that the closer reading did not                             |    12 |
+| The three readings give three marks                                                  |    10 |
+| The crop did not show the form                                                       |    10 |
+| The closer reading found no pronunciation                                            |     4 |
+| It holds something other than a respelling                                           |     2 |
+| Both readers agree, but the reading could hide a mark that readers are known to miss |     1 |
+| The readings give different marks                                                    |     1 |
 
 ## Limits
 
