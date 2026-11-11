@@ -167,7 +167,7 @@ The 43 remaining candidates carry these preparation categories. Each still needs
 
 ### Finish the headword pronunciations
 
-The [pronunciation pass](dictionary-audit-pronunciation.md) holds back 3,326 printed pronunciations: 1,928 where two agreeing readers could both have missed a mark or the syllables do not line up with the headword, and 1,398 where the readers differ. Its ledgers name each one. A closer reading of an enlarged crop settles about four in five of those it reaches. 80 of them have had no closer reading, because their place on the 1898 page was not found. A second closer reading would check the 62,677 pronunciations already written. Pronunciations after inflected forms are not yet compared, and 409 headwords carry stress marks that cannot be right.
+The [pronunciation pass](dictionary-audit-pronunciation.md) holds back 3,326 printed pronunciations: 1,928 where two agreeing readers could both have missed a mark or the syllables do not line up with the headword, and 1,398 where the readers differ. Its ledgers name each one. Two closer readings of enlarged crops have settled the rest. A second closer reading would check the 62,677 pronunciations already written. Pronunciations after inflected forms are not yet compared, and 409 headwords carry stress marks that cannot be right.
 
 ### Compare type styles
 

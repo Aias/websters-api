@@ -83,7 +83,7 @@ The three errors were checked by eye on the crops. Déblai has ticked vowels und
 
 ## Closer reading
 
-The pronunciations held back above need marks that a reader of the whole column misses. For each, the entry's first lines were cut from the 1898 printing, enlarged three times, and read blind by Opus. The closer reading covers printed pages 1 to 1681. It adds 23,057 pronunciations and replaces 1,690 damaged ones.
+The pronunciations held back above need marks that a reader of the whole column misses. For each, the entry's first lines were cut from the 1898 printing, enlarged three times, and read blind by Opus. The closer reading covers printed pages 1 to 1681. With the second closer reading described below, it adds 23,057 pronunciations and replaces 1,690 damaged ones.
 
 The three readings are then fused letter by letter. All three must have the same letters, hyphens and stresses. A mark stands when the closer reading gives it and a page reader agrees, or when the closer reading shows one of the marks page readers miss: the tick, the line under n, the bar through th, or the other count of dots below. A mark that a page reader saw and the closer reading did not is left open.
 
@@ -110,9 +110,32 @@ Before the pass ran, the closer reading was tried on 200 entries whose existing 
 
 A reading that keeps a plain long vowel in an unstressed syllable rests on one closer reading having seen no tick there. A second closer reading of those entries would catch most of the ticks the first one missed.
 
+## Second closer reading
+
+The first closer reading left 8,293 entries open that another reading could settle. 4,700 had never been found on the 1898 page. 1,862 crops had not shown the entry. In 1,731 the closer reading had other letters or marks than the page readings.
+
+Each entry is now placed in another way. The reader's lines of its column are lined up with the words recognized on the scan, which gives the line the entry starts on. That line is carried to the 1898 page, and the crop is set on the headword where the 1898 page's own recognized words show it. Only 39 entries are still without a crop that shows them.
+
+Where a first closer reading exists, both closer readings are fused with the page readings. Two closer readings that agree stand. A mark of a kind readers miss stands when either closer reading shows it. Otherwise three of the four readings must agree. On the calibration entries that rule equals the record in 137 of 141 entries where the record and the print give the same form. Of the other four, one is a missed tick, one a missed bar through th, one a breve that the 1898 page itself lacks, and one a neighbouring entry with the same headword.
+
+The second pass adds 6,753 pronunciations and replaces 453 damaged ones.
+
+| Settled by                                                                                          | Entries |
+| --------------------------------------------------------------------------------------------------- | ------: |
+| Both page readings and one closer reading                                                           |   5,738 |
+| Two closer readings that agree                                                                      |   1,289 |
+| One page reading and one closer reading, where the other page reading has other letters or stresses |     116 |
+| Two closer readings, and both page readings on the mark where they differ                           |      37 |
+| Two closer readings, one of which shows a mark the other missed                                     |      25 |
+| Two closer readings that agree, where the page readings have other hyphens or stresses              |       1 |
+
+### Entries beside a same-spelled entry
+
+The reader is told only the headword. Where two entries with the same headword stand within two lines of each other, it can transcribe the wrong one. Of the pronunciations the first closer reading wrote, 447 have such a neighbour, and twelve of those neighbours have a pronunciation of the same shape with other marks. All twelve were read by eye on the 1898 page. Eleven were right. River, one who rives, had taken the short i of the river, and is corrected to (rīv′ẽr). The second pass holds such entries back until a reading that tells the reader which entry to take.
+
 ## Limits and remaining work
 
-- 3,326 printed pronunciations are not yet in the record: 1,928 that could hide a missed mark or do not line up with the headword, and 1,398 where the readers differ. The closer reading settles about four in five of those it reaches. 80 have had no closer reading, because their place on the 1898 page was not found.
+- 3,326 printed pronunciations are not yet in the record: 1,928 that could hide a missed mark or do not line up with the headword, and 1,398 where the readers differ. Most wait on something other than a reading: the headword's own accents, a form the markup does not yet take, or readings that still differ after two closer readings.
 - The pronunciations added from the page readings rest on two readings of one scan. A closer reading of each would find the remaining wrong marks.
 - The pass covers the pronunciation after a headword. Pronunciations after inflected forms and plurals, and the 674 headword pronunciations that still hold a lost character, are not covered.
 - 409 headwords have stress marks that cannot be right, such as Eventration with no heavy mark. Their pronunciations are held back, and the headwords need a pass of their own.
