@@ -4,6 +4,8 @@ The [page-reading batches](dictionary-audit-page-reading-2.md) compare words. Th
 
 | Pages     | Differences | Confirmed by 1898 | Drafted by rule | Kept by proofreaders | Corrections | Punctuation | Capitals | Entries | Ledger                                         |
 | --------- | ----------: | ----------------: | --------------: | -------------------: | ----------: | ----------: | -------: | ------: | ---------------------------------------------- |
+| 1–50      |         126 |               111 |              90 |                    6 |          84 |          77 |        7 |      71 | [jsonl](dictionary-audit-punctuation-2.jsonl)  |
+| 51–150    |         238 |               194 |             160 |                    9 |         151 |         131 |       20 |     136 | [jsonl](dictionary-audit-punctuation-3.jsonl)  |
 | 151–250   |         865 |               805 |             768 |                   11 |         757 |         576 |      181 |     544 | [jsonl](dictionary-audit-punctuation-4.jsonl)  |
 | 251–350   |         591 |               518 |             479 |                    4 |         475 |         382 |       93 |     379 | [jsonl](dictionary-audit-punctuation-5.jsonl)  |
 | 351–450   |         351 |               277 |             263 |                   11 |         252 |         202 |       50 |     217 | [jsonl](dictionary-audit-punctuation-6.jsonl)  |
@@ -15,7 +17,9 @@ The [page-reading batches](dictionary-audit-page-reading-2.md) compare words. Th
 | 961–1060  |         429 |               349 |             308 |                   35 |         273 |         193 |       80 |     232 | [jsonl](dictionary-audit-punctuation-12.jsonl) |
 | 1061–1160 |         334 |               296 |             278 |                   33 |         245 |         202 |       43 |     215 | [jsonl](dictionary-audit-punctuation-13.jsonl) |
 | 1161–1260 |         421 |               368 |             335 |                   22 |         313 |         204 |      109 |     257 | [jsonl](dictionary-audit-punctuation-14.jsonl) |
-| Total     |       5,055 |             4,385 |           4,034 |                  187 |       3,847 |       3,004 |      843 |   3,067 |                                                |
+| 1261–1360 |         327 |               295 |             268 |                    7 |         261 |         229 |       32 |     215 | [jsonl](dictionary-audit-punctuation-15.jsonl) |
+| 1361–1460 |         284 |               255 |             227 |                   17 |         210 |         169 |       41 |     162 | [jsonl](dictionary-audit-punctuation-16.jsonl) |
+| Total     |       6,030 |             5,240 |           4,779 |                  226 |       4,553 |       3,610 |      943 |   3,651 |                                                |
 
 ## Method
 
@@ -72,7 +76,7 @@ The proofreaders' reasons for keeping the record fall into the same groups as on
 - **A confirmation from the wrong entry.** A strip sometimes shows a neighbouring entry with the same words. The proofreaders then check the change against the first scan, and it is applied only if that scan supports it, as under Primate and Prosimiae. Under Pneumatic it did not, and the record stays.
 - **Printed figures.** Under Figurate the print shows triangles of dots, which the record writes as periods. The readers pass over the figure, so the record stays.
 
-The proofreaders also found that the rule had put a closing period outside a definition's or an author's tag. The rule was changed, as step 4 now says. Where a proofreader found a change right but its drafted markup wrong, the change was redrafted by the rule or corrected by hand and then applied: 63 changes so far. Eighteen further marks that the changed rule could draft, all at the end of a definition or an etymology or after an author's name or a citation, were checked by hand against the printed context and applied. One hand correction also removes a stray word beside the mark: Corselet read "as, the body breastplate" where the print has "as the breastplate".
+The proofreaders also found that the rule had put a closing period outside a definition's or an author's tag. The rule was changed, as step 4 now says. Where a proofreader found a change right but its drafted markup wrong, the change was redrafted by the rule or corrected by hand and then applied: 67 changes so far. Eighteen further marks that the changed rule could draft, all at the end of a definition or an etymology or after an author's name or a citation, were checked by hand against the printed context and applied. One comma that the print sets between the two names of a phrase heading, under Soul, was withheld, because phrase headings keep the record's form. One hand correction also removes a stray word beside the mark: Corselet read "as, the body breastplate" where the print has "as the breastplate".
 
 **Second pass.** At first the rule drafted only simple marks added, removed or exchanged in a gap that held nothing else. It was then extended to the other shapes step 4 lists. A second pass over pages 751 to 1160 drafted 72 more changes from the confirmed differences the first pass had left. A proofreader read all 72 and kept one, under Nightmare, where a later editor rewrote the sentence. The other pages were drafted once, with the extended rule.
 
@@ -80,14 +84,14 @@ The proofreaders also found that the rule had put a closing period outside a def
 
 | Step                                     | Tokens       | Model time |
 | ---------------------------------------- | ------------ | ---------- |
-| Readings of 5,055 strips of 1898 (Opus)  | 22.6 million | 5.0 hours  |
-| Proofreading of 4,016 changes, 34 agents | 5.9 million  | 3.4 hours  |
+| Readings of 6,030 strips of 1898 (Opus)  | 27.0 million | 6.0 hours  |
+| Proofreading of 4,761 changes, 38 agents | 6.6 million  | 3.9 hours  |
 
 No page was read again. The integrating session's own usage was not measured.
 
 ## Limits
 
 - Dashes, italics and pronunciation marks are not compared.
-- 351 confirmed differences on these pages wait for a later pass, because no rule drafts their shape. Most involve a parenthesis, bracket or quotation mark that only one text has.
+- 461 confirmed differences on these pages wait for a later pass, because no rule drafts their shape. Most involve a parenthesis, bracket or quotation mark that only one text has.
 - A mark that the 1913 printing changed cannot be told from a typist's slip without the 1913 page. The ruling of 10 November 2026 treats it as a slip.
 - The comparison needs both neighbouring words to agree in all three texts, so a mark beside a word difference is not compared.
