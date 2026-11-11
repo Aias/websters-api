@@ -2,32 +2,32 @@
 
 The [page-reading batches](dictionary-audit-page-reading-2.md) compare words. This pass compares what they leave out: the marks between words and the initial capital of each word. It uses the same blind readings, so no page is read again. A correction is made where both readers agree against the record and a reading of the 1898 printing confirms them.
 
-| Pages     | Differences | Confirmed by 1898 | Drafted by rule | Kept by proofreaders | Corrections | Punctuation | Capitals | Entries | Ledger                                         |
-| --------- | ----------: | ----------------: | --------------: | -------------------: | ----------: | ----------: | -------: | ------: | ---------------------------------------------- |
-| 1–50      |         126 |               111 |              90 |                    6 |          84 |          77 |        7 |      71 | [jsonl](dictionary-audit-punctuation-2.jsonl)  |
-| 51–150    |         238 |               194 |             160 |                    9 |         151 |         131 |       20 |     136 | [jsonl](dictionary-audit-punctuation-3.jsonl)  |
-| 151–250   |         865 |               805 |             768 |                   11 |         757 |         576 |      181 |     544 | [jsonl](dictionary-audit-punctuation-4.jsonl)  |
-| 251–350   |         591 |               518 |             479 |                    4 |         475 |         382 |       93 |     379 | [jsonl](dictionary-audit-punctuation-5.jsonl)  |
-| 351–450   |         351 |               277 |             263 |                   11 |         252 |         202 |       50 |     217 | [jsonl](dictionary-audit-punctuation-6.jsonl)  |
-| 451–550   |         437 |               373 |             330 |                    3 |         327 |         253 |       74 |     258 | [jsonl](dictionary-audit-punctuation-7.jsonl)  |
-| 551–650   |         589 |               529 |             499 |                   16 |         483 |         401 |       82 |     354 | [jsonl](dictionary-audit-punctuation-8.jsonl)  |
-| 651–750   |         339 |               288 |             266 |                    5 |         261 |         228 |       33 |     207 | [jsonl](dictionary-audit-punctuation-9.jsonl)  |
-| 751–850   |         340 |               278 |             243 |                   19 |         224 |         178 |       46 |     199 | [jsonl](dictionary-audit-punctuation-10.jsonl) |
-| 851–960   |         359 |               304 |             265 |                   28 |         237 |         185 |       52 |     205 | [jsonl](dictionary-audit-punctuation-11.jsonl) |
-| 961–1060  |         429 |               349 |             308 |                   35 |         273 |         193 |       80 |     232 | [jsonl](dictionary-audit-punctuation-12.jsonl) |
-| 1061–1160 |         334 |               296 |             278 |                   33 |         245 |         202 |       43 |     215 | [jsonl](dictionary-audit-punctuation-13.jsonl) |
-| 1161–1260 |         421 |               368 |             335 |                   22 |         313 |         204 |      109 |     257 | [jsonl](dictionary-audit-punctuation-14.jsonl) |
-| 1261–1360 |         327 |               295 |             268 |                    7 |         261 |         229 |       32 |     215 | [jsonl](dictionary-audit-punctuation-15.jsonl) |
-| 1361–1460 |         284 |               255 |             227 |                   17 |         210 |         169 |       41 |     162 | [jsonl](dictionary-audit-punctuation-16.jsonl) |
-| 1461–1560 |         296 |               261 |             235 |                   20 |         215 |         181 |       34 |     189 | [jsonl](dictionary-audit-punctuation-17.jsonl) |
-| Total     |       6,326 |             5,501 |           5,014 |                  246 |       4,768 |       3,791 |      977 |   3,840 |                                                |
+| Pages     | Differences | Confirmed by 1898 | Drafted | Kept on review | Corrections | Punctuation | Capitals | Entries | Ledger                                         |
+| --------- | ----------: | ----------------: | ------: | -------------: | ----------: | ----------: | -------: | ------: | ---------------------------------------------- |
+| 1–50      |         126 |               111 |     111 |             13 |          98 |          91 |        7 |      78 | [jsonl](dictionary-audit-punctuation-2.jsonl)  |
+| 51–150    |         238 |               194 |     193 |             18 |         175 |         155 |       20 |     155 | [jsonl](dictionary-audit-punctuation-3.jsonl)  |
+| 151–250   |         865 |               805 |     805 |             16 |         789 |         608 |      181 |     561 | [jsonl](dictionary-audit-punctuation-4.jsonl)  |
+| 251–350   |         591 |               518 |     518 |              7 |         511 |         418 |       93 |     401 | [jsonl](dictionary-audit-punctuation-5.jsonl)  |
+| 351–450   |         351 |               277 |     277 |             17 |         260 |         210 |       50 |     223 | [jsonl](dictionary-audit-punctuation-6.jsonl)  |
+| 451–550   |         437 |               373 |     366 |             11 |         355 |         281 |       74 |     275 | [jsonl](dictionary-audit-punctuation-7.jsonl)  |
+| 551–650   |         589 |               529 |     529 |             22 |         507 |         425 |       82 |     366 | [jsonl](dictionary-audit-punctuation-8.jsonl)  |
+| 651–750   |         339 |               288 |     288 |             13 |         275 |         242 |       33 |     217 | [jsonl](dictionary-audit-punctuation-9.jsonl)  |
+| 751–850   |         340 |               278 |     278 |             40 |         238 |         192 |       46 |     211 | [jsonl](dictionary-audit-punctuation-10.jsonl) |
+| 851–960   |         359 |               304 |     303 |             48 |         255 |         203 |       52 |     216 | [jsonl](dictionary-audit-punctuation-11.jsonl) |
+| 961–1060  |         429 |               349 |     346 |             62 |         284 |         204 |       80 |     241 | [jsonl](dictionary-audit-punctuation-12.jsonl) |
+| 1061–1160 |         334 |               296 |     295 |             39 |         256 |         213 |       43 |     223 | [jsonl](dictionary-audit-punctuation-13.jsonl) |
+| 1161–1260 |         421 |               368 |     368 |             28 |         340 |         231 |      109 |     272 | [jsonl](dictionary-audit-punctuation-14.jsonl) |
+| 1261–1360 |         327 |               295 |     295 |             12 |         283 |         251 |       32 |     229 | [jsonl](dictionary-audit-punctuation-15.jsonl) |
+| 1361–1460 |         284 |               255 |     255 |             18 |         237 |         196 |       41 |     179 | [jsonl](dictionary-audit-punctuation-16.jsonl) |
+| 1461–1560 |         296 |               261 |     235 |             20 |         215 |         181 |       34 |     189 | [jsonl](dictionary-audit-punctuation-17.jsonl) |
+| Total     |       6,326 |             5,501 |   5,462 |            384 |       5,078 |       4,101 |      977 |   4,036 |                                                |
 
 ## Method
 
 1. **Compare.** For each record, the words of both blind readings are aligned with the record's words. Between two neighbouring words that all three share, the marks are compared: period, comma, semicolon, colon, question and exclamation marks, quotation marks, parentheses and brackets. Dashes are not compared. The first letter of each shared word is compared for its case. A difference counts only when both readers agree with each other.
 2. **Set aside what is not the print's running text.** Places inside or beside a registered later addition, entries the register lists whole, pronunciations, headwords, inflected forms, phrase headings, scientific names, formulas and small-capital abbreviations such as "a. d." are left out. So are words in small capitals inside a cross-reference, and words broken across a printed line.
 3. **Confirm.** Opus reads a strip of the 1898 printing at each place, blind. The difference stands only if that reading has the same marks or the same capital as the two readers.
-4. **Draft by rule.** A rule drafts the change where simple marks (period, comma, semicolon, colon) are added, removed or exchanged, where a period, question mark or exclamation mark replaces another, or where one letter changes case. A simple mark may also be added beside a parenthesis, a bracket or a closing quotation mark, and at the end of a verse line. The rule keeps the record's markup: a mark that belongs to the word on the left goes after any closing tag, a period that ends a definition, a note or an authority goes inside that element, and the space after a removed mark stays inside the closing tag. Other shapes are left for a later pass, and the ledger lists them.
+4. **Draft by rule.** A rule drafts the change where simple marks (period, comma, semicolon, colon) are added, removed or exchanged, where a period, question mark or exclamation mark replaces another, or where one letter changes case. A simple mark may also be added beside a parenthesis, a bracket or a closing quotation mark, and at the end of a verse line. The rule keeps the record's markup: a mark that belongs to the word on the left goes after any closing tag, a period that ends a definition, a note or an authority goes inside that element, and the space after a removed mark stays inside the closing tag. Other shapes are drafted by hand, as the hand pass below describes.
 5. **Proofread.** Reviewers who did not draft the changes read every one against the printed context and the 1898 reading. They report a change when the print is wrong, when it would damage the text or markup, when the difference is the record's own convention, or when the place lies in text a later editor rewrote. A reported change is not applied.
 6. **Apply.** The remaining changes are applied by position against a hash of each record.
 
@@ -81,18 +81,20 @@ The proofreaders also found that the rule had put a closing period outside a def
 
 **Second pass.** At first the rule drafted only simple marks added, removed or exchanged in a gap that held nothing else. It was then extended to the other shapes step 4 lists. A second pass over pages 751 to 1160 drafted 72 more changes from the confirmed differences the first pass had left. A proofreader read all 72 and kept one, under Nightmare, where a later editor rewrote the sentence. The other pages were drafted once, with the extended rule.
 
+**Hand pass.** The confirmed differences that the rule still could not draft were then drafted by hand: 447 places on pages 1 to 1460. They are ellipses, possessive apostrophes, parentheses and brackets, quotation marks, and marks beside a Greek word. Agents wrote the exact replacement for 313 and kept the record at 134. Of those 134, 55 are the record's own conventions, such as its parenthesized "Fig." labels, 34 lie in text a later editor rewrote, 33 are places where the print is wrong, 11 are not differences once the markup is set aside, and one has no support in the readings. Proofreaders who had not drafted the changes read every one and held four. The hand pass applied 310 corrections, among them plural possessives that the record had as singular, such as "Brokers' Cant" under Spot and "kings' houses" under Soft.
+
 ## Cost
 
-| Step                                     | Tokens       | Model time |
-| ---------------------------------------- | ------------ | ---------- |
-| Readings of 6,326 strips of 1898 (Opus)  | 28.3 million | 6.3 hours  |
-| Proofreading of 5,023 changes, 40 agents | 6.9 million  | 4.1 hours  |
+| Step                                      | Tokens       | Model time |
+| ----------------------------------------- | ------------ | ---------- |
+| Readings of 6,326 strips of 1898 (Opus)   | 28.3 million | 6.3 hours  |
+| Hand drafting and proofreading, 52 agents | 9.7 million  | 9.2 hours  |
 
 No page was read again. The integrating session's own usage was not measured.
 
 ## Limits
 
 - Dashes, italics and pronunciation marks are not compared.
-- 487 confirmed differences on these pages wait for a later pass, because no rule drafts their shape. Most involve a parenthesis, bracket or quotation mark that only one text has.
+- 39 confirmed differences wait for a later pass. No rule drafts their shape, and they have not yet been drafted by hand.
 - A mark that the 1913 printing changed cannot be told from a typist's slip without the 1913 page. The ruling of 10 November 2026 treats it as a slip.
 - The comparison needs both neighbouring words to agree in all three texts, so a mark beside a word difference is not compared.
