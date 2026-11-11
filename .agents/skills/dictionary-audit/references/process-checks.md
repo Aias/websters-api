@@ -124,6 +124,8 @@ Whole-page reading finds differences that entry-by-entry review does not reach, 
 - **A correction whose result is already in the record:** a hand correction that only removes a repeated phrase leaves text that the record already contains, so a check for "already applied" skips it. Give it enough context that the result is new.
 - **Page numbers:** take a printed page number from the scan leaf it was read from, never from memory.
 - **Tests that pin record text:** some tests assert a record's exact words. When a correction legitimately changes them, update the expected text, and run the tests after every plan.
+- **Order of same-spelled entries:** compare a record's entries with the print as whole units before comparing words. Pair each entry with a printed one by its opening words, in both readings, and reorder only when both readers and the typists' text give one order. A word comparison that runs first lines text up against the wrong entry and hides real differences inside it.
+- **A literal ‖ in the source:** the source writes the printed foreign-word mark as `&#x2016;`. A literal ‖ before an entry that is not the record's first is the source's own leftover, and the site shows it as a foreign-word mark. Drop it where neither reader has the mark before the printed entry. Ask the person where the entry has no printed page.
 
 [Page-reading batch 2](../../../../reports/dictionary-audit-page-reading-2.md) gives measured costs and yields.
 
