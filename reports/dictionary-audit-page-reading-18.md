@@ -1,6 +1,6 @@
 # Page-reading batch 18
 
-Two models read printed pages 1561 to 1681 without seeing the record, and their agreed reading is compared with the record word by word. This batch makes 609 corrections in 463 entries, adds 9 entries that had no record of their own, and gives 10 records their printed spelling. It opens 17 holds: 14 questions in the review queue and three differences in the order of same-spelled entries. The batch grants no complete-entry review credit.
+Two models read printed pages 1561 to 1681 without seeing the record, and their agreed reading is compared with the record word by word. This batch makes 614 corrections in 468 entries, adds 9 entries that had no record of their own, and gives 10 records their printed spelling. It opens 17 holds: 14 questions in the review queue and three differences in the order of same-spelled entries. The batch grants no complete-entry review credit.
 
 These are the last pages of the main vocabulary. With this batch the page reading covers every printed page from 1 to 1681.
 
@@ -34,7 +34,7 @@ The comparison found 1,934 differences, the 49 from the tiebreak reading include
 
 | Disposition                                                     | Differences |
 | --------------------------------------------------------------- | ----------: |
-| Corrected (609 edits)                                           |         594 |
+| Corrected (614 edits)                                           |         594 |
 | Registered later addition, unchanged                            |         166 |
 | Genus spelled out by convention, unchanged                      |          90 |
 | GCIDE-only words absent from Gutenberg and the print, unchanged |          26 |
@@ -53,13 +53,21 @@ The [ledger](dictionary-audit-page-reading-18.jsonl) gives every difference with
 
 ## Corrections
 
-- **576 follow the ruling of 10 November 2026.** The record's reading came from the typists. Examples: Upon "assure" for "assume", Universal "benefice" for "beneficence", Usurper "not" for "nor", Way "process" for "progress", and the field labels "(Anat.)" for "(Astron.)" under Venus and "[Obs.]" for "(Zoöl.)" under Wentletrap. Unison regains its I. Taylor quotation, Witch a quotation from Beaumont and Fletcher, Wish a line of Young, Wing "(b) On the road; moving from one place to another", and Usurpation "place, power, functions, or the like, without right". Wine regains two stretches of its etymology.
+- **581 follow the ruling of 10 November 2026.** The record's reading came from the typists. Examples: Upon "assure" for "assume", Universal "benefice" for "beneficence", Usurper "not" for "nor", Way "process" for "progress", and the field labels "(Anat.)" for "(Astron.)" under Venus and "[Obs.]" for "(Zoöl.)" under Wentletrap. Unison regains its I. Taylor quotation, Witch a quotation from Beaumont and Fletcher, Wish a line of Young, Wing "(b) On the road; moving from one place to another", and Usurpation "place, power, functions, or the like, without right". Wine regains two stretches of its etymology.
 - **33 undo a later GCIDE change.** Viscosity sense 2 again reads "A quality analogous to that of a viscous fluid", Under regains the phrase "Under the rose", Vandalism "their monuments", and Underbid "less" for "lower". Viceroy and Water tree regain the printed form of a name with two genera, and Vanadium its printed atomic weight.
 - **Inflected forms:** 10 are corrected, among them Universality "Universalities", Violate "Violated", Wad "Wadded" and Warrantable "Warrantably".
 - **Undershrieve** had the definition of the next printed entry, the noun Undershrub. It again reads "An undersheriff. [Obs.]", and Undershrub has its noun before its adjective.
 - **Undiscreet and Weanling** each carried a neighbouring printed entry under their own headword. Undiscretion and Weaning are now records of their own.
 - **Small slips fixed by hand:** Ungored regains its authority "Shak.", Watch "to watch a rogue", and Unruly loses a repeated example.
-- **Three corrections lie outside these pages.** Proofreaders of the punctuation pass noticed them beside the marks they were checking, and both readers of those pages agree on each. Mistletoe, on page 931, read "is akin of" for "is akin to". Greek, on page 649, had a question mark where the print has the word "Γραικός". Hemitone, on page 685, had taken its cross-reference for its definition, and again reads "See Semitone.] Same as Semitone."
+- **Eight corrections lie outside these pages.** Proofreaders of the punctuation pass noticed them beside the marks they were checking, and both readers of those pages agree on each.
+  - Mistletoe, on page 932, read "is akin of" for "is akin to".
+  - Greek, on page 649, had a question mark where the print has the word "Γραικός".
+  - Hemitone, on page 685, had taken its cross-reference for its definition, and again reads "See Semitone.] Same as Semitone."
+  - Kythe, on page 820, labelled its intransitive entry as a transitive verb.
+  - Romaic, on page 1249, had an omicron for the omega of "Ῥωμαῖοι".
+  - Castle, on page 224, lacked the accent of "Échauguettes".
+  - China, on page 249, had a bare "D" for the genus Dianthus.
+  - Libra, on page 848, had a stray space inside a sense letter.
 
 ## New and renamed records
 
