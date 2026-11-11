@@ -1,6 +1,6 @@
 # Page-reading batch 9
 
-Two models read printed pages 651 to 750 without seeing the record, and their agreed reading is compared with the record word by word. This batch makes 868 corrections in 656 entries, adds 14 entries that the electronic text never had, and gives 11 records their printed spelling. It opens 28 holds and closes one: 25 questions in the review queue and 3 entries whose homographs stand in another order than the print's. The batch grants no complete-entry review credit.
+Two models read printed pages 651 to 750 without seeing the record, and their agreed reading is compared with the record word by word. This batch makes 868 corrections in 656 entries, adds 14 entries that the electronic text never had, and gives 11 records their printed spelling. It opens 32 holds and closes one: 29 questions in the review queue and 3 entries whose homographs stand in another order than the print's. The batch grants no complete-entry review credit.
 
 The method is the one [batch 2](dictionary-audit-page-reading-2.md) describes, with the changes of batches [3](dictionary-audit-page-reading-3.md) to [7](dictionary-audit-page-reading-7.md). Nothing in the method changed for this batch.
 
@@ -25,10 +25,10 @@ The comparison found 1,584 differences, the 34 from the tiebreak reading include
 | Pronunciations and shared headwords                             |          28 |
 | The record follows the 1913 Supplement, unchanged               |           8 |
 | The print is wrong, or the 1913 printing revised the passage    |           8 |
-| Other differences that keep the record                          |           8 |
+| Other differences that keep the record                          |           4 |
 | The 1898 printing reads as the record                           |          14 |
 | Not a difference in the text, or not settled                    |         114 |
-| Held                                                            |          43 |
+| Held                                                            |          47 |
 
 The [ledger](dictionary-audit-page-reading-9.jsonl) gives every difference with its disposition, and every edit with its exact fragments and readings.
 
@@ -61,7 +61,7 @@ The rename of Heyten closes the hold `a28-Heyten-0`, which had waited for eviden
 
 - **The print is wrong:** Gum "Eucalpytus" and Hobble's authority "Jeffreys".
 - **Probable 1913 revisions:** Gulf Stream's definition, Grow's phrase list, Heliogravure, Hydrogenium, and two phrases under Hypocycloid and Iatrochemistry stand as the 1913 typists' text has them.
-- **Held for the person (25 questions):** Hematophilia and Hemophilia, whose entries the record has exchanged. Twenty-three passages that GCIDE rewrote, where restoring the printed wording removes text the later-additions register lists or would blend two wordings (Grounding, Guenon, Gun, Gymnastical, Gymnastics, Hagiographa, Haitian, Halfbeak, Hall-mark, Hallucinatory, Heading, Headlight, Hello, Honor, Horsechestnut, Hydrolytic, Hypermetropy, Iced, Idiot, Ill-natured, Incandescent, Incoherent and Inconsistent). Each is in the review queue with crops of both printings.
+- **Held for the person (29 questions):** Hematophilia and Hemophilia, whose entries the record has exchanged. Twenty-seven passages that GCIDE rewrote, where restoring the printed wording removes text the later-additions register lists or would blend two wordings (Groschen, Grounding, Guenon, Gun, Gunner, Gymnastical, Gymnastics, Hagiographa, Haitian, Halfbeak, Hall-mark, Hallucinatory, Heading, Headlight, Hello, Homoiothermic, Honor, Horsechestnut, Horsehair, Hydrolytic, Hypermetropy, Iced, Idiot, Ill-natured, Incandescent, Incoherent and Inconsistent). Each is in the review queue with crops of both printings.
 - **Held for a later pass (3):** Groan, Hackle and Handicap hold their homographs in another order than the print's.
 
 ## Cost
