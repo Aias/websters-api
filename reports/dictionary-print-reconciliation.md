@@ -175,7 +175,7 @@ The page readings record each printed line as plain text. They do not mark itali
 
 ### Open holds
 
-The [open register](dictionary-audit-holds.md) contains 598 unresolved fields: 153 evidence holds, 65 reading holds, and 380 structure holds, including Dolphin.
+The [open register](dictionary-audit-holds.md) contains 600 unresolved fields: 153 evidence holds, 65 reading holds, and 382 structure holds, including Dolphin.
 
 ## Updating progress
 
