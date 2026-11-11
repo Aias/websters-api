@@ -15,7 +15,7 @@ Gutenberg and GCIDE provide comparison text and candidate locations. Accepted co
 
 ## Recorded progress
 
-Checkpoint: homograph-order-1. Source SHA-256 `c707e1d76ed730cf5d0597834cd066a5a6e40eaecad2549913268271f54f0aa5`. The frozen inventory retains its original source hashes. Current workset dispositions are recorded separately in [`dictionary-print-workset-outcomes.jsonl`](dictionary-print-workset-outcomes.jsonl).
+Checkpoint: punctuation-18. Source SHA-256 `700e39cb9fb246cc128b95421183bd27054670ee240557d1ecaa3be8f5ec0a13`. The frozen inventory retains its original source hashes. Current workset dispositions are recorded separately in [`dictionary-print-workset-outcomes.jsonl`](dictionary-print-workset-outcomes.jsonl).
 
 | Work                            | Completed                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Remaining or measurement limit                                                                                                                                                                              |
 | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -122,7 +122,7 @@ The audit of later-addition rows containing Ω found printed text that both elec
 
 [Page-reading batch 14](dictionary-audit-page-reading-14.md) reads printed pages 1161 to 1260, about 253,000 words in 6,476 entries. It makes 654 corrections in 482 entries: 624 where the typists' text differs from the print and 30 where GCIDE later changed the 1913 wording. It adds 9 entries that no electronic text has as records, five of them split out of neighbours that had absorbed them, and renames 11 to their printed spelling. Nine holds join the register: 8 questions for the person and 1 entry whose homographs stand in another order than the print's.
 
-The [punctuation and capitals pass](dictionary-audit-punctuation.md) compares the marks between words and initial capitals, which the page-reading batches leave out, from the same blind readings. Pages 1 to 1681 make 5,335 corrections in 4,252 entries: 4,329 in punctuation and 1,006 in capitals. Each is confirmed by a reading of the 1898 printing and proofread before it is applied.
+The [punctuation and capitals pass](dictionary-audit-punctuation.md) compares the marks between words and initial capitals, which the page-reading batches leave out, from the same blind readings. Pages 1 to 1681 make 5,346 corrections in 4,261 entries: 4,329 in punctuation and 1,017 in capitals. Each is confirmed by a reading of the 1898 printing and proofread before it is applied.
 
 [Page-reading batch 15](dictionary-audit-page-reading-15.md) reads printed pages 1261 to 1360, about 255,000 words in 6,578 entries. It makes 568 corrections in 442 entries: 535 where the typists' text differs from the print and 33 where GCIDE later changed the 1913 wording. It adds 2 entries that no electronic text has as records and renames 12 to their printed spelling. Eleven holds join the register, all questions for the person.
 
@@ -167,7 +167,7 @@ The page readings record each printed line as plain text. They do not mark itali
 
 ### Open holds
 
-The [open register](dictionary-audit-holds.md) contains 596 unresolved fields: 153 evidence holds, 65 reading holds, and 378 structure holds, including Dolphin.
+The [open register](dictionary-audit-holds.md) contains 597 unresolved fields: 153 evidence holds, 65 reading holds, and 379 structure holds, including Dolphin.
 
 ## Updating progress
 
