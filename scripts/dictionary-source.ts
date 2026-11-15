@@ -1,4 +1,5 @@
-import { readFileSync, statSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 export const SOURCE_FILE = join(import.meta.dir, '..', 'src', 'dict.jsonl');
@@ -38,10 +39,10 @@ export function writeDictionarySource(source: ReadonlyMap<string, string>): void
   writeFileSync(SOURCE_FILE, serializeDictionarySource(source));
 }
 
-export function sourceFingerprint(): { size: number; mtimeMs: number } {
-  const stats = [SOURCE_FILE, AUTHOR_NAMES_FILE].map((file) => statSync(file));
-  return {
-    size: stats.reduce((total, stat) => total + stat.size, 0),
-    mtimeMs: Math.max(...stats.map((stat) => stat.mtimeMs)),
-  };
+export function sourceFingerprint(
+  files: ReadonlyArray<string> = [SOURCE_FILE, AUTHOR_NAMES_FILE]
+): string {
+  const hash = createHash('sha256');
+  for (const file of files) hash.update(readFileSync(file));
+  return hash.digest('hex');
 }
