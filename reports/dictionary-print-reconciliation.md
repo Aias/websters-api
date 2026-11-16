@@ -28,13 +28,13 @@ Checkpoint: own-compounds-21-26. Source SHA-256 `1a6ae340a27475bc87c293f2946a8a6
 | Compounds in separate records   | Historical work has 46 restoration targets and 26 removed records. Own-compounds-2 restores five further compounds; own-compounds-3-6 restores 12. Own-compounds-7-14 restores four more compounds. Own-compounds-15-20 restores seven more printed units. Own-compounds-21-26 restores seven compound units, headings, subdivisions or boundaries. All reviewed own records remain. | The 188-key pool has 145 recorded resolutions and 43 remaining candidates. Counts overlap with split-record work.                                                                                           |
 | Homograph order                 | Twelve entries follow the printed homograph order: As, Coordinate, Fell and Minor reordered, Butt, Char, Hock and Stem take printed homographs that sat in another record, Tout's later homographs follow its printed ones, and Fray, Main and Molar gain a printed homograph no record had.                                                                                         | All 22 targets in the numbered-reference triage are resolved. The other ten already followed the print.                                                                                                     |
 | Original split-record proposals | All 15 proposals have recorded source dispositions.                                                                                                                                                                                                                                                                                                                                  | Bold eagle has fresh independent native confirmation. Its original acceptance record remains unrecovered.                                                                                                   |
-| Later-addition classification   | [13,908 classifications across 11,145 entries](dictionary-later-additions.md).                                                                                                                                                                                                                                                                                                       | 3,912 classifications are uncertain. Of the 497 entries flagged for re-examination, classification-1 settles 365 and defers 125. Guttersnipe settles one more, leaving six in the own-record compound pool. |
+| Later-addition classification   | [13,827 classifications across 11,074 entries](dictionary-later-additions.md).                                                                                                                                                                                                                                                                                                       | 3,832 classifications are uncertain. Of the 497 entries flagged for re-examination, classification-1 settles 365 and defers 125. Guttersnipe settles one more, leaving six in the own-record compound pool. |
 
 These rows use different units and overlap. A whole-sense restoration can resolve several survey fragments, and a later batch can revisit an entry. Keep batch edits, distinct entries, resolved holds, and survey fragments separate. The older 3,494-entry damaged-character review queue supplies no denominator for this track.
 
 The whole-definition totals come from the survey's batch results and the fix-1 reruns for Clock, Key, and Kumquat. Sense totals include the senses-3 restoration in `38b54a9`. Definition-5 has an exact [acceptance ledger](dictionary-audit-definition-5.jsonl). The survey contains historical intermediate counts, so use this checkpoint and the corresponding batch records when reporting progress.
 
-The later-addition register has 6,728 located spans and 1,145 unresolved locations. Senses-4 retires 35 replaced spans, relocates two pointers using lexical context, and clears three pointers for further reconciliation. The homograph-order batch relocates six pointers that moved with their homographs. These location counts are separate from the classification categories above.
+The later-addition register has 6,724 located spans and 1,068 unresolved locations. Senses-4 retires 35 replaced spans, relocates two pointers using lexical context, and clears three pointers for further reconciliation. The homograph-order batch relocates six pointers that moved with their homographs. These location counts are separate from the classification categories above.
 
 ## Remaining work
 
@@ -88,6 +88,10 @@ Dolphin's note is restored in printed order after sense 1(b), but its content re
 
 Element's chemistry note takes back its printed sentence ("From certain evidence … some simpler body or bodies.") in place of GCIDE's later wording about subatomic particles and quarks. Two blind readers of the 1895 print agree with Gutenberg's 1913 text, and the restoration settles survey fragments 10277 through 10281.
 
+Sciaenoid takes back its printed definition, "a family of marine fishes which includes the meagre, the squeteague, and the kingfish," in place of GCIDE's later rewrite, which adds the meagre's binomials, the drum and croaker families, and the croaker's bladder. The complete-entry batch z31 read it in the 1895 print, Gutenberg's 1913 text agrees, and the four later-addition spans that marked the rewrite are retired.
+
+The audit of later-addition rows containing Ω found printed text that both electronic texts lost, which waits on two print readings: the whole entry Analogize (v. t.), which GCIDE and Gutenberg run into Analogist; Pelican's "fr. πέλεκυς an ax", lost by an eye-skip; and words beside Greek in Anatreptic, Archaeological, Boustrophedon, Didelphia, Ecumenical and Chlorite. Pi's sense 2 and Semiology's first definition are later rewrites inside otherwise printed spans.
+
 The 58 worksets remain in the frozen inventory with their original spans and blockers. Read their [current outcomes](dictionary-print-workset-outcomes.jsonl) before selecting new work. No unreviewed candidates remain in this bounded pool. Broader sense and definition differences still require complete-unit reconciliation.
 
 ### Finish the own-record compound pool
@@ -117,7 +121,7 @@ The 43 remaining candidates carry these preparation categories. Each still needs
 
 ### Open holds
 
-The [open register](dictionary-audit-holds.md) contains 226 unresolved fields: 151 evidence holds, 65 reading holds, four reference holds, four sequence holds, and two structure holds, including Dolphin.
+The [open register](dictionary-audit-holds.md) contains 228 unresolved fields: 154 evidence holds, 64 reading holds, four ruling holds, four sequence holds, and two structure holds, including Dolphin.
 
 ## Updating progress
 

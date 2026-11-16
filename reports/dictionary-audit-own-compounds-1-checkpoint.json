@@ -18,10 +18,10 @@
   },
   "openBatchHolds": [],
   "frozenFiles": {
-    "reports/dictionary-print-inventory.json": "b322bcc4527188568c933f34ca9f0d31dd7b2b129fd6cf51741db8aacc530750",
+    "reports/dictionary-print-inventory.json": "6bcb3b75be0da0d8a6bd551c42bf6539a367b1d509f3dc0ceda3b1936c78a026",
     "reports/dictionary-print-inventory.jsonl": "2d514c26fc30137cc89afc8745aa0f14653f7b4e8ec0362ee184fc5312b2566d",
     "reports/dictionary-print-fragments.jsonl": "89316853530af024e18c4fc89659c33b6746b0625719f4505bca56dbce79a166",
-    "reports/dictionary-print-review-history.jsonl": "d9e04fe56546adf16dfb878575c1843c7175462e7c24a497f9cfc15e3d6d2ed2",
+    "reports/dictionary-print-review-history.jsonl": "0d53e66f2069a1b20d202fa9b313e49928f5a37f88b54f507e349e79339aeeff",
     "reports/dictionary-print-worksets.jsonl": "77681c9cd204818eded0323135e22c08b624bfb2573a5690bc0488c1cc91c90d"
   },
   "weeklyUsageAtAdmission": {
