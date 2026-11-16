@@ -75,6 +75,10 @@ function renderHeader(
     .join('');
 }
 
+function needsLeadingSpace(block: LexicalBlock | undefined): boolean {
+  return Boolean(block && (!('html' in block) || !/^[\s,.;:!?)]/.test(block.html)));
+}
+
 function renderContent(
   content: ReadonlyArray<LexicalBlock>,
   entryId: string,
@@ -85,7 +89,7 @@ function renderContent(
       if (block.kind === 'sense')
         return `<div class="sense"${block.id ? ` id="${fragmentId(entryId, block.id)}"` : ''}><strong>${escapeXml(block.number)}</strong> ${renderContent(block.content, entryId, entriesBySlug)}</div>`;
       if (block.kind === 'compound')
-        return `<div class="compound"${block.id ? ` id="${fragmentId(entryId, block.id)}"` : ''}><strong>${contentHtml(block.headwordHtml, entryId, entriesBySlug)}</strong> ${renderContent(block.content, entryId, entriesBySlug)}</div>`;
+        return `<div class="compound"${block.id ? ` id="${fragmentId(entryId, block.id)}"` : ''}><strong>${contentHtml(block.headwordHtml, entryId, entriesBySlug)}</strong>${needsLeadingSpace(block.content[0]) ? ' ' : ''}${renderContent(block.content, entryId, entriesBySlug)}</div>`;
       if (block.kind === 'section')
         return `<div class="section">${renderContent(block.content, entryId, entriesBySlug)}</div>`;
       if (block.kind === 'quotation')
@@ -93,11 +97,7 @@ function renderContent(
       const body = contentHtml(block.html, entryId, entriesBySlug);
       if (['etymology', 'forms', 'note', 'synonyms', 'usage'].includes(block.kind))
         return `<div class="${block.kind}">${body}</div>`;
-      const next = content[index + 1];
-      const separator =
-        block.kind === 'label' && next && (!('html' in next) || !/^[\s,.;:!?)]/.test(next.html))
-          ? ' '
-          : '';
+      const separator = block.kind === 'label' && needsLeadingSpace(content[index + 1]) ? ' ' : '';
       const tag = /<(?:table|pre|div|blockquote)\b/.test(body) ? 'div' : 'span';
       return `<${tag} class="${block.kind}">${body}</${tag}>${separator}`;
     })
@@ -117,7 +117,7 @@ export function renderDictionaryEntry(
   const homographs = entry.homographs
     .map(
       (homograph) =>
-        `<div class="homograph"${homograph.id ? ` id="${fragmentId(entryId, homograph.id)}"` : ''}><div class="header">${renderHeader(homograph.header, entryId, entriesBySlug)}</div>${renderContent(homograph.content, entryId, entriesBySlug)}</div>`
+        `<div class="homograph"${homograph.id ? ` id="${fragmentId(entryId, homograph.id)}"` : ''}><div class="header">${renderHeader(homograph.header, entryId, entriesBySlug)}</div> ${renderContent(homograph.content, entryId, entriesBySlug)}</div>`
     )
     .join('');
   return `<d:entry id="${entryId}" d:title="${escapeXml(entry.key)}">${indexes}${homographs}</d:entry>`;

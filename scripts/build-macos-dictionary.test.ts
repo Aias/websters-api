@@ -65,6 +65,39 @@ describe('macOS dictionary source', () => {
     expect(xml).not.toContain('<span class="matrix"><div');
   });
 
+  test('joins a compound headword to following punctuation', () => {
+    const xml = renderDictionaryEntry(
+      {
+        key: 'Café',
+        slug: 'cafe',
+        homographs: [
+          {
+            headword: 'Café',
+            alternateHeadwords: [],
+            pronunciation: null,
+            partOfSpeech: null,
+            header: [{ kind: 'headword', text: 'Café' }],
+            content: [
+              {
+                kind: 'compound',
+                headwords: ['Café noir'],
+                headwordHtml: 'Café noir',
+                content: [
+                  { kind: 'text', html: ', ' },
+                  { kind: 'definition', html: 'black coffee.' },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      [],
+      'e1',
+      entriesBySlug
+    );
+    expect(xml).toContain('<strong>Caf&#xe9; noir</strong><span class="text">, </span>');
+  });
+
   test('preserves MathML namespace', () => {
     const xml = renderDictionaryEntry(
       {
