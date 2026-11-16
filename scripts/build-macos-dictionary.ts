@@ -2,8 +2,11 @@ import { Database } from 'bun:sqlite';
 import { existsSync, mkdirSync, readFileSync, writeFileSync, cpSync } from 'node:fs';
 import { join } from 'node:path';
 import * as cheerio from 'cheerio';
+import { normalizeLookup } from '../app/lib/lookup';
 import type { DictionaryEntry, HeaderPart, LexicalBlock } from '../app/lib/types';
-import { sourceFingerprint } from './dictionary-source';
+import { readDictionarySource, sourceFingerprint } from './dictionary-source';
+import { entryAliases } from './entry-aliases';
+import { decodeEntryKey } from './entry-references';
 
 const ROOT = join(import.meta.dir, '..');
 const OUTPUT = join(ROOT, 'build', 'macos');
@@ -169,6 +172,12 @@ function main(): void {
     const terms = termsByKey.get(row.key) ?? [];
     terms.push(row.normalized_key);
     termsByKey.set(row.key, terms);
+  }
+  for (const [rawKey, html] of readDictionarySource()) {
+    const key = decodeEntryKey(rawKey);
+    const terms = termsByKey.get(key) ?? [];
+    terms.push(...entryAliases(key, html).names.map(normalizeLookup));
+    termsByKey.set(key, terms);
   }
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<d:dictionary xmlns="http://www.w3.org/1999/xhtml" xmlns:d="http://www.apple.com/DTDs/DictionaryService-1.0.rng">\n${parsedEntries.map((entry) => renderDictionaryEntry(entry, termsByKey.get(entry.key) ?? [], entriesBySlug.get(entry.slug) ?? '', entriesBySlug)).join('\n')}\n</d:dictionary>\n`;
   mkdirSync(OUTPUT, { recursive: true });
