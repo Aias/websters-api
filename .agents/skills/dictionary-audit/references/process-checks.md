@@ -151,6 +151,10 @@ Append one JSON line per field to `.cache/review/items.jsonl`, in the `ReviewIte
 
 The person decides each item at `/review` in the development server, by accepting the proposal, editing it, or keeping the record. `bun scripts/review/apply.ts --dry-run` lists the decided items, and without the flag it writes them to the source under the one-anchor guard. Commit applied decisions with the batch that raised them, and run the usual checks first.
 
+A lost passage that no crop pipeline located is found through the page readings. Search each reader's lines of the printed entry for the record's own words before and after the lost characters, and take what the reader has between them. Find a grouped heading that the entry pairing lacks by the heading's letters. Then cut about five lines around that place from both printings and read the strips blind again before accepting anything, because a column reading at page scale drops accents. A context match of one word on each side can land in a same-spelled entry, as it did for Geld and Pen, so try every homograph and keep the strongest match. Where a batch copied its second reading into both reader folders, a column has two independent page readers and never three.
+
+A restored character that rests on a judgment the written rules do not settle is applied and queued together, so the person sees the restored text and can change it. Give the item `old` as the restored fragment and `proposed` as the alternative, or `null` when the question is only whether to keep it.
+
 ## Resumable progress and admission
 
 Use `deriveProgress` from `packet.ts` to derive counts and the first unstarted key within the supplied frozen ordered keys and unique per-entry records. This is not a next-unclaimed cursor. Select the ascending or descending unclaimed range separately against the shared claims and preserve its exact review order. Bind source and complete-review credit to the actual source and implementation hashes. Glyph-only credit remains separate. Keep the detailed source, parser, browser-text, visual, field-hold, and issue records with their evidence rather than reducing them to a single completion boolean.

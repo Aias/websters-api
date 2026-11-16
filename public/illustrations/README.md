@@ -30,6 +30,18 @@ The unchanged crops of the 2399 × 3371 pixel scan are bounded by (571, 1035) an
 
 The unchanged 170 × 112 pixel crop of the 2399 × 3371 pixel scan is bounded by (613, 2260) and (783, 2372). Both grace-note and chord examples are preserved.
 
+## Dash
+
+`dash-staccato.png` is the staccato mark in the musical sense of _Dash_ in _Webster’s International Dictionary_ (1907), printed page 369, [Internet Archive scan n474](https://archive.org/download/webstersinternat01webs/page/n474.jpg?scale=1).
+
+The unchanged 5 × 18 pixel crop of the 2399 × 3371 pixel scan is bounded by (1491, 3005) and (1496, 3023). It runs from the top of the wedge down to the baseline of its line, so the mark sits raised as the print sets it.
+
+## Direct
+
+`direct-custos.png` is the musical direct, or custos, illustrated under _Direct_ in _Webster’s International Dictionary_ (1907), printed page 416, [Internet Archive scan n521](https://archive.org/download/webstersinternat01webs/page/n521.jpg?scale=1).
+
+The unchanged 58 × 27 pixel crop of the 2399 × 3371 pixel scan is bounded by (2046, 504) and (2104, 531). Two heavy downstrokes joined by hairlines form a zigzag with a hairline lead-in and tail.
+
 ## Iguanodon
 
 `iguanodon-tooth.png` is the tooth illustration in the pictorial appendix of _Webster’s International Dictionary_, Volume II (1895), printed page 1957, [Internet Archive scan n1004](https://archive.org/download/webstersinternat02websuoft/page/n1004.jpg?scale=1).
