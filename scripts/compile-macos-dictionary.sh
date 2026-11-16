@@ -9,4 +9,4 @@ if [ -z "${DICTIONARY_DEVELOPMENT_KIT:-}" ] || [ ! -x "$DICTIONARY_DEVELOPMENT_K
   exit 1
 fi
 cd "$(dirname "$0")/../build/macos"
-"$DICTIONARY_DEVELOPMENT_KIT/bin/build_dict.sh" Webster1913 Webster1913.xml Webster1913.css Webster1913.plist
+"$DICTIONARY_DEVELOPMENT_KIT/bin/build_dict.sh" -v 10.11 Webster1913 Webster1913.xml Webster1913.css Webster1913.plist
