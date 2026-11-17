@@ -33,15 +33,9 @@ const PROGRESS_EVERY = 10000;
 // Bump when parser/build output semantics change to force a rebuild.
 const PARSER_VERSION = 44;
 
-interface SourceFingerprint {
-  size: number;
-  mtimeMs: number;
-}
-
 interface BuildMetadata {
   parserVersion: number;
-  sourceSize: number;
-  sourceMtimeMs: number;
+  sourceHash: string;
   entryCount: number;
   errorCount: number;
 }
@@ -65,18 +59,14 @@ function isBuildMetadata(value: unknown): value is BuildMetadata {
   if (value === null || typeof value !== 'object') return false;
 
   const parserVersion = Reflect.get(value, 'parserVersion');
-  const sourceSize = Reflect.get(value, 'sourceSize');
-  const sourceMtimeMs = Reflect.get(value, 'sourceMtimeMs');
+  const sourceHash = Reflect.get(value, 'sourceHash');
   const entryCount = Reflect.get(value, 'entryCount');
   const errorCount = Reflect.get(value, 'errorCount');
 
   return (
     typeof parserVersion === 'number' &&
     Number.isFinite(parserVersion) &&
-    typeof sourceSize === 'number' &&
-    Number.isFinite(sourceSize) &&
-    typeof sourceMtimeMs === 'number' &&
-    Number.isFinite(sourceMtimeMs) &&
+    typeof sourceHash === 'string' &&
     typeof entryCount === 'number' &&
     Number.isFinite(entryCount) &&
     typeof errorCount === 'number' &&
@@ -97,27 +87,22 @@ function readBuildMetadata(): BuildMetadata | null {
   }
 }
 
-function shouldSkipBuild(source: SourceFingerprint, parserVersion: number): boolean {
+function shouldSkipBuild(sourceHash: string, parserVersion: number): boolean {
   if (!existsSync(DB_FILE)) return false;
   const metadata = readBuildMetadata();
   if (!metadata) return false;
 
   return (
     metadata.parserVersion === parserVersion &&
-    metadata.sourceSize === source.size &&
-    metadata.sourceMtimeMs === source.mtimeMs
+    metadata.sourceHash === sourceHash &&
+    metadata.errorCount === 0
   );
 }
 
-function writeBuildMetadata(
-  source: SourceFingerprint,
-  result: BuildResult,
-  parserVersion: number
-): void {
+function writeBuildMetadata(sourceHash: string, result: BuildResult, parserVersion: number): void {
   const metadata: BuildMetadata = {
     parserVersion,
-    sourceSize: source.size,
-    sourceMtimeMs: source.mtimeMs,
+    sourceHash,
     entryCount: result.parsedCount,
     errorCount: result.errorCount,
   };

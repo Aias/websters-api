@@ -4,9 +4,11 @@
   "type": "module",
   "sideEffects": false,
   "scripts": {
-    "build": "bun run build:db && next build",
+    "build": "bun run build:db && bun run scripts/build-macos-dictionary.ts && next build",
     "build:db": "bun run scripts/build-db.ts",
     "build:db:force": "bun run scripts/build-db.ts --force",
+    "build:macos": "bun run build:macos:source && sh scripts/compile-macos-dictionary.sh",
+    "build:macos:source": "bun run build:db && bun run scripts/build-macos-dictionary.ts",
     "check": "bun run lint && bun run type-check && bun run format",
     "dev": "next dev",
     "format": "oxfmt",
