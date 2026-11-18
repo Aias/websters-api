@@ -98,6 +98,39 @@ describe('macOS dictionary source', () => {
     expect(xml).toContain('<strong>Caf&#xe9; noir</strong><span class="text">, </span>');
   });
 
+  test('sets a quotation apart with each author on a line', () => {
+    const xml = renderDictionaryEntry(
+      {
+        key: 'Café',
+        slug: 'cafe',
+        homographs: [
+          {
+            headword: 'Café',
+            alternateHeadwords: [],
+            pronunciation: null,
+            partOfSpeech: null,
+            header: [{ kind: 'headword', text: 'Café' }],
+            content: [
+              {
+                kind: 'sense',
+                number: '1.',
+                content: [
+                  { kind: 'quotation', html: 'A quiet café.', authors: ['Pope.', 'Shak.'] },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      [],
+      'e1',
+      entriesBySlug
+    );
+    expect(xml).toContain(
+      '<strong>1.</strong> <div><blockquote class="q">A quiet caf&#xe9;. <span class="quotation-author">— Pope.</span> <span class="quotation-author">— Shak.</span></blockquote></div>'
+    );
+  });
+
   test('preserves MathML namespace', () => {
     const xml = renderDictionaryEntry(
       {

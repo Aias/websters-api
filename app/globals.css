@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import 'shadcn/tailwind.css';
+@import './source-typography.css';
 
 :root {
   color-scheme: light dark;
@@ -86,15 +87,6 @@ body {
   color: var(--foreground);
 }
 
-/* Typography classes from the Webster's 1913 source */
-.ex {
-  font-style: italic;
-}
-
-.qex {
-  color: var(--foreground);
-}
-
 blockquote.q {
   @apply relative mt-3 pl-3.5 text-sm text-muted-foreground italic;
 }
@@ -111,90 +103,6 @@ blockquote.q > .quotation-author {
 
 blockquote.q > .qau::before {
   content: '— ';
-}
-
-.xex {
-  text-decoration: underline;
-  text-decoration-style: dotted;
-  text-decoration-skip-ink: auto;
-  text-decoration-thickness: 0.075em;
-  text-underline-offset: 0.175em;
-}
-
-.altname,
-.altnpluf,
-.ant,
-.asp,
-.au,
-.class,
-.contr,
-.cref,
-.ets,
-.etsep,
-.examp,
-.fam,
-.gen,
-.isa,
-.member,
-.ord,
-.part,
-.parts,
-.phylum,
-.pluf,
-.pos,
-.prod,
-.ptcl,
-.qau,
-.sig,
-.spn,
-.stype,
-.subfam,
-.subord,
-.suborder,
-.uex,
-.var,
-.varn {
-  font-style: italic;
-}
-
-.adjf,
-.bold,
-.colf,
-.col,
-.conjf,
-.decf,
-.plw,
-.singw,
-.wf {
-  font-weight: 700;
-}
-
-.sc {
-  font-variant: small-caps;
-}
-
-.universbold {
-  font-family: var(--font-sans);
-  font-weight: 700;
-}
-
-a.er {
-  font-variant: small-caps;
-  text-decoration: underline;
-  text-decoration-thickness: 0.075em;
-  text-underline-offset: 0.175em;
-  text-decoration-skip-ink: auto;
-  text-decoration-color: oklch(from currentColor l c h / 0.5);
-  opacity: 0.7;
-  transition: opacity 0.1s;
-  &:hover {
-    opacity: 1;
-  }
-}
-
-.mark,
-.fld {
-  font-style: italic;
 }
 
 pre {
