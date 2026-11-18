@@ -38,6 +38,8 @@ The app's `main` is internally scrollable. A full-page screenshot may include on
 
 Use `@pierre/diffs` for the actual diff, including ranges applied to Rendered. The established integration uses `parseDiffFromFile` and `renderDiffWithHighlighter` with character-level line differences. Inspect the installed API for its exact options and returned node types.
 
+`renderDiffWithHighlighter` gives an empty line a single `"\n"` text node as a placeholder. Skip a text node whose value is `"\n"` when rebuilding each side's text from the rendered lines. Real line breaks are already replaced before diffing, so no content is lost. Without the skip, a restored or removed entry, whose other side is empty, fails the projection check with `Diff projection mismatch`.
+
 Build a deterministic text projection from both rendered trees, with deliberate block and line boundaries. Use the same projection when computing the diff and mapping offsets back to browser text nodes. If line separators are replaced for diffing, preserve offset correspondence. Assert that the compiled projection equals the browser projection before applying ranges.
 
 Expand changed ranges to grapheme boundaries so combining accents and multi-code-unit characters are not split. Map ranges to DOM `Range` objects and native CSS highlights. Highlight decoration must preserve text, wrapping, spacing, semantic structure, and dimensions. If neutral spans are needed for dimming, verify those properties after insertion.

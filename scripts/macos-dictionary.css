@@ -1,0 +1,163 @@
+@font-face {
+  font-family: 'Old Standard Webster';
+  src: url('fonts/OldStandard-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Old Standard Webster';
+  src: url('fonts/OldStandard-Italic.woff2') format('woff2');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Old Standard Webster';
+  src: url('fonts/Besley-ExtraBold.woff2') format('woff2');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Old Standard Webster';
+  src: url('fonts/OldStandard-BoldItalic.woff2') format('woff2');
+  font-style: italic;
+  font-weight: bold;
+}
+
+:root {
+  --foreground: CanvasText;
+  --muted-foreground: color-mix(in srgb, CanvasText 75%, transparent);
+  --border: color-mix(in srgb, CanvasText 10%, transparent);
+  --font-sans: system-ui;
+}
+
+body {
+  font-family: 'Old Standard Webster', serif;
+}
+
+a {
+  color: inherit;
+}
+
+.homograph {
+  margin-bottom: 2em;
+}
+
+.header {
+  margin-bottom: 0.5em;
+}
+
+h2.headword {
+  display: inline;
+  margin: 0;
+}
+
+.pronunciation {
+  font-size: 1.125em;
+}
+
+.partOfSpeech,
+.label {
+  font-style: italic;
+}
+
+.pronunciation,
+.partOfSpeech,
+.header > .text,
+.sense > strong,
+.label,
+.etymology,
+.forms,
+.note,
+.usage,
+blockquote.q {
+  color: var(--muted-foreground);
+}
+
+.label,
+.etymology,
+.forms,
+.note,
+.synonyms,
+.usage,
+blockquote.q,
+table,
+pre {
+  font-size: 0.875em;
+}
+
+.sense {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+  margin-top: 0.5em;
+}
+
+.sense ~ .sense {
+  margin-top: 1em;
+}
+
+.sense > strong {
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.sense > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.compound {
+  margin: 1em 0 0.5em;
+}
+
+.section,
+.synonyms,
+.usage {
+  margin-top: 0.75em;
+}
+
+.etymology,
+.forms {
+  margin-bottom: 0.5em;
+}
+
+.compound > .etymology {
+  display: inline;
+}
+
+.note {
+  margin-top: 0.25em;
+}
+
+.usage {
+  border-left: 2px solid var(--border);
+  padding-left: 0.75em;
+}
+
+blockquote.q {
+  margin: 0.75em 0 0;
+  border-left: 3px solid var(--border);
+  padding-left: 0.875em;
+  font-style: italic;
+}
+
+blockquote.q > .qau,
+blockquote.q > .quotation-author {
+  display: block;
+  margin-top: 0.25em;
+  color: color-mix(in srgb, currentColor 60%, transparent);
+  font-style: normal;
+}
+
+blockquote.q > .qau::before {
+  content: '— ';
+}
+
+td,
+th {
+  padding: 0.25em 0.5em;
+  vertical-align: top;
+}
+
+th {
+  text-align: left;
+}

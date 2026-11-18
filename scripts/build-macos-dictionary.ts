@@ -87,13 +87,13 @@ function renderContent(
   return content
     .map((block, index) => {
       if (block.kind === 'sense')
-        return `<div class="sense"${block.id ? ` id="${fragmentId(entryId, block.id)}"` : ''}><strong>${escapeXml(block.number)}</strong> ${renderContent(block.content, entryId, entriesBySlug)}</div>`;
+        return `<div class="sense"${block.id ? ` id="${fragmentId(entryId, block.id)}"` : ''}><strong>${escapeXml(block.number)}</strong> <div>${renderContent(block.content, entryId, entriesBySlug)}</div></div>`;
       if (block.kind === 'compound')
         return `<div class="compound"${block.id ? ` id="${fragmentId(entryId, block.id)}"` : ''}><strong>${contentHtml(block.headwordHtml, entryId, entriesBySlug)}</strong>${needsLeadingSpace(block.content[0]) ? ' ' : ''}${renderContent(block.content, entryId, entriesBySlug)}</div>`;
       if (block.kind === 'section')
         return `<div class="section">${renderContent(block.content, entryId, entriesBySlug)}</div>`;
       if (block.kind === 'quotation')
-        return `<blockquote>${contentHtml(block.html, entryId, entriesBySlug)}${block.authors.length ? ` <span class="author">${escapeXml(block.authors.join('; '))}</span>` : ''}</blockquote>`;
+        return `<blockquote class="q">${contentHtml(block.html, entryId, entriesBySlug)}${block.authors.map((author) => ` <span class="quotation-author">— ${escapeXml(author)}</span>`).join('')}</blockquote>`;
       const body = contentHtml(block.html, entryId, entriesBySlug);
       if (['etymology', 'forms', 'note', 'synonyms', 'usage'].includes(block.kind))
         return `<div class="${block.kind}">${body}</div>`;
@@ -184,7 +184,8 @@ function main(): void {
   writeFileSync(join(OUTPUT, 'Webster1913.xml'), xml);
   writeFileSync(
     join(OUTPUT, 'Webster1913.css'),
-    '@font-face { font-family: "Old Standard Webster"; src: url("fonts/OldStandard-Regular.woff2") format("woff2"); }\n@font-face { font-family: "Old Standard Webster"; src: url("fonts/OldStandard-Italic.woff2") format("woff2"); font-style: italic; }\n@font-face { font-family: "Old Standard Webster"; src: url("fonts/OldStandard-BoldItalic.woff2") format("woff2"); font-style: italic; font-weight: bold; }\nbody { font-family: "Old Standard Webster", serif; }\nh2.headword { display: inline; margin: 0; }\n.header { margin: 0 0 .35em; }\n.homograph, .sense, .compound, blockquote { margin: 0 0 .7em; }\n.etymology, .forms, .note, .synonyms, .usage { margin: .4em 0; }\n.partOfSpeech, .etymology, .label, .author, .it, .pos, .ets, .qau, .au { font-style: italic; }\n.adjf, .col, .conjf, .plw, .wf { font-weight: bold; }\n.sc { font-variant: small-caps; }\n'
+    readFileSync(join(import.meta.dir, 'macos-dictionary.css'), 'utf8') +
+      readFileSync(join(ROOT, 'app', 'source-typography.css'), 'utf8')
   );
   writeFileSync(
     join(OUTPUT, 'Webster1913.plist'),
@@ -200,6 +201,8 @@ function main(): void {
     'OldStandard-Italic.woff2',
     'OldStandard-BoldItalic.woff2',
     'OldStandard-OFL.txt',
+    'Besley-ExtraBold.woff2',
+    'Besley-OFL.txt',
     'Noto-OFL.txt',
   ])
     cpSync(join(ROOT, 'app', 'fonts', name), join(fonts, name));
