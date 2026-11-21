@@ -53,6 +53,10 @@ Of the eight rewrites, Ovist is restored, Carcinoma, Gadolinium and Nominalize a
 
 Eight blind reader calls settled sub-batch 2.
 
+## Sub-batch 3
+
+Two word-recovery candidates and one missing letter are restored, each from two certain blind readers of crops of two printings. Miscalculate takes back its single printed definition, "To calculate erroneously; to judge wrongly.", which GCIDE had split into two numbered senses and extended; the two later-addition rows that registered its numbers retire. Short circuit takes back "A circuit closed or made continuous so that a current may pass, especially such a circuit having a low resistance." in place of GCIDE's rewrite. Saxon's adjective regains the printed "(a)" before its first definition, which the record's "(b)" and "(c)" already follow. Gable was a pairing failure, and Sea nettle's "(a)" belongs to the neighbouring Sea needle, so both stay. Two blind reader calls settled the sub-batch.
+
 ## What remains
 
-Saxon and Sea nettle, whose printed letter at the start of a sense needs a reading. The three word-recovery candidates and the five entries filed under another record. The 93 entries with unregistered later text belong to the later-additions register rather than to this pool. The 82 holds wait on the person.
+The five printed entries filed under another record (Exsert, Hydr-, Mon-, Panto- and -wards) need a decision about where each belongs. The 93 entries with later text the register does not list belong to the later-additions register. The 82 holds wait on the person. Every other candidate in the pool has a status.
