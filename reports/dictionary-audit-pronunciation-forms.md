@@ -1,6 +1,6 @@
 # Pronunciations after inflected forms
 
-The print gives a pronunciation after many plurals, verb forms and derived words inside an entry, as in "pl. Abaci (-sī)" and "Adulterated (-ā′tĕd)". The record had many of these as an empty placeholder and lacked many more. This pass adds 4,541 of them and replaces 2,150 placeholders. 3,509 of them needed a closer reading of an enlarged crop of the 1898 printing, cut around the line the form stands on and fused with the page readings as in the [headword pronunciation pass](dictionary-audit-pronunciation.md). The [ledger](dictionary-audit-pronunciation-forms.jsonl) has a row for each form that both readers pair with a printed pronunciation, added or not.
+The print gives a pronunciation after many plurals, verb forms and derived words inside an entry, as in "pl. Abaci (-sī)" and "Adulterated (-ā′tĕd)". The record had many of these as an empty placeholder and lacked many more. This pass adds 4,541 of them and replaces 2,153 placeholders. 3,512 of them needed a closer reading of an enlarged crop of the 1898 printing, cut around the line the form stands on and fused with the page readings as in the [headword pronunciation pass](dictionary-audit-pronunciation.md). The [ledger](dictionary-audit-pronunciation-forms.jsonl) has a row for each form that both readers pair with a printed pronunciation, added or not.
 
 ## Method
 
@@ -17,25 +17,27 @@ The form pronunciations written from the two page readings alone are read again 
 
 ## Printed forms the record did not mark
 
-Both readers print 174 forms with a pronunciation that the record's entry does not carry as a form element. They are taken by kind, clearest first. 9 plurals that stood in their own plural group as bare text or with the cross-reference class are marked with the class that group uses everywhere else, and given their pronunciations. 24 compound headings are given the pronunciation the print sets after them, by the rules above; where the page readings leave the marks or the weight of an accent open, two closer readings settle them, one of the marks and weights and one of the weights alone.
+Both readers print 174 forms with a pronunciation that the record's entry does not carry as a form element. They are taken by kind, clearest first. 9 plurals that stood in their own plural group as bare text or with the cross-reference class are marked with the class that group uses everywhere else, and given their pronunciations. 24 compound headings are given the pronunciation the print sets after them, by the rules above; where the page readings leave the marks or the weight of an accent open, two closer readings settle them, one of the marks and weights and one of the weights alone. Where the record already gave a pronunciation that the page readings do not match, a closer reading of the 1898 printing confirms it or, with a second closer reading that agrees, corrects it: 3 corrected. A correction that would only take away a mark of a kind readers miss is held, and the record's pronunciation stands.
 
-| Held                                                                              | Forms |
-| --------------------------------------------------------------------------------- | ----: |
-| Not a form                                                                        |    34 |
-| The record already gives this pronunciation                                       |    32 |
-| The record already gives a pronunciation here that the page readings do not match |    27 |
-| The record has the word only inside longer text                                   |    14 |
-| The word stands in etymology markup                                               |    10 |
-| The record lacks the printed form                                                 |     9 |
-| The word stands in example markup                                                 |     4 |
-| The word stands in heading markup                                                 |     3 |
-| The word stands in quotation markup                                               |     2 |
-| The weight of an accent is hard to judge on the page                              |     1 |
-| The three readings give three marks                                               |     1 |
-| The word stands in definition markup                                              |     1 |
-| The word stands in other markup                                                   |     1 |
-| The word stands in cross-reference markup                                         |     1 |
-| It could not be built                                                             |     1 |
+| Held                                                        | Forms |
+| ----------------------------------------------------------- | ----: |
+| The record already gives this pronunciation                 |    47 |
+| Not a form                                                  |    34 |
+| The record has the word only inside longer text             |    14 |
+| The word stands in etymology markup                         |    10 |
+| The record lacks the printed form                           |     9 |
+| The record spells out what the print abbreviates            |     6 |
+| The word stands in example markup                           |     4 |
+| The word stands in heading markup                           |     3 |
+| The closer readings lack only a mark of a kind readers miss |     2 |
+| The word stands in quotation markup                         |     2 |
+| The weight of an accent is hard to judge on the page        |     1 |
+| The three readings give three marks                         |     1 |
+| The two closer readings differ from each other              |     1 |
+| The word stands in definition markup                        |     1 |
+| The word stands in other markup                             |     1 |
+| The word stands in cross-reference markup                   |     1 |
+| It could not be built                                       |     1 |
 
 ## What waits
 
