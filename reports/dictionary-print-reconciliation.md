@@ -34,7 +34,7 @@ These rows use different units and overlap. A whole-sense restoration can resolv
 
 The whole-definition totals come from the survey's batch results and the fix-1 reruns for Clock, Key, and Kumquat. Sense totals include the senses-3 restoration in `38b54a9`. Definition-5 has an exact [acceptance ledger](dictionary-audit-definition-5.jsonl). The survey contains historical intermediate counts, so use this checkpoint and the corresponding batch records when reporting progress.
 
-The later-addition register has 6,890 located spans and 1,068 unresolved locations. Senses-4 retires 35 replaced spans, relocates two pointers using lexical context, and clears three pointers for further reconciliation. The homograph-order batch relocates six pointers that moved with their homographs. These location counts are separate from the classification categories above.
+The later-addition register has 7,451 located spans and 504 unresolved locations. Classification-2 locates 564 of the 1,068 rows that had no owner, by the survey's context words, by a whole section's text without the heading the survey added, or at the record's headword for a heading only the record has. Senses-4 retires 35 replaced spans, relocates two pointers using lexical context, and clears three pointers for further reconciliation. The homograph-order batch relocates six pointers that moved with their homographs. These location counts are separate from the classification categories above.
 
 ## Remaining work
 

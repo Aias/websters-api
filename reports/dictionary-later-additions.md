@@ -15,7 +15,7 @@
 | `uncertain`          |   268 | 3,526 |  3,794 |
 | total                | 5,988 | 7,955 | 13,943 |
 
-Left out: 1,168 `ours-extra` hunks whose print vote supports ours, and 721 ours-only entries whose text mostly appears in the print OCR (Gutenberg dropped them; see `excluded-entries.jsonl`). Of the 7,955 span rows, 6,887 have an `owner` pointer and 1,068 await location or fragment reconciliation. Rows for text that a print restoration later replaced are removed once their complete disposition is established.
+Left out: 1,168 `ours-extra` hunks whose print vote supports ours, and 721 ours-only entries whose text mostly appears in the print OCR (Gutenberg dropped them; see `excluded-entries.jsonl`). Of the 7,955 span rows, 7,451 have an `owner` pointer and 504 await location or fragment reconciliation. Rows for text that a print restoration later replaced are removed once their complete disposition is established.
 
 ## Row fields
 
@@ -58,6 +58,8 @@ The original comparison covered A through W and omitted Gutenberg book 670. The 
 ## Owner verification
 
 `scripts/dictionary-later-additions.test.ts` checks every non-null span pointer against the current parsed entry using the registry's word normalization. This detects absent pointers and fragments missing from their recorded owners. Printed origin, lexical context, and removal boundaries still require review.
+
+Classification batch 2 locates 564 of the 1,068 rows that had no owner, appending how to each row's `evidence`. Fifty-nine match the words on one or both sides of their survey hunk, and four spans of four or more words occur once in the record. For 288 rows that cover a whole section, the survey wrote the headword in front of the section's text, so the row now holds the text without it and points at the section. For 213 rows that name a heading only the record has, the row now holds the record's syllabified headword, such as "Ai′blins" for the survey's "Aiblins,", and points at that headword. A short span found only without its context, such as Dollar's "formerly", stays unresolved.
 
 The ownership reconciliation at source revision `452e7b9` relocates four spans in Cart, Corn, and Out after confirming their context. It clears 148 stale pointers whose locations remain unconfirmed, retaining their classification and original text for review. Those rows are included in the 1,145 unresolved locations above. For example, Dollar's removed sense-2 word "formerly" must not be reassigned to the same word in Trade dollar.
 
