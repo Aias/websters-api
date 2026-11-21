@@ -46,10 +46,10 @@ describe('dictionary source restoration', () => {
     expect($('.def').text()).toContain('Loaded; freighted; burdened');
   });
 
-  test('directs Abaca to the existing Manila hemp entry', () => {
+  test('directs Abaca to Manila hemp under Manila', () => {
     const $ = cheerio.load(entrySource('Abaca'));
-    expect($('.er').text()).toBe('Manila hemp');
-    expect(entrySource('Manila hemp')).toContain('Musa textilis');
+    expect($('.cref').text()).toBe('Manila hemp');
+    expect($('.er').text()).toBe('Manila');
   });
 
   test('restores the printed Greek word in the Aam etymology', () => {
