@@ -1,6 +1,6 @@
 # Pronunciations after inflected forms
 
-The print gives a pronunciation after many plurals, verb forms and derived words inside an entry, as in "pl. Abaci (-sī)" and "Adulterated (-ā′tĕd)". The record had many of these as an empty placeholder and lacked many more. This pass adds 4,387 of them and replaces 2,044 placeholders. 3,264 of them needed a closer reading of an enlarged crop of the 1898 printing, cut around the line the form stands on and fused with the page readings as in the [headword pronunciation pass](dictionary-audit-pronunciation.md). The [ledger](dictionary-audit-pronunciation-forms.jsonl) has a row for each form that both readers pair with a printed pronunciation, added or not.
+The print gives a pronunciation after many plurals, verb forms and derived words inside an entry, as in "pl. Abaci (-sī)" and "Adulterated (-ā′tĕd)". The record had many of these as an empty placeholder and lacked many more. This pass adds 4,433 of them and replaces 2,057 placeholders. 3,323 of them needed a closer reading of an enlarged crop of the 1898 printing, cut around the line the form stands on and fused with the page readings as in the [headword pronunciation pass](dictionary-audit-pronunciation.md). The [ledger](dictionary-audit-pronunciation-forms.jsonl) has a row for each form that both readers pair with a printed pronunciation, added or not.
 
 ## Method
 
@@ -16,18 +16,17 @@ Before anything was written, the same steps were run on 1,143 forms whose pronun
 | Reason                                                                               | Forms |
 | ------------------------------------------------------------------------------------ | ----: |
 | Only one reader has it                                                               |   180 |
-| The weight of its accent is not known                                                |    97 |
+| The closer readings give other letters or marks                                      |    28 |
 | The closer reading has other letters or stresses                                     |    24 |
+| Two readings give an accent different weights                                        |    20 |
 | It could not be built                                                                |    17 |
 | A page reader saw a mark that the closer reading did not                             |    14 |
 | The three readings give three marks                                                  |    14 |
 | The crop did not show the form                                                       |    12 |
 | A closer reading gives the marks, but the weight of an accent is not known           |    10 |
-| Two readings give an accent different weights                                        |     9 |
 | The closer reading found no pronunciation                                            |     4 |
 | Both readers agree, but the reading could hide a mark that readers are known to miss |     1 |
 | The readings give different marks                                                    |     1 |
-| The closer readings give other letters or marks                                      |     1 |
 | It holds something other than a respelling                                           |     1 |
 | No two of three readings give the accents the same weights                           |     1 |
 
@@ -35,4 +34,4 @@ Before anything was written, the same steps were run on 1,143 forms whose pronun
 
 - A form is covered only where the record marks it as a form and both readers pair it with a printed pronunciation. A printed form that the record does not mark is not compared.
 - Forms whose pronunciation the record already has are not corrected here, though the check above found a few that differ from the print.
-- An accent in a part of a word, as in "(-ā′tĕd)", can be heavy or light, and the page readers do not tell. Two closer readings give the weight: one that writes out the pronunciation with its weights, and one that is asked only how thick each accent is, beside a reference image. Tried on headword pronunciations, the second was right in all 70 cases where it called itself certain. 1,313 form pronunciations were built where the two agree. 271 more were built where the two differed: a third closer reading of the form's line, by Fable, agrees with the first on every letter and mark, and two of the three give each accent the same weight. On 40 lone accents in partial forms whose weight the record has, the Fable and the Opus readings of the line were each right in all 40 and the thickness reading in 39. Every other form of that class waits: the two readings give an accent different weights, the weight is hard to judge on the page, or, for 97, no crop could be cut because the pronunciation is not on the form's line or the line has no certain place.
+- An accent in a part of a word, as in "(-ā′tĕd)", can be heavy or light, and the page readers do not tell. Two closer readings give the weight: one that writes out the pronunciation with its weights, and one that is asked only how thick each accent is, beside a reference image. Tried on headword pronunciations, the second was right in all 70 cases where it called itself certain. 1,313 form pronunciations were built where the two agree. 271 more were built where the two differed: a third closer reading of the form's line, by Fable, agrees with the first on every letter and mark, and two of the three give each accent the same weight. On 40 lone accents in partial forms whose weight the record has, the Fable and the Opus readings of the line were each right in all 40 and the thickness reading in 39. 59 forms whose pronunciation no crop could isolate were built where an Opus and a Fable reading of the form's line and the lines below it agree on every letter, mark and weight. Every other form of that class waits: the two readings give an accent different weights, the weight is hard to judge on the page, or, for 0, no crop could be cut because the pronunciation is not on the form's line or the line has no certain place.
