@@ -21,6 +21,7 @@ Both readers print 175 forms with a pronunciation that the record's entry does n
 
 | Held                                                                              | Forms |
 | --------------------------------------------------------------------------------- | ----: |
+| Not a form                                                                        |    34 |
 | The record already gives this pronunciation                                       |    32 |
 | The record already gives a pronunciation here that the page readings do not match |    27 |
 | The weight of an accent is hard to judge on the page                              |     1 |
@@ -29,7 +30,6 @@ Both readers print 175 forms with a pronunciation that the record's entry does n
 
 | Not yet taken                                                    | Forms |
 | ---------------------------------------------------------------- | ----: |
-| Not a form: an etymology or another parenthesis                  |    34 |
 | The record has the word in other markup, without a pronunciation |    22 |
 | The record has the word only inside other text                   |    14 |
 | The record lacks the word                                        |     9 |
