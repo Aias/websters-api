@@ -23,15 +23,19 @@ All nine X through Z rows are present. Both page readings of the 1895 print give
 
 ## Supplement entries under an existing key
 
-The index counts a supplement entry present whenever its headword matches a key, so a supplement entry the key's record lacks goes unseen. Boxer holds its two main-vocabulary nouns but not the supplement's Chinese organization. This batch checked the key-matched supplement entries that have a reachable witness: those on the 23 downloaded pages of the 1907 printing and those in the New International's Addenda of new words. Seven have no text in the record. A scan of the headings Gutenberg runs into the paragraphs of matched index entries finds four more entries with no record at all:
+The index counts a supplement entry present whenever its headword matches a key, so a supplement entry the key's record lacks goes unseen. Boxer holds its two main-vocabulary nouns but not the supplement's Chinese organization. This batch first checked the key-matched entries that have a reachable witness, those on the 23 downloaded pages of the 1907 printing and those in the New International's Addenda of new words. Five have no text in the record:
 
 - **Cockpit** ("In some aëroplanes and flying machines, an inclosure for the pilot or a passenger.") is restored. It follows the printed homograph, as Bowler's derby hat does, under the decision on later homographs.
-- **Aerostation** and **Boxer** are held because no printing at hand sets their wording.
+- **Aerostation** is held because no printing at hand sets its wording.
 - **Telemeter** is held because the 1907 printing sets its words as an added sense, "[Add.] 2.", of the main entry.
 - **Wing** ("(Aëronautics) Any surface used primarily for supporting a flying machine in flight …") is held, because the New International's Addenda reword it.
-- **Fermentation theory** is held, because the New International reads "the now accepted germ theory" where Gutenberg has "the accepted germ theory".
-- **Mediterranean fruit fly**, run into Medicine, is restored from the New International's Addenda. Pelican State and Poker dice are held with the six whose 1907 page is unreachable.
 - **Trustee process** is held for a decision. The decision on compounds in their own records removed a Trustee process record because Gutenberg prints no separate entry, but the 1913 Supplement does print one.
+
+A scan of the headings Gutenberg runs into the paragraphs of matched index entries finds four more Supplement entries with no record:
+
+- **Mediterranean fruit fly**, run into Medicine, is restored from the New International's Addenda.
+- **Pelican State** and **Poker dice** are held, because their 1907 pages are unreachable.
+- **Fermentation theory** is held, because the New International reads "the now accepted germ theory" where Gutenberg has "the accepted germ theory". Fermentation keeps its main-vocabulary compound "Fermentation theory of disease".
 
 A comparison of every Supplement entry with its key's record then finds nine more that the record lacks and that no reachable witness settles: the senses of Colony (botany), Dresser (furniture), Fusee (railroad signal), Palmer (palmerworm), Scarabæus (archaeology), Stylus (phonograph), Trailer (car) and Resist (a substance applied to a surface), and the entry Gypsy moth. They are held with Boxer. The other flagged entries carry a later rewording of the printed text. The comparison counts content words shared with the key's record, so a Supplement sense that shares most of its words with a main-vocabulary sense could still hide.
 
