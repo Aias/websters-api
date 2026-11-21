@@ -13,27 +13,25 @@ Before anything was written, the same steps were run on 1,143 forms whose pronun
 
 ## What waits
 
-| Reason                                                                                                                             | Forms |
-| ---------------------------------------------------------------------------------------------------------------------------------- | ----: |
-| Only one reader has it                                                                                                             |   180 |
-| The weight of its accent is not known. The closer readings did not settle it: two readings give an accent different weights        |   157 |
-| The weight of its accent is not known. The closer readings did not settle it: the weight of an accent is hard to judge on the page |   116 |
-| The weight of its accent is not known                                                                                              |    97 |
-| The weight of an accent is not known                                                                                               |    97 |
-| The closer reading has other letters or stresses                                                                                   |    24 |
-| It could not be built                                                                                                              |    17 |
-| A page reader saw a mark that the closer reading did not                                                                           |    14 |
-| The three readings give three marks                                                                                                |    12 |
-| The crop did not show the form                                                                                                     |    10 |
-| The closer reading found no pronunciation                                                                                          |     4 |
-| The weight of its accent is not known. The closer readings did not settle it: the crop did not show the form                       |     2 |
-| The weight of its accent is not known. The closer readings did not settle it: the three readings give three marks                  |     2 |
-| Both readers agree, but the reading could hide a mark that readers are known to miss                                               |     1 |
-| The readings give different marks                                                                                                  |     1 |
-| It holds something other than a respelling                                                                                         |     1 |
+| Reason                                                                               | Forms |
+| ------------------------------------------------------------------------------------ | ----: |
+| Only one reader has it                                                               |   180 |
+| Two readings give an accent different weights                                        |   157 |
+| The weight of an accent is hard to judge on the page                                 |   116 |
+| The weight of its accent is not known                                                |    97 |
+| A closer reading gives the marks, but the weight of an accent is not known           |    97 |
+| The closer reading has other letters or stresses                                     |    24 |
+| It could not be built                                                                |    17 |
+| A page reader saw a mark that the closer reading did not                             |    14 |
+| The three readings give three marks                                                  |    14 |
+| The crop did not show the form                                                       |    12 |
+| The closer reading found no pronunciation                                            |     4 |
+| Both readers agree, but the reading could hide a mark that readers are known to miss |     1 |
+| The readings give different marks                                                    |     1 |
+| It holds something other than a respelling                                           |     1 |
 
 ## Limits
 
 - A form is covered only where the record marks it as a form and both readers pair it with a printed pronunciation. A printed form that the record does not mark is not compared.
 - Forms whose pronunciation the record already has are not corrected here, though the check above found a few that differ from the print.
-- An accent in a part of a word, as in "(-ā′tĕd)", can be heavy or light, and the page readers do not tell. Two closer readings give the weight: one that writes out the pronunciation with its weights, and one that is asked only how thick each accent is, beside a reference image. Tried on headword pronunciations, the second was right in all 70 cases where it called itself certain. 1,235 form pronunciations were built where the two agree. The rest of that class waits: the readings differ, or the forms of printed pages 1261 to 1681 have not had both readings yet.
+- An accent in a part of a word, as in "(-ā′tĕd)", can be heavy or light, and the page readers do not tell. Two closer readings give the weight: one that writes out the pronunciation with its weights, and one that is asked only how thick each accent is, beside a reference image. Tried on headword pronunciations, the second was right in all 70 cases where it called itself certain. 1,235 form pronunciations were built where the two agree. Every other form of that class waits: the two readings give an accent different weights, the weight is hard to judge on the page, or, for 97, no crop could be cut because the pronunciation is not on the form's line or the line has no certain place.
