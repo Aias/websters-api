@@ -1,6 +1,6 @@
 # Pronunciations after inflected forms
 
-The print gives a pronunciation after many plurals, verb forms and derived words inside an entry, as in "pl. Abaci (-sī)" and "Adulterated (-ā′tĕd)". The record had many of these as an empty placeholder and lacked many more. This pass adds 4,541 of them and replaces 2,149 placeholders. 3,509 of them needed a closer reading of an enlarged crop of the 1898 printing, cut around the line the form stands on and fused with the page readings as in the [headword pronunciation pass](dictionary-audit-pronunciation.md). The [ledger](dictionary-audit-pronunciation-forms.jsonl) has a row for each form that both readers pair with a printed pronunciation, added or not.
+The print gives a pronunciation after many plurals, verb forms and derived words inside an entry, as in "pl. Abaci (-sī)" and "Adulterated (-ā′tĕd)". The record had many of these as an empty placeholder and lacked many more. This pass adds 4,541 of them and replaces 2,150 placeholders. 3,509 of them needed a closer reading of an enlarged crop of the 1898 printing, cut around the line the form stands on and fused with the page readings as in the [headword pronunciation pass](dictionary-audit-pronunciation.md). The [ledger](dictionary-audit-pronunciation-forms.jsonl) has a row for each form that both readers pair with a printed pronunciation, added or not.
 
 ## Method
 
@@ -13,11 +13,11 @@ Before anything was written, the same steps were run on 1,143 forms whose pronun
 
 ## A closer reading of what the page readings wrote
 
-The form pronunciations written from the two page readings alone are read again on an enlarged crop of the 1898 printing, cut around the form's own line. 3,163 have been read so far, and 18 wait. The closer reading confirms 3,144. Where it differs, a second closer reading is made, and the pronunciation changes only where the two closer readings agree with each other: 17 corrections so far. 2 still differ after two closer readings and stay as they are, and 0 wait for their second reading.
+The form pronunciations written from the two page readings alone are read again on an enlarged crop of the 1898 printing, cut around the form's own line. 3,163 have been read so far, and 19 wait. The closer reading confirms 3,144. Where it differs, a second closer reading is made, and the pronunciation changes only where the two closer readings agree with each other: 17 corrections so far. 2 still differ after two closer readings and stay as they are, and 0 wait for their second reading.
 
 ## Printed forms the record did not mark
 
-Both readers print 174 forms with a pronunciation that the record's entry does not carry as a form element. They are taken by kind, clearest first. 8 plurals that stood in their own plural group as bare text or with the cross-reference class are marked with the class that group uses everywhere else, and given their pronunciations. 24 compound headings are given the pronunciation the print sets after them, by the rules above; where the page readings leave the marks or the weight of an accent open, two closer readings settle them, one of the marks and weights and one of the weights alone.
+Both readers print 175 forms with a pronunciation that the record's entry does not carry as a form element. They are taken by kind, clearest first. 9 plurals that stood in their own plural group as bare text or with the cross-reference class are marked with the class that group uses everywhere else, and given their pronunciations. 24 compound headings are given the pronunciation the print sets after them, by the rules above; where the page readings leave the marks or the weight of an accent open, two closer readings settle them, one of the marks and weights and one of the weights alone.
 
 | Held                                                 | Forms |
 | ---------------------------------------------------- | ----: |
@@ -41,9 +41,9 @@ Both readers print 174 forms with a pronunciation that the record's entry does n
 | The closer readings give other letters or marks                                      |    28 |
 | The closer reading has other letters or stresses                                     |    24 |
 | Two readings give an accent different weights                                        |    21 |
-| It could not be built                                                                |    18 |
-| The three readings give three marks                                                  |    15 |
+| It could not be built                                                                |    17 |
 | A page reader saw a mark that the closer reading did not                             |    14 |
+| The three readings give three marks                                                  |    14 |
 | The crop did not show the form                                                       |    12 |
 | A closer reading gives the marks, but the weight of an accent is not known           |    10 |
 | Only one reader has it                                                               |     5 |
@@ -51,7 +51,6 @@ Both readers print 174 forms with a pronunciation that the record's entry does n
 | The second closer reading did not show the form                                      |     3 |
 | The two closer readings differ                                                       |     2 |
 | Both readers agree, but the reading could hide a mark that readers are known to miss |     1 |
-| The weight of an accent is hard to judge on the page                                 |     1 |
 | The readings give different marks                                                    |     1 |
 | It holds something other than a respelling                                           |     1 |
 | No two of three readings give the accents the same weights                           |     1 |
