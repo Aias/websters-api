@@ -56,6 +56,12 @@ Eight blind reader calls settled sub-batch 2.
 
 Two word-recovery candidates and one missing letter are restored, each from two certain blind readers of crops of two printings. Miscalculate takes back its single printed definition, "To calculate erroneously; to judge wrongly.", which GCIDE had split into two numbered senses and extended; the two later-addition rows that registered its numbers retire. Short circuit takes back "A circuit closed or made continuous so that a current may pass, especially such a circuit having a low resistance." in place of GCIDE's rewrite. Saxon's adjective regains the printed "(a)" before its first definition, which the record's "(b)" and "(c)" already follow. Gable was a pairing failure, and Sea nettle's "(a)" belongs to the neighbouring Sea needle, so both stay. Two blind reader calls settled the sub-batch.
 
+## Re-pairing the alignment failures
+
+The 500 entries set aside for alignment were paired again: each reading's printed entries on the record's page and its neighbours were tried one, two and three at a time, and the run that best covers the record's words was kept. 268 entries then align in both readings and were measured like the rest. Both readings agree on 8 structural differences there: 7 numbers or letters printed and recorded as running text, and Yellow, whose record numbers its printed sense "1." ahead of two Supplement senses, which joins the later-numbering holds. Seventeen more differences come from re-paired runs that cover only part of a large record. No entry needed a restoration, so no reader was called. 153 entries still do not align in both readings and 79 are too short to carry a sense number.
+
+The pool now measures 93,910 of the 94,806 record and printed-entry pairs. Of the 896 it does not measure, 555 hold registered later additions, 93 carry later text the register does not list, 8 follow 1913 or Supplement revisions and 8 are rewrites with recorded dispositions, and the rest do not align or are too short.
+
 ## What remains
 
 Five entries first sorted as filed under another record (Exsert, Hydr-, Mon-, Panto- and -wards) are short entries the readings interleave with the neighbour beside them, and the record files each as the print does. The 93 entries with later text the register does not list belong to the later-additions register. The 82 holds wait on the person. Every other candidate in the pool has a status.
