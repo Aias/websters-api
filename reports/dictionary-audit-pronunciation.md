@@ -151,7 +151,7 @@ The reader is told only the headword. Where two entries with the same headword s
 
 ## A closer reading of what the page readings wrote
 
-The pronunciations written from the two page readings alone had no closer reading, and the audit above put their error at about one wrong mark in 180. Each is now read again on an enlarged crop of the 1898 printing. 5,579 have been read so far. The closer reading confirms 5,504. Where it differs, a second closer reading is made, and the pronunciation changes only where the two closer readings agree with each other: 62 corrections so far. 13 still differ after two closer readings and stay as they are, and 0 wait for their second reading.
+The pronunciations written from the two page readings alone had no closer reading, and the audit above put their error at about one wrong mark in 180. Each is now read again on an enlarged crop of the 1898 printing. 8,326 have been read so far. The closer reading confirms 8,213. Where it differs, a second closer reading is made, and the pronunciation changes only where the two closer readings agree with each other: 62 corrections so far. 13 still differ after two closer readings and stay as they are, and 38 wait for their second reading.
 
 ## Limits and remaining work
 
