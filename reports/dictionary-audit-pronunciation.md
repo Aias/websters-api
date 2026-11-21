@@ -1,8 +1,8 @@
 # Headword pronunciation pass
 
-The print gives a pronunciation in parentheses after most headwords. The record had one for about 23,000 of its 120,705 headwords. This pass adds 61,993 printed pronunciations and replaces 3,528 damaged ones. 36,431 of the additions and 1,499 of the replacements come from the two blind readings that the [page-reading batches](dictionary-audit-page-reading-2.md) already made. The other 25,562 additions and 2,029 replacements needed a closer reading of an enlarged crop. 88,824 headwords now carry a whole pronunciation.
+The print gives a pronunciation in parentheses after most headwords. The record had one for about 23,000 of its 120,705 headwords. This pass adds 61,991 printed pronunciations and replaces 3,528 damaged ones. 36,431 of the additions and 1,499 of the replacements come from the two blind readings that the [page-reading batches](dictionary-audit-page-reading-2.md) already made. The other 25,560 additions and 2,029 replacements needed a closer reading of an enlarged crop. 88,822 headwords now carry a whole pronunciation.
 
-A pronunciation is added from the page readings only where both readers give the same marks and the reading falls outside the cases where readers are known to miss a mark. 482 printed pronunciations stay out for now. Each has a row in its ledger that says why.
+A pronunciation is added from the page readings only where both readers give the same marks and the reading falls outside the cases where readers are known to miss a mark. 484 printed pronunciations stay out for now. Each has a row in its ledger that says why.
 
 | Pages     | Record lacked |  Added | Replaced | After a closer reading | Could hide a missed mark | Readers differ | Other held | Ledger                                           |
 | --------- | ------------: | -----: | -------: | ---------------------: | -----------------------: | -------------: | ---------: | ------------------------------------------------ |
@@ -21,9 +21,9 @@ A pronunciation is added from the page readings only where both readers give the
 | 1161–1260 |         3,523 |  1,195 |      505 |                  1,799 |                        8 |             12 |          4 | [jsonl](dictionary-audit-pronunciation-14.jsonl) |
 | 1261–1360 |         4,140 |  2,614 |       20 |                  1,489 |                        0 |             10 |          7 | [jsonl](dictionary-audit-pronunciation-15.jsonl) |
 | 1361–1460 |         3,758 |  2,299 |       10 |                  1,433 |                        4 |              6 |          6 | [jsonl](dictionary-audit-pronunciation-16.jsonl) |
-| 1461–1560 |         4,389 |  2,450 |        2 |                  1,908 |                        4 |             23 |          2 | [jsonl](dictionary-audit-pronunciation-17.jsonl) |
-| 1561–1681 |         5,808 |  3,741 |       18 |                  2,009 |                        5 |             22 |         13 | [jsonl](dictionary-audit-pronunciation-18.jsonl) |
-| Total     |        66,003 | 36,431 |    1,499 |                 27,591 |                       86 |            295 |        101 |                                                  |
+| 1461–1560 |         4,389 |  2,450 |        2 |                  1,907 |                        4 |             24 |          2 | [jsonl](dictionary-audit-pronunciation-17.jsonl) |
+| 1561–1681 |         5,808 |  3,741 |       18 |                  2,008 |                        5 |             23 |         13 | [jsonl](dictionary-audit-pronunciation-18.jsonl) |
+| Total     |        66,003 | 36,431 |    1,499 |                 27,589 |                       86 |            297 |        101 |                                                  |
 
 "Record lacked" counts entries that both readers pair with a printed entry, where the print has a pronunciation and the record had none or a damaged one.
 
@@ -83,36 +83,37 @@ The three errors were checked by eye on the crops. Déblai has ticked vowels und
 
 ## Closer reading
 
-The pronunciations held back above need marks that a reader of the whole column misses. For each, the entry's first lines were cut from the 1898 printing, enlarged three times, and read blind by Opus. The closer reading covers printed pages 1 to 1681. With the second closer reading described below, it adds 25,562 pronunciations and replaces 2,029 damaged ones.
+The pronunciations held back above need marks that a reader of the whole column misses. For each, the entry's first lines were cut from the 1898 printing, enlarged three times, and read blind by Opus. The closer reading covers printed pages 1 to 1681. With the second closer reading described below, it adds 25,560 pronunciations and replaces 2,029 damaged ones.
 
 The three readings are then fused letter by letter. All three must have the same letters, hyphens and stresses. A mark stands when the closer reading gives it and a page reader agrees, or when the closer reading shows one of the marks page readers miss: the tick, the line under n, the bar through th, or the other count of dots below. A mark that a page reader saw and the closer reading did not is left open.
 
 Before the pass ran, the closer reading was tried on 200 entries whose existing pronunciation has one of those marks. It saw 144 of 147 ticks and added none to 71 plain long vowels. The two page readers had both seen six of those ticks. A second closer reading of the same crops missed different ticks: only one was missed by both. Fused with the page readings, the result equals the record in 129 of 133 entries where the record and the print give the same form.
 
-| Outcome of 28,072 closer readings                                                                                | Entries |
-| ---------------------------------------------------------------------------------------------------------------- | ------: |
-| Added                                                                                                            |  25,562 |
-| Replaced a damaged pronunciation                                                                                 |   2,029 |
-| A page reader saw a mark that neither closer reading did                                                         |     118 |
-| The closer reading has other letters or stresses                                                                 |      66 |
-| A closer reading saw a mark that the two that agree did not                                                      |      47 |
-| No closer reading shows the entry                                                                                |      44 |
-| No two closer readings agree on every letter and mark                                                            |      33 |
-| The pronunciation has fewer syllables than the headword and no hyphen before it                                  |      31 |
-| No two closer readings give the accents the same weights                                                         |      30 |
-| It holds something other than a respelling                                                                       |      29 |
-| The entry has several headwords                                                                                  |      26 |
-| Two closer readings agree, but the markup after the headword has a shape the writer does not take                |      18 |
-| Closer readings give the accents different weights                                                               |       9 |
-| Closer readings agree in pairs on different readings                                                             |       7 |
-| Its syllables or stresses do not line up with the headword                                                       |       6 |
-| An entry with the same headword stands beside it, and fewer than two readings that agree were told which to take |       5 |
-| The weights read on the page leave a whole word without a heavy accent                                           |       3 |
-| It has a mark the notation does not use                                                                          |       3 |
-| A page reader saw a mark that the closer reading did not                                                         |       2 |
-| The two closer readings have different letters or stresses                                                       |       2 |
-| An entry with the same headword stands beside it, and the reader was not told which to take                      |       1 |
-| The three readings give three marks                                                                              |       1 |
+| Outcome of 28,072 closer readings                                                                                                                          | Entries |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------: |
+| Added                                                                                                                                                      |  25,560 |
+| Replaced a damaged pronunciation                                                                                                                           |   2,029 |
+| A page reader saw a mark that neither closer reading did                                                                                                   |     118 |
+| The closer reading has other letters or stresses                                                                                                           |      66 |
+| A closer reading saw a mark that the two that agree did not                                                                                                |      47 |
+| No closer reading shows the entry                                                                                                                          |      44 |
+| No two closer readings agree on every letter and mark                                                                                                      |      33 |
+| The pronunciation has fewer syllables than the headword and no hyphen before it                                                                            |      31 |
+| No two closer readings give the accents the same weights                                                                                                   |      30 |
+| It holds something other than a respelling                                                                                                                 |      29 |
+| The entry has several headwords                                                                                                                            |      26 |
+| Two closer readings agree, but the markup after the headword has a shape the writer does not take                                                          |      18 |
+| Closer readings give the accents different weights                                                                                                         |       9 |
+| Closer readings agree in pairs on different readings                                                                                                       |       7 |
+| Its syllables or stresses do not line up with the headword                                                                                                 |       6 |
+| An entry with the same headword stands beside it, and fewer than two readings that agree were told which to take                                           |       5 |
+| The weights read on the page leave a whole word without a heavy accent                                                                                     |       3 |
+| It has a mark the notation does not use                                                                                                                    |       3 |
+| A page reader saw a mark that the closer reading did not                                                                                                   |       2 |
+| The two closer readings have different letters or stresses                                                                                                 |       2 |
+| Closer readings agree in pairs on different readings: a blind Fable reading made to sample the written pronunciations sides with the earlier Fable reading |       2 |
+| An entry with the same headword stands beside it, and the reader was not told which to take                                                                |       1 |
+| The three readings give three marks                                                                                                                        |       1 |
 
 A reading that keeps a plain long vowel in an unstressed syllable rests on one closer reading having seen no tick there. A second closer reading of those entries would catch most of the ticks the first one missed.
 
@@ -147,7 +148,7 @@ The reader is told only the headword. Where two entries with the same headword s
 
 **Accent weights read from the page.** Where a pronunciation's accents do not line up with the headword's, their weights cannot come from the headword. Two closer readings then give them: the reading that wrote out the pronunciation, and one that is asked only how thick each accent in the parentheses is, beside a reference image. Tried on pronunciations whose weights the record has, the second was right in all 70 where it called itself certain. Where the two agree, the pronunciation is built with those weights: 697 so far.
 
-**Held pronunciations read again.** A held-back pronunciation is written where two closer readings give it letter for letter and mark for mark, the rules above take it against the page readings, and it builds against the headword as it now stands, with its accent weights read from the page where they do not line up with the headword's. 172 already had the readings they needed and had been held only by the pipeline of their day: a headword corrected since, an earlier reading written with accent weights, a mark the markup now takes, or a row that no later fuse took up. 651 more are settled by a further closer reading by Fable, made blind on an enlarged crop of the 1898 printing, that agrees with an earlier closer reading. 268 are settled by a further Opus reading, of the first lines of the entry or of the thickness of the accents alone, that agrees with an earlier one. 550 of these take their accent weights from two readings of the page.
+**Held pronunciations read again.** A held-back pronunciation is written where two closer readings give it letter for letter and mark for mark, the rules above take it against the page readings, and it builds against the headword as it now stands, with its accent weights read from the page where they do not line up with the headword's. 172 already had the readings they needed and had been held only by the pipeline of their day: a headword corrected since, an earlier reading written with accent weights, a mark the markup now takes, or a row that no later fuse took up. 651 more are settled by a further closer reading by Fable, made blind on an enlarged crop of the 1898 printing, that agrees with an earlier closer reading. 266 are settled by a further Opus reading, of the first lines of the entry or of the thickness of the accents alone, that agrees with an earlier one. 550 of these take their accent weights from two readings of the page.
 
 ## A closer reading of what the page readings wrote
 
@@ -155,7 +156,7 @@ The pronunciations written from the two page readings alone had no closer readin
 
 ## Limits and remaining work
 
-- 482 printed pronunciations are not yet in the record: 187 that could hide a missed mark or do not line up with the headword, and 295 where the readers differ. Most wait on something other than a reading: the headword's own accents, a form the markup does not yet take, or readings that still differ after two closer readings.
+- 484 printed pronunciations are not yet in the record: 187 that could hide a missed mark or do not line up with the headword, and 297 where the readers differ. Most wait on something other than a reading: the headword's own accents, a form the markup does not yet take, or readings that still differ after two closer readings.
 - The pronunciations added from the page readings rest on two readings of one scan until the closer reading described above has reached them.
 - The pass covers the pronunciation after a headword. Pronunciations after inflected forms and plurals have a [pass of their own](dictionary-audit-pronunciation-forms.md). 167 headword pronunciations still hold a lost character.
 - 0 pronunciations are held back under a headword whose own accents cannot be right. The [headword pass](dictionary-audit-headword.md) corrected most such headwords, and these are the ones whose accent weights two readings did not settle.
