@@ -35,3 +35,18 @@ Before anything was written, the same steps were run on 1,143 forms whose pronun
 - A form is covered only where the record marks it as a form and both readers pair it with a printed pronunciation. A printed form that the record does not mark is not compared.
 - Forms whose pronunciation the record already has are not corrected here, though the check above found a few that differ from the print.
 - An accent in a part of a word, as in "(-ā′tĕd)", can be heavy or light, and the page readers do not tell. Two closer readings give the weight: one that writes out the pronunciation with its weights, and one that is asked only how thick each accent is, beside a reference image. Tried on headword pronunciations, the second was right in all 70 cases where it called itself certain. 1,313 form pronunciations were built where the two agree. 271 more were built where the two differed: a third closer reading of the form's line, by Fable, agrees with the first on every letter and mark, and two of the three give each accent the same weight. On 40 lone accents in partial forms whose weight the record has, the Fable and the Opus readings of the line were each right in all 40 and the thickness reading in 39. 59 forms whose pronunciation no crop could isolate were built where an Opus and a Fable reading of the form's line and the lines below it agree on every letter, mark and weight. Every other form of that class waits: the two readings give an accent different weights, the weight is hard to judge on the page, or, for 0, no crop could be cut because the pronunciation is not on the form's line or the line has no certain place.
+
+## The record's own form pronunciations
+
+The record already had a pronunciation after 8,412 forms. 160 of them are questioned by both page readings in a letter, a stress or a mark that readers do not miss, as in the [audit of existing headword pronunciations](dictionary-audit-pronunciation-existing.md). Each was read again by Opus on an enlarged crop of the form's line in the 1898 printing, and by Fable where the Opus reading differs from the record. 33 are corrected where the two closer readings agree letter for letter and mark for mark, under the same rules as that audit: a mark of a kind readers miss stays where the record has it, a stressed vowel keeps its mark, and a pronunciation the record spells out is not shortened. The record's accent weights are kept where the stresses stand as they did. The [ledger](dictionary-audit-pronunciation-forms-existing.jsonl) has a row for each form read.
+
+| Why the record stays                                                   | Forms |
+| ---------------------------------------------------------------------- | ----: |
+| The closer reading confirms the record                                 |    88 |
+| The record spells out what the print abbreviates                       |    29 |
+| The two closer readings differ                                         |     5 |
+| The closer reading did not show the form                               |     1 |
+| The readings show no mark on a stressed vowel that the record marks    |     1 |
+| The weights read on the page leave a whole word without a heavy accent |     1 |
+| It holds something other than a respelling                             |     1 |
+| The weight of an accent is not known                                   |     1 |

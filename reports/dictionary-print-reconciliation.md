@@ -185,7 +185,8 @@ The work of 2026-11-11 stopped with these readings unfinished. Each resumes wher
 - **Form pronunciations that wait on the weight of an accent.** The forms of every printed page have had both weight readings. 277 forms stay held because the two readings give an accent different weights or the weight is hard to judge.
 - **Forms found by the corrected pairing.** Pairing each printed entry by its own first line, and taking comparatives as forms, found forms the first pairing had missed. Those that both readers agree on are applied. The 123 that needed a closer reading and 43 of the weight class were cut into the folder families `form2`, `formw2` and `formp2`, read, and fused: 145 added or replaced. 97 more of the weight class have no crop: in 76 the pronunciation is not on the form's line, and 21 have no certain line.
 - **Headword pronunciations whose accent weights two readings did not settle.** A third weight reading has been made for all 338. Where two of the three readings agree, the pronunciation is built: 697 pronunciations now rest on weights read from the page.
-- **Not started.** An audit of the form pronunciations the record already had. Printed forms that the record does not mark as forms.
+- **The record's own form pronunciations.** 160 that both page readings question were read again on the 1898 printing by Opus and Fable, and 33 are corrected where the two agree. The [forms report](dictionary-audit-pronunciation-forms.md) gives why the others stay.
+- **Not started.** Printed forms that the record does not mark as forms.
 
 ### Compare type styles
 
