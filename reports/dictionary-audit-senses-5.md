@@ -43,10 +43,9 @@ The 1,164 entries the comparison could not measure fall into these causes:
 | Cause                                                                                               | Entries |
 | --------------------------------------------------------------------------------------------------- | ------: |
 | Registered later additions cover most of the unmatched words                                        |     555 |
-| Only one reading paired with the record, or the pairing or the entry's length defeats the alignment |     495 |
+| Only one reading paired with the record, or the pairing or the entry's length defeats the alignment |     500 |
 | The record carries later text the register does not list                                            |      93 |
 | The 1913 printing or the Supplement revised the definition, which the record follows                |       8 |
-| The printed entry is filed under another record (Exsert, Hydr-, Mon-, Panto-, -wards)               |       5 |
 | Rewrite or loss inside the entry                                                                    |       8 |
 
 Of the eight rewrites, Ovist is restored, Carcinoma, Gadolinium and Nominalize already have holds, Nebula's rewrite surrounds a registered later addition and is held, and Gable, Miscalculate and Short circuit remain word-recovery candidates. The pool file gives every entry its cause and status.
@@ -59,4 +58,4 @@ Two word-recovery candidates and one missing letter are restored, each from two 
 
 ## What remains
 
-The five printed entries filed under another record (Exsert, Hydr-, Mon-, Panto- and -wards) need a decision about where each belongs. The 93 entries with later text the register does not list belong to the later-additions register. The 82 holds wait on the person. Every other candidate in the pool has a status.
+Five entries first sorted as filed under another record (Exsert, Hydr-, Mon-, Panto- and -wards) are short entries the readings interleave with the neighbour beside them, and the record files each as the print does. The 93 entries with later text the register does not list belong to the later-additions register. The 82 holds wait on the person. Every other candidate in the pool has a status.
