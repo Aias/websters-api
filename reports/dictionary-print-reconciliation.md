@@ -189,7 +189,6 @@ The work of 2026-11-11 stopped with these readings unfinished. Each resumes wher
 - **Headword pronunciations whose accent weights two readings did not settle.** A third weight reading has been made for all 338. Where two of the three readings agree, the pronunciation is built: 697 pronunciations now rest on weights read from the page.
 - **The record's own form pronunciations.** 160 that both page readings question were read again on the 1898 printing by Opus and Fable, and 33 are corrected where the two agree. The [forms report](dictionary-audit-pronunciation-forms.md) gives why the others stay.
 - **Printed forms that the record does not mark as forms.** Both page readings print 174 forms with a pronunciation that the record's entry does not carry as a form element (`forms.py unmarked`, `pron/forms-unmarked.json`). 34 are not forms, and in 32 the record already gives the word and its pronunciation in other markup. The first batch marked the 8 plurals that stood in their own group as bare text or with the cross-reference class, and added their pronunciations. What remains: 77 with the word in other markup and no pronunciation, mostly pronunciations of run-in compounds and alternative headings; 14 with the word only inside longer text; and 9 that the record lacks, which need the printed text restored first. The pool counts only forms followed by a printed pronunciation.
-- **Not started.**
 
 ### Compare type styles
 
