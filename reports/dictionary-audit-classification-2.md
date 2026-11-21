@@ -48,3 +48,7 @@ The [ledger](dictionary-audit-classification-2.jsonl) gives each entry's identit
 ## Holds
 
 Forty-one entries join the [holds register](dictionary-audit-holds.md). Each gives the 1913 wording from Gutenberg. The 37 Supplement entries wait on a reading of a printed 1913 Supplement, which on archive.org lends only. Yen's 1913 revision waits on the 1913 printing or the person, because the 1895 page gives the older gold and silver yen. Yawl's Supplement sense was rewritten by RH, Xanthin's run-on Supplement definition by GCIDE, and Gam repeats a Supplement sense.
+
+## X–Z span rows
+
+The register's span rows came from an A–W survey, so entries under X, Y and Z had none. The full-alphabet survey (`.context/dictionary-audit/print-reconciliation-inventory/fresh-survey/full-alphabet/hunks.jsonl`) has 105 X–Z fragments where the record has words Gutenberg lacks, outside the 125 entries above and outside entries the register lists whole. Both page readings print 77 of them, which Gutenberg dropped. Four are no longer in the record. The other 24, in 11 entries, become span rows: Yttrium's and Zinc's atomic numbers, PJC clauses in Xylophone, Xylopyrography and Zebra, Xeriff's "(ca. 1900)", Zirconia's formula, and the rewritten phrase heading of Yield. Yield and Zebra already wait on the person's ruling from page-reading-18.

@@ -120,7 +120,7 @@ Whole-page reading finds differences that entry-by-entry review does not reach, 
 - **Punctuation shapes no rule drafts:** have one agent write the exact replacement by hand, with a stated reason wherever the record should stay, and a different agent proofread it. A reported change stays out unless its text changes after the review.
 - **Lists set in several columns:** the line comparison cannot follow a list the print sets two or three across, such as the word lists under Un-. Set its differences aside before any drafting, and compare the list's words as a set against both readers.
 - **Registered text before a repair:** check the later-additions register before turning a reported blend into a hand correction. If the correction would remove registered text, ask the person.
-- **Entries under X, Y and Z:** the register lists only whole entries there. Check every correction to those entries by hand, and judge later additions from the typists' text and the two printings.
+- **Entries under X, Y and Z:** their span rows come from classification batch 2, which checked the full-alphabet survey's fragments against both page readings, so the register covers them as it covers the other letters.
 - **A correction whose result is already in the record:** a hand correction that only removes a repeated phrase leaves text that the record already contains, so a check for "already applied" skips it. Give it enough context that the result is new.
 - **Page numbers:** take a printed page number from the scan leaf it was read from, never from memory.
 - **A pipe hides a failed step:** `script | cut` reports the status of `cut`. Before a commit that depends on a script's output, run the script on its own or check its own exit status.

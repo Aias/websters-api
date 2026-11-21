@@ -4,18 +4,18 @@
 
 ## Counts
 
-13,919 rows over 11,039 keys.
+13,943 rows over 11,050 keys.
 
 | category             | entry |  span |  total |
 | -------------------- | ----: | ----: | -----: |
 | `wordnet`            |    64 |    30 |     94 |
-| `gcide-editor`       |    75 |   141 |    216 |
+| `gcide-editor`       |    75 |   154 |    229 |
 | `supplement-1913`    | 3,424 |   817 |  4,241 |
-| `later-unattributed` | 2,153 | 3,417 |  5,570 |
+| `later-unattributed` | 2,153 | 3,428 |  5,581 |
 | `uncertain`          |   269 | 3,529 |  3,798 |
-| total                | 5,985 | 7,934 | 13,919 |
+| total                | 5,985 | 7,958 | 13,943 |
 
-Left out: 1,168 `ours-extra` hunks whose print vote supports ours, and 721 ours-only entries whose text mostly appears in the print OCR (Gutenberg dropped them; see `excluded-entries.jsonl`). Of the 7,934 span rows, 6,866 have an `owner` pointer and 1,068 await location or fragment reconciliation. Rows for text that a print restoration later replaced are removed once their complete disposition is established.
+Left out: 1,168 `ours-extra` hunks whose print vote supports ours, and 721 ours-only entries whose text mostly appears in the print OCR (Gutenberg dropped them; see `excluded-entries.jsonl`). Of the 7,958 span rows, 6,890 have an `owner` pointer and 1,068 await location or fragment reconciliation. Rows for text that a print restoration later replaced are removed once their complete disposition is established.
 
 ## Row fields
 
@@ -39,7 +39,7 @@ Spans (`ours-extra` hunks):
 3. A WordNet or editor source gives `wordnet` or `gcide-editor` whatever the vote, because the source is independent of the print. "Webster 1913 Suppl." gives `supplement-1913` (1913 text, kept and marked).
 4. Otherwise a `gutenberg` vote gives `later-unattributed`, and an `unclear` vote gives `uncertain`. The `evidence` field carries the vote anchor, the score, and the OCR window.
 
-Spans from classification batch 2 have no survey hunk. Each is a reviewed run of record words that Gutenberg's 1913 entry lacks, checked against both blind page readings for a main entry. A GCIDE paragraph tagged "1913 Webster + PJC" gives `gcide-editor`, because the 1913 part of its text is printed and the addition is the editor's. A "Webster 1913 Suppl." tag alone gives `later-unattributed` for text that Gutenberg's Supplement entry lacks. Their `printVote` is `gutenberg` where both page readings lack the text and `null` for a Supplement entry, which has no scanned page.
+Spans from classification batch 2 have no `surveyHunkId`. Each is a reviewed run of record words that Gutenberg's 1913 entry lacks, checked against both blind page readings for a main entry. Its X–Z rows for entries with no entry row cover every source-only fragment of the full-alphabet survey (`print-reconciliation-inventory/fresh-survey/full-alphabet/hunks.jsonl`) that the record keeps and both page readings lack, and their `evidence` names the survey hunk. A GCIDE paragraph tagged "1913 Webster + PJC" gives `gcide-editor`, because the 1913 part of its text is printed and the addition is the editor's. A "Webster 1913 Suppl." tag alone gives `later-unattributed` for text that Gutenberg's Supplement entry lacks. Their `printVote` is `gutenberg` where both page readings lack the text and `null` for a Supplement entry, which has no scanned page.
 
 Reviewed entry rows bind source tags to the exact paragraphs supplying the current text. Separate normalized headings and absent GCIDE senses retain their own provenance. A mixed paragraph does not establish that every word came from its latest contributor. [Own-compounds-1/2](dictionary-audit-own-compounds-2.md) corrects six rows under this distinction. [Own-compounds-3-6](dictionary-audit-own-compounds-3-6.md) corrects seven more entry rows and adds Humming bird, whose additional text has no identified contributor. The sole span pointer on its changed owner keys, Lancet's knife-like fragment, retains its matching lexical context.
 
