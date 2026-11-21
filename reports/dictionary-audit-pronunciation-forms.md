@@ -1,6 +1,6 @@
 # Pronunciations after inflected forms
 
-The print gives a pronunciation after many plurals, verb forms and derived words inside an entry, as in "pl. Abaci (-sī)" and "Adulterated (-ā′tĕd)". The record had many of these as an empty placeholder and lacked many more. This pass adds 4,512 of them and replaces 2,146 placeholders. 3,491 of them needed a closer reading of an enlarged crop of the 1898 printing, cut around the line the form stands on and fused with the page readings as in the [headword pronunciation pass](dictionary-audit-pronunciation.md). The [ledger](dictionary-audit-pronunciation-forms.jsonl) has a row for each form that both readers pair with a printed pronunciation, added or not.
+The print gives a pronunciation after many plurals, verb forms and derived words inside an entry, as in "pl. Abaci (-sī)" and "Adulterated (-ā′tĕd)". The record had many of these as an empty placeholder and lacked many more. This pass adds 4,517 of them and replaces 2,149 placeholders. 3,492 of them needed a closer reading of an enlarged crop of the 1898 printing, cut around the line the form stands on and fused with the page readings as in the [headword pronunciation pass](dictionary-audit-pronunciation.md). The [ledger](dictionary-audit-pronunciation-forms.jsonl) has a row for each form that both readers pair with a printed pronunciation, added or not.
 
 ## Method
 
@@ -13,7 +13,13 @@ Before anything was written, the same steps were run on 1,143 forms whose pronun
 
 ## A closer reading of what the page readings wrote
 
-The form pronunciations written from the two page readings alone are read again on an enlarged crop of the 1898 printing, cut around the form's own line. 3,163 have been read so far, and 4 wait. The closer reading confirms 3,144. Where it differs, a second closer reading is made, and the pronunciation changes only where the two closer readings agree with each other: 17 corrections so far. 2 still differ after two closer readings and stay as they are, and 0 wait for their second reading.
+The form pronunciations written from the two page readings alone are read again on an enlarged crop of the 1898 printing, cut around the form's own line. 3,163 have been read so far, and 11 wait. The closer reading confirms 3,144. Where it differs, a second closer reading is made, and the pronunciation changes only where the two closer readings agree with each other: 17 corrections so far. 2 still differ after two closer readings and stay as they are, and 0 wait for their second reading.
+
+## Printed forms the record did not mark
+
+Both readers print 174 forms with a pronunciation that the record's entry does not carry as a form element. 34 are not forms: the parenthesis after the word is an etymology or a gloss. In 32 the record already gives the word and its pronunciation in other markup. 85 have the word without a pronunciation, 14 have it only inside longer text, and 9 lack it.
+
+The first batch takes the inflections that stand in their own plural, verb-form or comparative group as bare text or with the cross-reference class. Each is marked with the class its group uses everywhere else, and its pronunciation is added by the rules above: 8 marked, 8 with a pronunciation. The rest of that class are mostly the pronunciations of run-in compounds and alternative headings, which are not forms.
 
 ## What waits
 
