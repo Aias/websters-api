@@ -1,21 +1,21 @@
 # Later additions to the dictionary text
 
-`dictionary-later-additions.jsonl` lists material in `src/dict.jsonl` that is probably not in the 1913 printed dictionary. It is sorted by `key` (entry row first, then span rows by `surveyHunkId`). Tools and work files are in `.context/dictionary-audit/later-additions/` (`build.py`, `owner.ts`, `finalize.py`, `excluded-entries.jsonl`).
+`dictionary-later-additions.jsonl` lists material in `src/dict.jsonl` that is probably not in the 1913 printed dictionary. It is sorted by `key` (entry row first, then span rows by `surveyHunkId`, and span rows without a survey hunk last in record order). Tools and work files are in `.context/dictionary-audit/later-additions/` (`build.py`, `owner.ts`, `finalize.py`, `excluded-entries.jsonl`).
 
 ## Counts
 
-13,826 rows over 11,073 keys.
+13,919 rows over 11,039 keys.
 
 | category             | entry |  span |  total |
 | -------------------- | ----: | ----: | -----: |
-| `wordnet`            |    94 |    21 |    115 |
-| `gcide-editor`       |   125 |    86 |    211 |
-| `supplement-1913`    | 3,356 |   794 |  4,150 |
-| `later-unattributed` | 2,158 | 3,361 |  5,519 |
-| `uncertain`          |   302 | 3,529 |  3,831 |
-| total                | 6,035 | 7,791 | 13,826 |
+| `wordnet`            |    64 |    30 |     94 |
+| `gcide-editor`       |    75 |   141 |    216 |
+| `supplement-1913`    | 3,424 |   817 |  4,241 |
+| `later-unattributed` | 2,153 | 3,417 |  5,570 |
+| `uncertain`          |   269 | 3,529 |  3,798 |
+| total                | 5,985 | 7,934 | 13,919 |
 
-Left out: 1,168 `ours-extra` hunks whose print vote supports ours, and 721 ours-only entries whose text mostly appears in the print OCR (Gutenberg dropped them; see `excluded-entries.jsonl`). Of the 7,792 span rows, 6,724 have an `owner` pointer and 1,068 await location or fragment reconciliation. Rows for text that a print restoration later replaced are removed once their complete disposition is established.
+Left out: 1,168 `ours-extra` hunks whose print vote supports ours, and 721 ours-only entries whose text mostly appears in the print OCR (Gutenberg dropped them; see `excluded-entries.jsonl`). Of the 7,934 span rows, 6,866 have an `owner` pointer and 1,068 await location or fragment reconciliation. Rows for text that a print restoration later replaced are removed once their complete disposition is established.
 
 ## Row fields
 
@@ -30,7 +30,7 @@ Entries (keys only ours has, from `survey-gutenberg/only-ours.jsonl`):
 
 1. The key is folded and looked up among GCIDE entries. The category follows the strongest source tag among the entry's paragraphs, in the order WordNet, editor, supplement, 1913 Webster: WordNet gives `wordnet`, `PJC`, `+PJC`, `JG` or any other editor gives `gcide-editor`, "Webster 1913 Suppl." gives `supplement-1913`, "1913 Webster" or no tag gives `later-unattributed`. A key with no GCIDE entry is `later-unattributed`.
 2. Print check for `later-unattributed` only: the share of the entry text's word trigrams found in the print OCR (1907 volume A to M, 1895 volume N to Z). At 60% or more the entry is 1913 text that Gutenberg dropped and is omitted. From 25% to 60% it is `uncertain`. Below 25% it stays `later-unattributed`.
-3. X through Z entries and supplement entries are rechecked against their complete Gutenberg paragraphs ([classification batch 1](dictionary-audit-classification-1.md)). An entry whose text is a main-text paragraph has no entry row. An entry whose text is a supplement paragraph is `supplement-1913`, whatever other tags its GCIDE paragraphs carry. Entries with later material or poor agreement keep their earlier category until span rows or identity checks settle them.
+3. X through Z entries and supplement entries are rechecked against their complete Gutenberg paragraphs ([classification batch 1](dictionary-audit-classification-1.md)). An entry whose text is a main-text paragraph has no entry row. An entry whose text is a supplement paragraph is `supplement-1913`, whatever other tags its GCIDE paragraphs carry. [Classification batch 2](dictionary-audit-classification-2.md) settles the 125 entries that batch 1 deferred, comparing main entries with both blind page readings as well as Gutenberg. A main entry loses its entry row, and a Supplement entry becomes `supplement-1913`. Their later material and any 1913 Supplement text inside a main entry become span rows.
 
 Spans (`ours-extra` hunks):
 
@@ -38,6 +38,8 @@ Spans (`ours-extra` hunks):
 2. The GCIDE paragraph holding the text is located (whole span, else span start with left context, else span start). If paragraphs of several kinds match, the priority is `wordnet`, `gcide-editor`, `supplement-1913`, then 1913 Webster, and `evidence` says so. When no paragraph is found, the survey's `gcideSource` tag is used.
 3. A WordNet or editor source gives `wordnet` or `gcide-editor` whatever the vote, because the source is independent of the print. "Webster 1913 Suppl." gives `supplement-1913` (1913 text, kept and marked).
 4. Otherwise a `gutenberg` vote gives `later-unattributed`, and an `unclear` vote gives `uncertain`. The `evidence` field carries the vote anchor, the score, and the OCR window.
+
+Spans from classification batch 2 have no survey hunk. Each is a reviewed run of record words that Gutenberg's 1913 entry lacks, checked against both blind page readings for a main entry. A GCIDE paragraph tagged "1913 Webster + PJC" gives `gcide-editor`, because the 1913 part of its text is printed and the addition is the editor's. A "Webster 1913 Suppl." tag alone gives `later-unattributed` for text that Gutenberg's Supplement entry lacks. Their `printVote` is `gutenberg` where both page readings lack the text and `null` for a Supplement entry, which has no scanned page.
 
 Reviewed entry rows bind source tags to the exact paragraphs supplying the current text. Separate normalized headings and absent GCIDE senses retain their own provenance. A mixed paragraph does not establish that every word came from its latest contributor. [Own-compounds-1/2](dictionary-audit-own-compounds-2.md) corrects six rows under this distinction. [Own-compounds-3-6](dictionary-audit-own-compounds-3-6.md) corrects seven more entry rows and adds Humming bird, whose additional text has no identified contributor. The sole span pointer on its changed owner keys, Lancet's knife-like fragment, retains its matching lexical context.
 
