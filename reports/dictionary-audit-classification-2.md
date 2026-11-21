@@ -6,9 +6,7 @@
 
 Each record is compared word by word with Gutenberg's 1913 text: its main paragraphs for a main-vocabulary entry, and its Supplement paragraphs, book 670 from paragraph 1374, for a Supplement entry. A main entry is also compared with both blind page readings of its printed column, and a record-only run in a main entry is checked against the key's Supplement paragraphs. Every difference was read by hand. Pronunciations, spelled-out labels, sense numbers, genera the print abbreviates, and Greek that Gutenberg lost are set aside.
 
-A record that is a printed main entry loses its entry row. A record that is a Supplement entry becomes `supplement-1913`. Words that no 1913 witness has become span rows, categorized from the tags of the GCIDE paragraph that holds them, and 1913 Supplement text inside a main entry becomes a `supplement-1913` span row. Where GCIDE replaced or dropped 1913 wording, the record keeps it and a hold records the 1913 text, because the Supplement has no scanned page at hand and the main pages show the wording of 1895 and 1898.
-
-No dictionary text changes. The owner check in `scripts/dictionary-later-additions.test.ts` now joins subscripts to their element, so a span containing a chemical formula such as Zircon's "Zr₂SiO₄" can be located.
+A record that is a printed main entry loses its entry row. A record that is a Supplement entry becomes `supplement-1913`. Words that no 1913 witness has become span rows, categorized from the tags of the GCIDE paragraph that holds them, and 1913 Supplement text inside a main entry becomes a `supplement-1913` span row. Where GCIDE replaced or dropped 1913 wording, the 1913 wording returns when two blind readings of a printing confirm it, and otherwise a hold records it. The owner check in `scripts/dictionary-later-additions.test.ts` now joins subscripts to their element, so a span containing a chemical formula such as Zircon's "Zr₂SiO₄" can be located.
 
 ## Results
 
@@ -45,9 +43,17 @@ The [ledger](dictionary-audit-classification-2.jsonl) gives each entry's identit
 - **Upwind repeats Yang's defect.** Its record is the printed verb "To wind up. Spenser.", and its editor category came from GCIDE's separate adverb and adjective. Zany and several Supplement entries have such separate GCIDE entries too, none of them in the record.
 - **Classification-1 compared three records with a neighbouring paragraph:** Pipe line with the verb Pipe-line, Stream line with Streamline, and Psychoanalysis, whose 1913 entry only refers to Psychanalysis. GCIDE moved Psychanalysis's 1913 definition into the Psychoanalysis record, which a hold records.
 
-## Holds
+## Restorations and holds
 
-Forty-one entries join the [holds register](dictionary-audit-holds.md). Each gives the 1913 wording from Gutenberg. The 37 Supplement entries wait on a reading of a printed 1913 Supplement, which on archive.org lends only. Yen's 1913 revision waits on the 1913 printing or the person, because the 1895 page gives the older gold and silver yen. Yawl's Supplement sense was rewritten by RH, Xanthin's run-on Supplement definition by GCIDE, and Gam repeats a Supplement sense.
+Forty-one entries carried 1913 wording that GCIDE replaced or dropped. The 1913 Supplement's own printing lends only, but the 1915 New International (archive.org `bwb_O8-DDQ-914`) sets many of its new words in the same wording. Its OCR shows Gutenberg's whole unit unchanged for 21 of the 41. Each of those entries was cut from the 1915 page and read blind by two Opus readers, and both readings contain Gutenberg's unit word for word. Those 21 take back the 1913 definition as a unit, as the editorial rulings require, with 24 exact edits in the [restorations ledger](dictionary-audit-classification-2-restorations.jsonl):
+
+- Acetonuria, Antibacterial (a), Antibody, Autotrophic, Clockwise, Decolletage, Filariasis, Hormone, Mercurialism, Padre (sense 1), Pedicure (sense 1), Pom-pom, Spectrometry, Telephoto and Xanthin's run-on Xanthine regain their printed definitions.
+- Cafeteria regains "small tables", Dope "sometimes", Oscillograph "usually consisting of", Hydroplane's sense 2 "a gliding boat", and Esperanto "a Russian" for "a Pole".
+- Garage regains its sense 1, "A place for housing automobiles.", and the note "Garage is recent in English, and has as yet acquired no settled pronunciation." Pedicure's second sense is again numbered 2.
+
+Separate later notes and labels stay registered, such as Antibody's note on autoimmune disease and Filariasis's "(Zoöl.)". Where the 1915 printing reads "looped belt" in Pom-pom, the record already does, and Gutenberg's "lopped" is a typing error. Photosynthesis stays held, because the 1915 printing adds a cross-reference inside the 1913 text, and so do Automobile, Artifact, Guimpe, Karakul, Oddment, Pipe line, Tryout and Tuxedo coat, which it words differently.
+
+Twenty-five span rows that marked the replaced wording retire, four are cut to the words that remain, and twenty holds close. Twenty-one stay in the [holds register](dictionary-audit-holds.md), each with the 1913 wording from Gutenberg: 17 Supplement entries that wait on a reading of a printed 1913 Supplement, Hydroplane's verb, Yen's 1913 revision, which waits on the 1913 printing or the person because the 1895 page gives the older gold and silver yen, Yawl's Supplement sense, rewritten by RH, and Knockdown's merged entries. Gam repeats a Supplement sense.
 
 ## X–Z span rows
 
