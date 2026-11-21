@@ -15,6 +15,7 @@ const entities: Record<string, string> = {
 
 function normalize(text: string): string {
   const plain = text
+    .replace(/<\/?su[bp]>/g, '')
     .replace(/<[^>]*>/g, ' ')
     .replace(/&#x([0-9a-f]+);/gi, (_, hex: string) => String.fromCodePoint(parseInt(hex, 16)))
     .replace(/&#(\d+);/g, (_, decimal: string) => String.fromCodePoint(Number(decimal)))

@@ -38,6 +38,35 @@ A second agent read both readers' lines and the page crop for all 59 corrections
 
 ## Limits
 
-- 98 differences are still unclear after three crops of the 1898 printing. Their rows in the page-reading ledgers say so.
+- 98 differences were still unclear after three crops of the 1898 printing. [Settle-2](#settle-2) settles them.
 - The fresh comparison covered only the 100 reordered records.
 - The proofreader's nine finds were slips beside places it was already reading. Other entries have had no such second look at their surroundings.
+
+## Settle-2
+
+The 98 unclear differences were mostly not unreadable print. The verdict looked for the record's or the print's words together with their neighbours in the taller crop's transcription, and it failed where a brace paired two headings, where both page readers had dropped or repeated a line at the edge of a piece, or where the crop's reader marked a letter unreadable beside the word. Read by hand, the existing crops settle about 60. For the rest, the place is found on each printing by that printing's own recognized words, not carried over from another scan, and a column crop and a close-up are cut from the 1907 or 1895 scan, the 1898 printing and, in volume 1, the 1890 printing. Opus reads every crop twice, blind, and Fable reads the close-ups where the Opus readings differ. A second Opus agent proofread every correction. The [ledger](dictionary-audit-settle-2.jsonl) has a row for each field.
+
+| Outcome                                                 | Differences |
+| ------------------------------------------------------- | ----------: |
+| Corrected                                               |          36 |
+| Not a difference in the words                           |          33 |
+| Both page readers dropped a line; the record is right   |           4 |
+| The print is misprinted or worn; the record is right    |          13 |
+| A later printing reads as the record                    |           3 |
+| The 1913 typists' text reads as the record, which stays |           8 |
+| Held for the person                                     |           1 |
+
+Among the corrections are "Castanopsis" under Chinquapin, "Infected Sion's daughters" in Infect's quotation from Milton, "Mark viii. 3." under Faint, "Wherein my time, something too prodigal" under Gage, the clause Wing lost between two occurrences of "attached", the note that introduces the list of grasses under Grass, and Baltimore oriole's printed definition, "A common American bird", in place of a later rewrite. Chincona's definition, which a later editor rewrote around a registered later addition, waits on the person. A check of the rendered entries found one more slip beside a correction, a missing space in Filigrane's "filum a thread".
+
+The printings differ more than earlier passes assumed. The 1898 printing resets Radiolaria's column to make room for Radiograph and its Röntgen rays, and it replaces Saki's last sentence with an entry for sake. The 1907 printing drops Crop's "[Obs.]", changes Abaca's "under Manilla" to "under Manila", and changes Clavier's German respelling from (klȧ-fēr′) to (klȧ-vēr′). Where the record agrees with the later printing, it stays.
+
+The same pass settles fields from three other pools:
+
+- **Reading holds:** eight rows close, among them Abaca's cross-reference, now "See Manila hemp under Manila" as the 1913 typists have it, and Philippic's Greek "Φιλιππικός". Five had already been restored by earlier passes. Abaca's "Manilla-hemp plant" returns to "Manila-hemp plant", because the 1913 printing evidently finished the respelling the 1907 printing began. Spleenwort's breathing (no dictionary lists ἀσπλήνιον), Eupnœa's headword (the record spells it with æ) and Clavier's header pronunciation get sharper questions. Sixteen lost-character rows wait on a printing that sets their entries.
+- **Later-addition rows containing Ω:** two blind page readings confirm every restoration the record carries, character for character: Analogize (v. t.), Pelican's "fr. πέλεκυς an ax", Anatreptic, Archaeological, Boustrophedon, Didelphia, Ecumenical and Chlorite. Semeiology's printed first definition, "The science or art of signs.", replaces a later rewrite. The Greek-letter Pi is in neither the print nor the 1913 typists' text, so its whole homograph stays as a later addition.
+- **Lost characters:** Clavier's note takes the 1907 respelling, and the earlier printings' form waits in the review queue. The other 17 markers have no printing at hand or printings that disagree, and each is already in the review queue.
+
+| Step                                                      | Calls | Tokens      | List price |
+| --------------------------------------------------------- | ----: | ----------- | ---------: |
+| Opus readings of 145 crops in six waves, and proofreading |    43 | 2.3 million |      $8.56 |
+| Fable readings of 13 close-ups                            |     3 | 0.1 million |      $0.75 |
