@@ -146,7 +146,7 @@ The [settle pass](dictionary-audit-settle.md) makes 61 corrections in 50 records
 
 The [headword pass](dictionary-audit-headword.md) compares each record's headword with both blind readings of its page and reads the 1,734 that they question on the 1898 printing. It corrects 1,584: 1,035 in the number or the weight of their accents, 437 in a syllable break, a hyphen, a space or the place of an accent, and 112 in a capital, a ligature or a mark over a letter. It also sets the comma after 232 headwords that lacked it. The keys are unchanged, and whether a key should follow its headword is a question for the person.
 
-The [form pronunciation pass](dictionary-audit-pronunciation-forms.md) adds the pronunciations that the print gives after plurals, verb forms and derived words inside an entry. It adds 4,316 and replaces 2,037 empty placeholders. 464 more are held back, each with a ledger row.
+The [form pronunciation pass](dictionary-audit-pronunciation-forms.md) adds the pronunciations that the print gives after plurals, verb forms and derived words inside an entry. It adds 4,387 and replaces 2,044 empty placeholders. 386 more are held back, each with a ledger row.
 
 The [audit of existing pronunciations](dictionary-audit-pronunciation-existing.md) reads again the 1,312 pronunciations the record already had where both page readings question a letter, a stress or a mark that readers do not miss. It corrects 469 where a closer reading of the 1898 printing agrees with both. The record spells out 1,592 pronunciations that the print abbreviates, and whether those should stay is a question for the person.
 
