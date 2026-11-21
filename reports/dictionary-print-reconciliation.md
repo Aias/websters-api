@@ -146,7 +146,7 @@ The [headword pronunciation pass](dictionary-audit-pronunciation.md) adds 61,989
 
 The [settle pass](dictionary-audit-settle.md) makes 61 corrections in 50 records. A taller crop of the 1898 printing settles 69 of the 167 word differences that two strips had left open, and 40 of them are corrections. Ten more come from comparing the reordered records again, and eleven from slips noticed beside them. [Settle-2](dictionary-audit-settle.md#settle-2) settles the 98 that stayed unclear: 36 corrections, 61 kept with a reason, and Chincona held for the person.
 
-A [third blind reading of 20 random pages](dictionary-audit-sample-reading.md) measures what the passes left behind: 131 differences from the record in 50,075 words, 0 corrected and 9 held, 0.18 per 1,000 words.
+A [third blind reading of 30 random pages](dictionary-audit-sample-reading.md) measures what the passes left behind: 213 differences from the record in 74,796 words, 0 corrected and 12 held, 0.16 per 1,000 words.
 
 The [headword pass](dictionary-audit-headword.md) compares each record's headword with both blind readings of its page and reads the 1,734 that they question on the 1898 printing. It corrects 1,584: 1,035 in the number or the weight of their accents, 437 in a syllable break, a hyphen, a space or the place of an accent, and 112 in a capital, a ligature or a mark over a letter. It also sets the comma after 232 headwords that lacked it. The keys are unchanged, and whether a key should follow its headword is a question for the person.
 
