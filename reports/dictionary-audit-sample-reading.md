@@ -1,51 +1,51 @@
 # Third blind reading of a sample of pages
 
-A third blind reading of 60 printed pages, drawn at random across the 17 page ranges of the [page-reading batches](dictionary-audit-page-reading-2.md), measures what the passes have left behind. Opus read each column of the sample by the batches' own method (the same column pieces and the same reader prompt, blind to the record), and the reading was compared with the record as it stands. The [ledger](dictionary-audit-sample-reading.jsonl) has a row for each difference.
+A third blind reading of 70 printed pages, drawn at random across the 17 page ranges of the [page-reading batches](dictionary-audit-page-reading-2.md), measures what the passes have left behind. Opus read each column of the sample by the batches' own method (the same column pieces and the same reader prompt, blind to the record), and the reading was compared with the record as it stands. The [ledger](dictionary-audit-sample-reading.jsonl) has a row for each difference.
 
-The sample reading has 147,243 words. It differs from the record in 398 places. 1 are corrected and 26 are held. That puts what the passes left behind at 0.18 differences per 1,000 words, counting the corrections and the held places, and 0.01 corrections per 1,000 words.
+The sample reading has 171,500 words. It differs from the record in 471 places. 1 are corrected and 28 are held. That puts what the passes left behind at 0.17 differences per 1,000 words, counting the corrections and the held places, and 0.01 corrections per 1,000 words.
 
 ## The sample
 
-The pages of each range were shuffled with `random.Random(20261121)`, the ranges were taken in a shuffled order, and pages were drawn round-robin across them, leaving out the 145 pages of the 10 November benchmark (`sample-reading-plan.json` in `.context/dictionary-audit/exhaustive/`). Printed pages read: 12, 18, 34, 106, 109, 125, 135, 176, 180, 200, 264, 287, 292, 353, 358, 428, 431, 489, 510, 537, 552, 590, 631, 683, 696, 722, 742, 790, 810, 820, 837, 851, 861, 901, 930, 971, 1008, 1030, 1046, 1064, 1071, 1093, 1164, 1200, 1215, 1238, 1261, 1262, 1292, 1392, 1404, 1443, 1463, 1510, 1524, 1529, 1575, 1600, 1649, 1666.
+The pages of each range were shuffled with `random.Random(20261121)`, the ranges were taken in a shuffled order, and pages were drawn round-robin across them, leaving out the 145 pages of the 10 November benchmark (`sample-reading-plan.json` in `.context/dictionary-audit/exhaustive/`). Printed pages read: 12, 18, 23, 34, 106, 109, 125, 135, 176, 178, 180, 200, 264, 265, 287, 292, 353, 358, 428, 431, 462, 489, 510, 537, 552, 590, 623, 631, 683, 696, 722, 742, 747, 790, 810, 820, 837, 851, 861, 901, 930, 970, 971, 1008, 1030, 1046, 1064, 1068, 1071, 1093, 1164, 1200, 1215, 1238, 1261, 1262, 1292, 1306, 1381, 1392, 1404, 1443, 1463, 1510, 1524, 1529, 1575, 1600, 1649, 1666.
 
 ## What the differences are
 
 | Where the difference lies      | Differences |
 | ------------------------------ | ----------: |
-| In a registered later addition |         180 |
-| In the text itself             |         116 |
-| A genus the print abbreviates  |          39 |
-| Text only GCIDE has            |          15 |
-| Unreadable in the reading      |          15 |
-| Inside inflected-form brackets |          14 |
-| Inside braces                  |          12 |
-| In a pronunciation             |           6 |
+| In a registered later addition |         222 |
+| In the text itself             |         134 |
+| A genus the print abbreviates  |          42 |
+| Inside inflected-form brackets |          19 |
+| Text only GCIDE has            |          17 |
+| Unreadable in the reading      |          16 |
+| Inside braces                  |          13 |
+| In a pronunciation             |           7 |
 | A source mark                  |           1 |
 
-An open difference is settled only where two certain readings agree against the record: the new blind reading, and a blind reading by Opus of a strip of the 1898 printing that reads as the print. The 1898 strip reads as the new reading in 83 of the 116 open differences. Sense numbers and letters count as structure, as the senses-5 lesson describes, and are not changed here.
+An open difference is settled only where two certain readings agree against the record: the new blind reading, and a blind reading by Opus of a strip of the 1898 printing that reads as the print. The 1898 strip reads as the new reading in 97 of the 134 open differences. Sense numbers and letters count as structure, as the senses-5 lesson describes, and are not changed here.
 
 | Outcome                                                                                                  | Differences |
 | -------------------------------------------------------------------------------------------------------- | ----------: |
 | Corrected                                                                                                |           1 |
-| In a registered later addition                                                                           |         185 |
-| A genus the print abbreviates                                                                            |          39 |
-| The 1898 reading does not side with the new reading                                                      |          27 |
-| The entry has an open hold                                                                               |          21 |
-| Text only GCIDE has                                                                                      |          15 |
-| Unreadable in the reading                                                                                |          15 |
-| Inside inflected-form brackets                                                                           |          14 |
-| The source batch already decided this place                                                              |          14 |
-| Inside braces                                                                                            |          12 |
-| By hand, the alignment is unclear and the place needs a hand reading                                     |          11 |
-| By hand, comparison artifact                                                                             |           7 |
-| Page edge                                                                                                |           6 |
+| In a registered later addition                                                                           |         227 |
+| A genus the print abbreviates                                                                            |          42 |
+| The 1898 reading does not side with the new reading                                                      |          29 |
+| The entry has an open hold                                                                               |          27 |
+| Inside inflected-form brackets                                                                           |          19 |
+| Text only GCIDE has                                                                                      |          17 |
+| The source batch already decided this place                                                              |          16 |
+| Unreadable in the reading                                                                                |          16 |
+| Inside braces                                                                                            |          13 |
+| By hand, the alignment is unclear and the place needs a hand reading                                     |          12 |
+| By hand, comparison artifact                                                                             |          10 |
+| Page edge                                                                                                |           8 |
+| In a pronunciation                                                                                       |           7 |
 | Structure                                                                                                |           6 |
-| In a pronunciation                                                                                       |           6 |
 | By hand, reading artifact                                                                                |           6 |
+| By hand, an abbreviated compound heading in the print, which the record spells out                       |           4 |
 | By hand, a misprint the record corrects                                                                  |           3 |
 | By hand, the record carries a rewritten definition in the printed one's place, a question for the person |           2 |
 | By hand, the record's definition differs from the print as a block and needs a hand draft                |           2 |
-| By hand, an abbreviated compound heading in the print, which the record spells out                       |           2 |
 | A source mark                                                                                            |           1 |
 | By hand, a registered later addition                                                                     |           1 |
 | By hand, the record adds a word, and page-reading-4 kept it                                              |           1 |
@@ -53,7 +53,7 @@ An open difference is settled only where two certain readings agree against the 
 
 ## Cost
 
-180 Opus calls read the 180 columns and 19 read the 1898 strips. No Fable calls.
+210 Opus calls read the 210 columns and 21 read the 1898 strips. No Fable calls.
 
 ## Limits
 
