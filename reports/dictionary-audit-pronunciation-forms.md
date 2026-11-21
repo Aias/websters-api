@@ -1,6 +1,6 @@
 # Pronunciations after inflected forms
 
-The print gives a pronunciation after many plurals, verb forms and derived words inside an entry, as in "pl. Abaci (-sī)" and "Adulterated (-ā′tĕd)". The record had many of these as an empty placeholder and lacked many more. This pass adds 3,760 of them and replaces 1,999 placeholders. 2,592 of them needed a closer reading of an enlarged crop of the 1898 printing, cut around the line the form stands on and fused with the page readings as in the [headword pronunciation pass](dictionary-audit-pronunciation.md). The [ledger](dictionary-audit-pronunciation-forms.jsonl) has a row for each form that both readers pair with a printed pronunciation, added or not.
+The print gives a pronunciation after many plurals, verb forms and derived words inside an entry, as in "pl. Abaci (-sī)" and "Adulterated (-ā′tĕd)". The record had many of these as an empty placeholder and lacked many more. This pass adds 3,927 of them and replaces 2,010 placeholders. 2,770 of them needed a closer reading of an enlarged crop of the 1898 printing, cut around the line the form stands on and fused with the page readings as in the [headword pronunciation pass](dictionary-audit-pronunciation.md). The [ledger](dictionary-audit-pronunciation-forms.jsonl) has a row for each form that both readers pair with a printed pronunciation, added or not.
 
 ## Method
 
@@ -13,16 +13,28 @@ Before anything was written, the same steps were run on 1,143 forms whose pronun
 
 ## What waits
 
-| Reason                                                                               | Forms |
-| ------------------------------------------------------------------------------------ | ----: |
-| The weight of its accent is not known                                                |   580 |
-| Only one reader has it                                                               |   180 |
-| The two readers give different marks                                                 |   160 |
-| Both readers agree, but the reading could hide a mark that readers are known to miss |   121 |
-| It could not be built                                                                |    17 |
+| Reason                                                                                                                             | Forms |
+| ---------------------------------------------------------------------------------------------------------------------------------- | ----: |
+| Only one reader has it                                                                                                             |   180 |
+| The weight of its accent is not known. The closer readings did not settle it: two readings give an accent different weights        |   148 |
+| The weight of its accent is not known                                                                                              |   140 |
+| The weight of its accent is not known. The closer readings did not settle it: the weight of an accent is hard to judge on the page |   110 |
+| The weight of an accent is not known                                                                                               |    95 |
+| Both readers agree, but the reading could hide a mark that readers are known to miss                                               |    90 |
+| The two readers give different marks                                                                                               |    34 |
+| The closer reading has other letters or stresses                                                                                   |    24 |
+| It could not be built                                                                                                              |    17 |
+| A page reader saw a mark that the closer reading did not                                                                           |    12 |
+| The three readings give three marks                                                                                                |    10 |
+| The crop did not show the form                                                                                                     |    10 |
+| The closer reading found no pronunciation                                                                                          |     4 |
+| The weight of its accent is not known. The closer readings did not settle it: the crop did not show the form                       |     2 |
+| The weight of its accent is not known. The closer readings did not settle it: the three readings give three marks                  |     2 |
+| The readings give different marks                                                                                                  |     1 |
+| It holds something other than a respelling                                                                                         |     1 |
 
 ## Limits
 
 - A form is covered only where the record marks it as a form and both readers pair it with a printed pronunciation. A printed form that the record does not mark is not compared.
 - Forms whose pronunciation the record already has are not corrected here, though the check above found a few that differ from the print.
-- An accent in a part of a word, as in "(-ā′tĕd)", can be heavy or light, and the page readers do not tell. Two closer readings give the weight: one that writes out the pronunciation with its weights, and one that is asked only how thick each accent is, beside a reference image. Tried on headword pronunciations, the second was right in all 70 cases where it called itself certain. 1,029 form pronunciations were built where the two agree. The rest of that class waits: the readings differ, or the forms of printed pages 1261 to 1681 have not had both readings yet.
+- An accent in a part of a word, as in "(-ā′tĕd)", can be heavy or light, and the page readers do not tell. Two closer readings give the weight: one that writes out the pronunciation with its weights, and one that is asked only how thick each accent is, beside a reference image. Tried on headword pronunciations, the second was right in all 70 cases where it called itself certain. 1,207 form pronunciations were built where the two agree. The rest of that class waits: the readings differ, or the forms of printed pages 1261 to 1681 have not had both readings yet.
