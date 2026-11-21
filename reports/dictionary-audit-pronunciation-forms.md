@@ -24,16 +24,22 @@ Both readers print 175 forms with a pronunciation that the record's entry does n
 | Not a form                                                                        |    34 |
 | The record already gives this pronunciation                                       |    32 |
 | The record already gives a pronunciation here that the page readings do not match |    27 |
+| The record has the word only inside longer text                                   |    14 |
+| The word stands in etymology markup                                               |    10 |
+| The record lacks the printed form                                                 |     9 |
+| The word stands in example markup                                                 |     4 |
+| The word stands in heading markup                                                 |     3 |
+| The word stands in quotation markup                                               |     2 |
 | The weight of an accent is hard to judge on the page                              |     1 |
 | The three readings give three marks                                               |     1 |
+| The word stands in definition markup                                              |     1 |
+| The word stands in other markup                                                   |     1 |
+| The word stands in cross-reference markup                                         |     1 |
 | It could not be built                                                             |     1 |
 
-| Not yet taken                                                    | Forms |
-| ---------------------------------------------------------------- | ----: |
-| The record has the word in other markup, without a pronunciation |    22 |
-| The record has the word only inside other text                   |    14 |
-| The record lacks the word                                        |     9 |
-| Bare text in its form group, without a pronunciation             |     1 |
+| Not yet taken                                        | Forms |
+| ---------------------------------------------------- | ----: |
+| Bare text in its form group, without a pronunciation |     1 |
 
 ## What waits
 
