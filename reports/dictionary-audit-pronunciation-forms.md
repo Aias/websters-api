@@ -11,6 +11,10 @@ The print gives a pronunciation after many plurals, verb forms and derived words
 
 Before anything was written, the same steps were run on 1,143 forms whose pronunciation the record already had. The result is the record's own in 899. In 232 of the other 244 the record spells out a pronunciation that the print abbreviates, as "ȧ-bĭl′ĭ-tĭz" for the printed "-tĭz" under Ability. A mark differs in four, and the letters or their number in eight.
 
+## A closer reading of what the page readings wrote
+
+The form pronunciations written from the two page readings alone are read again on an enlarged crop of the 1898 printing, cut around the form's own line. 40 have been read so far, and 3,127 wait. The closer reading confirms 40. Where it differs, a second closer reading is made, and the pronunciation changes only where the two closer readings agree with each other: 0 corrections so far. 0 still differ after two closer readings and stay as they are, and 0 wait for their second reading.
+
 ## What waits
 
 | Reason                                                                               | Forms |
