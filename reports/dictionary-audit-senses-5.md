@@ -32,6 +32,27 @@ Twenty-five entries regain the printed "1." before their first sense: Castled, C
 
 Ten blind reader calls settled the sub-batch. The later-addition pointers still name their spans, and the rendered entries show the new number.
 
+## Sub-batch 2
+
+Sixteen more entries regain a printed number. Comparative, Running, Sheet, Solvent, Strike, Triton, Flap, Football, Pay and Unpicked lacked "1." altogether. Cornered, Scambler, Jura and Grafting wrote it as plain text inside the definition, so it becomes a sense number. Frill's number goes before its label, and Tantalus's moves there from after it, as the print sets them. Ovist takes back its printed definition, "(Biol.) Same as Ovulist.", in place of GCIDE's "(Zoöl.) A believer in ovism." Two blind readers certainly read each. Alderman's printed "2." loses a missing space inside its element, which changes no printed character.
+
+The 110 record homographs that start at "2.", skip or repeat a number, or start later were settled against the page readings. 69 number later-added senses on from a printed sense the print leaves unnumbered, and 8 more have later or rewritten senses among the printed ones (Body, Escape, Even, Nebula, Nebulosity, Phosphorescence, Tail and Virus). These go to the [holds register](dictionary-audit-holds.jsonl) with three whose letters, and three whose numbers, run on into later senses: 82 hold rows. 19 homographs have no printed entry in the readings, 7 match the print as they stand, and Nice already has a structure hold.
+
+The 1,164 entries the comparison could not measure fall into these causes:
+
+| Cause                                                                                               | Entries |
+| --------------------------------------------------------------------------------------------------- | ------: |
+| Registered later additions cover most of the unmatched words                                        |     555 |
+| Only one reading paired with the record, or the pairing or the entry's length defeats the alignment |     495 |
+| The record carries later text the register does not list                                            |      93 |
+| The 1913 printing or the Supplement revised the definition, which the record follows                |       8 |
+| The printed entry is filed under another record (Exsert, Hydr-, Mon-, Panto-, -wards)               |       5 |
+| Rewrite or loss inside the entry                                                                    |       8 |
+
+Of the eight rewrites, Ovist is restored, Carcinoma, Gadolinium and Nominalize already have holds, Nebula's rewrite surrounds a registered later addition and is held, and Gable, Miscalculate and Short circuit remain word-recovery candidates. The pool file gives every entry its cause and status.
+
+Eight blind reader calls settled sub-batch 2.
+
 ## What remains
 
-Eight of the 33 missing "1." entries remain: Comparative, Frill, Solvent and Triton, whose number precedes a field label, Running, Sheet and Strike, and Tantalus, whose number and label stand in another order than the print's. The 64 unconfirmed homographs that start at "2.", the 42 that skip or repeat and the 4 that start late come next, then the 1,164 unmeasured entries.
+Saxon and Sea nettle, whose printed letter at the start of a sense needs a reading. The three word-recovery candidates and the five entries filed under another record. The 93 entries with unregistered later text belong to the later-additions register rather than to this pool. The 82 holds wait on the person.
