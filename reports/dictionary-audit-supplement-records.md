@@ -1,6 +1,6 @@
 # Supplement records
 
-This batch reviews the 180 entries of the 1913 Supplement index that match no key, and the nine X through Z entries of the main text that the full-alphabet survey newly exposed. It adds five supplement entries that had no record, Agrotechny, Fuselage, Futurism, Movie and Mediterranean fruit fly, and Cockpit's supplement entry, which the Cockpit record lacked. It opens 23 holds: 13 missing supplement entries in the pool and eight outside it that lack an eligible print witness, and two printed entries filed inside another record. The batch grants no complete-entry review credit.
+This batch reviews the 180 entries of the 1913 Supplement index that match no key, and the nine X through Z entries of the main text that the full-alphabet survey newly exposed. It adds five supplement entries that had no record, Agrotechny, Fuselage, Futurism, Movie and Mediterranean fruit fly, and Cockpit's supplement entry, which the Cockpit record lacked. It opens 32 holds: 13 missing supplement entries in the pool and 17 outside it that lack an eligible print witness, and two printed entries filed inside another record. The batch grants no complete-entry review credit.
 
 The [ledger](dictionary-audit-supplement-records.jsonl) gives each new record's text, witness and readings, and a disposition for each of the 189 inventory rows.
 
@@ -33,7 +33,7 @@ The index counts a supplement entry present whenever its headword matches a key,
 - **Mediterranean fruit fly**, run into Medicine, is restored from the New International's Addenda. Pelican State and Poker dice are held with the six whose 1907 page is unreachable.
 - **Trustee process** is held for a decision. The decision on compounds in their own records removed a Trustee process record because Gutenberg prints no separate entry, but the 1913 Supplement does print one.
 
-The other key-matched supplement entries still need the same comparison. A rough text scan flags about 80 whose printed wording no single record holds, many of them later rewordings rather than absences.
+A comparison of every Supplement entry with its key's record then finds nine more that the record lacks and that no reachable witness settles: the senses of Colony (botany), Dresser (furniture), Fusee (railroad signal), Palmer (palmerworm), Scarabæus (archaeology), Stylus (phonograph), Trailer (car) and Resist (a substance applied to a surface), and the entry Gypsy moth. They are held with Boxer. The other flagged entries carry a later rewording of the printed text. The comparison counts content words shared with the key's record, so a Supplement sense that shares most of its words with a main-vocabulary sense could still hide.
 
 ## Witnesses
 
@@ -48,15 +48,15 @@ A supplement entry with no record takes the 1900 Supplement in the 1907 Merriam 
 
 ## Holds
 
-| Hold                                                                             | Entries                                                                   |
-| -------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| The 1907 page is unreachable, and the New International prints the entry         | Banjorine, Franc-tireur, Line-up, Luffa, Oscilloscope, Yunca              |
-| The 1907 printing has an earlier wording, and only the New International matches | Adipoma                                                                   |
-| The printings disagree with Gutenberg                                            | Adenopathy's etymology, Alcornoque, Moving picture, Radiothorium          |
-| No printing at hand sets the entry as Gutenberg has it                           | Phone, Granite State                                                      |
-| A printed entry filed inside another record                                      | Y- inside I-, Consolation game inside Race                                |
-| Key-matched supplement entries                                                   | Aerostation, Boxer, Fermentation theory, Telemeter, Trustee process, Wing |
-| Run-in supplement entries whose 1907 page is unreachable                         | Pelican State, Poker dice                                                 |
+| Hold                                                                             | Entries                                                                                                                                                   |
+| -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The 1907 page is unreachable, and the New International prints the entry         | Banjorine, Franc-tireur, Line-up, Luffa, Oscilloscope, Yunca                                                                                              |
+| The 1907 printing has an earlier wording, and only the New International matches | Adipoma                                                                                                                                                   |
+| The printings disagree with Gutenberg                                            | Adenopathy's etymology, Alcornoque, Moving picture, Radiothorium                                                                                          |
+| No printing at hand sets the entry as Gutenberg has it                           | Phone, Granite State                                                                                                                                      |
+| A printed entry filed inside another record                                      | Y- inside I-, Consolation game inside Race                                                                                                                |
+| Key-matched supplement entries                                                   | Aerostation, Boxer, Colony, Dresser, Fermentation theory, Fusee, Gypsy moth, Palmer, Resist, Scarabæus, Stylus, Telemeter, Trailer, Trustee process, Wing |
+| Run-in supplement entries whose 1907 page is unreachable                         | Pelican State, Poker dice                                                                                                                                 |
 
 The 1913 printing on archive.org (`rbanms.webstersrevisedu0000noah`) would settle most of these, but it is lending-only. For the six whose 1907 page is unreachable, two blind readings of the 1915 New International and, except for Luffa, one of the 1914 London printing are on file. Banjorine, Line-up, Oscilloscope and Luffa match Gutenberg apart from house style, Franc-tireur adds its plural, and Yunca reads "irrigating" for Gutenberg's "irrigation". A ruling that admits the New International where the 1907 printing cannot be reached would let the first four apply without new readings. The two filed entries need headwords moved, which the pronunciation pass owns until it finishes.
 
