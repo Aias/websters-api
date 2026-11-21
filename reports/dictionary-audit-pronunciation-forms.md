@@ -17,7 +17,7 @@ The form pronunciations written from the two page readings alone are read again 
 
 ## Printed forms the record did not mark
 
-Both readers print 175 forms with a pronunciation that the record's entry does not carry as a form element. They are taken by kind, clearest first. 9 plurals that stood in their own plural group as bare text or with the cross-reference class are marked with the class that group uses everywhere else, and given their pronunciations. 24 compound headings are given the pronunciation the print sets after them, by the rules above; where the page readings leave the marks or the weight of an accent open, two closer readings settle them, one of the marks and weights and one of the weights alone.
+Both readers print 174 forms with a pronunciation that the record's entry does not carry as a form element. They are taken by kind, clearest first. 9 plurals that stood in their own plural group as bare text or with the cross-reference class are marked with the class that group uses everywhere else, and given their pronunciations. 24 compound headings are given the pronunciation the print sets after them, by the rules above; where the page readings leave the marks or the weight of an accent open, two closer readings settle them, one of the marks and weights and one of the weights alone.
 
 | Held                                                                              | Forms |
 | --------------------------------------------------------------------------------- | ----: |
@@ -36,10 +36,6 @@ Both readers print 175 forms with a pronunciation that the record's entry does n
 | The word stands in other markup                                                   |     1 |
 | The word stands in cross-reference markup                                         |     1 |
 | It could not be built                                                             |     1 |
-
-| Not yet taken                                        | Forms |
-| ---------------------------------------------------- | ----: |
-| Bare text in its form group, without a pronunciation |     1 |
 
 ## What waits
 
