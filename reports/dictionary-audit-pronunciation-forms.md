@@ -13,7 +13,7 @@ Before anything was written, the same steps were run on 1,143 forms whose pronun
 
 ## A closer reading of what the page readings wrote
 
-The form pronunciations written from the two page readings alone are read again on an enlarged crop of the 1898 printing, cut around the form's own line. 2,962 have been read so far, and 205 wait. The closer reading confirms 2,944. Where it differs, a second closer reading is made, and the pronunciation changes only where the two closer readings agree with each other: 15 corrections so far. 2 still differ after two closer readings and stay as they are, and 1 wait for their second reading.
+The form pronunciations written from the two page readings alone are read again on an enlarged crop of the 1898 printing, cut around the form's own line. 2,962 have been read so far, and 205 wait. The closer reading confirms 2,944. Where it differs, a second closer reading is made, and the pronunciation changes only where the two closer readings agree with each other: 16 corrections so far. 2 still differ after two closer readings and stay as they are, and 0 wait for their second reading.
 
 ## What waits
 
