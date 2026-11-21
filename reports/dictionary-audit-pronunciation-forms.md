@@ -19,15 +19,16 @@ The form pronunciations written from the two page readings alone are read again 
 
 Both readers print 175 forms with a pronunciation that the record's entry does not carry as a form element. They are taken by kind, clearest first. 9 plurals that stood in their own plural group as bare text or with the cross-reference class are marked with the class that group uses everywhere else, and given their pronunciations. 24 compound headings are given the pronunciation the print sets after them, by the rules above; where the page readings leave the marks or the weight of an accent open, two closer readings settle them, one of the marks and weights and one of the weights alone.
 
-| Held                                                 | Forms |
-| ---------------------------------------------------- | ----: |
-| The weight of an accent is hard to judge on the page |     1 |
-| The three readings give three marks                  |     1 |
-| It could not be built                                |     1 |
+| Held                                                                              | Forms |
+| --------------------------------------------------------------------------------- | ----: |
+| The record already gives this pronunciation                                       |    32 |
+| The record already gives a pronunciation here that the page readings do not match |    27 |
+| The weight of an accent is hard to judge on the page                              |     1 |
+| The three readings give three marks                                               |     1 |
+| It could not be built                                                             |     1 |
 
 | Not yet taken                                                    | Forms |
 | ---------------------------------------------------------------- | ----: |
-| The record gives it with a pronunciation, in other markup        |    59 |
 | Not a form: an etymology or another parenthesis                  |    34 |
 | The record has the word in other markup, without a pronunciation |    22 |
 | The record has the word only inside other text                   |    14 |
